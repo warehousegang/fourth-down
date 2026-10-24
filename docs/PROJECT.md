@@ -16,7 +16,7 @@ The directive's explicit Idea-to-Production OS v1.0 controls and G0–G4 definit
 | [LIFECYCLE_PROTOCOL.md](LIFECYCLE_PROTOCOL.md) | Prospective forecast selection, result reconciliation, scoring and research policy |
 | [CHALLENGER_PROTOCOL.md](CHALLENGER_PROTOCOL.md), [MODEL_REGISTRY.json](MODEL_REGISTRY.json) | Separately versioned challenger development, fixed evaluation and approval boundary |
 | [CURRENT_VALIDATION.json](CURRENT_VALIDATION.json), [CORRECTIVE_VALIDATION.json](CORRECTIVE_VALIDATION.json) | Preserved prior verification evidence; never rewritten by a new increment |
-| [EXECUTION_VALIDATION.json](EXECUTION_VALIDATION.json) | New increment's actual verification results and artifact hashes |
+| [EXECUTION_VALIDATION.json](EXECUTION_VALIDATION.json), [ARTIFACT_CORRECTIONS.md](ARTIFACT_CORRECTIONS.md) | New increment's actual verification results and artifact hashes |
 | [RELEASE_GATES.md](RELEASE_GATES.md) | G0–G4 readiness recommendation and owner decisions |
 | [CURRENT_FORECASTS.md](CURRENT_FORECASTS.md), [OPERATIONS.md](OPERATIONS.md), [EVIDENCE_BUNDLE.md](EVIDENCE_BUNDLE.md), [DEPLOYMENT.md](DEPLOYMENT.md) | Local runbooks, refresh planning, failure handling, recovery and cost limits |
 | [THIRD_PARTY.md](THIRD_PARTY.md), [ACTIONS_LOCK.json](ACTIONS_LOCK.json) | Attribution, complete dependency notices and immutable Action references |

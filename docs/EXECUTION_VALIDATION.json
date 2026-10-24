@@ -1,0 +1,1039 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-10-24T14:10:21.404491+00:00",
+  "scope": "Local product execution increment under supplied Idea-to-Production OS v1.0 G0\u2013G4 gates; no owner gate approval inferred",
+  "commits": {
+    "baseline": "313d899",
+    "requirements": "863fef9",
+    "implementation": "242fabd",
+    "final_application": "a9133ce"
+  },
+  "authorization": {
+    "separate_fixed_non_holdout_challenger_training": true,
+    "frozen_incumbent_modified_or_retrained": false,
+    "protected_2024_2025_consumed": false,
+    "legacy_partial_exposure_preserved": true,
+    "model_promoted": false,
+    "scheduled_execution_enabled": false,
+    "remote_workflow_run": false,
+    "deployed": false,
+    "paid_service_provisioned": false,
+    "account_settings_changed": false,
+    "personal_website_modified": false
+  },
+  "protected_artifacts": {
+    "count": 20,
+    "all_unchanged": true,
+    "file_sha256": {
+      "web/public/data/demo.json": "41c3ad0d8d2997238b464f196b700ce328f38eb6e93831a18d504c7ef6aa24a9",
+      "web/public/THIRD_PARTY_NOTICES.txt": "f6daec4cdeeadeb95ecf930b8f1ea9b704574d5ad5bfe64a6806d45287dad54c",
+      "web/package-lock.json": "2ad2822b75b6c6c8c5e4a7cb50416857f5bb037a6decb6f0a62eea811d237c9d",
+      "docs/FROZEN_MODEL.json": "2896a526ed8035b1674a6beb3c8d27c76ba4b3f466309bfeb729c6ddbf80f957",
+      "docs/HOLDOUT_PROTOCOL_FREEZE.json": "61fbf6127a62a3240686b12ab3b0016f8e60feb2260bed577e9550ba953d4020",
+      "docs/HOLDOUT_EXPOSURE.json": "686cbb616ee7d828879c825c9b12c84c269f789374d8aee0f46718950a1d7d4c",
+      "legacy/SHA256.json": "ad182b6c4f80cbbb8ee283273b92e6b3bbd117b9b5f13c367f6cd695fc0250cc",
+      "ml/data.py": "7523ad95de1742fcc067e75c112845c76ba65ffb15486dabe980beb935375873",
+      "ml/features.py": "64279b7ca027d9477f1780a83ff04d19eea837e5d219b4786b927bff65366b0a",
+      "ml/train.py": "18ffadaca7ca5dcc6e4e7c8df2816c0c7dc173947792b1e07fddc094aca18383",
+      "ml/forecast.py": "57583405dc336e63f2c016da8d1d2d9b3e4831006c1d4204a31fd9240238ce04",
+      "docs/ML_EVALUATION.md": "303d9e481d3fc1a6d054580863c723d31c6522158fbbd3e6a7a6af82740f2067",
+      "docs/FEATURES.md": "39feebb3aea483459a97176747d17fa0d6929a6fc3c7a2d1d53bad8dbb361eb8",
+      "requirements.txt": "23df77316f3e66a8da2a7dfee8ae9dae342265f297a0d63d335cb1f33ff0d253",
+      "requirements-lock.txt": "107ccd3fe0f7cfa5846e9dd7af09b8cd15ee4872fd69d355f262da30c37559d8",
+      "docs/HOLDOUT_PROTOCOL.md": "ed08d57acb7efac02930848608573cf3be0e4f261ffa553868965b4b57fa56f5",
+      "docs/CORRECTIVE_VALIDATION.json": "a6a301344cfe3d7187cdff62de07766f11e014f263263af0948e49bfb3f7d6cb",
+      "docs/CURRENT_VALIDATION.json": "2b52984f195fb1eecf2d69d6362c30f1e8d72c80349cf7266ca73e0bdde2c2ff",
+      "docs/RELEASE_ARTIFACTS.json": "ff4dc58630541f3d89600a017827824a0211b34ec88812097ee233f0e28cfc13",
+      "docs/ACTIONS_LOCK.json": "16035bbd68c512b520958c85971fd90d0ba12a6903d5ebbbb90b5d3cd6d1ac48"
+    }
+  },
+  "local_verification": {
+    "python": {
+      "passed": 191,
+      "skipped": 1,
+      "fits_blocked": true,
+      "skip_reason": "Original incumbent fit-repeatability test forbidden; separate challenger already executed outside release tests"
+    },
+    "frontend": {
+      "passed": 88,
+      "test_files": 9
+    },
+    "packaging": {
+      "passed": 11
+    },
+    "browser": {
+      "root_full_passed": 14,
+      "subpath_full_passed": 14,
+      "final_mobile_layout_rerun_passed": 1,
+      "final_changed_views_root_passed": 2,
+      "final_changed_views_subpath_passed": 2,
+      "profiles": [
+        "desktop Chrome",
+        "mobile iPhone13 viewport using Chrome"
+      ],
+      "tested_axe_violations": 0,
+      "tested_horizontal_overflow": false,
+      "tested_page_errors": 0,
+      "limitation": "Selected WCAG2A/AA+2.1AA rules; local macOS Chrome, not exhaustive accessibility or hosted/Linux certification"
+    },
+    "production_build": {
+      "typescript": true,
+      "subpath": "/nfl-predictor/",
+      "latest_context_included": true,
+      "notices_verified": true,
+      "nonblocking_warnings": [
+        "Two existing upstream Zod annotation warnings",
+        "Deprecated development transitive whatwg-encoding package"
+      ]
+    },
+    "security": {
+      "npm_known_vulnerabilities": 0,
+      "python_known_vulnerabilities": 0,
+      "python_distributions_checked": 41,
+      "pip_check_passed": true,
+      "new_dependencies": 0,
+      "targeted_secret_scan": {
+        "method": "Targeted known-token and private-key patterns in tracked/nonignored source; not exhaustive security certification",
+        "files_scanned": 143,
+        "findings": []
+      },
+      "limitation": "Advisory and targeted pattern checks, not security certification"
+    }
+  },
+  "clean_archive": {
+    "source_commit": "a9133ce",
+    "frontend_install": "Fresh npm ci --ignore-scripts from exact lock into clean archive; temporary verified package cache",
+    "frontend_tests_passed": 88,
+    "packaging_tests_passed": 11,
+    "python_source_commit": "242fabd (Python code unchanged at a9133ce)",
+    "python_tests_passed": 189,
+    "python_tests_skipped": 3,
+    "python_environment": "Existing Python 3.14.2 environment; not a fresh Python dependency install",
+    "production_subpath": "/nfl-predictor/",
+    "dist_matches_workspace": true,
+    "dist_file_count": 22,
+    "dist_total_bytes": 4731114,
+    "dist_sha256": {
+      "index.html": "2890557b8d31cd53d40a53b875a9c879cfc6e5686a58aff36edbe96e038238c8",
+      "CURRENT_DATA_NOTICE.txt": "6c66cb1fbcf86185dbf14748e7e6257ae954b803355fe0f47253222c7aca78ef",
+      "THIRD_PARTY_NOTICES.txt": "f6daec4cdeeadeb95ecf930b8f1ea9b704574d5ad5bfe64a6806d45287dad54c",
+      "data/demo.json": "41c3ad0d8d2997238b464f196b700ce328f38eb6e93831a18d504c7ef6aa24a9",
+      "assets/index-CeB0Z2oa.js": "69de86b76db8af9a005870146ff876c275b8aac0f96363e371c23321aa6cf072",
+      "assets/index-LKEX_M4r.css": "4fd2588f06c744d8cf4b08be45d2672ed33f998e5d513562e9a8f7fffc50a8a9",
+      "data/research/latest.json": "543fd4c1c2af0baa15278fca5b20835cbb289ac28774ea6eba0cf20fd9a498a4",
+      "data/research/challenger-b6b02ee1084420cc65e5877683fc7602cdb3f2ac0a1b6b7980130b81dd42c68a.json": "b6b02ee1084420cc65e5877683fc7602cdb3f2ac0a1b6b7980130b81dd42c68a",
+      "data/research/challenger-dce5b9bc802f459e153324dea42fb3080e61a4b6eaf367aa4a8dc27fafda0791.json": "dce5b9bc802f459e153324dea42fb3080e61a4b6eaf367aa4a8dc27fafda0791",
+      "data/research/challenger-2b90c2f946ef4bac8a2841ae2d4abd8ad8b279449fc38cc1dea1dac32f8b3e68.json": "2b90c2f946ef4bac8a2841ae2d4abd8ad8b279449fc38cc1dea1dac32f8b3e68",
+      "data/context/context-c52fd53d2cec653d9663e2bdea01587392ad65e713b5a5fa811c9eb5203894ba.json": "c52fd53d2cec653d9663e2bdea01587392ad65e713b5a5fa811c9eb5203894ba",
+      "data/context/latest.json": "d4de3e9339334a30a63b4b2bca40470fb40291418f929ddb5ba782fa8e440f04",
+      "data/context/context-3a11a90025addd59f71191c34e26f4c053c3d0dfb34a16a155106a07f4e0a71b.json": "3a11a90025addd59f71191c34e26f4c053c3d0dfb34a16a155106a07f4e0a71b",
+      "data/context/context-9be0bd883791f34e50c498014de364cc407fc47446a04bac27061323d4f9c43b.json": "9be0bd883791f34e50c498014de364cc407fc47446a04bac27061323d4f9c43b",
+      "data/operations/latest.json": "12e85a61446ba4f8cbea75055f44eb53270430816e3d40bc03221f1ec8ecd9a1",
+      "data/operations/operations-4f1de7bd0fbbdba2e8fde376f785e2a29c64c051660a607f9ec2cf58cfc9d4eb.json": "4f1de7bd0fbbdba2e8fde376f785e2a29c64c051660a607f9ec2cf58cfc9d4eb",
+      "data/operations/operations-c46b707e33c8b57ba068e14ae2bd3283fe225c2b57c85a3e66fe12a3aae800b2.json": "c46b707e33c8b57ba068e14ae2bd3283fe225c2b57c85a3e66fe12a3aae800b2",
+      "data/operations/operations-0a21283c5bfd13265e43ac345507d6cf1a986bd4fdda279e7ce6c04716f1c95f.json": "0a21283c5bfd13265e43ac345507d6cf1a986bd4fdda279e7ce6c04716f1c95f",
+      "data/current/latest.json": "73f18987480490f1a936f28ae14f2651ba41a033619471a644454846d7c52a74",
+      "data/current/forecast-2026-3449f56cda00dca8e4f4c253458d471b8924cc3ec9a25fd4a5821d356d7737cb.json": "3449f56cda00dca8e4f4c253458d471b8924cc3ec9a25fd4a5821d356d7737cb",
+      "data/current/forecast-2026-11d4518833ef149e9a4e6b239094468dbc90f516be058bce02d40d4141618445.json": "11d4518833ef149e9a4e6b239094468dbc90f516be058bce02d40d4141618445",
+      "data/current/forecast-2026-66342f068c048d28b96b456b61d0e51d4cb981a72fce1519d53df24c383aef77.json": "66342f068c048d28b96b456b61d0e51d4cb981a72fce1519d53df24c383aef77"
+    }
+  },
+  "current_forecast": {
+    "pointer": {
+      "file": "forecast-2026-66342f068c048d28b96b456b61d0e51d4cb981a72fce1519d53df24c383aef77.json",
+      "generated_at": "2026-10-24T14:01:35.520006+00:00",
+      "schema_version": 1,
+      "season": 2026,
+      "sha256": "66342f068c048d28b96b456b61d0e51d4cb981a72fce1519d53df24c383aef77"
+    },
+    "available_games": 13,
+    "season": 2026,
+    "week": 7,
+    "as_of": "2026-10-24T14:01:35.447231+00:00",
+    "generated_at": "2026-10-24T14:01:35.520006+00:00",
+    "valid_until": "2026-10-25T11:47:43+00:00",
+    "source": {
+      "asset_id": 668960439,
+      "license_url": "https://github.com/sportsdataverse/sportsdataverse-data/blob/main/LICENSE",
+      "raw_sha256": "1922b31983e74a7c53c661084c7d68e70bd9ea2ffd63ff410aaa754dc5023d9c",
+      "retrieved_at": "2026-10-24T14:01:35.437206+00:00",
+      "schema_version": 1,
+      "season": 2026,
+      "source_name": "SportsDataverse / NFL Next Gen Stats schedules",
+      "source_updated_at": "2026-10-23T11:47:43+00:00",
+      "source_url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nfl_ngs_schedules/ngs_schedule_2026.csv"
+    },
+    "oracle": {
+      "forecast_sha256": "66342f068c048d28b96b456b61d0e51d4cb981a72fce1519d53df24c383aef77",
+      "raw_sha256": "1922b31983e74a7c53c661084c7d68e70bd9ea2ffd63ff410aaa754dc5023d9c",
+      "season": 2026,
+      "week": 7,
+      "source_regular_season_games": 272,
+      "available_forecasts": 13,
+      "factors_checked": 52,
+      "max_probability_error": 1.1102230246251565e-16,
+      "max_factor_error": 0.0,
+      "method": "Independent 2026 raw CSV queries and direct formulas; no production state/scoring functions, fitting, holdout reads or accuracy evaluation"
+    },
+    "byte_replay": {
+      "forecast": "forecast-2026-66342f068c048d28b96b456b61d0e51d4cb981a72fce1519d53df24c383aef77.json",
+      "sha256": "66342f068c048d28b96b456b61d0e51d4cb981a72fce1519d53df24c383aef77",
+      "byte_identical": true,
+      "written_files": 0
+    }
+  },
+  "lifecycle": {
+    "pointer": {
+      "file": "operations-c46b707e33c8b57ba068e14ae2bd3283fe225c2b57c85a3e66fe12a3aae800b2.json",
+      "generated_at": "2026-10-24T14:01:35.520006+00:00",
+      "schema_version": 1,
+      "season": 2026,
+      "sha256": "c46b707e33c8b57ba068e14ae2bd3283fe225c2b57c85a3e66fe12a3aae800b2"
+    },
+    "protocol": {
+      "sha256": "d8a48afeb98a8f3eddbacd0e347f7b62a84730b87444c659b4eb45da8075062e",
+      "version": "forecast-lifecycle-v2"
+    },
+    "forecast_records": 39,
+    "matchups": 13,
+    "metrics": {
+      "all_snapshots": {
+        "accuracy": null,
+        "baselines": {
+          "coin_flip": {
+            "accuracy": null,
+            "brier": null,
+            "count": 0,
+            "log_loss": null
+          },
+          "home_rate": {
+            "accuracy": null,
+            "brier": null,
+            "count": 0,
+            "log_loss": null
+          }
+        },
+        "brier": null,
+        "by_season": [],
+        "calibration": [
+          {
+            "brier": null,
+            "count": 0,
+            "home_win_rate": null,
+            "lower": 0.0,
+            "mean_probability": null,
+            "upper": 0.1
+          },
+          {
+            "brier": null,
+            "count": 0,
+            "home_win_rate": null,
+            "lower": 0.1,
+            "mean_probability": null,
+            "upper": 0.2
+          },
+          {
+            "brier": null,
+            "count": 0,
+            "home_win_rate": null,
+            "lower": 0.2,
+            "mean_probability": null,
+            "upper": 0.3
+          },
+          {
+            "brier": null,
+            "count": 0,
+            "home_win_rate": null,
+            "lower": 0.3,
+            "mean_probability": null,
+            "upper": 0.4
+          },
+          {
+            "brier": null,
+            "count": 0,
+            "home_win_rate": null,
+            "lower": 0.4,
+            "mean_probability": null,
+            "upper": 0.5
+          },
+          {
+            "brier": null,
+            "count": 0,
+            "home_win_rate": null,
+            "lower": 0.5,
+            "mean_probability": null,
+            "upper": 0.6
+          },
+          {
+            "brier": null,
+            "count": 0,
+            "home_win_rate": null,
+            "lower": 0.6,
+            "mean_probability": null,
+            "upper": 0.7
+          },
+          {
+            "brier": null,
+            "count": 0,
+            "home_win_rate": null,
+            "lower": 0.7,
+            "mean_probability": null,
+            "upper": 0.8
+          },
+          {
+            "brier": null,
+            "count": 0,
+            "home_win_rate": null,
+            "lower": 0.8,
+            "mean_probability": null,
+            "upper": 0.9
+          },
+          {
+            "brier": null,
+            "count": 0,
+            "home_win_rate": null,
+            "lower": 0.9,
+            "mean_probability": null,
+            "upper": 1.0
+          }
+        ],
+        "count": 0,
+        "game_count": 0,
+        "log_loss": null,
+        "ties_excluded": 0
+      },
+      "primary": {
+        "accuracy": null,
+        "baselines": {
+          "coin_flip": {
+            "accuracy": null,
+            "brier": null,
+            "count": 0,
+            "log_loss": null
+          },
+          "home_rate": {
+            "accuracy": null,
+            "brier": null,
+            "count": 0,
+            "log_loss": null
+          }
+        },
+        "brier": null,
+        "by_season": [],
+        "calibration": [
+          {
+            "brier": null,
+            "count": 0,
+            "home_win_rate": null,
+            "lower": 0.0,
+            "mean_probability": null,
+            "upper": 0.1
+          },
+          {
+            "brier": null,
+            "count": 0,
+            "home_win_rate": null,
+            "lower": 0.1,
+            "mean_probability": null,
+            "upper": 0.2
+          },
+          {
+            "brier": null,
+            "count": 0,
+            "home_win_rate": null,
+            "lower": 0.2,
+            "mean_probability": null,
+            "upper": 0.3
+          },
+          {
+            "brier": null,
+            "count": 0,
+            "home_win_rate": null,
+            "lower": 0.3,
+            "mean_probability": null,
+            "upper": 0.4
+          },
+          {
+            "brier": null,
+            "count": 0,
+            "home_win_rate": null,
+            "lower": 0.4,
+            "mean_probability": null,
+            "upper": 0.5
+          },
+          {
+            "brier": null,
+            "count": 0,
+            "home_win_rate": null,
+            "lower": 0.5,
+            "mean_probability": null,
+            "upper": 0.6
+          },
+          {
+            "brier": null,
+            "count": 0,
+            "home_win_rate": null,
+            "lower": 0.6,
+            "mean_probability": null,
+            "upper": 0.7
+          },
+          {
+            "brier": null,
+            "count": 0,
+            "home_win_rate": null,
+            "lower": 0.7,
+            "mean_probability": null,
+            "upper": 0.8
+          },
+          {
+            "brier": null,
+            "count": 0,
+            "home_win_rate": null,
+            "lower": 0.8,
+            "mean_probability": null,
+            "upper": 0.9
+          },
+          {
+            "brier": null,
+            "count": 0,
+            "home_win_rate": null,
+            "lower": 0.9,
+            "mean_probability": null,
+            "upper": 1.0
+          }
+        ],
+        "count": 0,
+        "game_count": 0,
+        "log_loss": null,
+        "ties_excluded": 0
+      }
+    },
+    "schedule_counts": {
+      "completed": 94,
+      "scheduled": 178
+    },
+    "interpretation": "Zero prospective scored outcomes: all recorded forecasted games are still upcoming. Existing final schedule results are not assigned backfilled forecasts."
+  },
+  "current_context": {
+    "pointer": {
+      "file": "context-9be0bd883791f34e50c498014de364cc407fc47446a04bac27061323d4f9c43b.json",
+      "generated_at": "2026-10-24T14:05:27.806292+00:00",
+      "schema_version": 1,
+      "season": 2026,
+      "sha256": "9be0bd883791f34e50c498014de364cc407fc47446a04bac27061323d4f9c43b"
+    },
+    "as_of": "2026-10-24T14:05:27.806283+00:00",
+    "generated_at": "2026-10-24T14:05:27.806292+00:00",
+    "valid_until": "2026-10-25T14:05:27.806292+00:00",
+    "affects_probability": false,
+    "sources": [
+      {
+        "asset_id": 672155356,
+        "file": "3c9892ffb02d77e698e10a9bcda564425a36cf130c52281dd21c49bf9224528b-injuries_2026.csv",
+        "id": "injuries",
+        "license": "CC BY 4.0; nflverse repository declaration",
+        "license_url": "https://github.com/nflverse/nflverse-data/blob/main/LICENSE.md",
+        "retrieved_at": "2026-10-24T13:59:28.711854+00:00",
+        "sha256": "3c9892ffb02d77e698e10a9bcda564425a36cf130c52281dd21c49bf9224528b",
+        "source_updated_at": "2026-10-24T11:57:46Z",
+        "url": "https://github.com/nflverse/nflverse-data/releases/download/injuries/injuries_2026.csv"
+      },
+      {
+        "asset_id": 672155992,
+        "file": "2782878214b4a925674c79bbeadcc74ff383c0173eb358a40cbe5fc5d51de5c8-depth_charts_2026.parquet",
+        "id": "depth_charts",
+        "license": "CC BY 4.0; nflverse repository declaration",
+        "license_url": "https://github.com/nflverse/nflverse-data/blob/main/LICENSE.md",
+        "retrieved_at": "2026-10-24T13:59:29.441788+00:00",
+        "sha256": "2782878214b4a925674c79bbeadcc74ff383c0173eb358a40cbe5fc5d51de5c8",
+        "source_updated_at": "2026-10-24T11:58:06Z",
+        "url": "https://github.com/nflverse/nflverse-data/releases/download/depth_charts/depth_charts_2026.parquet"
+      },
+      {
+        "asset_id": 672323753,
+        "file": "13c03b8d8333ec3955b5386f501d625eb3c32ed5ee4beedc3fb6c215051e42a5-stats_team_week_2026.csv",
+        "id": "stats_team",
+        "license": "CC BY 4.0; nflverse repository declaration",
+        "license_url": "https://github.com/nflverse/nflverse-data/blob/main/LICENSE.md",
+        "retrieved_at": "2026-10-24T13:59:30.299351+00:00",
+        "sha256": "13c03b8d8333ec3955b5386f501d625eb3c32ed5ee4beedc3fb6c215051e42a5",
+        "source_updated_at": "2026-10-24T13:20:49Z",
+        "url": "https://github.com/nflverse/nflverse-data/releases/download/stats_team/stats_team_week_2026.csv"
+      }
+    ],
+    "oracle": {
+      "artifact_sha256": "9be0bd883791f34e50c498014de364cc407fc47446a04bac27061323d4f9c43b",
+      "matchups_verified": 13,
+      "team_sides_verified": 26,
+      "domains_verified_per_team": 3,
+      "raw_source_sha256": {
+        "injuries": "3c9892ffb02d77e698e10a9bcda564425a36cf130c52281dd21c49bf9224528b",
+        "depth_charts": "2782878214b4a925674c79bbeadcc74ff383c0173eb358a40cbe5fc5d51de5c8",
+        "stats_team": "13c03b8d8333ec3955b5386f501d625eb3c32ed5ee4beedc3fb6c215051e42a5"
+      },
+      "method": "Independent csv/Arrow identity selection and direct ratio arithmetic; no ml.context transformation calls; only captured2026 sources",
+      "no_fitting": true,
+      "no_holdout": true
+    },
+    "limitations": [
+      "Current observed context only. No annotation changes the frozen model's features, coefficients or probabilities.",
+      "Context cutoff is independently shown and may be later than the forecast's original input cutoff; these are not retroactive forecast inputs.",
+      "The injury file supplies no report publication time. A weekly report observed now cannot establish prior availability or prove completeness.",
+      "Depth-chart position does not confirm a starter. Its source_recorded_at is the provider snapshot timestamp, not proof of an original team publication. Individual quarterback performance is not ingested.",
+      "Team statistics are observable aggregate ratios; EPA and CPOE are excluded. No efficiency predictive contribution has been trained or measured.",
+      "No weather, verified news, travel-distance or protected2024\u20132025 input is acquired.",
+      "nflverse repository CC BY4.0 terms and attribution are preserved; upstream public redistribution review remains a release gate."
+    ],
+    "correction_record": "docs/ARTIFACT_CORRECTIONS.md"
+  },
+  "research_challenger": {
+    "pointer": {
+      "file": "challenger-2b90c2f946ef4bac8a2841ae2d4abd8ad8b279449fc38cc1dea1dac32f8b3e68.json",
+      "generated_at": "2026-10-24T13:56:12.092485+00:00",
+      "model_id": "challenger-v1-da5c3ab79a98",
+      "schema_version": 1,
+      "sha256": "2b90c2f946ef4bac8a2841ae2d4abd8ad8b279449fc38cc1dea1dac32f8b3e68"
+    },
+    "operational": false,
+    "model_id": "challenger-v1-da5c3ab79a98",
+    "configuration": {
+      "bootstrap_replicates": 2000,
+      "calibration": {
+        "C": 1000000.0,
+        "max_iter": 2000,
+        "random_state": 42,
+        "solver": "lbfgs"
+      },
+      "classification_threshold": 0.5,
+      "domain_groups": {
+        "current_performance": [
+          "smooth_win_diff"
+        ],
+        "home_road": [
+          "venue_margin_diff",
+          "neutral_site"
+        ],
+        "opponent_adjusted": [
+          "opponent_adjusted_margin_diff"
+        ],
+        "prior_strength": [
+          "prior_smooth_win_diff",
+          "prior_margin_diff"
+        ],
+        "recent_trends": [
+          "recent_margin_diff"
+        ],
+        "rest_travel": [
+          "rest_diff",
+          "bye_diff"
+        ],
+        "scoring_margins": [
+          "margin_diff"
+        ]
+      },
+      "estimator": {
+        "C": 1.0,
+        "max_iter": 2000,
+        "random_state": 42,
+        "solver": "lbfgs"
+      },
+      "features": [
+        "smooth_win_diff",
+        "margin_diff",
+        "recent_margin_diff",
+        "rest_diff",
+        "prior_smooth_win_diff",
+        "prior_margin_diff",
+        "opponent_adjusted_margin_diff",
+        "venue_margin_diff",
+        "bye_diff",
+        "neutral_site"
+      ],
+      "fold_seasons": [
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "locked_seasons": [
+        2024,
+        2025
+      ],
+      "seed": 42,
+      "training_start": 2011,
+      "version": "schedule-intelligence-v1"
+    },
+    "declaration": {
+      "config": {
+        "bootstrap_replicates": 2000,
+        "calibration": {
+          "C": 1000000.0,
+          "max_iter": 2000,
+          "random_state": 42,
+          "solver": "lbfgs"
+        },
+        "classification_threshold": 0.5,
+        "domain_groups": {
+          "current_performance": [
+            "smooth_win_diff"
+          ],
+          "home_road": [
+            "venue_margin_diff",
+            "neutral_site"
+          ],
+          "opponent_adjusted": [
+            "opponent_adjusted_margin_diff"
+          ],
+          "prior_strength": [
+            "prior_smooth_win_diff",
+            "prior_margin_diff"
+          ],
+          "recent_trends": [
+            "recent_margin_diff"
+          ],
+          "rest_travel": [
+            "rest_diff",
+            "bye_diff"
+          ],
+          "scoring_margins": [
+            "margin_diff"
+          ]
+        },
+        "estimator": {
+          "C": 1.0,
+          "max_iter": 2000,
+          "random_state": 42,
+          "solver": "lbfgs"
+        },
+        "features": [
+          "smooth_win_diff",
+          "margin_diff",
+          "recent_margin_diff",
+          "rest_diff",
+          "prior_smooth_win_diff",
+          "prior_margin_diff",
+          "opponent_adjusted_margin_diff",
+          "venue_margin_diff",
+          "bye_diff",
+          "neutral_site"
+        ],
+        "fold_seasons": [
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023
+        ],
+        "locked_seasons": [
+          2024,
+          2025
+        ],
+        "seed": 42,
+        "training_start": 2011,
+        "version": "schedule-intelligence-v1"
+      },
+      "declared_at": "2026-10-24T13:54:29.506906+00:00",
+      "protocol_sha256": "e0ce915a410f1c0bcac18e43bfde519f14ceb899206752de96b9f5f999f0e414",
+      "status": "pre-fit-fixed-configuration"
+    },
+    "provenance": {
+      "code_sha256": {
+        "ml/challenger.py": "48fa1fcbfd8312ffde12724ddb96660013df852d6544128dc6abc0420a880365",
+        "ml/intelligence.py": "509e8e0477e7aba68e9bf4c4f9f923d6e743900b17ed305137357e2531cb2ef3"
+      },
+      "dataset_counts": {
+        "eligible_labeled_2011_2023": 3363,
+        "missing_feature_rows": 0,
+        "source": 3631
+      },
+      "declaration": {
+        "config": {
+          "bootstrap_replicates": 2000,
+          "calibration": {
+            "C": 1000000.0,
+            "max_iter": 2000,
+            "random_state": 42,
+            "solver": "lbfgs"
+          },
+          "classification_threshold": 0.5,
+          "domain_groups": {
+            "current_performance": [
+              "smooth_win_diff"
+            ],
+            "home_road": [
+              "venue_margin_diff",
+              "neutral_site"
+            ],
+            "opponent_adjusted": [
+              "opponent_adjusted_margin_diff"
+            ],
+            "prior_strength": [
+              "prior_smooth_win_diff",
+              "prior_margin_diff"
+            ],
+            "recent_trends": [
+              "recent_margin_diff"
+            ],
+            "rest_travel": [
+              "rest_diff",
+              "bye_diff"
+            ],
+            "scoring_margins": [
+              "margin_diff"
+            ]
+          },
+          "estimator": {
+            "C": 1.0,
+            "max_iter": 2000,
+            "random_state": 42,
+            "solver": "lbfgs"
+          },
+          "features": [
+            "smooth_win_diff",
+            "margin_diff",
+            "recent_margin_diff",
+            "rest_diff",
+            "prior_smooth_win_diff",
+            "prior_margin_diff",
+            "opponent_adjusted_margin_diff",
+            "venue_margin_diff",
+            "bye_diff",
+            "neutral_site"
+          ],
+          "fold_seasons": [
+            2018,
+            2019,
+            2020,
+            2021,
+            2022,
+            2023
+          ],
+          "locked_seasons": [
+            2024,
+            2025
+          ],
+          "seed": 42,
+          "training_start": 2011,
+          "version": "schedule-intelligence-v1"
+        },
+        "declared_at": "2026-10-24T13:54:29.506906+00:00",
+        "protocol_sha256": "e0ce915a410f1c0bcac18e43bfde519f14ceb899206752de96b9f5f999f0e414",
+        "status": "pre-fit-fixed-configuration"
+      },
+      "frozen_manifest_sha256": "2896a526ed8035b1674a6beb3c8d27c76ba4b3f466309bfeb729c6ddbf80f957",
+      "packages": {
+        "numpy": "2.5.4",
+        "pandas": "3.1.0",
+        "scikit-learn": "1.9.1"
+      },
+      "protocol_sha256": "e0ce915a410f1c0bcac18e43bfde519f14ceb899206752de96b9f5f999f0e414",
+      "python": "3.14.2",
+      "source": {
+        "packages": {
+          "nflreadpy": "0.1.5",
+          "numpy": "2.5.4",
+          "pandas": "3.1.0",
+          "scikit-learn": "1.9.1"
+        },
+        "python": "3.14.2",
+        "retrieved_at": "2026-10-24T12:48:36.377855+00:00",
+        "rows": 3631,
+        "seasons": [
+          2010,
+          2023
+        ],
+        "sha256": "20f573837dac7d9ea41dade07b165de6164b3370d60e49d5242e5255cabb7d01",
+        "source": "https://github.com/nflverse/nflverse-data/releases/download/schedules/games.parquet"
+      },
+      "source_sha256": "20f573837dac7d9ea41dade07b165de6164b3370d60e49d5242e5255cabb7d01"
+    },
+    "diagnostic_2023": {
+      "accuracy": 0.5955882352941176,
+      "brier": 0.2322823062056015,
+      "log_loss": 0.6561186063992791,
+      "n": 272
+    },
+    "pooled": {
+      "challenger": {
+        "accuracy": 0.623730964467005,
+        "brier": 0.22694679583778674,
+        "log_loss": 0.6461680755187268,
+        "n": 1576
+      },
+      "coin": {
+        "accuracy": 0.5418781725888325,
+        "brier": 0.25,
+        "log_loss": 0.6931471805599452,
+        "n": 1576
+      },
+      "home": {
+        "accuracy": 0.5418781725888325,
+        "brier": 0.24904590415563316,
+        "log_loss": 0.6912596732556328,
+        "n": 1576
+      },
+      "incumbent_recipe": {
+        "accuracy": 0.6040609137055838,
+        "brier": 0.23168243918727316,
+        "log_loss": 0.6551467656562712,
+        "n": 1576
+      },
+      "raw_challenger": {
+        "accuracy": 0.6256345177664975,
+        "brier": 0.2274725703761451,
+        "log_loss": 0.6467156161953354,
+        "n": 1576
+      }
+    },
+    "uncertainty": {
+      "diagnostic_vs_frozen_incumbent": {
+        "high": 0.002666297290682859,
+        "low": -0.011476851148978263,
+        "mean": -0.004762425515815414,
+        "replicates": 2000,
+        "seed": 42,
+        "stratified_by_season": true,
+        "unit": "season-week"
+      },
+      "pooled_vs_recipe": {
+        "high": -0.0005696108261392344,
+        "low": -0.008554115365733377,
+        "mean": -0.00473564334948645,
+        "replicates": 2000,
+        "seed": 42,
+        "stratified_by_season": true,
+        "unit": "season-week"
+      }
+    },
+    "reproducibility": {
+      "comparison_excludes": [
+        "generated_at",
+        "reproducibility"
+      ],
+      "deterministic_payload_sha256": "a280073a11e03e2a35658e54ba3416e0c67ef1bd0c55e1533b8363faa7723742",
+      "repeat_verified": true
+    },
+    "independent_saved_artifact_oracle": {
+      "method": "Independent Python stdlib scalar arithmetic; no production model/scoring helpers or fitting",
+      "predictions_verified": 1576,
+      "pooled_metric_sets_verified": 5,
+      "max_probability_error": 2.220446049250313e-16,
+      "artifact_sha256": "2b90c2f946ef4bac8a2841ae2d4abd8ad8b279449fc38cc1dea1dac32f8b3e68"
+    },
+    "promotion": {
+      "approval_required": true,
+      "blockers": [
+        "At least one retrospective season exceeds the predeclared 0.10 ECE limit",
+        "No prospective full-season shadow evidence",
+        "2026 prior-season inputs unavailable under holdout restriction",
+        "Historical publication vintages unavailable",
+        "Owner promotion approval not granted"
+      ],
+      "criteria": {
+        "every_season_ece_at_most_0_10": false,
+        "live_all_features_available": false,
+        "no_season_regression_above_0_01": true,
+        "owner_approved": false,
+        "paired_brier_upper_bound_below_zero": true,
+        "pooled_brier_improvement_at_least_0_002": true,
+        "pooled_ece_at_most_0_05": true,
+        "prospective_full_season": false
+      },
+      "eligible": false
+    },
+    "limitation": "2018\u20132023 retrospective and 2023 selection-exposed; recipe comparator is separately refitted/uncalibrated and actual frozen model is compared only on 2023. No feature-only improvement claim."
+  },
+  "frozen_2023_reproduction": {
+    "review_method": "Independent CSV history queries and saved-coefficient scoring; no fitting, tuning, network acquisition, or holdout reads",
+    "source_sha256": "20f573837dac7d9ea41dade07b165de6164b3370d60e49d5242e5255cabb7d01",
+    "freeze_sha256": "2896a526ed8035b1674a6beb3c8d27c76ba4b3f466309bfeb729c6ddbf80f957",
+    "demo_sha256": "41c3ad0d8d2997238b464f196b700ce328f38eb6e93831a18d504c7ef6aa24a9",
+    "frozen_file_checks": {
+      "ml/data.py": true,
+      "ml/features.py": true,
+      "ml/train.py": true,
+      "ml/forecast.py": true,
+      "docs/ML_EVALUATION.md": true,
+      "docs/FEATURES.md": true,
+      "requirements.txt": true,
+      "requirements-lock.txt": true
+    },
+    "model_and_reports_match": true,
+    "built_demo_matches": true,
+    "candidate_holdout_evaluation_locked": true,
+    "holdout_exposure_status": "partially-exposed",
+    "source_rows": 3631,
+    "source_seasons": [
+      2010,
+      2023
+    ],
+    "ties": 12,
+    "incomplete": 0,
+    "train_n": 3347,
+    "validation_n": 272,
+    "training_home_rate": 0.5572154167911563,
+    "recomputed": {
+      "coin": {
+        "n": 272,
+        "accuracy": 0.5551470588235294,
+        "brier": 0.25,
+        "log_loss": 0.6931471805599453
+      },
+      "home": {
+        "n": 272,
+        "accuracy": 0.5551470588235294,
+        "brier": 0.24696308000779646,
+        "log_loss": 0.6870610591071165
+      },
+      "schedule": {
+        "n": 272,
+        "accuracy": 0.5882352941176471,
+        "brier": 0.23704473172141693,
+        "log_loss": 0.6657815064516025
+      }
+    },
+    "brier_difference": {
+      "mean": -0.009918348286379495,
+      "low": -0.024714685176909074,
+      "high": 0.006381807129210394,
+      "unit": "week",
+      "replicates": 2000
+    },
+    "calibration": [
+      {
+        "bin": 1,
+        "count": 4,
+        "predicted": 0.19121565416576394,
+        "observed": 0.25
+      },
+      {
+        "bin": 2,
+        "count": 6,
+        "predicted": 0.25810415697466743,
+        "observed": 0.5
+      },
+      {
+        "bin": 3,
+        "count": 30,
+        "predicted": 0.35698395112195735,
+        "observed": 0.4
+      },
+      {
+        "bin": 4,
+        "count": 43,
+        "predicted": 0.4589641821445729,
+        "observed": 0.4883720930232558
+      },
+      {
+        "bin": 5,
+        "count": 90,
+        "predicted": 0.5530923333261418,
+        "observed": 0.4888888888888889
+      },
+      {
+        "bin": 6,
+        "count": 47,
+        "predicted": 0.653420056221847,
+        "observed": 0.6808510638297872
+      },
+      {
+        "bin": 7,
+        "count": 39,
+        "predicted": 0.7415975395011069,
+        "observed": 0.6923076923076923
+      },
+      {
+        "bin": 8,
+        "count": 13,
+        "predicted": 0.8319683196612188,
+        "observed": 0.8461538461538461
+      }
+    ],
+    "all_272_forecasts_and_1088_factors_match": true,
+    "largest_factor_error": 0.0,
+    "largest_probability_error": 2.220446049250313e-16,
+    "all_272_cutoffs_kickoffs_venues_match_source": true,
+    "games_with_zero_prior_season_history": 16,
+    "timestamps_source_evaluation_forecast": [
+      "2026-10-24T12:48:36.377855+00:00",
+      "2026-10-24T12:48:46.014475+00:00",
+      "2026-10-24T12:48:59.667510+00:00"
+    ],
+    "original_script_checks": {
+      "explore.py": {
+        "manifest_matches_original": true,
+        "manifest_matches_legacy": true
+      },
+      "baseline.py": {
+        "manifest_matches_original": true,
+        "manifest_matches_legacy": true
+      },
+      "features.py": {
+        "manifest_matches_original": true,
+        "manifest_matches_legacy": true
+      },
+      "test_features.py": {
+        "manifest_matches_original": true,
+        "manifest_matches_legacy": true
+      },
+      "train.py": {
+        "manifest_matches_original": true,
+        "manifest_matches_legacy": true
+      }
+    },
+    "unlicensed_logos_absent": true,
+    "not_reproduced_without_refitting": [
+      "original logistic metrics",
+      "four ablation fits",
+      "five expanding-window fitted model metrics"
+    ]
+  },
+  "evidence_bundle": {
+    "roundtrip_verified": true,
+    "files": 9,
+    "source_snapshots": 2,
+    "raw_files": 1,
+    "forecast_versions": 3,
+    "operations_versions": 3,
+    "bytes": 96362,
+    "sha256": "6666b5ca61f53ca60101b5a1a89a6bc5696cae4247b5ef701544a2acd046ddbd",
+    "manifest_sha256": "18f7c8ac925b700e1134d18ab12859f9e1dc12ce612a7acd5e2e7b6057493bc0",
+    "pointers_restored": false,
+    "hosted_restore_implemented": false
+  },
+  "gates": {
+    "G0": "ready for owner review",
+    "G1": "partial: expanded prediction-time data and prospective evidence missing",
+    "G2": "ready for local owner review",
+    "G3": "NO-GO: hosted retention/restore, partitions, source/license/account review and approval",
+    "G4": "partial: deterministic loop and research ready; zero prospective scored games, no model promotion",
+    "2024_2025_holdout": "locked and partially exposed; no further execution"
+  },
+  "unimplemented": [
+    "Weather and verified news collectors",
+    "Confirmed starter and individual QB-performance source",
+    "Historical publication-vintage enrichment for predictive contribution",
+    "Travel-distance features",
+    "2026 challenger prior strength without protected2025 access",
+    "LLM investigation adapter (deterministic fallback implemented)",
+    "Hosted trusted evidence restoration/retention",
+    "Whole-season static history partitioning",
+    "Enabled scheduling or deployment"
+  ],
+  "evidence_locations": [
+    "artifacts/execution/",
+    "artifacts/context-oracle.json",
+    "docs/EVIDENCE_BUNDLE.md",
+    "docs/ARTIFACT_CORRECTIONS.md"
+  ],
+  "preview_cleanup": {
+    "task_owned_ports_stopped": [
+      4174,
+      4175
+    ],
+    "preexisting_user_port_4173_untouched": true
+  }
+}
