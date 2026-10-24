@@ -15,7 +15,17 @@ test("current artifact, inputs, source lineage, history separation and accessibi
   await expect(page.locator(".current-card")).toHaveCount(artifact.games.length);
   expect(historicalRequests).toEqual([]);
   await expect(page.locator("img")).toHaveCount(0);
-  await expect(page.getByText("58.8%",{exact:true})).toHaveCount(0);
+  // A real upcoming probability may equal the historical accuracy after rounding.
+  // Verify every displayed probability against this artifact instead of banning a number.
+  for(const [index,game] of artifact.games.entries()){
+    const card=page.locator(".current-card").nth(index);
+    const displayable=game.status==="available"&&Date.parse(artifact.generated_at)<Date.parse(artifact.valid_until)
+      &&game.kickoff&&Date.parse(artifact.generated_at)<Date.parse(game.kickoff);
+    if(displayable)await expect(card.locator(".current-probabilities strong")).toHaveText([
+      `${(game.away_probability*100).toFixed(1)}%`,`${(game.home_probability*100).toFixed(1)}%`,
+    ]);
+    else await expect(card.locator(".current-probabilities")).toHaveCount(0);
+  }
   if (artifact.games.some((g: {status:string})=>g.status==="available")) {
     await page.locator(".current-inputs summary").first().click();
     await expect(page.locator(".current-feature-table").first()).toBeVisible();
