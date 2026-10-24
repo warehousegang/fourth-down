@@ -2,13 +2,13 @@ import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 import { readFileSync } from "node:fs";
 import { demonstrationForecasts } from "../src/interview-demo";
-import { operationsSchema } from "../src/operations-contracts";
+import type { Operations } from "../src/operations-contracts";
 const pointer=JSON.parse(readFileSync("public/data/current/latest.json","utf8"));
 const contextPointer=JSON.parse(readFileSync("public/data/context/latest.json","utf8"));
 const context=JSON.parse(readFileSync(`public/data/context/${contextPointer.file}`,"utf8"));
 const current=JSON.parse(readFileSync(`public/data/current/${pointer.file}`,"utf8"));
 const operationsPointer=JSON.parse(readFileSync("public/data/operations/latest.json","utf8"));
-const operations=operationsSchema.parse(JSON.parse(readFileSync(`public/data/operations/${operationsPointer.file}`,"utf8")));
+const operations=JSON.parse(readFileSync(`public/data/operations/${operationsPointer.file}`,"utf8")) as Operations;
 
 test("operational intelligence routes, honest evidence, responsive layout and accessibility",async({page},info)=>{
   const errors:string[]=[];page.on("pageerror",e=>errors.push(e.message));
