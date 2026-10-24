@@ -11,5 +11,6 @@ web/dist/
 playwright-report/
 test-results/
 *.tsbuildinfo
-# Generated replay stays local until the owner approves inclusion/redistribution.
+# Only the checksummed 2023 replay is part of the corrective source package.
 /web/public/data/*.json
+!/web/public/data/demo.json

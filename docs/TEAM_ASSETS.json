@@ -1,0 +1,202 @@
+{
+  "retrieved_on": "2026-10-24",
+  "purpose": "Local reference-inspired frontend reskin",
+  "rights": "Team trademarks; ESPN-hosted source assets. Not covered by the nflverse data license. Public redistribution remains subject to G3 review.",
+  "assets": [
+    {
+      "team": "ARI",
+      "source": "https://a.espncdn.com/i/teamlogos/nfl/500/ari.png",
+      "sha256": "f870b58b43585a5b7717d578dd433b0b1e0c462d64ef4bea2aeb8c03f4ae7854",
+      "bytes": 41994
+    },
+    {
+      "team": "ATL",
+      "source": "https://a.espncdn.com/i/teamlogos/nfl/500/atl.png",
+      "sha256": "fe566e9da6f7986b2bac321571bd751247ff93af15c51ae555486fb1bee90c91",
+      "bytes": 51781
+    },
+    {
+      "team": "BAL",
+      "source": "https://a.espncdn.com/i/teamlogos/nfl/500/bal.png",
+      "sha256": "67796023c172c9aeab5bcdac9204823d3590097246ad1cb92971134b5f26dcc0",
+      "bytes": 55985
+    },
+    {
+      "team": "BUF",
+      "source": "https://a.espncdn.com/i/teamlogos/nfl/500/buf.png",
+      "sha256": "79b71e2f536ee29f9d23834e89828883af2d95bf6968cbd07a505444229cdd20",
+      "bytes": 38004
+    },
+    {
+      "team": "CAR",
+      "source": "https://a.espncdn.com/i/teamlogos/nfl/500/car.png",
+      "sha256": "2cebc1bbdcfd89f28c1578b397f440d229d93fa9a30bfa1193cc286482c82298",
+      "bytes": 36636
+    },
+    {
+      "team": "CHI",
+      "source": "https://a.espncdn.com/i/teamlogos/nfl/500/chi.png",
+      "sha256": "fd7b5a207b9ad443f950b384d43dba6cb367c5737ad50a51a15e3893fa31753b",
+      "bytes": 93593
+    },
+    {
+      "team": "CIN",
+      "source": "https://a.espncdn.com/i/teamlogos/nfl/500/cin.png",
+      "sha256": "8e549c0ecac92453140370b2aef3e4a140139b50d16e92507532e8ee49930d4e",
+      "bytes": 26628
+    },
+    {
+      "team": "CLE",
+      "source": "https://a.espncdn.com/i/teamlogos/nfl/500/cle.png",
+      "sha256": "9b286fc4286dc39b1b5a6a08aab042b456ba5fdce99e45e49a4d1e2672411fa2",
+      "bytes": 94482
+    },
+    {
+      "team": "DAL",
+      "source": "https://a.espncdn.com/i/teamlogos/nfl/500/dal.png",
+      "sha256": "f4ea9a2ec7d7d500f08db94c8c6f1b23f75361ffe39c4d4b480a684a511ce61e",
+      "bytes": 32372
+    },
+    {
+      "team": "DEN",
+      "source": "https://a.espncdn.com/i/teamlogos/nfl/500/den.png",
+      "sha256": "c98bec2be32e27b19f79f5da86ac6ef133c78d75ab78aadb28ef36696c3213e8",
+      "bytes": 40948
+    },
+    {
+      "team": "DET",
+      "source": "https://a.espncdn.com/i/teamlogos/nfl/500/det.png",
+      "sha256": "9776b567ebab0bd3640165e915d948d8e736e35967dfc19ce62b967cfe7b4eb1",
+      "bytes": 57465
+    },
+    {
+      "team": "GB",
+      "source": "https://a.espncdn.com/i/teamlogos/nfl/500/gb.png",
+      "sha256": "7ea8154cdbff5db84d248f235c1f1c78a1a8b4cb8c14335b5886ec10ee20b00e",
+      "bytes": 39188
+    },
+    {
+      "team": "HOU",
+      "source": "https://a.espncdn.com/i/teamlogos/nfl/500/hou.png",
+      "sha256": "54b0fe559761860e4953851c197d995b2f9c0c4e278164edda7b608ffd64f39b",
+      "bytes": 35767
+    },
+    {
+      "team": "IND",
+      "source": "https://a.espncdn.com/i/teamlogos/nfl/500/ind.png",
+      "sha256": "f1f5222a876f810956aa8d4e75d4e6b47bcb3a6d11f876642b674010233c8a97",
+      "bytes": 42083
+    },
+    {
+      "team": "JAX",
+      "source": "https://a.espncdn.com/i/teamlogos/nfl/500/jax.png",
+      "sha256": "15cb9a1c77ebfaea885d0d3a34f33dabc4e6a00eb7d5462148fceed641d49397",
+      "bytes": 78814
+    },
+    {
+      "team": "KC",
+      "source": "https://a.espncdn.com/i/teamlogos/nfl/500/kc.png",
+      "sha256": "3d77958dc6373768919bb2681cbe1b143f56c07a1f013460def665a5026a7f3d",
+      "bytes": 40228
+    },
+    {
+      "team": "LA",
+      "source": "https://a.espncdn.com/i/teamlogos/nfl/500/lar.png",
+      "sha256": "e289b738a5e1259cccea921bee02eec881d35b4241761a8c4e12fe5964cab75c",
+      "bytes": 38707
+    },
+    {
+      "team": "LAC",
+      "source": "https://a.espncdn.com/i/teamlogos/nfl/500/lac.png",
+      "sha256": "5400f85bd93129c056717a771da57a97225e15f39c0022107ce89ef993f15bb0",
+      "bytes": 32850
+    },
+    {
+      "team": "LV",
+      "source": "https://a.espncdn.com/i/teamlogos/nfl/500/lv.png",
+      "sha256": "94de716ea6d3859effbfbc0966c8327eefc0a004e0d2f16c77ca80b58fd95eaa",
+      "bytes": 27355
+    },
+    {
+      "team": "MIA",
+      "source": "https://a.espncdn.com/i/teamlogos/nfl/500/mia.png",
+      "sha256": "b9631269a82abda39bd748afc82390679ca67bfc167bc3581665e237407de8e0",
+      "bytes": 64408
+    },
+    {
+      "team": "MIN",
+      "source": "https://a.espncdn.com/i/teamlogos/nfl/500/min.png",
+      "sha256": "72759956b149bc1c9496ea6ebb9a6ae34093dfed371cc6abb425c13f14f53448",
+      "bytes": 69686
+    },
+    {
+      "team": "NE",
+      "source": "https://a.espncdn.com/i/teamlogos/nfl/500/ne.png",
+      "sha256": "dac19aa9a573dcf9075e2422bee3e35a4955b9ab494bb3191ab3bacfd3609729",
+      "bytes": 32083
+    },
+    {
+      "team": "NO",
+      "source": "https://a.espncdn.com/i/teamlogos/nfl/500/no.png",
+      "sha256": "68ddfdf1d7ee8317f1af083a0c6d59142a11e8af4dad73c3c50bbafc338e0a94",
+      "bytes": 52016
+    },
+    {
+      "team": "NYG",
+      "source": "https://a.espncdn.com/i/teamlogos/nfl/500/nyg.png",
+      "sha256": "62e361850e7ba3a50dfd09cbb38429e994d1c23b0f999c74421f10e37c7067e7",
+      "bytes": 7574
+    },
+    {
+      "team": "NYJ",
+      "source": "https://a.espncdn.com/i/teamlogos/nfl/500/nyj.png",
+      "sha256": "5de8d029f3602c97ffe02bd636eb2630e55d019d1a37cf819d3b9e39a219487b",
+      "bytes": 130614
+    },
+    {
+      "team": "PHI",
+      "source": "https://a.espncdn.com/i/teamlogos/nfl/500/phi.png",
+      "sha256": "2875f50f8b756ed5ea3866105b4683f5c603aa542e2c7f7870287e1d3d006100",
+      "bytes": 70332
+    },
+    {
+      "team": "PIT",
+      "source": "https://a.espncdn.com/i/teamlogos/nfl/500/pit.png",
+      "sha256": "806bcb72e75ed184a99bea34df458e6cd87145fc9a863945f3356b01122aeb6f",
+      "bytes": 56620
+    },
+    {
+      "team": "SEA",
+      "source": "https://a.espncdn.com/i/teamlogos/nfl/500/sea.png",
+      "sha256": "2546b1d4fe5cf6c2d75cda53d3fb56bbc4dd43c6b00200586dab5a85df8fa492",
+      "bytes": 32081
+    },
+    {
+      "team": "SF",
+      "source": "https://a.espncdn.com/i/teamlogos/nfl/500/sf.png",
+      "sha256": "82ae812f6c15718ce5abdd402863e8b4553fa9971e4baa5d45ff585c52948a45",
+      "bytes": 48699
+    },
+    {
+      "team": "TB",
+      "source": "https://a.espncdn.com/i/teamlogos/nfl/500/tb.png",
+      "sha256": "bcc5d267024650938c9f35558077fe00a31913b89c61768d4ebb63d1ea31fbfd",
+      "bytes": 96110
+    },
+    {
+      "team": "TEN",
+      "source": "https://a.espncdn.com/i/teamlogos/nfl/500/ten.png",
+      "sha256": "27cf283fca5b2e9e1c5e995a465a54223424c157d2013b603a6491f99333cf45",
+      "bytes": 50732
+    },
+    {
+      "team": "WAS",
+      "source": "https://a.espncdn.com/i/teamlogos/nfl/500/wsh.png",
+      "sha256": "2f67805ef9e385a4c67adb0a9320706bd481a52e3aa0e0faea995dad2b501112",
+      "bytes": 30416
+    }
+  ],
+  "status": "retired; excluded from source package and production build",
+  "replacement": "Original CSS text identifiers displaying team abbreviations. No NFL/ESPN logo assets are shipped.",
+  "retired_on": "2026-10-24"
+}

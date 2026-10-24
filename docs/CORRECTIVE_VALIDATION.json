@@ -1,0 +1,251 @@
+{
+  "reviewed_on": "2026-10-24",
+  "scope": "Corrective preparation only; no additional holdout reads, scoring, fitting, tuning, deployment, remote writes, purchases or personal website changes",
+  "candidate_id": "schedule-v1-741cf41752",
+  "baseline_commit": "cf15da887930144633f88035d87cfd59fd564c63",
+  "protected_file_sha256_unchanged": {
+    "ml/data.py": "7523ad95de1742fcc067e75c112845c76ba65ffb15486dabe980beb935375873",
+    "ml/features.py": "64279b7ca027d9477f1780a83ff04d19eea837e5d219b4786b927bff65366b0a",
+    "ml/train.py": "18ffadaca7ca5dcc6e4e7c8df2816c0c7dc173947792b1e07fddc094aca18383",
+    "ml/forecast.py": "57583405dc336e63f2c016da8d1d2d9b3e4831006c1d4204a31fd9240238ce04",
+    "docs/ML_EVALUATION.md": "303d9e481d3fc1a6d054580863c723d31c6522158fbbd3e6a7a6af82740f2067",
+    "docs/FEATURES.md": "39feebb3aea483459a97176747d17fa0d6929a6fc3c7a2d1d53bad8dbb361eb8",
+    "requirements.txt": "23df77316f3e66a8da2a7dfee8ae9dae342265f297a0d63d335cb1f33ff0d253",
+    "requirements-lock.txt": "107ccd3fe0f7cfa5846e9dd7af09b8cd15ee4872fd69d355f262da30c37559d8",
+    "docs/FROZEN_MODEL.json": "2896a526ed8035b1674a6beb3c8d27c76ba4b3f466309bfeb729c6ddbf80f957",
+    "web/public/data/demo.json": "41c3ad0d8d2997238b464f196b700ce328f38eb6e93831a18d504c7ef6aa24a9",
+    "artifacts/model.json": "d709f60b43c3553de5b3e991f478f31128ddb0094307c2564bc3873ca2b3ee0a",
+    "legacy/SHA256.json": "ad182b6c4f80cbbb8ee283273b92e6b3bbd117b9b5f13c367f6cd695fc0250cc"
+  },
+  "source_sha256_unchanged": "20f573837dac7d9ea41dade07b165de6164b3370d60e49d5242e5255cabb7d01",
+  "holdout_exposure_status": "partially-exposed",
+  "holdout_execution_authorized": false,
+  "holdout_protocol_sha256": "ed08d57acb7efac02930848608573cf3be0e4f261ffa553868965b4b57fa56f5",
+  "checks": {
+    "python": {
+      "passed": 22,
+      "skipped": 1,
+      "skip_reason": "Owner forbids retraining; repeatability fit test explicitly skipped; LogisticRegression.fit, Pipeline.fit, StandardScaler.fit/partial_fit blocked"
+    },
+    "frontend_unit": 14,
+    "release_packaging": 6,
+    "browser_root": {
+      "passed": 4,
+      "url": "http://127.0.0.1:4175/"
+    },
+    "browser_production_subpath": {
+      "passed": 4,
+      "url": "http://127.0.0.1:4174/nfl-predictor/"
+    },
+    "browser_scope": "Desktop Chrome and mobile viewport: all routes, selection, refresh, artifact-unavailable state, notices, no overflow/uncaught JS errors, zero axe violations under tested rules",
+    "typescript_and_build": "passed",
+    "clean_git_archive_install_build": "pending",
+    "python_license_notices": 41,
+    "frontend_license_notices": 5,
+    "official_logos_shipped": 0
+  },
+  "validation_2023": {
+    "review_method": "Independent CSV history queries and saved-coefficient scoring; no fitting, tuning, network acquisition, or holdout reads",
+    "source_sha256": "20f573837dac7d9ea41dade07b165de6164b3370d60e49d5242e5255cabb7d01",
+    "freeze_sha256": "2896a526ed8035b1674a6beb3c8d27c76ba4b3f466309bfeb729c6ddbf80f957",
+    "demo_sha256": "41c3ad0d8d2997238b464f196b700ce328f38eb6e93831a18d504c7ef6aa24a9",
+    "frozen_file_checks": {
+      "ml/data.py": true,
+      "ml/features.py": true,
+      "ml/train.py": true,
+      "ml/forecast.py": true,
+      "docs/ML_EVALUATION.md": true,
+      "docs/FEATURES.md": true,
+      "requirements.txt": true,
+      "requirements-lock.txt": true
+    },
+    "model_and_reports_match": true,
+    "built_demo_matches": true,
+    "candidate_holdout_evaluation_locked": true,
+    "holdout_exposure_status": "partially-exposed",
+    "source_rows": 3631,
+    "source_seasons": [
+      2010,
+      2023
+    ],
+    "ties": 12,
+    "incomplete": 0,
+    "train_n": 3347,
+    "validation_n": 272,
+    "training_home_rate": 0.5572154167911563,
+    "recomputed": {
+      "coin": {
+        "n": 272,
+        "accuracy": 0.5551470588235294,
+        "brier": 0.25,
+        "log_loss": 0.6931471805599453
+      },
+      "home": {
+        "n": 272,
+        "accuracy": 0.5551470588235294,
+        "brier": 0.24696308000779646,
+        "log_loss": 0.6870610591071165
+      },
+      "schedule": {
+        "n": 272,
+        "accuracy": 0.5882352941176471,
+        "brier": 0.23704473172141693,
+        "log_loss": 0.6657815064516025
+      }
+    },
+    "brier_difference": {
+      "mean": -0.009918348286379495,
+      "low": -0.024714685176909074,
+      "high": 0.006381807129210394,
+      "unit": "week",
+      "replicates": 2000
+    },
+    "calibration": [
+      {
+        "bin": 1,
+        "count": 4,
+        "predicted": 0.19121565416576394,
+        "observed": 0.25
+      },
+      {
+        "bin": 2,
+        "count": 6,
+        "predicted": 0.25810415697466743,
+        "observed": 0.5
+      },
+      {
+        "bin": 3,
+        "count": 30,
+        "predicted": 0.35698395112195735,
+        "observed": 0.4
+      },
+      {
+        "bin": 4,
+        "count": 43,
+        "predicted": 0.4589641821445729,
+        "observed": 0.4883720930232558
+      },
+      {
+        "bin": 5,
+        "count": 90,
+        "predicted": 0.5530923333261418,
+        "observed": 0.4888888888888889
+      },
+      {
+        "bin": 6,
+        "count": 47,
+        "predicted": 0.653420056221847,
+        "observed": 0.6808510638297872
+      },
+      {
+        "bin": 7,
+        "count": 39,
+        "predicted": 0.7415975395011069,
+        "observed": 0.6923076923076923
+      },
+      {
+        "bin": 8,
+        "count": 13,
+        "predicted": 0.8319683196612188,
+        "observed": 0.8461538461538461
+      }
+    ],
+    "all_272_forecasts_and_1088_factors_match": true,
+    "largest_factor_error": 0.0,
+    "largest_probability_error": 2.220446049250313e-16,
+    "all_272_cutoffs_kickoffs_venues_match_source": true,
+    "games_with_zero_prior_season_history": 16,
+    "timestamps_source_evaluation_forecast": [
+      "2026-10-24T12:48:36.377855+00:00",
+      "2026-10-24T12:48:46.014475+00:00",
+      "2026-10-24T12:48:59.667510+00:00"
+    ],
+    "original_script_checks": {
+      "explore.py": {
+        "manifest_matches_original": true,
+        "manifest_matches_legacy": true
+      },
+      "baseline.py": {
+        "manifest_matches_original": true,
+        "manifest_matches_legacy": true
+      },
+      "features.py": {
+        "manifest_matches_original": true,
+        "manifest_matches_legacy": true
+      },
+      "test_features.py": {
+        "manifest_matches_original": true,
+        "manifest_matches_legacy": true
+      },
+      "train.py": {
+        "manifest_matches_original": true,
+        "manifest_matches_legacy": true
+      }
+    },
+    "unlicensed_logos_absent": true,
+    "not_reproduced_without_refitting": [
+      "original logistic metrics",
+      "four ablation fits",
+      "five expanding-window fitted model metrics"
+    ]
+  },
+  "security": {
+    "reviewed_on": "2026-10-24",
+    "source_files_scanned": 68,
+    "credential_pattern_matches": [],
+    "method": "Targeted private-key/AWS/GitHub/OpenAI token patterns across tracked and nonignored source files; not exhaustive secret detection",
+    "excluded_release_paths": [
+      "data/",
+      "artifacts/",
+      "node_modules/",
+      "web/dist/",
+      "web/public/teams/"
+    ],
+    "npm_audit": {
+      "vulnerabilities": {
+        "info": 0,
+        "low": 0,
+        "moderate": 0,
+        "high": 0,
+        "critical": 0,
+        "total": 0
+      },
+      "dependencies": {
+        "prod": 6,
+        "dev": 196,
+        "optional": 53,
+        "peer": 8,
+        "peerOptional": 0,
+        "total": 201
+      }
+    },
+    "python_packages_audited": 41,
+    "python_known_vulnerabilities": 0,
+    "python_skipped": 0,
+    "pip_check": "No broken requirements found"
+  },
+  "initial_failure": "Initial production browser run used a preview without matching VITE_BASE_PATH, returning HTML for JS paths. Restarted preview with /nfl-predictor/ and all four cases passed; failed log preserved. No application behavior weakened.",
+  "warnings": [
+    "Two upstream Zod annotation warnings during Vite bundle; build successful",
+    "No remote CI or cross-OS Python installation verification",
+    "Python frozen constraints have no wheel hashes",
+    "Original-logistic/ablation/backtest coefficients missing; historical summaries not regenerated",
+    "New Git history does not prove prior experiment chronology"
+  ],
+  "dist_total_bytes": 692062,
+  "evidence_sha256": {
+    "artifacts/corrective/after.json": "e3dc934da2586c3f10758eeffd725bca3b99000a8500e34bf4f4ab84e67aa5ae",
+    "artifacts/corrective/before.json": "e3dc934da2586c3f10758eeffd725bca3b99000a8500e34bf4f4ab84e67aa5ae",
+    "artifacts/corrective/browser-root.log": "6c1c0bb70c1df27b035537e97342014f81fa652f89a2203efc20c4ba908e879a",
+    "artifacts/corrective/browser-subpath-initial-preview-misconfiguration.log": "43e1c96b59dcb69ab96e2f358979799059497084379541f49f53c12aac39bb1e",
+    "artifacts/corrective/browser-subpath.log": "24dae6fd54506163d9ba74675140bf5a5261288cc6c63b59809a93dfdc2665e3",
+    "artifacts/corrective/evidence.json": "06d642329d3d6a57704386d0e1a3c68d8a014029077c179cdccd0add21c8423e",
+    "artifacts/corrective/frontend-tests-build.log": "5c76197ffd5fc8b771efc3a359ab70c4b8cf126148bc8b62fd0269bfddcf24f4",
+    "artifacts/corrective/npm-audit.json": "0a0b328a6e0ed0c891952bff3a29ff13f9906e2ab3d7a3049111431829bbce71",
+    "artifacts/corrective/packaging-tests.log": "3c57b2248a5b59796dd7fbade28336f33dd6f2f3b00b1d043d721da2ba74a363",
+    "artifacts/corrective/python-audit.json": "7048e9219723da4c744d67f326044998d224150d691c8d4b1b615c81417cc842",
+    "artifacts/corrective/python-tests.log": "de1bffa812187f3a5b769d63005f3a23ee97079e92908d0b6fb48c43014ea5dd",
+    "artifacts/corrective/security.json": "3df9b692182d056be89758644f5918e7ca4db7187bab143fc4af15995d7aecfa",
+    "artifacts/corrective/validation-check.log": "06d642329d3d6a57704386d0e1a3c68d8a014029077c179cdccd0add21c8423e"
+  }
+}

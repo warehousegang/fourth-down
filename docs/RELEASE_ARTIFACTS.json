@@ -1,0 +1,17 @@
+{
+  "recorded_on": "2026-10-24",
+  "purpose": "Corrective source packaging; no model or forecast regeneration",
+  "model_id": "schedule-v1-741cf41752",
+  "forecast_season": 2023,
+  "forecast_games": 272,
+  "public_release_authorized": false,
+  "file_sha256": {
+    "web/public/data/demo.json": "41c3ad0d8d2997238b464f196b700ce328f38eb6e93831a18d504c7ef6aa24a9",
+    "web/public/THIRD_PARTY_NOTICES.txt": "f6daec4cdeeadeb95ecf930b8f1ea9b704574d5ad5bfe64a6806d45287dad54c",
+    "web/package-lock.json": "2ad2822b75b6c6c8c5e4a7cb50416857f5bb037a6decb6f0a62eea811d237c9d",
+    "docs/FROZEN_MODEL.json": "2896a526ed8035b1674a6beb3c8d27c76ba4b3f466309bfeb729c6ddbf80f957",
+    "docs/HOLDOUT_PROTOCOL_FREEZE.json": "61fbf6127a62a3240686b12ab3b0016f8e60feb2260bed577e9550ba953d4020",
+    "docs/HOLDOUT_EXPOSURE.json": "686cbb616ee7d828879c825c9b12c84c269f789374d8aee0f46718950a1d7d4c",
+    "legacy/SHA256.json": "ad182b6c4f80cbbb8ee283273b92e6b3bbd117b9b5f13c367f6cd695fc0250cc"
+  }
+}

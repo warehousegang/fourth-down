@@ -1,0 +1,28 @@
+{
+  "protocol_id": "partially-exposed-2024-2025-v1",
+  "recorded_on": "2026-10-24",
+  "status": "frozen-pending-owner-approval",
+  "execution_authorized": false,
+  "holdout_evaluated_by_candidate": false,
+  "exposure_status": "partially-exposed",
+  "model_id": "schedule-v1-741cf41752",
+  "original_source_sha256": "20f573837dac7d9ea41dade07b165de6164b3370d60e49d5242e5255cabb7d01",
+  "baseline_git_commit": "cf15da887930144633f88035d87cfd59fd564c63",
+  "file_sha256": {
+    "docs/HOLDOUT_PROTOCOL.md": "ed08d57acb7efac02930848608573cf3be0e4f261ffa553868965b4b57fa56f5",
+    "docs/HOLDOUT_EXPOSURE.json": "686cbb616ee7d828879c825c9b12c84c269f789374d8aee0f46718950a1d7d4c",
+    "docs/FROZEN_MODEL.json": "2896a526ed8035b1674a6beb3c8d27c76ba4b3f466309bfeb729c6ddbf80f957",
+    "docs/ML_EVALUATION.md": "303d9e481d3fc1a6d054580863c723d31c6522158fbbd3e6a7a6af82740f2067",
+    "docs/FEATURES.md": "39feebb3aea483459a97176747d17fa0d6929a6fc3c7a2d1d53bad8dbb361eb8"
+  },
+  "original_frozen_files": {
+    "ml/data.py": "7523ad95de1742fcc067e75c112845c76ba65ffb15486dabe980beb935375873",
+    "ml/features.py": "64279b7ca027d9477f1780a83ff04d19eea837e5d219b4786b927bff65366b0a",
+    "ml/train.py": "18ffadaca7ca5dcc6e4e7c8df2816c0c7dc173947792b1e07fddc094aca18383",
+    "ml/forecast.py": "57583405dc336e63f2c016da8d1d2d9b3e4831006c1d4204a31fd9240238ce04",
+    "docs/ML_EVALUATION.md": "303d9e481d3fc1a6d054580863c723d31c6522158fbbd3e6a7a6af82740f2067",
+    "docs/FEATURES.md": "39feebb3aea483459a97176747d17fa0d6929a6fc3c7a2d1d53bad8dbb361eb8",
+    "requirements.txt": "23df77316f3e66a8da2a7dfee8ae9dae342265f297a0d63d335cb1f33ff0d253",
+    "requirements-lock.txt": "107ccd3fe0f7cfa5846e9dd7af09b8cd15ee4872fd69d355f262da30c37559d8"
+  }
+}

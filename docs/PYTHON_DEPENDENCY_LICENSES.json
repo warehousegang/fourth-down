@@ -1,0 +1,576 @@
+[
+  {
+    "name": "annotated-types",
+    "version": "0.8.0",
+    "files": [
+      {
+        "source": "annotated_types-0.8.0.dist-info/licenses/LICENSE",
+        "sha256": "fe1049884b1a0d9342901e88e07f32925d24b3121d9972b6a6805fb9824b095d"
+      }
+    ]
+  },
+  {
+    "name": "certifi",
+    "version": "2026.10.23",
+    "files": [
+      {
+        "source": "certifi-2026.10.23.dist-info/licenses/LICENSE",
+        "sha256": "e93716da6b9c0d5a4a1df60fe695b370f0695603d21f6f83f053e42cfc10caf7"
+      }
+    ]
+  },
+  {
+    "name": "charset-normalizer",
+    "version": "3.5.2",
+    "files": [
+      {
+        "source": "charset_normalizer-3.5.2.dist-info/licenses/LICENSE",
+        "sha256": "6d0d41bfe170ac6c7dc248c9a63e254d0fb45a60d50a8257d0af92c6e249b887"
+      }
+    ]
+  },
+  {
+    "name": "cloudpickle",
+    "version": "3.1.2",
+    "files": [
+      {
+        "source": "cloudpickle-3.1.2.dist-info/licenses/LICENSE",
+        "sha256": "3029ea34173e9fdc233ad315dc6b100bd1ea71f529b1c1af97664a272fdc55f5"
+      }
+    ]
+  },
+  {
+    "name": "contourpy",
+    "version": "1.4.0",
+    "files": [
+      {
+        "source": "contourpy-1.4.0.dist-info/licenses/LICENSE",
+        "sha256": "11401c428c7014a75728e8679f9c000aacf262015aaba65a760d41aa1130b3af"
+      }
+    ]
+  },
+  {
+    "name": "cycler",
+    "version": "0.12.1",
+    "files": [
+      {
+        "source": "cycler-0.12.1.dist-info/LICENSE",
+        "sha256": "f1218143d766da3fea66f13396b7f15df46a83303f29bf96ba6e98eb4d42f408"
+      }
+    ]
+  },
+  {
+    "name": "fonttools",
+    "version": "4.67.0",
+    "files": [
+      {
+        "source": "fonttools-4.67.0.dist-info/licenses/LICENSE",
+        "sha256": "6787208f83f659ccbc2223b2fde952ffa6f7e8aca62f1a8a2bf5bc51bb1b2383"
+      },
+      {
+        "source": "fonttools-4.67.0.dist-info/licenses/LICENSE.external",
+        "sha256": "94a83aaee0729a0f302d34acc4acecbd9d58366f262429075fe557e4a54b2e69"
+      }
+    ]
+  },
+  {
+    "name": "idna",
+    "version": "3.20",
+    "files": [
+      {
+        "source": "idna-3.20.dist-info/licenses/LICENSE.md",
+        "sha256": "1a9a4f0e3d479a27240ddd59a9137a66ab4a0f9dfdc8ca6188cc0bfd85187f04"
+      }
+    ]
+  },
+  {
+    "name": "iniconfig",
+    "version": "2.3.1",
+    "files": [
+      {
+        "source": "iniconfig-2.3.1.dist-info/licenses/LICENSE",
+        "sha256": "3409fa91f7ace557894632676656e32264fe5ef7581535725dc9a23774551bd4"
+      }
+    ]
+  },
+  {
+    "name": "joblib",
+    "version": "1.6.0",
+    "files": [
+      {
+        "source": "joblib-1.6.0.dist-info/licenses/LICENSE.txt",
+        "sha256": "42612911c1872c5e4b43f6ae0e8ee59467cd350332241cf72ce90640264fae6a"
+      }
+    ]
+  },
+  {
+    "name": "kiwisolver",
+    "version": "1.5.1",
+    "files": [
+      {
+        "source": "kiwisolver-1.5.1.dist-info/licenses/LICENSE",
+        "sha256": "529c40e5f67f2f88904657a9f7879ae2f8dc76bc9bfef9cb10d988b48804ed61"
+      }
+    ]
+  },
+  {
+    "name": "matplotlib",
+    "version": "3.11.2",
+    "files": [
+      {
+        "source": "matplotlib-3.11.2.dist-info/LICENSE",
+        "sha256": "822e8e528147569a41975592aee19c11992ab667ba50451cd929031d5fc74491"
+      }
+    ]
+  },
+  {
+    "name": "narwhals",
+    "version": "2.27.1",
+    "files": [
+      {
+        "source": "narwhals-2.27.1.dist-info/licenses/LICENSE.md",
+        "sha256": "811445f30147b8f0c9d444c9025fd528f9532c54b7b83f6e2368473dc91cfdf0"
+      }
+    ]
+  },
+  {
+    "name": "nflreadpy",
+    "version": "0.1.5",
+    "files": [
+      {
+        "source": "https://github.com/nflverse/nflreadpy/blob/95b6cb50852523d043b8bf3abc62e801a3654b7d/LICENSE.md",
+        "sha256": "1b967c8c71bc631f25fc11cb4ecc2e64a8811112e107b74d39e95d143299ce94"
+      }
+    ]
+  },
+  {
+    "name": "numpy",
+    "version": "2.5.4",
+    "files": [
+      {
+        "source": "numpy-2.5.4.dist-info/licenses/LICENSE.txt",
+        "sha256": "649a589ab31076e79e9ce62ba24eae9959598124176640dbc95f87bd10f34fcf"
+      },
+      {
+        "source": "numpy-2.5.4.dist-info/licenses/numpy/_core/include/numpy/libdivide/LICENSE.txt",
+        "sha256": "fbc539f47d0cf83bc61378080fb873d5c14630126cacbfe754035c3926daa5ec"
+      },
+      {
+        "source": "numpy-2.5.4.dist-info/licenses/numpy/_core/src/common/pythoncapi-compat/COPYING",
+        "sha256": "3f2c1ffa76383a55ae0aac01c9737cd70050dff63e1f026694fbe9d662573c98"
+      },
+      {
+        "source": "numpy-2.5.4.dist-info/licenses/numpy/_core/src/highway/LICENSE",
+        "sha256": "e340270d4f64384569a91d546acb5b094d69ce47f0c015db77abb74dc6f815af"
+      },
+      {
+        "source": "numpy-2.5.4.dist-info/licenses/numpy/_core/src/multiarray/dragon4_LICENSE.txt",
+        "sha256": "f7b14309e5f54e5022b26448eefd419988ada2aec01d3c1162d84a0ea8f21f2c"
+      },
+      {
+        "source": "numpy-2.5.4.dist-info/licenses/numpy/_core/src/npysort/x86-simd-sort/LICENSE.md",
+        "sha256": "211e7d737d6179a08f791ebb0a99897ce7cd2457410c542876d125576edfe910"
+      },
+      {
+        "source": "numpy-2.5.4.dist-info/licenses/numpy/_core/src/umath/svml/LICENSE",
+        "sha256": "c17011467b4fe6e20fbfbeda4df09e58c2bca5480a063e55735a4000a379aad9"
+      },
+      {
+        "source": "numpy-2.5.4.dist-info/licenses/numpy/fft/pocketfft/LICENSE.md",
+        "sha256": "a85ca13fdf90160b64a0698215868c13b74d835ad0a4e2ba44713b8c5058a056"
+      },
+      {
+        "source": "numpy-2.5.4.dist-info/licenses/numpy/linalg/lapack_lite/LICENSE.txt",
+        "sha256": "a14cc25e10d40a3aa705b7de2fb764a6535d8ee9b2db4e1724900585457dfd55"
+      },
+      {
+        "source": "numpy-2.5.4.dist-info/licenses/numpy/ma/LICENSE",
+        "sha256": "05f3b88351988ecfad10abe92c0c50e5875c6452d5009a0084cc291551ffcca6"
+      },
+      {
+        "source": "numpy-2.5.4.dist-info/licenses/numpy/random/LICENSE.md",
+        "sha256": "103166b62b80443afb9eb3488e052ea06be0cff566b908f199e561fde49af19f"
+      },
+      {
+        "source": "numpy-2.5.4.dist-info/licenses/numpy/random/src/distributions/LICENSE.md",
+        "sha256": "469778be8f33d54e1bcaab28c281cc472916d2d273f835e55bc487d30503face"
+      },
+      {
+        "source": "numpy-2.5.4.dist-info/licenses/numpy/random/src/mt19937/LICENSE.md",
+        "sha256": "0e111337b25494a773106695f0e799f642b8567aaacca4f116a74a8177179156"
+      },
+      {
+        "source": "numpy-2.5.4.dist-info/licenses/numpy/random/src/pcg64/LICENSE.md",
+        "sha256": "e7d4f4fb20358f314210a892ae17351e04993813646f697ec387385ca2a36918"
+      },
+      {
+        "source": "numpy-2.5.4.dist-info/licenses/numpy/random/src/philox/LICENSE.md",
+        "sha256": "6f5828a57223d4cc7f8ea505a2623e7b978b242752c1515e355f46ba2cec1800"
+      },
+      {
+        "source": "numpy-2.5.4.dist-info/licenses/numpy/random/src/sfc64/LICENSE.md",
+        "sha256": "9d4098846018319cd68e228ee6220361787f73bccbf00237a85e4fc9621b998f"
+      },
+      {
+        "source": "numpy-2.5.4.dist-info/licenses/numpy/random/src/splitmix64/LICENSE.md",
+        "sha256": "268b0ca06759d31ea3ca68dd35f20e877916e927b1c2a835e4592a3c4354b1f9"
+      }
+    ]
+  },
+  {
+    "name": "packaging",
+    "version": "26.3",
+    "files": [
+      {
+        "source": "packaging-26.3.dist-info/licenses/LICENSE",
+        "sha256": "cad1ef5bd340d73e074ba614d26f7deaca5c7940c3d8c34852e65c4909686c48"
+      },
+      {
+        "source": "packaging-26.3.dist-info/licenses/LICENSE.APACHE",
+        "sha256": "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594"
+      },
+      {
+        "source": "packaging-26.3.dist-info/licenses/LICENSE.BSD",
+        "sha256": "b70e7e9b742f1cc6f948b34c16aa39ffece94196364bc88ff0d2180f0028fac5"
+      }
+    ]
+  },
+  {
+    "name": "pandas",
+    "version": "3.1.0",
+    "files": [
+      {
+        "source": "pandas-3.1.0.dist-info/licenses/LICENSE",
+        "sha256": "9850f6b5bdef7346503065807b878deb8058b976c5c329f4c4d23bf4796ce9ae"
+      },
+      {
+        "source": "pandas-3.1.0.dist-info/licenses/LICENSES/BOTTLENECK_LICENCE",
+        "sha256": "053a90e30580f5d9d79817add1567f88b4a3eeb11bcded9ecf74619d17768066"
+      },
+      {
+        "source": "pandas-3.1.0.dist-info/licenses/LICENSES/DATEUTIL_LICENSE",
+        "sha256": "ba00f51a0d92823b5a1cde27d8b5b9d2321e67ed8da9bc163eff96d5e17e577e"
+      },
+      {
+        "source": "pandas-3.1.0.dist-info/licenses/LICENSES/HAVEN_LICENSE",
+        "sha256": "48216b40b3d1b19452923dd6fd74655bf5c0df9d76b51eb0efade7e0b88bfbcc"
+      },
+      {
+        "source": "pandas-3.1.0.dist-info/licenses/LICENSES/HAVEN_MIT",
+        "sha256": "87217d0a79195441ab615a3abb3ab6777502e57804ea83f973df975a67ebd720"
+      },
+      {
+        "source": "pandas-3.1.0.dist-info/licenses/LICENSES/KLIB_LICENSE",
+        "sha256": "7463172c3a23321c1838896eba437f70a6de80ac5a840b2960966c8c5444abf1"
+      },
+      {
+        "source": "pandas-3.1.0.dist-info/licenses/LICENSES/MUSL_LICENSE",
+        "sha256": "50a343c1ce9e27cd6c58023f13b91d2cd679861fe7fb6bbbbfbec3dcafc3583f"
+      },
+      {
+        "source": "pandas-3.1.0.dist-info/licenses/LICENSES/NUMPY_LICENSE",
+        "sha256": "81d42da02a56b611c35abc83d2241564b46bec3a5b1960b395d55cebca68fb6f"
+      },
+      {
+        "source": "pandas-3.1.0.dist-info/licenses/LICENSES/PACKAGING_LICENSE",
+        "sha256": "1871330068a18f1f07c3f147a41c008e59f367f217041ca6eb20b0298639a128"
+      },
+      {
+        "source": "pandas-3.1.0.dist-info/licenses/LICENSES/PSF_LICENSE",
+        "sha256": "3b2f81fe21d181c499c59a256c8e1968455d6689d269aa85373bfb6af41da3bf"
+      },
+      {
+        "source": "pandas-3.1.0.dist-info/licenses/LICENSES/PYPERCLIP_LICENSE",
+        "sha256": "eafcd440e3570c6bc7b77dcec15dec398d13bc9b5e897336b221ff81ff19f345"
+      },
+      {
+        "source": "pandas-3.1.0.dist-info/licenses/LICENSES/PYUPGRADE_LICENSE",
+        "sha256": "70aedcd6928272bd176e4fdc3384af22ee759d006fb15105d994756e4f2d1b7a"
+      },
+      {
+        "source": "pandas-3.1.0.dist-info/licenses/LICENSES/SAS7BDAT_LICENSE",
+        "sha256": "458d5fd4175825440ad32d6bf6af45d1a19d4adb316b557d869c6560b6692e00"
+      },
+      {
+        "source": "pandas-3.1.0.dist-info/licenses/LICENSES/STATSBASE_JL_LICENSE",
+        "sha256": "f371ccf0fb892a4cd9f2e550c4b8cf4362793d17028dc642ad55c1e01a41dfe1"
+      },
+      {
+        "source": "pandas-3.1.0.dist-info/licenses/LICENSES/ULTRAJSON_LICENSE",
+        "sha256": "2bfbb5bb8ec66d136ec62d836ddc0c0019d44ef4d9389f1f6cab1c1109d774a2"
+      },
+      {
+        "source": "pandas-3.1.0.dist-info/licenses/LICENSES/XSIMD_LICENSE",
+        "sha256": "501352acba62cc54e8e3d293754d606f919c9b425b962193c211f9fa29cd9940"
+      },
+      {
+        "source": "pandas-3.1.0.dist-info/licenses/subprojects/fast_float-8.2.10/LICENSE-APACHE",
+        "sha256": "097a889aa954d04e088b790b10a4014d6189561d0a6013935a73ce3d4ddaaf06"
+      },
+      {
+        "source": "pandas-3.1.0.dist-info/licenses/subprojects/fast_float-8.2.10/LICENSE-BOOST",
+        "sha256": "8d8291caf1cee26d23acf3eb67c9f9a2d58f1c681b16a4fbe8cbfb9e3c0b5a9b"
+      },
+      {
+        "source": "pandas-3.1.0.dist-info/licenses/subprojects/fast_float-8.2.10/LICENSE-MIT",
+        "sha256": "e562f3f974ced7e69dd1db77b820b36bcf8f30377f1aa105723fba449c53c4e6"
+      }
+    ]
+  },
+  {
+    "name": "pillow",
+    "version": "13.0.0",
+    "files": [
+      {
+        "source": "pillow-13.0.0.dist-info/licenses/LICENSE",
+        "sha256": "dda12a98c1979cf3d94df1cff45d27a4cb3f04a60c76f76902ac54cac03ec0ce"
+      }
+    ]
+  },
+  {
+    "name": "platformdirs",
+    "version": "4.13.5",
+    "files": [
+      {
+        "source": "platformdirs-4.13.5.dist-info/licenses/LICENSE",
+        "sha256": "29e0fd62e929850e86eb28c3fdccf0cefdf4fa94879011cffb3d0d4bed6d4db6"
+      }
+    ]
+  },
+  {
+    "name": "pluggy",
+    "version": "1.7.0",
+    "files": [
+      {
+        "source": "pluggy-1.7.0.dist-info/licenses/LICENSE",
+        "sha256": "d6b65e6c213a5d0b577911d34d6e5949b9f59d76c238c5071a2f3fc16cfb2606"
+      }
+    ]
+  },
+  {
+    "name": "polars",
+    "version": "2.0.0",
+    "files": [
+      {
+        "source": "polars-2.0.0.dist-info/licenses/LICENSE",
+        "sha256": "8296022372dc83cc8ef234b3d4889ef8f8b1779754a78bebf13d2c5178a6b4c4"
+      }
+    ]
+  },
+  {
+    "name": "polars-runtime-32",
+    "version": "2.0.0",
+    "files": [
+      {
+        "source": "polars_runtime_32-2.0.0.dist-info/licenses/LICENSE",
+        "sha256": "8296022372dc83cc8ef234b3d4889ef8f8b1779754a78bebf13d2c5178a6b4c4"
+      }
+    ]
+  },
+  {
+    "name": "pyarrow",
+    "version": "26.0.0",
+    "files": [
+      {
+        "source": "pyarrow-26.0.0.dist-info/licenses/LICENSE.txt",
+        "sha256": "cd03925a27219d326d622609fbcae6567279af8b8885c33d5969a9e4ef5d7525"
+      },
+      {
+        "source": "pyarrow-26.0.0.dist-info/licenses/NOTICE.txt",
+        "sha256": "afd895d61a00101f6d5a41cf518c83865d815e8109e956f512a0ce4ea9738c06"
+      }
+    ]
+  },
+  {
+    "name": "pydantic",
+    "version": "2.14.1",
+    "files": [
+      {
+        "source": "pydantic-2.14.1.dist-info/licenses/LICENSE",
+        "sha256": "a9e186f3ca16b5eef84318e7a701721351a00cb7b8ae3a4394b67b49e3529ef3"
+      }
+    ]
+  },
+  {
+    "name": "pydantic-settings",
+    "version": "2.16.1",
+    "files": [
+      {
+        "source": "pydantic_settings-2.16.1.dist-info/licenses/LICENSE",
+        "sha256": "eb355a753e020346d33d83bf9769135b89fc610568ac531a01c295bcee7fd998"
+      }
+    ]
+  },
+  {
+    "name": "pydantic_core",
+    "version": "2.50.1",
+    "files": [
+      {
+        "source": "pydantic_core-2.50.1.dist-info/licenses/LICENSE",
+        "sha256": "2afdd30d54b4d62b6f488a6bcc1546e84ec5061f13f4209c03d012348783795a"
+      }
+    ]
+  },
+  {
+    "name": "Pygments",
+    "version": "2.21.0",
+    "files": [
+      {
+        "source": "pygments-2.21.0.dist-info/licenses/AUTHORS",
+        "sha256": "71a83872ad82f57be692cf827e048e2cd51d45169cfa1ea3f28706d97a872c0f"
+      },
+      {
+        "source": "pygments-2.21.0.dist-info/licenses/LICENSE",
+        "sha256": "a9d66f1d526df02e29dce73436d34e56e8632f46c275bbdffc70569e882f9f17"
+      }
+    ]
+  },
+  {
+    "name": "pyparsing",
+    "version": "3.3.3",
+    "files": [
+      {
+        "source": "pyparsing-3.3.3.dist-info/licenses/LICENSE",
+        "sha256": "a5425f9dc14ac74d4c5f0b679e941f2442e32cca7452a4418d5b1a49893ebe4e"
+      }
+    ]
+  },
+  {
+    "name": "pytest",
+    "version": "9.1.1",
+    "files": [
+      {
+        "source": "pytest-9.1.1.dist-info/licenses/LICENSE",
+        "sha256": "ca836a5f9ecca3b2f350230faa20a48fb8b145653b5568d784862df864706b9b"
+      }
+    ]
+  },
+  {
+    "name": "python-dateutil",
+    "version": "3.0.0",
+    "files": [
+      {
+        "source": "python_dateutil-3.0.0.dist-info/licenses/LICENSE",
+        "sha256": "ba00f51a0d92823b5a1cde27d8b5b9d2321e67ed8da9bc163eff96d5e17e577e"
+      }
+    ]
+  },
+  {
+    "name": "python-dotenv",
+    "version": "1.2.4",
+    "files": [
+      {
+        "source": "python_dotenv-1.2.4.dist-info/licenses/LICENSE",
+        "sha256": "80619b7049f08c81683ad0e01f08f257a840652dd71ee83146d36658c7d2c2b9"
+      }
+    ]
+  },
+  {
+    "name": "requests",
+    "version": "2.34.2",
+    "files": [
+      {
+        "source": "requests-2.34.2.dist-info/licenses/LICENSE",
+        "sha256": "09e8a9bcec8067104652c168685ab0931e7868f9c8284b66f5ae6edae5f1130b"
+      },
+      {
+        "source": "requests-2.34.2.dist-info/licenses/NOTICE",
+        "sha256": "f5110972dedad2b4e9d314518daf3b7d72d6e02e499acd802181de6f74571dcc"
+      }
+    ]
+  },
+  {
+    "name": "scikit-learn",
+    "version": "1.9.1",
+    "files": [
+      {
+        "source": "scikit_learn-1.9.1.dist-info/licenses/COPYING",
+        "sha256": "fc8dc597df0e3f51da65e2a71021e7f92e0b481998ec572a53c03ac0441db040"
+      }
+    ]
+  },
+  {
+    "name": "scipy",
+    "version": "1.18.1",
+    "files": [
+      {
+        "source": "scipy-1.18.1.dist-info/LICENSE.txt",
+        "sha256": "09a1b9e19573045b0784a181cc4bef677039d4f2111631c747bf72b7f19017d4"
+      }
+    ]
+  },
+  {
+    "name": "six",
+    "version": "1.17.0",
+    "files": [
+      {
+        "source": "six-1.17.0.dist-info/LICENSE",
+        "sha256": "4375ba20e2b9c6c4e7cad2940a628fd90e95cc3d50ee92aae755715d8ba1fbd0"
+      }
+    ]
+  },
+  {
+    "name": "threadpoolctl",
+    "version": "3.7.0",
+    "files": [
+      {
+        "source": "threadpoolctl-3.7.0.dist-info/licenses/LICENSE",
+        "sha256": "81ac619075248b06e53660b652d10e485f4675f5d0ae0f97ea22370da1f7e23b"
+      }
+    ]
+  },
+  {
+    "name": "tqdm",
+    "version": "4.70.1",
+    "files": [
+      {
+        "source": "tqdm-4.70.1.dist-info/licenses/LICENCE",
+        "sha256": "fcff87c3a47ce8028a8512aa182d4fcf0ad1c90544ee75cf9b343684cac194de"
+      }
+    ]
+  },
+  {
+    "name": "typing-inspection",
+    "version": "0.4.4",
+    "files": [
+      {
+        "source": "typing_inspection-0.4.4.dist-info/licenses/LICENSE",
+        "sha256": "804b59b25f2c31bd278f9202a19ae49a3945aa2664387e2d0a128c7cacc61ec3"
+      }
+    ]
+  },
+  {
+    "name": "typing_extensions",
+    "version": "4.16.0",
+    "files": [
+      {
+        "source": "typing_extensions-4.16.0.dist-info/licenses/LICENSE",
+        "sha256": "3b2f81fe21d181c499c59a256c8e1968455d6689d269aa85373bfb6af41da3bf"
+      }
+    ]
+  },
+  {
+    "name": "tzdata",
+    "version": "2026.5",
+    "files": [
+      {
+        "source": "tzdata-2026.5.dist-info/licenses/LICENSE",
+        "sha256": "df58f69ea88683035d720b5375bcef0cf5aeaa98a1d098d572e0992c378deb46"
+      },
+      {
+        "source": "tzdata-2026.5.dist-info/licenses/licenses/LICENSE_APACHE",
+        "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+      }
+    ]
+  },
+  {
+    "name": "urllib3",
+    "version": "2.8.0",
+    "files": [
+      {
+        "source": "urllib3-2.8.0.dist-info/licenses/LICENSE.txt",
+        "sha256": "130e3a64d5fdd5d096a752694634a7d9df284469de86e5732100268041e3d686"
+      }
+    ]
+  }
+]

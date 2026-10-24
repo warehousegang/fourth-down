@@ -1,0 +1,18 @@
+{
+  "recorded_on": "2026-10-24",
+  "source": "Thomas's explicit corrective-release instruction in this chat",
+  "status": "partially-exposed",
+  "seasons": [2024, 2025],
+  "previous_execution": "Original legacy baseline was executed previously",
+  "observed_aggregate_baseline_metrics": {
+    "accuracy": 0.5359,
+    "brier": 0.2492,
+    "log_loss": 0.6915
+  },
+  "precision": "Owner-reported rounded aggregates; not independently recomputed",
+  "original_execution_date": null,
+  "candidate_evaluated_in_this_workspace": false,
+  "additional_holdout_results_inspected_during_correction": false,
+  "evaluation_authorized": false,
+  "interpretation": "The 2024–2025 period is not a pristine holdout. Any future candidate evaluation is a one-time, partially exposed retrospective assessment. Prior baseline exposure cannot be undone by creating Git history or a new freeze."
+}

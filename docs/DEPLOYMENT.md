@@ -1,0 +1,23 @@
+# Local demonstration and future deployment
+
+## Local
+Use README.md for installation and run commands. Demo JSON is already generated from the real 2023 replay. Training is not necessary to open it. For production-subpath previews, use VITE_BASE_PATH=/nfl-predictor/ for both build and preview (README.md); the preview server does not infer the base from an earlier build. The browser makes no calls to external data services, uses system fonts, and needs no keys.
+
+## Cost and limits (checked 2026-10-24)
+Target recurring infrastructure cost $0 with local training and a GitHub Pages project site. [GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits) is available for public repositories on GitHub Free; private repository availability depends on plan. Published site limit 1 GB, soft bandwidth 100 GB/month, deployment timeout 10 minutes; soft 10 builds/hour does not apply to custom Actions builds. This educational portfolio is not a commercial SaaS.
+
+[GitHub Actions billing](https://docs.github.com/en/billing/concepts/product-billing/github-actions): standard GitHub-hosted runners for public repositories are free; private repositories use plan-dependent allowances and excess can be billed. Larger runners and storage have separate rules. Do not assume the user's account plan or remaining allowance. The prepared CI has workflow_dispatch only, one job, a 10-minute timeout, no scheduled or push triggers and no artifact uploads. Do not enable paid usage; review budgets first. No remote workflow has been run. Local runtime/energy/storage still have a practical cost.
+
+## Publication procedure — requires approval, not executed
+1. Review G0–G3 evidence, source attribution, source code license decision, dependencies and account billing. Obtain Thomas's explicit public-release approval; final-holdout approval is separate.
+2. Create or choose a separate project repository, e.g. `nfl-predictor`, only after approval. Do not use the personal site's repository. The corrective package tracks web/public/data/demo.json and its checksum; raw data/, artifacts/, node_modules/, environments, traces and credentials stay excluded. Local history is established on codex/corrective-release. No push or remote creation is authorized.
+3. Official Actions are pinned to verified full commit SHAs; see ACTIONS_LOCK.json. The inactive Pages template packages dist as artifact.tar and uses SHA-pinned upload-artifact directly, avoiding the mutable nested action inside upload-pages-artifact. Do not enable or execute it before approval. The pinned revisions use the Node 20 action runtime; check current runner compatibility at activation, without silently replacing reviewed pins. Remote execution is unverified.
+4. In repository Settings → Pages, choose GitHub Actions. Set up the `github-pages` environment with a required human reviewer. Rename `.github/workflows/pages.yml.disabled` to `pages.yml` only after approval.
+5. Set base path to `/<repository-name>/` using VITE_BASE_PATH. For an approved dedicated user site, `/` is appropriate, but this project is designed as a subdirectory. Do not change the existing personal site.
+6. Manually run the deployment workflow on the approved commit and enter the exact confirmation phrase. The template builds only the frontend, uses the committed JSON, and deploys no backend. Verify hash deep links, refresh, model version, artifact SHA and mobile layout at the returned URL.
+
+## Rollback
+Before deployment, record approved Git commit, model ID and artifact checksum. To roll back, revert the release change or restore the previous approved source/artifact commit and manually redeploy after owner authorization. Never replace the source snapshot or model in place without a new version. If a forecast error occurs, disable public access through Pages settings with owner authorization until a reviewed fix is available. Keep previous reviewed artifacts locally or in normal source history; do not upload raw datasets.
+
+## Featured project link — future manual change only
+After verifying the separate approved deployment, identify the personal site's actual project-card component or content file. Add one card titled `Fourth Down — NFL Prediction Research`, with the approved `https://<owner>.github.io/<repository>/` URL and description `Explainable NFL forecasts, temporal backtesting, and transparent model evaluation.` Add a separate source-code link if approved. Preview the personal site, review the diff and request permission before publishing that unrelated site. No such files were opened or changed by this task.
