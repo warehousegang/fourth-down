@@ -1,0 +1,4915 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-10-24T14:37:38.241544+00:00",
+  "recommendation": {
+    "local_RC1_review": "GO",
+    "public_deployment": "NO-GO",
+    "scheduled_execution": "NO-GO",
+    "model_promotion": "NO-GO",
+    "protected_holdout": "LOCKED; partially exposed"
+  },
+  "source": {
+    "approved_commit": "31213446b1eb668bf160da3ff76129e24b9bac7f",
+    "baseline_commit": "a5f700c",
+    "implementation_commit": "b105134",
+    "verified_implementation_commit": "0c4b43f2d5f330ed0b57f1a35748e84b86c8bd3d",
+    "branch": "codex/rc1-release-preparation",
+    "sha256": {
+      "ml/replay.py": "bd0c5931a0949f8f1e562f8338145c53ebfd377aa97682c7b12cfbb1c51b32f9",
+      "ml/simulation.py": "99577115a1fcbc3d8c0e41a5cf6d36656c5aa19c570d83ffdb59295a05eb1faf",
+      "ml/lifecycle_simulation.py": "19e5efb5a4477fe5df7d007ff8368c8c7a64eef4ad0ba4d4efcb3fd1ae41c942",
+      "ml/rc1_operations.py": "e5327d3fbc569b10700dc84c257a63f4b736e5c12c33a4858f6965ee18769c4e",
+      "scripts/verify_rc1.py": "a3c386276363c81c228d4666570433b12b7f64d51000ef461e73312cf804fbb8",
+      "tests/test_replay.py": "c18e2d9a76fb9771e143435dfb90f979488d5fb34711b2c8a519e9f00a711860",
+      "tests/test_simulation.py": "b3a885f497198d53a63280c44563adb5efdc0c6d12031a4689011b9cdc8d6794",
+      "tests/test_lifecycle_simulation.py": "9e0ed3c681ad61f1fa52094e05517096fa520b28bdbd275a18b12b73b0362dab",
+      "tests/test_rc1_operations.py": "a0c9ffd41c434a20c9c9175a0d6ba3bcc4918c118cadf194d39260d6060e7e78",
+      "web/e2e/current.spec.ts": "05b256b4399db0e0b17c20829d81249c5f71e0e27aa1411f1805c9585c7f967f",
+      "web/e2e/dashboard.spec.ts": "9e3f21a0f58a55da9c1bd7dee07d269c1534d762f3e9736ea7d51ff9a1f85597",
+      "web/e2e/intelligence.spec.ts": "91a66434458b011135c7696533c2c8087412d4031d69474ee644a616c359721c"
+    }
+  },
+  "framework": {
+    "requested": "Idea-to-Production Operating System v1.1",
+    "available_authority": "RC1 directive ten release review dimensions plus existing project controls",
+    "complete_separate_framework_located": false,
+    "search_scope": "Relevant local workspace/Codex Markdown/text and accessible Pages query; no exhaustive absence claim"
+  },
+  "model_id": "schedule-v1-741cf41752",
+  "integrity_current_and_recovery": {
+    "schema_version": 1,
+    "checked_at": "2026-10-24T14:34:47.080952+00:00",
+    "source_commit": "31213446b1eb668bf160da3ff76129e24b9bac7f",
+    "protected_files_verified": 52,
+    "local_datasets_verified": 10,
+    "sha256": {
+      "docs/ACTIONS_LOCK.json": "16035bbd68c512b520958c85971fd90d0ba12a6903d5ebbbb90b5d3cd6d1ac48",
+      "docs/CHALLENGER_DECLARATION.json": "8f8159199652d5c27090fdb4a77705db217f692e55487525052251a0453c460b",
+      "docs/CHALLENGER_PROTOCOL.md": "e0ce915a410f1c0bcac18e43bfde519f14ceb899206752de96b9f5f999f0e414",
+      "docs/CORRECTIVE_VALIDATION.json": "a6a301344cfe3d7187cdff62de07766f11e014f263263af0948e49bfb3f7d6cb",
+      "docs/CURRENT_VALIDATION.json": "2b52984f195fb1eecf2d69d6362c30f1e8d72c80349cf7266ca73e0bdde2c2ff",
+      "docs/EXECUTION_VALIDATION.json": "56fbab449f2f91ff3500d31e71c762c9a4c4bd527ed6ff12ff4f92ddef635e55",
+      "docs/FEATURES.md": "39feebb3aea483459a97176747d17fa0d6929a6fc3c7a2d1d53bad8dbb361eb8",
+      "docs/FROZEN_MODEL.json": "2896a526ed8035b1674a6beb3c8d27c76ba4b3f466309bfeb729c6ddbf80f957",
+      "docs/HOLDOUT_EXPOSURE.json": "686cbb616ee7d828879c825c9b12c84c269f789374d8aee0f46718950a1d7d4c",
+      "docs/HOLDOUT_PROTOCOL.md": "ed08d57acb7efac02930848608573cf3be0e4f261ffa553868965b4b57fa56f5",
+      "docs/HOLDOUT_PROTOCOL_FREEZE.json": "61fbf6127a62a3240686b12ab3b0016f8e60feb2260bed577e9550ba953d4020",
+      "docs/LIFECYCLE_PROTOCOL.md": "d8a48afeb98a8f3eddbacd0e347f7b62a84730b87444c659b4eb45da8075062e",
+      "docs/ML_EVALUATION.md": "303d9e481d3fc1a6d054580863c723d31c6522158fbbd3e6a7a6af82740f2067",
+      "docs/MODEL_REGISTRY.json": "67034f9a8fd582b2946b8fe3ff41871f58444854c45edf4120efd805c1b21166",
+      "docs/PYTHON_DEPENDENCY_LICENSES.json": "b2a5e5533aaf2d9e43f762502cc7c03e439cba38d309f51442e16ea3f9ca5355",
+      "docs/PYTHON_DEPENDENCY_NOTICES.txt": "2a54a82534558e96ee412f64c87f99ce2339fff134d92b9caa49c5831806adf4",
+      "docs/RELEASE_ARTIFACTS.json": "ff4dc58630541f3d89600a017827824a0211b34ec88812097ee233f0e28cfc13",
+      "docs/protocols/a9afb5c4b7e02d0c74480036a2e3489cfe94dc8edb31b067e027da6f22b4d33a.md": "a9afb5c4b7e02d0c74480036a2e3489cfe94dc8edb31b067e027da6f22b4d33a",
+      "docs/protocols/d8a48afeb98a8f3eddbacd0e347f7b62a84730b87444c659b4eb45da8075062e.md": "d8a48afeb98a8f3eddbacd0e347f7b62a84730b87444c659b4eb45da8075062e",
+      "legacy/SHA256.json": "ad182b6c4f80cbbb8ee283273b92e6b3bbd117b9b5f13c367f6cd695fc0250cc",
+      "legacy/baseline.py": "12268caa0efa743d9602f05271d354da7fa9454546ccc0609ed5dd7a1e044699",
+      "legacy/explore.py": "63e9dede8e6355f6ff96e613ef0cff9f0d95aa127449712ebc7e0a0754a816fa",
+      "legacy/features.py": "58f9163f3bde3aac9dbcaf357410bcbb93032c72d0db854674da9a1c428ee8a5",
+      "legacy/test_features.py": "52509a7ac698fcdabedff7b23ff8a96ad49dbd9d4bbf28a52814510b205b88c2",
+      "legacy/train.py": "11a627777f8f3de7cb253d7b4b07caea3e46691ddf81153982d1a8f402ecc965",
+      "ml/data.py": "7523ad95de1742fcc067e75c112845c76ba65ffb15486dabe980beb935375873",
+      "ml/features.py": "64279b7ca027d9477f1780a83ff04d19eea837e5d219b4786b927bff65366b0a",
+      "ml/forecast.py": "57583405dc336e63f2c016da8d1d2d9b3e4831006c1d4204a31fd9240238ce04",
+      "ml/train.py": "18ffadaca7ca5dcc6e4e7c8df2816c0c7dc173947792b1e07fddc094aca18383",
+      "requirements-lock.txt": "107ccd3fe0f7cfa5846e9dd7af09b8cd15ee4872fd69d355f262da30c37559d8",
+      "requirements.txt": "23df77316f3e66a8da2a7dfee8ae9dae342265f297a0d63d335cb1f33ff0d253",
+      "web/package-lock.json": "2ad2822b75b6c6c8c5e4a7cb50416857f5bb037a6decb6f0a62eea811d237c9d",
+      "web/package.json": "8cd60b18d7f5ebd0d1d3967a5e539097ed270249e32de1d1ae88e05587e4fc54",
+      "web/public/CURRENT_DATA_NOTICE.txt": "6c66cb1fbcf86185dbf14748e7e6257ae954b803355fe0f47253222c7aca78ef",
+      "web/public/THIRD_PARTY_NOTICES.txt": "f6daec4cdeeadeb95ecf930b8f1ea9b704574d5ad5bfe64a6806d45287dad54c",
+      "web/public/data/context/context-3a11a90025addd59f71191c34e26f4c053c3d0dfb34a16a155106a07f4e0a71b.json": "3a11a90025addd59f71191c34e26f4c053c3d0dfb34a16a155106a07f4e0a71b",
+      "web/public/data/context/context-9be0bd883791f34e50c498014de364cc407fc47446a04bac27061323d4f9c43b.json": "9be0bd883791f34e50c498014de364cc407fc47446a04bac27061323d4f9c43b",
+      "web/public/data/context/context-c52fd53d2cec653d9663e2bdea01587392ad65e713b5a5fa811c9eb5203894ba.json": "c52fd53d2cec653d9663e2bdea01587392ad65e713b5a5fa811c9eb5203894ba",
+      "web/public/data/context/latest.json": "d4de3e9339334a30a63b4b2bca40470fb40291418f929ddb5ba782fa8e440f04",
+      "web/public/data/current/forecast-2026-11d4518833ef149e9a4e6b239094468dbc90f516be058bce02d40d4141618445.json": "11d4518833ef149e9a4e6b239094468dbc90f516be058bce02d40d4141618445",
+      "web/public/data/current/forecast-2026-3449f56cda00dca8e4f4c253458d471b8924cc3ec9a25fd4a5821d356d7737cb.json": "3449f56cda00dca8e4f4c253458d471b8924cc3ec9a25fd4a5821d356d7737cb",
+      "web/public/data/current/forecast-2026-66342f068c048d28b96b456b61d0e51d4cb981a72fce1519d53df24c383aef77.json": "66342f068c048d28b96b456b61d0e51d4cb981a72fce1519d53df24c383aef77",
+      "web/public/data/current/latest.json": "73f18987480490f1a936f28ae14f2651ba41a033619471a644454846d7c52a74",
+      "web/public/data/demo.json": "41c3ad0d8d2997238b464f196b700ce328f38eb6e93831a18d504c7ef6aa24a9",
+      "web/public/data/operations/latest.json": "12e85a61446ba4f8cbea75055f44eb53270430816e3d40bc03221f1ec8ecd9a1",
+      "web/public/data/operations/operations-0a21283c5bfd13265e43ac345507d6cf1a986bd4fdda279e7ce6c04716f1c95f.json": "0a21283c5bfd13265e43ac345507d6cf1a986bd4fdda279e7ce6c04716f1c95f",
+      "web/public/data/operations/operations-4f1de7bd0fbbdba2e8fde376f785e2a29c64c051660a607f9ec2cf58cfc9d4eb.json": "4f1de7bd0fbbdba2e8fde376f785e2a29c64c051660a607f9ec2cf58cfc9d4eb",
+      "web/public/data/operations/operations-c46b707e33c8b57ba068e14ae2bd3283fe225c2b57c85a3e66fe12a3aae800b2.json": "c46b707e33c8b57ba068e14ae2bd3283fe225c2b57c85a3e66fe12a3aae800b2",
+      "web/public/data/research/challenger-2b90c2f946ef4bac8a2841ae2d4abd8ad8b279449fc38cc1dea1dac32f8b3e68.json": "2b90c2f946ef4bac8a2841ae2d4abd8ad8b279449fc38cc1dea1dac32f8b3e68",
+      "web/public/data/research/challenger-b6b02ee1084420cc65e5877683fc7602cdb3f2ac0a1b6b7980130b81dd42c68a.json": "b6b02ee1084420cc65e5877683fc7602cdb3f2ac0a1b6b7980130b81dd42c68a",
+      "web/public/data/research/challenger-dce5b9bc802f459e153324dea42fb3080e61a4b6eaf367aa4a8dc27fafda0791.json": "dce5b9bc802f459e153324dea42fb3080e61a4b6eaf367aa4a8dc27fafda0791",
+      "web/public/data/research/latest.json": "543fd4c1c2af0baa15278fca5b20835cbb289ac28774ea6eba0cf20fd9a498a4",
+      "data/schedules-2010-2023.csv": "20f573837dac7d9ea41dade07b165de6164b3370d60e49d5242e5255cabb7d01",
+      "data/manifest.json": "363022ab479f7248420967afb3d5d1c6157a55e9dfb10503cb50d8e64ad24c15",
+      "data/current/2026/raw-1922b31983e74a7c53c661084c7d68e70bd9ea2ffd63ff410aaa754dc5023d9c.csv": "1922b31983e74a7c53c661084c7d68e70bd9ea2ffd63ff410aaa754dc5023d9c",
+      "data/current/2026/snapshot-8ca053cf9a54ca3f4e980ec733e89ff88ba115946a05752ef91b64a674ba202b.json": "8ca053cf9a54ca3f4e980ec733e89ff88ba115946a05752ef91b64a674ba202b",
+      "data/current/2026/snapshot-df68dc999fd249a32922198baecfb40ee61093a59dce19e70cfe41d9d5c6193b.json": "df68dc999fd249a32922198baecfb40ee61093a59dce19e70cfe41d9d5c6193b",
+      "data/current-context/2026/13c03b8d8333ec3955b5386f501d625eb3c32ed5ee4beedc3fb6c215051e42a5-stats_team_week_2026.csv": "13c03b8d8333ec3955b5386f501d625eb3c32ed5ee4beedc3fb6c215051e42a5",
+      "data/current-context/2026/2782878214b4a925674c79bbeadcc74ff383c0173eb358a40cbe5fc5d51de5c8-depth_charts_2026.parquet": "2782878214b4a925674c79bbeadcc74ff383c0173eb358a40cbe5fc5d51de5c8",
+      "data/current-context/2026/3c9892ffb02d77e698e10a9bcda564425a36cf130c52281dd21c49bf9224528b-injuries_2026.csv": "3c9892ffb02d77e698e10a9bcda564425a36cf130c52281dd21c49bf9224528b",
+      "data/current-context/2026/acquisition.json": "55aba9167bb520137dfb030cc9d14e3ba3252dd2ea2f629a336aa59f69145dcc",
+      "data/current-context/2026/receipt-a7e2312c190e1242edf7fceff81c0f807e8208124bafa711a1758f1f21b25dee.json": "a7e2312c190e1242edf7fceff81c0f807e8208124bafa711a1758f1f21b25dee"
+    },
+    "legacy_original_matches": {
+      "baseline.py": "12268caa0efa743d9602f05271d354da7fa9454546ccc0609ed5dd7a1e044699",
+      "explore.py": "63e9dede8e6355f6ff96e613ef0cff9f0d95aa127449712ebc7e0a0754a816fa",
+      "features.py": "58f9163f3bde3aac9dbcaf357410bcbb93032c72d0db854674da9a1c428ee8a5",
+      "test_features.py": "52509a7ac698fcdabedff7b23ff8a96ad49dbd9d4bbf28a52814510b205b88c2",
+      "train.py": "11a627777f8f3de7cb253d7b4b07caea3e46691ddf81153982d1a8f402ecc965"
+    },
+    "independent_current": {
+      "forecast_sha256": "66342f068c048d28b96b456b61d0e51d4cb981a72fce1519d53df24c383aef77",
+      "raw_sha256": "1922b31983e74a7c53c661084c7d68e70bd9ea2ffd63ff410aaa754dc5023d9c",
+      "season": 2026,
+      "week": 7,
+      "source_regular_season_games": 272,
+      "available_forecasts": 13,
+      "factors_checked": 52,
+      "max_probability_error": 1.1102230246251565e-16,
+      "max_factor_error": 0.0,
+      "method": "Independent 2026 raw CSV queries and direct formulas; no production state/scoring functions, fitting, holdout reads or accuracy evaluation"
+    },
+    "byte_replay": {
+      "forecast": "forecast-2026-66342f068c048d28b96b456b61d0e51d4cb981a72fce1519d53df24c383aef77.json",
+      "sha256": "66342f068c048d28b96b456b61d0e51d4cb981a72fce1519d53df24c383aef77",
+      "byte_identical": true,
+      "written_files": 0
+    },
+    "current_schedule_forecast_operations_proofs": {
+      "source_snapshots": 2,
+      "forecast_versions": 3,
+      "operations_versions": 3
+    },
+    "source_proof_scope": "Current schedule, forecast and operations bundle only; excludes context and research",
+    "freshness": {
+      "as_of": "2026-10-24T14:01:35.447231+00:00",
+      "generated_at": "2026-10-24T14:01:35.520006+00:00",
+      "source_updated_at": "2026-10-23T11:47:43+00:00",
+      "valid_until": "2026-10-25T11:47:43+00:00",
+      "source_age_hours": 26.784466931111112,
+      "expired_at_review": false,
+      "future_kickoff_count_at_review": 13,
+      "availability_limit": "Saved source only; no live source reacquisition or schedule-change assertion"
+    },
+    "real_bundle": {
+      "season": 2026,
+      "sha256": "439e2c06080614733e1fe86c096d713e087f95a7d0a3f46a87502f84b10393f9",
+      "manifest_sha256": "59a75a46be871205ead8b76de3d46a6114406fbefc2d8a6424c8d9406d1895ca",
+      "files": 9,
+      "bytes": 96362,
+      "source_snapshots": 2,
+      "forecast_versions": 3,
+      "operations_versions": 3,
+      "bundle": "/Users/thomas/Documents/ChatGPT/nfl predictor/artifacts/rc1/real-evidence-bundle/evidence-2026-439e2c06080614733e1fe86c096d713e087f95a7d0a3f46a87502f84b10393f9.zip",
+      "pointers_restored": false
+    },
+    "restore": {
+      "season": 2026,
+      "sha256": "439e2c06080614733e1fe86c096d713e087f95a7d0a3f46a87502f84b10393f9",
+      "manifest_sha256": "59a75a46be871205ead8b76de3d46a6114406fbefc2d8a6424c8d9406d1895ca",
+      "files": 9,
+      "bytes": 96362,
+      "source_snapshots": 2,
+      "forecast_versions": 3,
+      "operations_versions": 3,
+      "restored": 9,
+      "identical_existing": 0,
+      "pointers_restored": false
+    },
+    "idempotent_repeat_restored": 0,
+    "credential_scan": {
+      "files": 182,
+      "patterns": [
+        "private_key",
+        "github_token",
+        "aws_access_key",
+        "openai_key"
+      ],
+      "findings": [],
+      "scope": "Tracked and nonignored candidate source plus dist; finite patterns, not comprehensive secret detection"
+    },
+    "prohibited_actions_executed": [],
+    "boundary_evidence_level": "Code-path review and artifact hashes; this field is not an instrumented runtime audit"
+  },
+  "historical_replay": {
+    "boundaries": {
+      "binary_targets_exclude_ties": true,
+      "evaluated_seasons": [
+        2023
+      ],
+      "fit_calls": 0,
+      "fit_seasons": [
+        2010,
+        2022
+      ],
+      "historical_training_count": 3347,
+      "history_ties_count_half": true,
+      "holdout_status": "partially-exposed",
+      "network_calls": 0,
+      "protected_seasons_consumed": [],
+      "public_writes": 0,
+      "source_count": 3631,
+      "source_seasons": [
+        2010,
+        2023
+      ]
+    },
+    "by_season": [
+      {
+        "accuracy": 0.5882352941176471,
+        "brier": 0.23704473172141693,
+        "log_loss": 0.6657815064516025,
+        "n": 272,
+        "season": 2023
+      }
+    ],
+    "calibration": [
+      {
+        "bin": 1,
+        "count": 4,
+        "lower": 0.1,
+        "observed": 0.25,
+        "predicted": 0.19121565416576394,
+        "upper": 0.2
+      },
+      {
+        "bin": 2,
+        "count": 6,
+        "lower": 0.2,
+        "observed": 0.5,
+        "predicted": 0.25810415697466743,
+        "upper": 0.3
+      },
+      {
+        "bin": 3,
+        "count": 30,
+        "lower": 0.3,
+        "observed": 0.4,
+        "predicted": 0.35698395112195735,
+        "upper": 0.4
+      },
+      {
+        "bin": 4,
+        "count": 43,
+        "lower": 0.4,
+        "observed": 0.4883720930232558,
+        "predicted": 0.4589641821445729,
+        "upper": 0.5
+      },
+      {
+        "bin": 5,
+        "count": 90,
+        "lower": 0.5,
+        "observed": 0.4888888888888889,
+        "predicted": 0.5530923333261418,
+        "upper": 0.6
+      },
+      {
+        "bin": 6,
+        "count": 47,
+        "lower": 0.6,
+        "observed": 0.6808510638297872,
+        "predicted": 0.653420056221847,
+        "upper": 0.7
+      },
+      {
+        "bin": 7,
+        "count": 39,
+        "lower": 0.7,
+        "observed": 0.6923076923076923,
+        "predicted": 0.7415975395011069,
+        "upper": 0.8
+      },
+      {
+        "bin": 8,
+        "count": 13,
+        "lower": 0.8,
+        "observed": 0.8461538461538461,
+        "predicted": 0.8319683196612188,
+        "upper": 0.9
+      }
+    ],
+    "deterministic_payload_sha256": "92411e6357acfa0e83cd57d9794e475dc1ebc0fe9cb45ef6d4dc55de813ee913",
+    "evaluation_population": {
+      "games": 272,
+      "season": 2023,
+      "status": "selection-exposed-retrospective-diagnostic"
+    },
+    "generated_at": "2026-10-24T14:28:14.035777+00:00",
+    "historical_publication_availability_proven": false,
+    "limitations": [
+      "Corrected historical data lacks original publication-vintage proof; event-time eligibility is not proven historical information availability.",
+      "2023 was used to select the incumbent; replay is a reused retrospective diagnostic, not prospective or untouched-test accuracy.",
+      "Incumbent seasons2010\u20132022 are fitting data and are not reported as valid independent backtest seasons.",
+      "One season and18week blocks limit intervals; repeated-team dependence across weeks and model selection are not fully captured.",
+      "Calibration bins are descriptive; no calibration transform was fitted by this harness.",
+      "Probabilities condition on non-ties. No2024\u20132025 data was consumed, and prior legacy aggregate exposure remains disclosed."
+    ],
+    "metrics": {
+      "coin": {
+        "accuracy": 0.5551470588235294,
+        "brier": 0.25,
+        "log_loss": 0.6931471805599453,
+        "n": 272
+      },
+      "home_rate": {
+        "accuracy": 0.5551470588235294,
+        "brier": 0.24696308000779646,
+        "log_loss": 0.6870610591071165,
+        "n": 272
+      },
+      "incumbent": {
+        "accuracy": 0.5882352941176471,
+        "brier": 0.23704473172141693,
+        "log_loss": 0.6657815064516025,
+        "n": 272
+      }
+    },
+    "mode": "rc1-event-time-historical-replay",
+    "model_id": "schedule-v1-741cf41752",
+    "prospective": false,
+    "provenance": {
+      "code_sha256": "bd0c5931a0949f8f1e562f8338145c53ebfd377aa97682c7b12cfbb1c51b32f9",
+      "model_freeze_sha256": "2896a526ed8035b1674a6beb3c8d27c76ba4b3f466309bfeb729c6ddbf80f957",
+      "protocol_sha256": "70c62798e4ad151af2d88fa74342b04fc3cfa83658a2f6e0887fd6d4eed4d75e",
+      "saved_demo_sha256": "41c3ad0d8d2997238b464f196b700ce328f38eb6e93831a18d504c7ef6aa24a9",
+      "source": {
+        "packages": {
+          "nflreadpy": "0.1.5",
+          "numpy": "2.5.4",
+          "pandas": "3.1.0",
+          "scikit-learn": "1.9.1"
+        },
+        "python": "3.14.2",
+        "retrieved_at": "2026-10-24T12:48:36.377855+00:00",
+        "rows": 3631,
+        "seasons": [
+          2010,
+          2023
+        ],
+        "sha256": "20f573837dac7d9ea41dade07b165de6164b3370d60e49d5242e5255cabb7d01",
+        "source": "https://github.com/nflverse/nflverse-data/releases/download/schedules/games.parquet"
+      },
+      "source_sha256": "20f573837dac7d9ea41dade07b165de6164b3370d60e49d5242e5255cabb7d01",
+      "training_home_rate": 0.5572154167911563
+    },
+    "repeat_verified": true,
+    "saved_challenger_checks": {
+      "artifact_sha256": "2b90c2f946ef4bac8a2841ae2d4abd8ad8b279449fc38cc1dea1dac32f8b3e68",
+      "by_season": [
+        {
+          "calibration_season": 2017,
+          "fit_seasons": [
+            2011,
+            2016
+          ],
+          "metrics": {
+            "accuracy": 0.6535433070866141,
+            "brier": 0.2137376742959818,
+            "log_loss": 0.615383946081933,
+            "n": 254
+          },
+          "season": 2018
+        },
+        {
+          "calibration_season": 2018,
+          "fit_seasons": [
+            2011,
+            2017
+          ],
+          "metrics": {
+            "accuracy": 0.6431372549019608,
+            "brier": 0.23148123778027468,
+            "log_loss": 0.658779910137675,
+            "n": 255
+          },
+          "season": 2019
+        },
+        {
+          "calibration_season": 2019,
+          "fit_seasons": [
+            2011,
+            2018
+          ],
+          "metrics": {
+            "accuracy": 0.6588235294117647,
+            "brier": 0.21896743666378762,
+            "log_loss": 0.6282309566911125,
+            "n": 255
+          },
+          "season": 2020
+        },
+        {
+          "calibration_season": 2020,
+          "fit_seasons": [
+            2011,
+            2019
+          ],
+          "metrics": {
+            "accuracy": 0.5977859778597786,
+            "brier": 0.23272243182650085,
+            "log_loss": 0.6614792803280352,
+            "n": 271
+          },
+          "season": 2021
+        },
+        {
+          "calibration_season": 2021,
+          "fit_seasons": [
+            2011,
+            2020
+          ],
+          "metrics": {
+            "accuracy": 0.5985130111524164,
+            "brier": 0.23147138540160328,
+            "log_loss": 0.6547972035756884,
+            "n": 269
+          },
+          "season": 2022
+        },
+        {
+          "calibration_season": 2022,
+          "fit_seasons": [
+            2011,
+            2021
+          ],
+          "metrics": {
+            "accuracy": 0.5955882352941176,
+            "brier": 0.2322823062056015,
+            "log_loss": 0.6561186063992791,
+            "n": 272
+          },
+          "season": 2023
+        }
+      ],
+      "chronological_splits_verified": true,
+      "largest_probability_error": 2.220446049250313e-16,
+      "model_id": "challenger-v1-da5c3ab79a98",
+      "predictions_checked": 1576,
+      "prospective_or_untouched_test": false,
+      "scope": "Saved prediction arithmetic and split metadata only; no fitting or independent training reproduction"
+    },
+    "schema_version": 1,
+    "uncertainty": {
+      "block_count": 18,
+      "blocks": [
+        [
+          2023,
+          1
+        ],
+        [
+          2023,
+          2
+        ],
+        [
+          2023,
+          3
+        ],
+        [
+          2023,
+          4
+        ],
+        [
+          2023,
+          5
+        ],
+        [
+          2023,
+          6
+        ],
+        [
+          2023,
+          7
+        ],
+        [
+          2023,
+          8
+        ],
+        [
+          2023,
+          9
+        ],
+        [
+          2023,
+          10
+        ],
+        [
+          2023,
+          11
+        ],
+        [
+          2023,
+          12
+        ],
+        [
+          2023,
+          13
+        ],
+        [
+          2023,
+          14
+        ],
+        [
+          2023,
+          15
+        ],
+        [
+          2023,
+          16
+        ],
+        [
+          2023,
+          17
+        ],
+        [
+          2023,
+          18
+        ]
+      ],
+      "intervals": {
+        "accuracy": {
+          "estimate": 0.5882352941176471,
+          "high": 0.6539994628747509,
+          "low": 0.5238095238095238
+        },
+        "brier": {
+          "estimate": 0.23704473172141693,
+          "high": 0.2543010773955319,
+          "low": 0.220099600105594
+        },
+        "brier_difference_coin": {
+          "estimate": -0.012955268278583072,
+          "high": 0.004301077395531911,
+          "low": -0.029900399894406005
+        },
+        "brier_difference_home": {
+          "estimate": -0.0099183482863795,
+          "high": 0.00638180712921039,
+          "low": -0.02471468517690908
+        },
+        "log_loss": {
+          "estimate": 0.6657815064516025,
+          "high": 0.7027322849948348,
+          "low": 0.6292174706887318
+        }
+      },
+      "method": "paired percentile bootstrap; complete week blocks",
+      "replicates": 2000,
+      "seed": 42,
+      "unit": "season-week"
+    },
+    "verification": {
+      "all_saved_probabilities_and_factors_match": true,
+      "discrepancies": [],
+      "frozen_file_checks": {
+        "docs/FEATURES.md": true,
+        "docs/ML_EVALUATION.md": true,
+        "ml/data.py": true,
+        "ml/features.py": true,
+        "ml/forecast.py": true,
+        "ml/train.py": true,
+        "requirements-lock.txt": true,
+        "requirements.txt": true
+      },
+      "largest_probability_error": 2.220446049250313e-16,
+      "original_metrics_calibration_and_uncertainty_reproduced": true
+    }
+  },
+  "monte_carlo": {
+    "cases": [
+      {
+        "case": "p0",
+        "count": 1000000,
+        "elapsed_seconds": 0.0943833750061458,
+        "file": "artifacts/rc1/monte-carlo/simulation-50fc7c23a5adb37e484223c418d28507161565e384458b4a4439aa7ce6e35471.json",
+        "frequency": 0.0,
+        "frequency_standard_error": 0.0,
+        "losses": 1000000,
+        "probability": 0.0,
+        "reproduce_argv": [
+          "python",
+          "-m",
+          "ml.simulation",
+          "--synthetic",
+          "--probability",
+          "0",
+          "--count",
+          "1000000",
+          "--seed",
+          "42"
+        ],
+        "sampling_band": {
+          "assumed_probability_fixed": true,
+          "coverage": 0.95,
+          "frequency_high": 0.0,
+          "frequency_low": 0.0,
+          "interpretation": "A bound on Monte Carlo sampling fluctuation under independent Bernoulli trials at the supplied p; not a confidence interval for the model's real-world accuracy or true game probability.",
+          "method": "Hoeffding frequency-deviation bound; exact degenerate interval at p=0 or p=1",
+          "observed_frequency_within_bound": true,
+          "radius": 0.0
+        },
+        "seed": 42,
+        "sha256": "50fc7c23a5adb37e484223c418d28507161565e384458b4a4439aa7ce6e35471",
+        "wins": 0
+      },
+      {
+        "case": "p50",
+        "count": 1000000,
+        "elapsed_seconds": 0.07470495799498167,
+        "file": "artifacts/rc1/monte-carlo/simulation-806b59c02974e558043fdd780626b7ff69fdc567f9bb72c8e23f3d08114c2897.json",
+        "frequency": 0.499824,
+        "frequency_standard_error": 0.0005,
+        "losses": 500176,
+        "probability": 0.5,
+        "reproduce_argv": [
+          "python",
+          "-m",
+          "ml.simulation",
+          "--synthetic",
+          "--probability",
+          ".5",
+          "--count",
+          "1000000",
+          "--seed",
+          "42"
+        ],
+        "sampling_band": {
+          "assumed_probability_fixed": true,
+          "coverage": 0.95,
+          "frequency_high": 0.5013581015157407,
+          "frequency_low": 0.4986418984842594,
+          "interpretation": "A bound on Monte Carlo sampling fluctuation under independent Bernoulli trials at the supplied p; not a confidence interval for the model's real-world accuracy or true game probability.",
+          "method": "Hoeffding frequency-deviation bound; exact degenerate interval at p=0 or p=1",
+          "observed_frequency_within_bound": true,
+          "radius": 0.0013581015157406195
+        },
+        "seed": 42,
+        "sha256": "806b59c02974e558043fdd780626b7ff69fdc567f9bb72c8e23f3d08114c2897",
+        "wins": 499824
+      },
+      {
+        "case": "p80",
+        "count": 1000000,
+        "elapsed_seconds": 0.07461929200508166,
+        "file": "artifacts/rc1/monte-carlo/simulation-e4127778571c803c5728506d2c06b724127efc980927537d9e0f9a9022198384.json",
+        "frequency": 0.800622,
+        "frequency_standard_error": 0.00039999999999999996,
+        "losses": 199378,
+        "probability": 0.8,
+        "reproduce_argv": [
+          "python",
+          "-m",
+          "ml.simulation",
+          "--synthetic",
+          "--probability",
+          ".8",
+          "--count",
+          "1000000",
+          "--seed",
+          "42"
+        ],
+        "sampling_band": {
+          "assumed_probability_fixed": true,
+          "coverage": 0.95,
+          "frequency_high": 0.8013581015157407,
+          "frequency_low": 0.7986418984842594,
+          "interpretation": "A bound on Monte Carlo sampling fluctuation under independent Bernoulli trials at the supplied p; not a confidence interval for the model's real-world accuracy or true game probability.",
+          "method": "Hoeffding frequency-deviation bound; exact degenerate interval at p=0 or p=1",
+          "observed_frequency_within_bound": true,
+          "radius": 0.0013581015157406195
+        },
+        "seed": 42,
+        "sha256": "e4127778571c803c5728506d2c06b724127efc980927537d9e0f9a9022198384",
+        "wins": 800622
+      },
+      {
+        "case": "p100",
+        "count": 1000000,
+        "elapsed_seconds": 0.07341658299264964,
+        "file": "artifacts/rc1/monte-carlo/simulation-80a8631efb1c8596afdf774f2f21f6261d7dd18e97148d4f67b05c75a531f4ee.json",
+        "frequency": 1.0,
+        "frequency_standard_error": 0.0,
+        "losses": 0,
+        "probability": 1.0,
+        "reproduce_argv": [
+          "python",
+          "-m",
+          "ml.simulation",
+          "--synthetic",
+          "--probability",
+          "1",
+          "--count",
+          "1000000",
+          "--seed",
+          "42"
+        ],
+        "sampling_band": {
+          "assumed_probability_fixed": true,
+          "coverage": 0.95,
+          "frequency_high": 1.0,
+          "frequency_low": 1.0,
+          "interpretation": "A bound on Monte Carlo sampling fluctuation under independent Bernoulli trials at the supplied p; not a confidence interval for the model's real-world accuracy or true game probability.",
+          "method": "Hoeffding frequency-deviation bound; exact degenerate interval at p=0 or p=1",
+          "observed_frequency_within_bound": true,
+          "radius": 0.0
+        },
+        "seed": 42,
+        "sha256": "80a8631efb1c8596afdf774f2f21f6261d7dd18e97148d4f67b05c75a531f4ee",
+        "wins": 1000000
+      },
+      {
+        "case": "p80-repeat",
+        "count": 1000000,
+        "elapsed_seconds": 0.07309224999335129,
+        "file": "artifacts/rc1/monte-carlo/simulation-e4127778571c803c5728506d2c06b724127efc980927537d9e0f9a9022198384.json",
+        "frequency": 0.800622,
+        "frequency_standard_error": 0.00039999999999999996,
+        "losses": 199378,
+        "probability": 0.8,
+        "reproduce_argv": [
+          "python",
+          "-m",
+          "ml.simulation",
+          "--synthetic",
+          "--probability",
+          ".8",
+          "--count",
+          "1000000",
+          "--seed",
+          "42"
+        ],
+        "sampling_band": {
+          "assumed_probability_fixed": true,
+          "coverage": 0.95,
+          "frequency_high": 0.8013581015157407,
+          "frequency_low": 0.7986418984842594,
+          "interpretation": "A bound on Monte Carlo sampling fluctuation under independent Bernoulli trials at the supplied p; not a confidence interval for the model's real-world accuracy or true game probability.",
+          "method": "Hoeffding frequency-deviation bound; exact degenerate interval at p=0 or p=1",
+          "observed_frequency_within_bound": true,
+          "radius": 0.0013581015157406195
+        },
+        "seed": 42,
+        "sha256": "e4127778571c803c5728506d2c06b724127efc980927537d9e0f9a9022198384",
+        "wins": 800622
+      },
+      {
+        "case": "large-p80",
+        "count": 10000000,
+        "elapsed_seconds": 0.7367208749928977,
+        "file": "artifacts/rc1/monte-carlo/simulation-d2d79a7f65c82a096f20a4ddeda50841455df0f0462f54158f80283e3065390c.json",
+        "frequency": 0.8002018,
+        "frequency_standard_error": 0.00012649110640673515,
+        "losses": 1997982,
+        "probability": 0.8,
+        "reproduce_argv": [
+          "python",
+          "-m",
+          "ml.simulation",
+          "--synthetic",
+          "--probability",
+          ".8",
+          "--count",
+          "10000000",
+          "--seed",
+          "42"
+        ],
+        "sampling_band": {
+          "assumed_probability_fixed": true,
+          "coverage": 0.95,
+          "frequency_high": 0.8004294694083468,
+          "frequency_low": 0.7995705305916533,
+          "interpretation": "A bound on Monte Carlo sampling fluctuation under independent Bernoulli trials at the supplied p; not a confidence interval for the model's real-world accuracy or true game probability.",
+          "method": "Hoeffding frequency-deviation bound; exact degenerate interval at p=0 or p=1",
+          "observed_frequency_within_bound": true,
+          "radius": 0.00042946940834673753
+        },
+        "seed": 42,
+        "sha256": "d2d79a7f65c82a096f20a4ddeda50841455df0f0462f54158f80283e3065390c",
+        "wins": 8002018
+      },
+      {
+        "case": "saved-frozen-model",
+        "count": 1000000,
+        "elapsed_seconds": 0.6473098749993369,
+        "file": "artifacts/rc1/monte-carlo/simulation-6e5d49570a4163d065f760f1b94bb25e283d376e9ad3f36c12df43ea305199ed.json",
+        "frequency": 0.453103,
+        "frequency_standard_error": 0.0004978137442374039,
+        "losses": 546897,
+        "probability": 0.45329372581401256,
+        "reproduce_argv": [
+          "python",
+          "-m",
+          "ml.simulation",
+          "--synthetic",
+          "--forecast",
+          "forecast-2026-66342f068c048d28b96b456b61d0e51d4cb981a72fce1519d53df24c383aef77.json",
+          "--game",
+          "ngs-2026-60272",
+          "--count",
+          "1000000",
+          "--seed",
+          "42"
+        ],
+        "sampling_band": {
+          "assumed_probability_fixed": true,
+          "coverage": 0.95,
+          "frequency_high": 0.4546518273297532,
+          "frequency_low": 0.45193562429827194,
+          "interpretation": "A bound on Monte Carlo sampling fluctuation under independent Bernoulli trials at the supplied p; not a confidence interval for the model's real-world accuracy or true game probability.",
+          "method": "Hoeffding frequency-deviation bound; exact degenerate interval at p=0 or p=1",
+          "observed_frequency_within_bound": true,
+          "radius": 0.0013581015157406195
+        },
+        "seed": 42,
+        "sha256": "6e5d49570a4163d065f760f1b94bb25e283d376e9ad3f36c12df43ea305199ed",
+        "wins": 453103
+      }
+    ],
+    "mode": "synthetic-simulation-validation",
+    "not_real_nfl_outcomes": true,
+    "same_seed_result_bytes_identical": true,
+    "saved_forecast": {
+      "file": "forecast-2026-66342f068c048d28b96b456b61d0e51d4cb981a72fce1519d53df24c383aef77.json",
+      "game_id": "ngs-2026-60272",
+      "model_id": "schedule-v1-741cf41752",
+      "sha256": "66342f068c048d28b96b456b61d0e51d4cb981a72fce1519d53df24c383aef77"
+    },
+    "schema_version": 1
+  },
+  "synthetic_lifecycle": {
+    "assertion_count": 322,
+    "harness_sha256": "19e5efb5a4477fe5df7d007ff8368c8c7a64eef4ad0ba4d4efcb3fd1ae41c942",
+    "limitations": [
+      "All schedules, scores, player annotations and observation timestamps are fixed synthetic test fixtures, not observed NFL data.",
+      "Virtual pregame timestamps simulate execution order; these were never forecasts actually issued on those dates.",
+      "Probabilities are produced by the unchanged frozen model from synthetic feature states; no probability or coefficient is forced to a desired value.",
+      "Scenario pass/fail tests software behavior and arithmetic, not NFL predictive accuracy, model calibration or causal explanations.",
+      "All intermediate forecast/evaluation publications occur in a temporary directory and are removed after capture into this explicitly synthetic report."
+    ],
+    "mode": "synthetic-lifecycle-simulation",
+    "model_fits": 0,
+    "model_freeze_sha256": "2896a526ed8035b1674a6beb3c8d27c76ba4b3f466309bfeb729c6ddbf80f957",
+    "model_id": "schedule-v1-741cf41752",
+    "network_calls": 0,
+    "production_writes": 0,
+    "real_nfl_outcomes_consumed": 0,
+    "scenario_count": 14,
+    "schema_version": 1,
+    "synthetic": true,
+    "virtual_clock": {
+      "postgame": "2026-10-05T00:00:00+00:00",
+      "pregame": "2026-10-03T12:00:00+00:00"
+    },
+    "evidence": "artifacts/rc1/scenarios/scenario-evidence-6cdc71e2d475649438d9338a4106e8ff60dc1c565f36c1db23bc5b6bc81b0965.json",
+    "sha256": "6cdc71e2d475649438d9338a4106e8ff60dc1c565f36c1db23bc5b6bc81b0965",
+    "scenarios": [
+      {
+        "annotation": null,
+        "description": "A model-derived strong home favorite loses a controlled synthetic game.",
+        "failures": [],
+        "features": {
+          "margin_diff": 20.0,
+          "recent_margin_diff": 26.666666666666668,
+          "rest_diff": 0,
+          "smooth_win_diff": 0.5
+        },
+        "final_metrics": {
+          "all_snapshots": {
+            "accuracy": 0.0,
+            "baselines": {
+              "coin_flip": {
+                "accuracy": 0.0,
+                "brier": 0.25,
+                "count": 1,
+                "log_loss": 0.6931471805599453
+              },
+              "home_rate": {
+                "accuracy": 0.0,
+                "brier": 0.310489020709742,
+                "count": 1,
+                "log_loss": 0.8146718953552944
+              }
+            },
+            "brier": 0.8515882600771538,
+            "by_season": [
+              {
+                "accuracy": 0.0,
+                "brier": 0.8515882600771538,
+                "count": 1,
+                "log_loss": 2.561555306868291,
+                "season": 2026
+              }
+            ],
+            "calibration": [
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.0,
+                "mean_probability": null,
+                "upper": 0.1
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.1,
+                "mean_probability": null,
+                "upper": 0.2
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.2,
+                "mean_probability": null,
+                "upper": 0.3
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.3,
+                "mean_probability": null,
+                "upper": 0.4
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.4,
+                "mean_probability": null,
+                "upper": 0.5
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.5,
+                "mean_probability": null,
+                "upper": 0.6
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.6,
+                "mean_probability": null,
+                "upper": 0.7
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.7,
+                "mean_probability": null,
+                "upper": 0.8
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.8,
+                "mean_probability": null,
+                "upper": 0.9
+              },
+              {
+                "brier": 0.8515882600771538,
+                "count": 1,
+                "home_win_rate": 0.0,
+                "lower": 0.9,
+                "mean_probability": 0.9228153986996283,
+                "upper": 1.0
+              }
+            ],
+            "count": 1,
+            "game_count": 1,
+            "log_loss": 2.561555306868291,
+            "ties_excluded": 0
+          },
+          "primary": {
+            "accuracy": 0.0,
+            "baselines": {
+              "coin_flip": {
+                "accuracy": 0.0,
+                "brier": 0.25,
+                "count": 1,
+                "log_loss": 0.6931471805599453
+              },
+              "home_rate": {
+                "accuracy": 0.0,
+                "brier": 0.310489020709742,
+                "count": 1,
+                "log_loss": 0.8146718953552944
+              }
+            },
+            "brier": 0.8515882600771538,
+            "by_season": [
+              {
+                "accuracy": 0.0,
+                "brier": 0.8515882600771538,
+                "count": 1,
+                "log_loss": 2.561555306868291,
+                "season": 2026
+              }
+            ],
+            "calibration": [
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.0,
+                "mean_probability": null,
+                "upper": 0.1
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.1,
+                "mean_probability": null,
+                "upper": 0.2
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.2,
+                "mean_probability": null,
+                "upper": 0.3
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.3,
+                "mean_probability": null,
+                "upper": 0.4
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.4,
+                "mean_probability": null,
+                "upper": 0.5
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.5,
+                "mean_probability": null,
+                "upper": 0.6
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.6,
+                "mean_probability": null,
+                "upper": 0.7
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.7,
+                "mean_probability": null,
+                "upper": 0.8
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.8,
+                "mean_probability": null,
+                "upper": 0.9
+              },
+              {
+                "brier": 0.8515882600771538,
+                "count": 1,
+                "home_win_rate": 0.0,
+                "lower": 0.9,
+                "mean_probability": 0.9228153986996283,
+                "upper": 1.0
+              }
+            ],
+            "count": 1,
+            "game_count": 1,
+            "log_loss": 2.561555306868291,
+            "ties_excluded": 0
+          }
+        },
+        "home_probability": 0.9228153986996283,
+        "id": "strong_favorite_loses",
+        "scored_games": 1,
+        "status_transitions": [
+          "scheduled",
+          "completed"
+        ],
+        "synthetic": true
+      },
+      {
+        "annotation": null,
+        "description": "A model-derived home underdog beats the strong away favorite.",
+        "failures": [],
+        "features": {
+          "margin_diff": -20.0,
+          "recent_margin_diff": -26.666666666666668,
+          "rest_diff": 0,
+          "smooth_win_diff": -0.5
+        },
+        "final_metrics": {
+          "all_snapshots": {
+            "accuracy": 0.0,
+            "baselines": {
+              "coin_flip": {
+                "accuracy": 1.0,
+                "brier": 0.25,
+                "count": 1,
+                "log_loss": 0.6931471805599453
+              },
+              "home_rate": {
+                "accuracy": 1.0,
+                "brier": 0.19605818712742945,
+                "count": 1,
+                "log_loss": 0.5848033691334107
+              }
+            },
+            "brier": 0.7631152954843379,
+            "by_season": [
+              {
+                "accuracy": 0.0,
+                "brier": 0.7631152954843379,
+                "count": 1,
+                "log_loss": 2.0680246111791356,
+                "season": 2026
+              }
+            ],
+            "calibration": [
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.0,
+                "mean_probability": null,
+                "upper": 0.1
+              },
+              {
+                "brier": 0.7631152954843379,
+                "count": 1,
+                "home_win_rate": 1.0,
+                "lower": 0.1,
+                "mean_probability": 0.12643529404838136,
+                "upper": 0.2
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.2,
+                "mean_probability": null,
+                "upper": 0.3
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.3,
+                "mean_probability": null,
+                "upper": 0.4
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.4,
+                "mean_probability": null,
+                "upper": 0.5
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.5,
+                "mean_probability": null,
+                "upper": 0.6
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.6,
+                "mean_probability": null,
+                "upper": 0.7
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.7,
+                "mean_probability": null,
+                "upper": 0.8
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.8,
+                "mean_probability": null,
+                "upper": 0.9
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.9,
+                "mean_probability": null,
+                "upper": 1.0
+              }
+            ],
+            "count": 1,
+            "game_count": 1,
+            "log_loss": 2.0680246111791356,
+            "ties_excluded": 0
+          },
+          "primary": {
+            "accuracy": 0.0,
+            "baselines": {
+              "coin_flip": {
+                "accuracy": 1.0,
+                "brier": 0.25,
+                "count": 1,
+                "log_loss": 0.6931471805599453
+              },
+              "home_rate": {
+                "accuracy": 1.0,
+                "brier": 0.19605818712742945,
+                "count": 1,
+                "log_loss": 0.5848033691334107
+              }
+            },
+            "brier": 0.7631152954843379,
+            "by_season": [
+              {
+                "accuracy": 0.0,
+                "brier": 0.7631152954843379,
+                "count": 1,
+                "log_loss": 2.0680246111791356,
+                "season": 2026
+              }
+            ],
+            "calibration": [
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.0,
+                "mean_probability": null,
+                "upper": 0.1
+              },
+              {
+                "brier": 0.7631152954843379,
+                "count": 1,
+                "home_win_rate": 1.0,
+                "lower": 0.1,
+                "mean_probability": 0.12643529404838136,
+                "upper": 0.2
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.2,
+                "mean_probability": null,
+                "upper": 0.3
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.3,
+                "mean_probability": null,
+                "upper": 0.4
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.4,
+                "mean_probability": null,
+                "upper": 0.5
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.5,
+                "mean_probability": null,
+                "upper": 0.6
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.6,
+                "mean_probability": null,
+                "upper": 0.7
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.7,
+                "mean_probability": null,
+                "upper": 0.8
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.8,
+                "mean_probability": null,
+                "upper": 0.9
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.9,
+                "mean_probability": null,
+                "upper": 1.0
+              }
+            ],
+            "count": 1,
+            "game_count": 1,
+            "log_loss": 2.0680246111791356,
+            "ties_excluded": 0
+          }
+        },
+        "home_probability": 0.12643529404838136,
+        "id": "underdog_wins",
+        "scored_games": 1,
+        "status_transitions": [
+          "scheduled",
+          "completed"
+        ],
+        "synthetic": true
+      },
+      {
+        "annotation": null,
+        "description": "The model-derived strong home favorite wins.",
+        "failures": [],
+        "features": {
+          "margin_diff": 20.0,
+          "recent_margin_diff": 26.666666666666668,
+          "rest_diff": 0,
+          "smooth_win_diff": 0.5
+        },
+        "final_metrics": {
+          "all_snapshots": {
+            "accuracy": 1.0,
+            "baselines": {
+              "coin_flip": {
+                "accuracy": 1.0,
+                "brier": 0.25,
+                "count": 1,
+                "log_loss": 0.6931471805599453
+              },
+              "home_rate": {
+                "accuracy": 1.0,
+                "brier": 0.19605818712742945,
+                "count": 1,
+                "log_loss": 0.5848033691334107
+              }
+            },
+            "brier": 0.005957462677897348,
+            "by_season": [
+              {
+                "accuracy": 1.0,
+                "brier": 0.005957462677897348,
+                "count": 1,
+                "log_loss": 0.08032606589108725,
+                "season": 2026
+              }
+            ],
+            "calibration": [
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.0,
+                "mean_probability": null,
+                "upper": 0.1
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.1,
+                "mean_probability": null,
+                "upper": 0.2
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.2,
+                "mean_probability": null,
+                "upper": 0.3
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.3,
+                "mean_probability": null,
+                "upper": 0.4
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.4,
+                "mean_probability": null,
+                "upper": 0.5
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.5,
+                "mean_probability": null,
+                "upper": 0.6
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.6,
+                "mean_probability": null,
+                "upper": 0.7
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.7,
+                "mean_probability": null,
+                "upper": 0.8
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.8,
+                "mean_probability": null,
+                "upper": 0.9
+              },
+              {
+                "brier": 0.005957462677897348,
+                "count": 1,
+                "home_win_rate": 1.0,
+                "lower": 0.9,
+                "mean_probability": 0.9228153986996283,
+                "upper": 1.0
+              }
+            ],
+            "count": 1,
+            "game_count": 1,
+            "log_loss": 0.08032606589108725,
+            "ties_excluded": 0
+          },
+          "primary": {
+            "accuracy": 1.0,
+            "baselines": {
+              "coin_flip": {
+                "accuracy": 1.0,
+                "brier": 0.25,
+                "count": 1,
+                "log_loss": 0.6931471805599453
+              },
+              "home_rate": {
+                "accuracy": 1.0,
+                "brier": 0.19605818712742945,
+                "count": 1,
+                "log_loss": 0.5848033691334107
+              }
+            },
+            "brier": 0.005957462677897348,
+            "by_season": [
+              {
+                "accuracy": 1.0,
+                "brier": 0.005957462677897348,
+                "count": 1,
+                "log_loss": 0.08032606589108725,
+                "season": 2026
+              }
+            ],
+            "calibration": [
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.0,
+                "mean_probability": null,
+                "upper": 0.1
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.1,
+                "mean_probability": null,
+                "upper": 0.2
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.2,
+                "mean_probability": null,
+                "upper": 0.3
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.3,
+                "mean_probability": null,
+                "upper": 0.4
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.4,
+                "mean_probability": null,
+                "upper": 0.5
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.5,
+                "mean_probability": null,
+                "upper": 0.6
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.6,
+                "mean_probability": null,
+                "upper": 0.7
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.7,
+                "mean_probability": null,
+                "upper": 0.8
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.8,
+                "mean_probability": null,
+                "upper": 0.9
+              },
+              {
+                "brier": 0.005957462677897348,
+                "count": 1,
+                "home_win_rate": 1.0,
+                "lower": 0.9,
+                "mean_probability": 0.9228153986996283,
+                "upper": 1.0
+              }
+            ],
+            "count": 1,
+            "game_count": 1,
+            "log_loss": 0.08032606589108725,
+            "ties_excluded": 0
+          }
+        },
+        "home_probability": 0.9228153986996283,
+        "id": "correct_favorite",
+        "scored_games": 1,
+        "status_transitions": [
+          "scheduled",
+          "completed"
+        ],
+        "synthetic": true
+      },
+      {
+        "annotation": null,
+        "description": "Kickoff passed, but no verified final result is available.",
+        "failures": [],
+        "features": {
+          "margin_diff": 20.0,
+          "recent_margin_diff": 26.666666666666668,
+          "rest_diff": 0,
+          "smooth_win_diff": 0.5
+        },
+        "final_metrics": {
+          "all_snapshots": {
+            "accuracy": null,
+            "baselines": {
+              "coin_flip": {
+                "accuracy": null,
+                "brier": null,
+                "count": 0,
+                "log_loss": null
+              },
+              "home_rate": {
+                "accuracy": null,
+                "brier": null,
+                "count": 0,
+                "log_loss": null
+              }
+            },
+            "brier": null,
+            "by_season": [],
+            "calibration": [
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.0,
+                "mean_probability": null,
+                "upper": 0.1
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.1,
+                "mean_probability": null,
+                "upper": 0.2
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.2,
+                "mean_probability": null,
+                "upper": 0.3
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.3,
+                "mean_probability": null,
+                "upper": 0.4
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.4,
+                "mean_probability": null,
+                "upper": 0.5
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.5,
+                "mean_probability": null,
+                "upper": 0.6
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.6,
+                "mean_probability": null,
+                "upper": 0.7
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.7,
+                "mean_probability": null,
+                "upper": 0.8
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.8,
+                "mean_probability": null,
+                "upper": 0.9
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.9,
+                "mean_probability": null,
+                "upper": 1.0
+              }
+            ],
+            "count": 0,
+            "game_count": 0,
+            "log_loss": null,
+            "ties_excluded": 0
+          },
+          "primary": {
+            "accuracy": null,
+            "baselines": {
+              "coin_flip": {
+                "accuracy": null,
+                "brier": null,
+                "count": 0,
+                "log_loss": null
+              },
+              "home_rate": {
+                "accuracy": null,
+                "brier": null,
+                "count": 0,
+                "log_loss": null
+              }
+            },
+            "brier": null,
+            "by_season": [],
+            "calibration": [
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.0,
+                "mean_probability": null,
+                "upper": 0.1
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.1,
+                "mean_probability": null,
+                "upper": 0.2
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.2,
+                "mean_probability": null,
+                "upper": 0.3
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.3,
+                "mean_probability": null,
+                "upper": 0.4
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.4,
+                "mean_probability": null,
+                "upper": 0.5
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.5,
+                "mean_probability": null,
+                "upper": 0.6
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.6,
+                "mean_probability": null,
+                "upper": 0.7
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.7,
+                "mean_probability": null,
+                "upper": 0.8
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.8,
+                "mean_probability": null,
+                "upper": 0.9
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.9,
+                "mean_probability": null,
+                "upper": 1.0
+              }
+            ],
+            "count": 0,
+            "game_count": 0,
+            "log_loss": null,
+            "ties_excluded": 0
+          }
+        },
+        "home_probability": 0.9228153986996283,
+        "id": "missing_final",
+        "scored_games": 0,
+        "status_transitions": [
+          "scheduled",
+          "unknown"
+        ],
+        "synthetic": true
+      },
+      {
+        "annotation": null,
+        "description": "An explicitly postponed game remains unscored.",
+        "failures": [],
+        "features": {
+          "margin_diff": 20.0,
+          "recent_margin_diff": 26.666666666666668,
+          "rest_diff": 0,
+          "smooth_win_diff": 0.5
+        },
+        "final_metrics": {
+          "all_snapshots": {
+            "accuracy": null,
+            "baselines": {
+              "coin_flip": {
+                "accuracy": null,
+                "brier": null,
+                "count": 0,
+                "log_loss": null
+              },
+              "home_rate": {
+                "accuracy": null,
+                "brier": null,
+                "count": 0,
+                "log_loss": null
+              }
+            },
+            "brier": null,
+            "by_season": [],
+            "calibration": [
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.0,
+                "mean_probability": null,
+                "upper": 0.1
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.1,
+                "mean_probability": null,
+                "upper": 0.2
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.2,
+                "mean_probability": null,
+                "upper": 0.3
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.3,
+                "mean_probability": null,
+                "upper": 0.4
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.4,
+                "mean_probability": null,
+                "upper": 0.5
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.5,
+                "mean_probability": null,
+                "upper": 0.6
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.6,
+                "mean_probability": null,
+                "upper": 0.7
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.7,
+                "mean_probability": null,
+                "upper": 0.8
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.8,
+                "mean_probability": null,
+                "upper": 0.9
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.9,
+                "mean_probability": null,
+                "upper": 1.0
+              }
+            ],
+            "count": 0,
+            "game_count": 0,
+            "log_loss": null,
+            "ties_excluded": 0
+          },
+          "primary": {
+            "accuracy": null,
+            "baselines": {
+              "coin_flip": {
+                "accuracy": null,
+                "brier": null,
+                "count": 0,
+                "log_loss": null
+              },
+              "home_rate": {
+                "accuracy": null,
+                "brier": null,
+                "count": 0,
+                "log_loss": null
+              }
+            },
+            "brier": null,
+            "by_season": [],
+            "calibration": [
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.0,
+                "mean_probability": null,
+                "upper": 0.1
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.1,
+                "mean_probability": null,
+                "upper": 0.2
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.2,
+                "mean_probability": null,
+                "upper": 0.3
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.3,
+                "mean_probability": null,
+                "upper": 0.4
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.4,
+                "mean_probability": null,
+                "upper": 0.5
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.5,
+                "mean_probability": null,
+                "upper": 0.6
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.6,
+                "mean_probability": null,
+                "upper": 0.7
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.7,
+                "mean_probability": null,
+                "upper": 0.8
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.8,
+                "mean_probability": null,
+                "upper": 0.9
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.9,
+                "mean_probability": null,
+                "upper": 1.0
+              }
+            ],
+            "count": 0,
+            "game_count": 0,
+            "log_loss": null,
+            "ties_excluded": 0
+          }
+        },
+        "home_probability": 0.9228153986996283,
+        "id": "postponed",
+        "scored_games": 0,
+        "status_transitions": [
+          "scheduled",
+          "postponed"
+        ],
+        "synthetic": true
+      },
+      {
+        "annotation": null,
+        "description": "A later score correction creates a new result/evaluation version.",
+        "failures": [],
+        "features": {
+          "margin_diff": 20.0,
+          "recent_margin_diff": 26.666666666666668,
+          "rest_diff": 0,
+          "smooth_win_diff": 0.5
+        },
+        "final_metrics": {
+          "all_snapshots": {
+            "accuracy": 0.0,
+            "baselines": {
+              "coin_flip": {
+                "accuracy": 0.0,
+                "brier": 0.25,
+                "count": 1,
+                "log_loss": 0.6931471805599453
+              },
+              "home_rate": {
+                "accuracy": 0.0,
+                "brier": 0.310489020709742,
+                "count": 1,
+                "log_loss": 0.8146718953552944
+              }
+            },
+            "brier": 0.8515882600771538,
+            "by_season": [
+              {
+                "accuracy": 0.0,
+                "brier": 0.8515882600771538,
+                "count": 1,
+                "log_loss": 2.561555306868291,
+                "season": 2026
+              }
+            ],
+            "calibration": [
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.0,
+                "mean_probability": null,
+                "upper": 0.1
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.1,
+                "mean_probability": null,
+                "upper": 0.2
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.2,
+                "mean_probability": null,
+                "upper": 0.3
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.3,
+                "mean_probability": null,
+                "upper": 0.4
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.4,
+                "mean_probability": null,
+                "upper": 0.5
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.5,
+                "mean_probability": null,
+                "upper": 0.6
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.6,
+                "mean_probability": null,
+                "upper": 0.7
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.7,
+                "mean_probability": null,
+                "upper": 0.8
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.8,
+                "mean_probability": null,
+                "upper": 0.9
+              },
+              {
+                "brier": 0.8515882600771538,
+                "count": 1,
+                "home_win_rate": 0.0,
+                "lower": 0.9,
+                "mean_probability": 0.9228153986996283,
+                "upper": 1.0
+              }
+            ],
+            "count": 1,
+            "game_count": 1,
+            "log_loss": 2.561555306868291,
+            "ties_excluded": 0
+          },
+          "primary": {
+            "accuracy": 0.0,
+            "baselines": {
+              "coin_flip": {
+                "accuracy": 0.0,
+                "brier": 0.25,
+                "count": 1,
+                "log_loss": 0.6931471805599453
+              },
+              "home_rate": {
+                "accuracy": 0.0,
+                "brier": 0.310489020709742,
+                "count": 1,
+                "log_loss": 0.8146718953552944
+              }
+            },
+            "brier": 0.8515882600771538,
+            "by_season": [
+              {
+                "accuracy": 0.0,
+                "brier": 0.8515882600771538,
+                "count": 1,
+                "log_loss": 2.561555306868291,
+                "season": 2026
+              }
+            ],
+            "calibration": [
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.0,
+                "mean_probability": null,
+                "upper": 0.1
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.1,
+                "mean_probability": null,
+                "upper": 0.2
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.2,
+                "mean_probability": null,
+                "upper": 0.3
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.3,
+                "mean_probability": null,
+                "upper": 0.4
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.4,
+                "mean_probability": null,
+                "upper": 0.5
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.5,
+                "mean_probability": null,
+                "upper": 0.6
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.6,
+                "mean_probability": null,
+                "upper": 0.7
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.7,
+                "mean_probability": null,
+                "upper": 0.8
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.8,
+                "mean_probability": null,
+                "upper": 0.9
+              },
+              {
+                "brier": 0.8515882600771538,
+                "count": 1,
+                "home_win_rate": 0.0,
+                "lower": 0.9,
+                "mean_probability": 0.9228153986996283,
+                "upper": 1.0
+              }
+            ],
+            "count": 1,
+            "game_count": 1,
+            "log_loss": 2.561555306868291,
+            "ties_excluded": 0
+          }
+        },
+        "home_probability": 0.9228153986996283,
+        "id": "corrected_final",
+        "scored_games": 1,
+        "status_transitions": [
+          "scheduled",
+          "completed",
+          "completed"
+        ],
+        "synthetic": true
+      },
+      {
+        "annotation": {
+          "evidence": [],
+          "model_feature_enabled": false,
+          "probability_adjustment": null,
+          "rejected": [
+            {
+              "domain": "injuries",
+              "reason": "Future, unordered, or expired evidence"
+            }
+          ],
+          "status": "unavailable"
+        },
+        "description": "A synthetic injury report after cutoff is rejected and cannot change the forecast.",
+        "failures": [],
+        "features": {
+          "margin_diff": 20.0,
+          "recent_margin_diff": 26.666666666666668,
+          "rest_diff": 0,
+          "smooth_win_diff": 0.5
+        },
+        "final_metrics": {
+          "all_snapshots": {
+            "accuracy": 0.0,
+            "baselines": {
+              "coin_flip": {
+                "accuracy": 0.0,
+                "brier": 0.25,
+                "count": 1,
+                "log_loss": 0.6931471805599453
+              },
+              "home_rate": {
+                "accuracy": 0.0,
+                "brier": 0.310489020709742,
+                "count": 1,
+                "log_loss": 0.8146718953552944
+              }
+            },
+            "brier": 0.8515882600771538,
+            "by_season": [
+              {
+                "accuracy": 0.0,
+                "brier": 0.8515882600771538,
+                "count": 1,
+                "log_loss": 2.561555306868291,
+                "season": 2026
+              }
+            ],
+            "calibration": [
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.0,
+                "mean_probability": null,
+                "upper": 0.1
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.1,
+                "mean_probability": null,
+                "upper": 0.2
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.2,
+                "mean_probability": null,
+                "upper": 0.3
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.3,
+                "mean_probability": null,
+                "upper": 0.4
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.4,
+                "mean_probability": null,
+                "upper": 0.5
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.5,
+                "mean_probability": null,
+                "upper": 0.6
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.6,
+                "mean_probability": null,
+                "upper": 0.7
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.7,
+                "mean_probability": null,
+                "upper": 0.8
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.8,
+                "mean_probability": null,
+                "upper": 0.9
+              },
+              {
+                "brier": 0.8515882600771538,
+                "count": 1,
+                "home_win_rate": 0.0,
+                "lower": 0.9,
+                "mean_probability": 0.9228153986996283,
+                "upper": 1.0
+              }
+            ],
+            "count": 1,
+            "game_count": 1,
+            "log_loss": 2.561555306868291,
+            "ties_excluded": 0
+          },
+          "primary": {
+            "accuracy": 0.0,
+            "baselines": {
+              "coin_flip": {
+                "accuracy": 0.0,
+                "brier": 0.25,
+                "count": 1,
+                "log_loss": 0.6931471805599453
+              },
+              "home_rate": {
+                "accuracy": 0.0,
+                "brier": 0.310489020709742,
+                "count": 1,
+                "log_loss": 0.8146718953552944
+              }
+            },
+            "brier": 0.8515882600771538,
+            "by_season": [
+              {
+                "accuracy": 0.0,
+                "brier": 0.8515882600771538,
+                "count": 1,
+                "log_loss": 2.561555306868291,
+                "season": 2026
+              }
+            ],
+            "calibration": [
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.0,
+                "mean_probability": null,
+                "upper": 0.1
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.1,
+                "mean_probability": null,
+                "upper": 0.2
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.2,
+                "mean_probability": null,
+                "upper": 0.3
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.3,
+                "mean_probability": null,
+                "upper": 0.4
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.4,
+                "mean_probability": null,
+                "upper": 0.5
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.5,
+                "mean_probability": null,
+                "upper": 0.6
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.6,
+                "mean_probability": null,
+                "upper": 0.7
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.7,
+                "mean_probability": null,
+                "upper": 0.8
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.8,
+                "mean_probability": null,
+                "upper": 0.9
+              },
+              {
+                "brier": 0.8515882600771538,
+                "count": 1,
+                "home_win_rate": 0.0,
+                "lower": 0.9,
+                "mean_probability": 0.9228153986996283,
+                "upper": 1.0
+              }
+            ],
+            "count": 1,
+            "game_count": 1,
+            "log_loss": 2.561555306868291,
+            "ties_excluded": 0
+          }
+        },
+        "home_probability": 0.9228153986996283,
+        "id": "late_injury_context",
+        "scored_games": 1,
+        "status_transitions": [
+          "scheduled",
+          "completed"
+        ],
+        "synthetic": true
+      },
+      {
+        "annotation": null,
+        "description": "A stale source yields an unavailable forecast without an invented probability.",
+        "failures": [],
+        "features": {},
+        "final_metrics": {
+          "all_snapshots": {
+            "accuracy": null,
+            "baselines": {
+              "coin_flip": {
+                "accuracy": null,
+                "brier": null,
+                "count": 0,
+                "log_loss": null
+              },
+              "home_rate": {
+                "accuracy": null,
+                "brier": null,
+                "count": 0,
+                "log_loss": null
+              }
+            },
+            "brier": null,
+            "by_season": [],
+            "calibration": [
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.0,
+                "mean_probability": null,
+                "upper": 0.1
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.1,
+                "mean_probability": null,
+                "upper": 0.2
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.2,
+                "mean_probability": null,
+                "upper": 0.3
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.3,
+                "mean_probability": null,
+                "upper": 0.4
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.4,
+                "mean_probability": null,
+                "upper": 0.5
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.5,
+                "mean_probability": null,
+                "upper": 0.6
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.6,
+                "mean_probability": null,
+                "upper": 0.7
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.7,
+                "mean_probability": null,
+                "upper": 0.8
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.8,
+                "mean_probability": null,
+                "upper": 0.9
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.9,
+                "mean_probability": null,
+                "upper": 1.0
+              }
+            ],
+            "count": 0,
+            "game_count": 0,
+            "log_loss": null,
+            "ties_excluded": 0
+          },
+          "primary": {
+            "accuracy": null,
+            "baselines": {
+              "coin_flip": {
+                "accuracy": null,
+                "brier": null,
+                "count": 0,
+                "log_loss": null
+              },
+              "home_rate": {
+                "accuracy": null,
+                "brier": null,
+                "count": 0,
+                "log_loss": null
+              }
+            },
+            "brier": null,
+            "by_season": [],
+            "calibration": [
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.0,
+                "mean_probability": null,
+                "upper": 0.1
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.1,
+                "mean_probability": null,
+                "upper": 0.2
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.2,
+                "mean_probability": null,
+                "upper": 0.3
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.3,
+                "mean_probability": null,
+                "upper": 0.4
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.4,
+                "mean_probability": null,
+                "upper": 0.5
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.5,
+                "mean_probability": null,
+                "upper": 0.6
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.6,
+                "mean_probability": null,
+                "upper": 0.7
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.7,
+                "mean_probability": null,
+                "upper": 0.8
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.8,
+                "mean_probability": null,
+                "upper": 0.9
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.9,
+                "mean_probability": null,
+                "upper": 1.0
+              }
+            ],
+            "count": 0,
+            "game_count": 0,
+            "log_loss": null,
+            "ties_excluded": 0
+          }
+        },
+        "home_probability": null,
+        "id": "stale_source",
+        "scored_games": 0,
+        "status_transitions": [
+          "scheduled",
+          "completed"
+        ],
+        "synthetic": true
+      },
+      {
+        "annotation": null,
+        "description": "A reconciliation source outage preserves the prior immutable evidence and pointer.",
+        "failures": [
+          {
+            "message": "Source unavailable: preserve the last successful operations artifact",
+            "stage": "reconciliation",
+            "type": "ValueError"
+          }
+        ],
+        "features": {
+          "margin_diff": 20.0,
+          "recent_margin_diff": 26.666666666666668,
+          "rest_diff": 0,
+          "smooth_win_diff": 0.5
+        },
+        "final_metrics": {
+          "all_snapshots": {
+            "accuracy": null,
+            "baselines": {
+              "coin_flip": {
+                "accuracy": null,
+                "brier": null,
+                "count": 0,
+                "log_loss": null
+              },
+              "home_rate": {
+                "accuracy": null,
+                "brier": null,
+                "count": 0,
+                "log_loss": null
+              }
+            },
+            "brier": null,
+            "by_season": [],
+            "calibration": [
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.0,
+                "mean_probability": null,
+                "upper": 0.1
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.1,
+                "mean_probability": null,
+                "upper": 0.2
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.2,
+                "mean_probability": null,
+                "upper": 0.3
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.3,
+                "mean_probability": null,
+                "upper": 0.4
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.4,
+                "mean_probability": null,
+                "upper": 0.5
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.5,
+                "mean_probability": null,
+                "upper": 0.6
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.6,
+                "mean_probability": null,
+                "upper": 0.7
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.7,
+                "mean_probability": null,
+                "upper": 0.8
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.8,
+                "mean_probability": null,
+                "upper": 0.9
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.9,
+                "mean_probability": null,
+                "upper": 1.0
+              }
+            ],
+            "count": 0,
+            "game_count": 0,
+            "log_loss": null,
+            "ties_excluded": 0
+          },
+          "primary": {
+            "accuracy": null,
+            "baselines": {
+              "coin_flip": {
+                "accuracy": null,
+                "brier": null,
+                "count": 0,
+                "log_loss": null
+              },
+              "home_rate": {
+                "accuracy": null,
+                "brier": null,
+                "count": 0,
+                "log_loss": null
+              }
+            },
+            "brier": null,
+            "by_season": [],
+            "calibration": [
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.0,
+                "mean_probability": null,
+                "upper": 0.1
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.1,
+                "mean_probability": null,
+                "upper": 0.2
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.2,
+                "mean_probability": null,
+                "upper": 0.3
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.3,
+                "mean_probability": null,
+                "upper": 0.4
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.4,
+                "mean_probability": null,
+                "upper": 0.5
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.5,
+                "mean_probability": null,
+                "upper": 0.6
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.6,
+                "mean_probability": null,
+                "upper": 0.7
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.7,
+                "mean_probability": null,
+                "upper": 0.8
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.8,
+                "mean_probability": null,
+                "upper": 0.9
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.9,
+                "mean_probability": null,
+                "upper": 1.0
+              }
+            ],
+            "count": 0,
+            "game_count": 0,
+            "log_loss": null,
+            "ties_excluded": 0
+          }
+        },
+        "home_probability": 0.9228153986996283,
+        "id": "missing_source",
+        "scored_games": 0,
+        "status_transitions": [
+          "scheduled"
+        ],
+        "synthetic": true
+      },
+      {
+        "annotation": null,
+        "description": "An incomplete earlier result blocks a probability and postgame scoring.",
+        "failures": [],
+        "features": {},
+        "final_metrics": {
+          "all_snapshots": {
+            "accuracy": null,
+            "baselines": {
+              "coin_flip": {
+                "accuracy": null,
+                "brier": null,
+                "count": 0,
+                "log_loss": null
+              },
+              "home_rate": {
+                "accuracy": null,
+                "brier": null,
+                "count": 0,
+                "log_loss": null
+              }
+            },
+            "brier": null,
+            "by_season": [],
+            "calibration": [
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.0,
+                "mean_probability": null,
+                "upper": 0.1
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.1,
+                "mean_probability": null,
+                "upper": 0.2
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.2,
+                "mean_probability": null,
+                "upper": 0.3
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.3,
+                "mean_probability": null,
+                "upper": 0.4
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.4,
+                "mean_probability": null,
+                "upper": 0.5
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.5,
+                "mean_probability": null,
+                "upper": 0.6
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.6,
+                "mean_probability": null,
+                "upper": 0.7
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.7,
+                "mean_probability": null,
+                "upper": 0.8
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.8,
+                "mean_probability": null,
+                "upper": 0.9
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.9,
+                "mean_probability": null,
+                "upper": 1.0
+              }
+            ],
+            "count": 0,
+            "game_count": 0,
+            "log_loss": null,
+            "ties_excluded": 0
+          },
+          "primary": {
+            "accuracy": null,
+            "baselines": {
+              "coin_flip": {
+                "accuracy": null,
+                "brier": null,
+                "count": 0,
+                "log_loss": null
+              },
+              "home_rate": {
+                "accuracy": null,
+                "brier": null,
+                "count": 0,
+                "log_loss": null
+              }
+            },
+            "brier": null,
+            "by_season": [],
+            "calibration": [
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.0,
+                "mean_probability": null,
+                "upper": 0.1
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.1,
+                "mean_probability": null,
+                "upper": 0.2
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.2,
+                "mean_probability": null,
+                "upper": 0.3
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.3,
+                "mean_probability": null,
+                "upper": 0.4
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.4,
+                "mean_probability": null,
+                "upper": 0.5
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.5,
+                "mean_probability": null,
+                "upper": 0.6
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.6,
+                "mean_probability": null,
+                "upper": 0.7
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.7,
+                "mean_probability": null,
+                "upper": 0.8
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.8,
+                "mean_probability": null,
+                "upper": 0.9
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.9,
+                "mean_probability": null,
+                "upper": 1.0
+              }
+            ],
+            "count": 0,
+            "game_count": 0,
+            "log_loss": null,
+            "ties_excluded": 0
+          }
+        },
+        "home_probability": null,
+        "id": "missing_feature_input",
+        "scored_games": 0,
+        "status_transitions": [
+          "scheduled",
+          "completed"
+        ],
+        "synthetic": true
+      },
+      {
+        "annotation": null,
+        "description": "Repeated identical result receipts and reconciliation are idempotent.",
+        "failures": [
+          {
+            "message": "Duplicate forecast artifact receipt",
+            "stage": "duplicate_forecast_receipt",
+            "type": "ValueError"
+          }
+        ],
+        "features": {
+          "margin_diff": 20.0,
+          "recent_margin_diff": 26.666666666666668,
+          "rest_diff": 0,
+          "smooth_win_diff": 0.5
+        },
+        "final_metrics": {
+          "all_snapshots": {
+            "accuracy": 1.0,
+            "baselines": {
+              "coin_flip": {
+                "accuracy": 1.0,
+                "brier": 0.25,
+                "count": 1,
+                "log_loss": 0.6931471805599453
+              },
+              "home_rate": {
+                "accuracy": 1.0,
+                "brier": 0.19605818712742945,
+                "count": 1,
+                "log_loss": 0.5848033691334107
+              }
+            },
+            "brier": 0.005957462677897348,
+            "by_season": [
+              {
+                "accuracy": 1.0,
+                "brier": 0.005957462677897348,
+                "count": 1,
+                "log_loss": 0.08032606589108725,
+                "season": 2026
+              }
+            ],
+            "calibration": [
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.0,
+                "mean_probability": null,
+                "upper": 0.1
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.1,
+                "mean_probability": null,
+                "upper": 0.2
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.2,
+                "mean_probability": null,
+                "upper": 0.3
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.3,
+                "mean_probability": null,
+                "upper": 0.4
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.4,
+                "mean_probability": null,
+                "upper": 0.5
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.5,
+                "mean_probability": null,
+                "upper": 0.6
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.6,
+                "mean_probability": null,
+                "upper": 0.7
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.7,
+                "mean_probability": null,
+                "upper": 0.8
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.8,
+                "mean_probability": null,
+                "upper": 0.9
+              },
+              {
+                "brier": 0.005957462677897348,
+                "count": 1,
+                "home_win_rate": 1.0,
+                "lower": 0.9,
+                "mean_probability": 0.9228153986996283,
+                "upper": 1.0
+              }
+            ],
+            "count": 1,
+            "game_count": 1,
+            "log_loss": 0.08032606589108725,
+            "ties_excluded": 0
+          },
+          "primary": {
+            "accuracy": 1.0,
+            "baselines": {
+              "coin_flip": {
+                "accuracy": 1.0,
+                "brier": 0.25,
+                "count": 1,
+                "log_loss": 0.6931471805599453
+              },
+              "home_rate": {
+                "accuracy": 1.0,
+                "brier": 0.19605818712742945,
+                "count": 1,
+                "log_loss": 0.5848033691334107
+              }
+            },
+            "brier": 0.005957462677897348,
+            "by_season": [
+              {
+                "accuracy": 1.0,
+                "brier": 0.005957462677897348,
+                "count": 1,
+                "log_loss": 0.08032606589108725,
+                "season": 2026
+              }
+            ],
+            "calibration": [
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.0,
+                "mean_probability": null,
+                "upper": 0.1
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.1,
+                "mean_probability": null,
+                "upper": 0.2
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.2,
+                "mean_probability": null,
+                "upper": 0.3
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.3,
+                "mean_probability": null,
+                "upper": 0.4
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.4,
+                "mean_probability": null,
+                "upper": 0.5
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.5,
+                "mean_probability": null,
+                "upper": 0.6
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.6,
+                "mean_probability": null,
+                "upper": 0.7
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.7,
+                "mean_probability": null,
+                "upper": 0.8
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.8,
+                "mean_probability": null,
+                "upper": 0.9
+              },
+              {
+                "brier": 0.005957462677897348,
+                "count": 1,
+                "home_win_rate": 1.0,
+                "lower": 0.9,
+                "mean_probability": 0.9228153986996283,
+                "upper": 1.0
+              }
+            ],
+            "count": 1,
+            "game_count": 1,
+            "log_loss": 0.08032606589108725,
+            "ties_excluded": 0
+          }
+        },
+        "home_probability": 0.9228153986996283,
+        "id": "duplicate_events",
+        "scored_games": 1,
+        "status_transitions": [
+          "scheduled",
+          "completed"
+        ],
+        "synthetic": true
+      },
+      {
+        "annotation": null,
+        "description": "Invalid source timing fails generation without changing an existing forecast.",
+        "failures": [
+          {
+            "message": "Invalid forecast/source time ordering or season",
+            "stage": "generation",
+            "type": "ValueError"
+          }
+        ],
+        "features": {
+          "margin_diff": 20.0,
+          "recent_margin_diff": 26.666666666666668,
+          "rest_diff": 0,
+          "smooth_win_diff": 0.5
+        },
+        "final_metrics": {
+          "all_snapshots": {
+            "accuracy": null,
+            "baselines": {
+              "coin_flip": {
+                "accuracy": null,
+                "brier": null,
+                "count": 0,
+                "log_loss": null
+              },
+              "home_rate": {
+                "accuracy": null,
+                "brier": null,
+                "count": 0,
+                "log_loss": null
+              }
+            },
+            "brier": null,
+            "by_season": [],
+            "calibration": [
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.0,
+                "mean_probability": null,
+                "upper": 0.1
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.1,
+                "mean_probability": null,
+                "upper": 0.2
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.2,
+                "mean_probability": null,
+                "upper": 0.3
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.3,
+                "mean_probability": null,
+                "upper": 0.4
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.4,
+                "mean_probability": null,
+                "upper": 0.5
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.5,
+                "mean_probability": null,
+                "upper": 0.6
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.6,
+                "mean_probability": null,
+                "upper": 0.7
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.7,
+                "mean_probability": null,
+                "upper": 0.8
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.8,
+                "mean_probability": null,
+                "upper": 0.9
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.9,
+                "mean_probability": null,
+                "upper": 1.0
+              }
+            ],
+            "count": 0,
+            "game_count": 0,
+            "log_loss": null,
+            "ties_excluded": 0
+          },
+          "primary": {
+            "accuracy": null,
+            "baselines": {
+              "coin_flip": {
+                "accuracy": null,
+                "brier": null,
+                "count": 0,
+                "log_loss": null
+              },
+              "home_rate": {
+                "accuracy": null,
+                "brier": null,
+                "count": 0,
+                "log_loss": null
+              }
+            },
+            "brier": null,
+            "by_season": [],
+            "calibration": [
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.0,
+                "mean_probability": null,
+                "upper": 0.1
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.1,
+                "mean_probability": null,
+                "upper": 0.2
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.2,
+                "mean_probability": null,
+                "upper": 0.3
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.3,
+                "mean_probability": null,
+                "upper": 0.4
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.4,
+                "mean_probability": null,
+                "upper": 0.5
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.5,
+                "mean_probability": null,
+                "upper": 0.6
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.6,
+                "mean_probability": null,
+                "upper": 0.7
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.7,
+                "mean_probability": null,
+                "upper": 0.8
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.8,
+                "mean_probability": null,
+                "upper": 0.9
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.9,
+                "mean_probability": null,
+                "upper": 1.0
+              }
+            ],
+            "count": 0,
+            "game_count": 0,
+            "log_loss": null,
+            "ties_excluded": 0
+          }
+        },
+        "home_probability": 0.9228153986996283,
+        "id": "failed_generation",
+        "scored_games": 0,
+        "status_transitions": [
+          "scheduled"
+        ],
+        "synthetic": true
+      },
+      {
+        "annotation": null,
+        "description": "A game observed in progress does not acquire a fabricated final score.",
+        "failures": [],
+        "features": {
+          "margin_diff": 20.0,
+          "recent_margin_diff": 26.666666666666668,
+          "rest_diff": 0,
+          "smooth_win_diff": 0.5
+        },
+        "final_metrics": {
+          "all_snapshots": {
+            "accuracy": null,
+            "baselines": {
+              "coin_flip": {
+                "accuracy": null,
+                "brier": null,
+                "count": 0,
+                "log_loss": null
+              },
+              "home_rate": {
+                "accuracy": null,
+                "brier": null,
+                "count": 0,
+                "log_loss": null
+              }
+            },
+            "brier": null,
+            "by_season": [],
+            "calibration": [
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.0,
+                "mean_probability": null,
+                "upper": 0.1
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.1,
+                "mean_probability": null,
+                "upper": 0.2
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.2,
+                "mean_probability": null,
+                "upper": 0.3
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.3,
+                "mean_probability": null,
+                "upper": 0.4
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.4,
+                "mean_probability": null,
+                "upper": 0.5
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.5,
+                "mean_probability": null,
+                "upper": 0.6
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.6,
+                "mean_probability": null,
+                "upper": 0.7
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.7,
+                "mean_probability": null,
+                "upper": 0.8
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.8,
+                "mean_probability": null,
+                "upper": 0.9
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.9,
+                "mean_probability": null,
+                "upper": 1.0
+              }
+            ],
+            "count": 0,
+            "game_count": 0,
+            "log_loss": null,
+            "ties_excluded": 0
+          },
+          "primary": {
+            "accuracy": null,
+            "baselines": {
+              "coin_flip": {
+                "accuracy": null,
+                "brier": null,
+                "count": 0,
+                "log_loss": null
+              },
+              "home_rate": {
+                "accuracy": null,
+                "brier": null,
+                "count": 0,
+                "log_loss": null
+              }
+            },
+            "brier": null,
+            "by_season": [],
+            "calibration": [
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.0,
+                "mean_probability": null,
+                "upper": 0.1
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.1,
+                "mean_probability": null,
+                "upper": 0.2
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.2,
+                "mean_probability": null,
+                "upper": 0.3
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.3,
+                "mean_probability": null,
+                "upper": 0.4
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.4,
+                "mean_probability": null,
+                "upper": 0.5
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.5,
+                "mean_probability": null,
+                "upper": 0.6
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.6,
+                "mean_probability": null,
+                "upper": 0.7
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.7,
+                "mean_probability": null,
+                "upper": 0.8
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.8,
+                "mean_probability": null,
+                "upper": 0.9
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.9,
+                "mean_probability": null,
+                "upper": 1.0
+              }
+            ],
+            "count": 0,
+            "game_count": 0,
+            "log_loss": null,
+            "ties_excluded": 0
+          }
+        },
+        "home_probability": 0.9228153986996283,
+        "id": "in_progress",
+        "scored_games": 0,
+        "status_transitions": [
+          "scheduled",
+          "in_progress"
+        ],
+        "synthetic": true
+      },
+      {
+        "annotation": null,
+        "description": "A verified synthetic tie is recorded and excluded from binary scores.",
+        "failures": [],
+        "features": {
+          "margin_diff": 20.0,
+          "recent_margin_diff": 26.666666666666668,
+          "rest_diff": 0,
+          "smooth_win_diff": 0.5
+        },
+        "final_metrics": {
+          "all_snapshots": {
+            "accuracy": null,
+            "baselines": {
+              "coin_flip": {
+                "accuracy": null,
+                "brier": null,
+                "count": 0,
+                "log_loss": null
+              },
+              "home_rate": {
+                "accuracy": null,
+                "brier": null,
+                "count": 0,
+                "log_loss": null
+              }
+            },
+            "brier": null,
+            "by_season": [],
+            "calibration": [
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.0,
+                "mean_probability": null,
+                "upper": 0.1
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.1,
+                "mean_probability": null,
+                "upper": 0.2
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.2,
+                "mean_probability": null,
+                "upper": 0.3
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.3,
+                "mean_probability": null,
+                "upper": 0.4
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.4,
+                "mean_probability": null,
+                "upper": 0.5
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.5,
+                "mean_probability": null,
+                "upper": 0.6
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.6,
+                "mean_probability": null,
+                "upper": 0.7
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.7,
+                "mean_probability": null,
+                "upper": 0.8
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.8,
+                "mean_probability": null,
+                "upper": 0.9
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.9,
+                "mean_probability": null,
+                "upper": 1.0
+              }
+            ],
+            "count": 0,
+            "game_count": 0,
+            "log_loss": null,
+            "ties_excluded": 1
+          },
+          "primary": {
+            "accuracy": null,
+            "baselines": {
+              "coin_flip": {
+                "accuracy": null,
+                "brier": null,
+                "count": 0,
+                "log_loss": null
+              },
+              "home_rate": {
+                "accuracy": null,
+                "brier": null,
+                "count": 0,
+                "log_loss": null
+              }
+            },
+            "brier": null,
+            "by_season": [],
+            "calibration": [
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.0,
+                "mean_probability": null,
+                "upper": 0.1
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.1,
+                "mean_probability": null,
+                "upper": 0.2
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.2,
+                "mean_probability": null,
+                "upper": 0.3
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.3,
+                "mean_probability": null,
+                "upper": 0.4
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.4,
+                "mean_probability": null,
+                "upper": 0.5
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.5,
+                "mean_probability": null,
+                "upper": 0.6
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.6,
+                "mean_probability": null,
+                "upper": 0.7
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.7,
+                "mean_probability": null,
+                "upper": 0.8
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.8,
+                "mean_probability": null,
+                "upper": 0.9
+              },
+              {
+                "brier": null,
+                "count": 0,
+                "home_win_rate": null,
+                "lower": 0.9,
+                "mean_probability": null,
+                "upper": 1.0
+              }
+            ],
+            "count": 0,
+            "game_count": 0,
+            "log_loss": null,
+            "ties_excluded": 1
+          }
+        },
+        "home_probability": 0.9228153986996283,
+        "id": "tied_final",
+        "scored_games": 0,
+        "status_transitions": [
+          "scheduled",
+          "completed"
+        ],
+        "synthetic": true
+      }
+    ]
+  },
+  "operational_dry_run": {
+    "report": "/Users/thomas/Documents/ChatGPT/nfl predictor/artifacts/rc1/operations/dry-run-11da4b0b896629d267446c64a53127fd9f1d133e9b18158020720a41ebe16461.json",
+    "schema_version": 1,
+    "mode": "RC1 SYNTHETIC OPERATIONAL DRY RUN",
+    "passed_checks": 15,
+    "checks": [
+      {
+        "name": "duplicate_refresh_is_byte_identical",
+        "passed": true,
+        "available_forecasts": 16
+      },
+      {
+        "name": "failure_before_pointer_replace_preserves_both_pointers",
+        "passed": true
+      },
+      {
+        "name": "individual_pointer_replacement_has_complete_target",
+        "passed": true,
+        "observations": [
+          {
+            "before_sha256": "b5ffc9cbb9a04900a497f25b1ad589d2aa2dddb7920569f9f8f6366a760ef151",
+            "after_sha256": "d24e172ce06c3057545c1a333ca76f1afc0ed0a13caf92b40bb036c01041e4c9"
+          }
+        ],
+        "limitation": "Filesystem replace boundary checked; not power-loss durability or distributed atomicity"
+      },
+      {
+        "name": "partial_pair_publication_detected_and_same_input_rerun_recovers",
+        "passed": true,
+        "cross_file_atomic": false
+      },
+      {
+        "name": "rollback_restores_verified_pair_without_rewriting_time_or_versions",
+        "passed": true,
+        "expiry_preserved": true,
+        "original_valid_until": "2026-09-06T13:00:00+00:00",
+        "stale_review_at": "2026-09-08T00:00:00Z",
+        "expired_at_simulated_review": true,
+        "limitation": "Manual two-pointer rollback in isolated directory; production transaction not implemented"
+      },
+      {
+        "name": "portable_bundle_validates_restores_and_is_idempotent",
+        "passed": true,
+        "files": 8,
+        "pointers_restored": false,
+        "archive_sha256": "0e6ceaf112ff0ac328f32f0c22545023ea2b200068d05cf09521f5859636b10e"
+      },
+      {
+        "name": "corrupt_bundle_rejected_before_destination_creation",
+        "passed": true
+      },
+      {
+        "name": "truncated_version_fails_closed_and_preserves_pointer",
+        "passed": true,
+        "automatic_repair": false,
+        "limitation": "Production version writes are not crash-atomic; verified recovery required"
+      },
+      {
+        "name": "size_budget_failure_preserves_pointers",
+        "passed": true
+      },
+      {
+        "name": "duplicate_process_lock_blocks_then_releases",
+        "passed": true
+      },
+      {
+        "name": "thursday_saturday_international_monday_and_missed_pregame_plan",
+        "passed": true,
+        "events": 17,
+        "enabled": false,
+        "schedule_policy": "Tuesday09:00ET + Saturday18:00ET and every confirmed kickoff minus90min, including Thursday"
+      },
+      {
+        "name": "eastern_dst_transition_preserves_local_schedule_hours",
+        "passed": true
+      },
+      {
+        "name": "outage_bounded",
+        "passed": true,
+        "attempts": 2,
+        "network_requests": 0
+      },
+      {
+        "name": "rate_limit_bounded",
+        "passed": true,
+        "attempts": 1,
+        "network_requests": 0
+      },
+      {
+        "name": "workflow_permissions_pins_no_cron_timeout_retention",
+        "passed": true,
+        "workflows": [
+          {
+            "file": ".github/workflows/ci.yml",
+            "sha256": "544a0fa5d10f16e730c687963a386c24d7050ae3b536532237fbeb0bb6b1490b",
+            "active_manual_only": true,
+            "immutable_actions": 3
+          },
+          {
+            "file": ".github/workflows/current-refresh.yml.disabled",
+            "sha256": "56ef7231682ebb3c9e2f85852dda3d30feda2978aa04aab04b0be63f6258a3bc",
+            "active_manual_only": false,
+            "immutable_actions": 4
+          },
+          {
+            "file": ".github/workflows/pages.yml.disabled",
+            "sha256": "84b46a9c07e280b1c02fe7e2d9d10514f31b115d661a11b5b3c85f9d86c4146b",
+            "active_manual_only": false,
+            "immutable_actions": 5
+          }
+        ]
+      }
+    ],
+    "real_source_requests": 0,
+    "real_publication_writes": 0,
+    "scheduled_execution_enabled": false,
+    "release_limitations": [
+      "Current and operations pointers are not a single transaction.",
+      "Version file creation is not crash-atomic; collision fails closed and requires verified recovery.",
+      "Trusted hosted bundle restoration and durable retention are not wired.",
+      "Local dry runs do not prove hosted Actions runtime, billing quotas or Pages environment protection."
+    ]
+  },
+  "tests": {
+    "python": {
+      "passed": 314,
+      "skipped": 1,
+      "log": "artifacts/rc1/python-tests.txt",
+      "sha256": "72b16ff4ff3f32e7f3e069a7ba2c259a5d710240708b2692fc1ddc0b6f4cded4"
+    },
+    "clean_source_python": {
+      "passed": 311,
+      "skipped": 4,
+      "log": "artifacts/rc1/clean-python-tests.txt",
+      "sha256": "1297bb623f3a8a74e7e27f88fa675f6156a622d6d85f284b364fdf46def29c99"
+    },
+    "python_no_fit_guard": "scripts/test_release.py forbids estimator/scaler fitting; one fitting case is skipped; clean checkout additionally lacks three authorized raw-data integration inputs",
+    "frontend": {
+      "passed": 88,
+      "files": 9
+    },
+    "packaging": {
+      "passed": 11
+    },
+    "browser_root": {
+      "passed": 14
+    },
+    "browser_subpath": {
+      "passed": 14
+    },
+    "browser_scope": "Chrome desktop and iPhone13-sized Chromium on macOS; no checked axe violations, overflow or page errors; not exhaustive accessibility certification",
+    "dedicated_python_subsets": {
+      "replay": 23,
+      "bernoulli": 59,
+      "lifecycle": 31,
+      "operations": 10
+    },
+    "clean_source": {
+      "frontend_passed": 88,
+      "packaging_passed": 11,
+      "frontend_commit": "b105134",
+      "python_commit": "0c4b43f2d5f330ed0b57f1a35748e84b86c8bd3d",
+      "frontend_unchanged_between_commits": true,
+      "installation": "npm ci --offline --cache /private/tmp/fourth-down-npm-cache --ignore-scripts; existing pinned Python interpreter, no fresh Python install",
+      "source_archive": {
+        "commit": "0c4b43f2d5f330ed0b57f1a35748e84b86c8bd3d",
+        "directory": "/private/tmp/fourth-down-rc1-verified-vhswaglm",
+        "archive": "/Users/thomas/Documents/ChatGPT/nfl predictor/artifacts/rc1/source-implementation.tar",
+        "sha256": "28c653a15769e061901a4915c1e68d75c588d99fc06feea8e1e1ca5e79942478"
+      }
+    },
+    "commands": [
+      "python scripts/test_release.py",
+      "python -m ml.replay --verify-repeat",
+      "python -m ml.lifecycle_simulation",
+      "python -m ml.rc1_operations",
+      "python scripts/verify_rc1.py",
+      "python scripts/generate_python_notices.py --check",
+      "python -m pip check",
+      "npm test",
+      "npm run test:release",
+      "VITE_BASE_PATH=/ npm run build",
+      "VITE_BASE_PATH=/nfl-predictor/ npm run build",
+      "TEST_BASE_URL=http://127.0.0.1:4175/ TEST_ARTIFACT_DIR=../artifacts/rc1/browser-root npm run test:e2e",
+      "TEST_BASE_URL=http://127.0.0.1:4174/nfl-predictor/ TEST_ARTIFACT_DIR=../artifacts/rc1/browser-subpath npm run test:e2e",
+      "npm audit --json",
+      "pip-audit --no-deps --disable-pip -r requirements-lock.txt --format json"
+    ]
+  },
+  "security_and_rights": {
+    "npm_vulnerabilities": {
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "high": 0,
+      "critical": 0,
+      "total": 0
+    },
+    "python_distributions": 41,
+    "python_known_vulnerabilities": 0,
+    "python_notices_verified": 41,
+    "production_javascript_notices_verified": 5,
+    "pip_consistency_passed": true,
+    "new_dependencies": 0,
+    "unapproved_logo_assets_shipped": 0,
+    "own_source_license_chosen": false,
+    "upstream_public_rights_resolved": false,
+    "primary_sources_checked_on": "2026-10-24",
+    "sources": [
+      "https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits",
+      "https://docs.github.com/en/billing/concepts/product-billing/github-actions",
+      "https://github.com/sportsdataverse/sportsdataverse-data/blob/main/LICENSE",
+      "https://github.com/nflverse/nflverse-data/blob/main/LICENSE.md"
+    ],
+    "final_candidate_credential_scan": {
+      "files": 183,
+      "findings": 0,
+      "scope": "Tracked/nonignored source and dist; four finite token/private-key pattern families; no exhaustive secret detection claim"
+    }
+  },
+  "static_package": {
+    "files": {
+      "CURRENT_DATA_NOTICE.txt": "6c66cb1fbcf86185dbf14748e7e6257ae954b803355fe0f47253222c7aca78ef",
+      "THIRD_PARTY_NOTICES.txt": "f6daec4cdeeadeb95ecf930b8f1ea9b704574d5ad5bfe64a6806d45287dad54c",
+      "assets/index-CeB0Z2oa.js": "69de86b76db8af9a005870146ff876c275b8aac0f96363e371c23321aa6cf072",
+      "assets/index-LKEX_M4r.css": "4fd2588f06c744d8cf4b08be45d2672ed33f998e5d513562e9a8f7fffc50a8a9",
+      "data/context/context-3a11a90025addd59f71191c34e26f4c053c3d0dfb34a16a155106a07f4e0a71b.json": "3a11a90025addd59f71191c34e26f4c053c3d0dfb34a16a155106a07f4e0a71b",
+      "data/context/context-9be0bd883791f34e50c498014de364cc407fc47446a04bac27061323d4f9c43b.json": "9be0bd883791f34e50c498014de364cc407fc47446a04bac27061323d4f9c43b",
+      "data/context/context-c52fd53d2cec653d9663e2bdea01587392ad65e713b5a5fa811c9eb5203894ba.json": "c52fd53d2cec653d9663e2bdea01587392ad65e713b5a5fa811c9eb5203894ba",
+      "data/context/latest.json": "d4de3e9339334a30a63b4b2bca40470fb40291418f929ddb5ba782fa8e440f04",
+      "data/current/forecast-2026-11d4518833ef149e9a4e6b239094468dbc90f516be058bce02d40d4141618445.json": "11d4518833ef149e9a4e6b239094468dbc90f516be058bce02d40d4141618445",
+      "data/current/forecast-2026-3449f56cda00dca8e4f4c253458d471b8924cc3ec9a25fd4a5821d356d7737cb.json": "3449f56cda00dca8e4f4c253458d471b8924cc3ec9a25fd4a5821d356d7737cb",
+      "data/current/forecast-2026-66342f068c048d28b96b456b61d0e51d4cb981a72fce1519d53df24c383aef77.json": "66342f068c048d28b96b456b61d0e51d4cb981a72fce1519d53df24c383aef77",
+      "data/current/latest.json": "73f18987480490f1a936f28ae14f2651ba41a033619471a644454846d7c52a74",
+      "data/demo.json": "41c3ad0d8d2997238b464f196b700ce328f38eb6e93831a18d504c7ef6aa24a9",
+      "data/operations/latest.json": "12e85a61446ba4f8cbea75055f44eb53270430816e3d40bc03221f1ec8ecd9a1",
+      "data/operations/operations-0a21283c5bfd13265e43ac345507d6cf1a986bd4fdda279e7ce6c04716f1c95f.json": "0a21283c5bfd13265e43ac345507d6cf1a986bd4fdda279e7ce6c04716f1c95f",
+      "data/operations/operations-4f1de7bd0fbbdba2e8fde376f785e2a29c64c051660a607f9ec2cf58cfc9d4eb.json": "4f1de7bd0fbbdba2e8fde376f785e2a29c64c051660a607f9ec2cf58cfc9d4eb",
+      "data/operations/operations-c46b707e33c8b57ba068e14ae2bd3283fe225c2b57c85a3e66fe12a3aae800b2.json": "c46b707e33c8b57ba068e14ae2bd3283fe225c2b57c85a3e66fe12a3aae800b2",
+      "data/research/challenger-2b90c2f946ef4bac8a2841ae2d4abd8ad8b279449fc38cc1dea1dac32f8b3e68.json": "2b90c2f946ef4bac8a2841ae2d4abd8ad8b279449fc38cc1dea1dac32f8b3e68",
+      "data/research/challenger-b6b02ee1084420cc65e5877683fc7602cdb3f2ac0a1b6b7980130b81dd42c68a.json": "b6b02ee1084420cc65e5877683fc7602cdb3f2ac0a1b6b7980130b81dd42c68a",
+      "data/research/challenger-dce5b9bc802f459e153324dea42fb3080e61a4b6eaf367aa4a8dc27fafda0791.json": "dce5b9bc802f459e153324dea42fb3080e61a4b6eaf367aa4a8dc27fafda0791",
+      "data/research/latest.json": "543fd4c1c2af0baa15278fca5b20835cbb289ac28774ea6eba0cf20fd9a498a4",
+      "index.html": "2890557b8d31cd53d40a53b875a9c879cfc6e5686a58aff36edbe96e038238c8"
+    },
+    "count": 22,
+    "uncompressed_bytes": 4731114,
+    "archive_bytes": 4751360,
+    "archive_sha256": "a816c323e0c07da1311bc6826d52ed5f79591a4be19cea621b46618a9ddc5693",
+    "archive": "artifacts/rc1/static-pages.tar",
+    "base": "/nfl-predictor/",
+    "clean_build_byte_identical": true,
+    "restore_byte_identical": true,
+    "frontend_clean_commit": "b105134",
+    "python_clean_commit": "0c4b43f2d5f330ed0b57f1a35748e84b86c8bd3d",
+    "frontend_unchanged_between_these_commits": true
+  },
+  "review_fixes": [
+    "Reject unsupported flow/duplicate/extra YAML triggers, including whitespace-before-colon duplicate keys, in the workflow regression contract.",
+    "Report rollback expiry preservation and explicit later virtual review, rather than pretending the earlier rollback was already stale.",
+    "Prevent scenario output to arbitrary checkout paths when the checkout itself is under OS temporary storage; two added regressions.",
+    "Clarify current-proof scope, future-kickoff count and code-review rather than instrumented action-audit evidence."
+  ],
+  "open_blockers": [
+    "Public upstream data-rights review and source-code license decision.",
+    "Durable trusted hosted observation-bundle restore/retention not implemented.",
+    "Immutable version creation is not crash-atomic; two latest pointers are not transactional; production recovery tooling required.",
+    "Hosted runner/Node20 Action runtime, Pages environment reviewer and account quotas/overage controls unverified.",
+    "Existing forecast expires before upcoming games; no RC1 refresh authorized or performed.",
+    "Partition history before sustained runs hit existing client budgets.",
+    "Owner release approval and reconciliation of any additional OSv1.1 controls; model promotion/holdout authority remain separate."
+  ],
+  "no_prohibited_actions": "No fitting/tuning/promotion, holdout execution, deployment, scheduled execution, paid service, account or personal-site change. Supported by code review, no-fit tests, boundary tests and preserved hashes; no claim of exhaustive runtime instrumentation.",
+  "artifacts": {
+    "artifacts/rc1/browser-root/corrective-architecture-desktop.png": {
+      "sha256": "05f187416795d35cabe4caa0ad7f753fc6e0b044754a105ffe6e8ca41c9cb62b",
+      "bytes": 302437
+    },
+    "artifacts/rc1/browser-root/corrective-architecture-mobile.png": {
+      "sha256": "63fb0b9bd56e3e312c0bdce91f3a95dbec8a2f0e5cbed7ebce263b537dc6704c",
+      "bytes": 1110935
+    },
+    "artifacts/rc1/browser-root/corrective-desktop.png": {
+      "sha256": "5fbca175e8b4d66d18df2012882b36b3de771ed56e0c41bda99c7e02d63433e1",
+      "bytes": 340079
+    },
+    "artifacts/rc1/browser-root/corrective-mobile.png": {
+      "sha256": "0f867895e50292384dae79b664b736df01bcbb72bc25335deb44f462b72fa75b",
+      "bytes": 842944
+    },
+    "artifacts/rc1/browser-root/corrective-model-performance-desktop.png": {
+      "sha256": "025dc3bfcf406a30b13a013ae9ecd919f22c2488d7e6d877a19b89a64d651b3d",
+      "bytes": 285573
+    },
+    "artifacts/rc1/browser-root/corrective-model-performance-mobile.png": {
+      "sha256": "f9bb476688a7cdb56aa995fc79b65f08aeb2b5fd576298047422338719b1a12f",
+      "bytes": 902729
+    },
+    "artifacts/rc1/browser-root/corrective-prediction-explanation-desktop.png": {
+      "sha256": "ed14b47a081deb38c4b3948bb56d4f7720e19ae201989d6f47c9461706262b65",
+      "bytes": 297416
+    },
+    "artifacts/rc1/browser-root/corrective-prediction-explanation-mobile.png": {
+      "sha256": "bde9967a8bbbe1b0f6a7711ff13be9cd217b7b7b768fa3a991e41ab5c84d9d2f",
+      "bytes": 847080
+    },
+    "artifacts/rc1/browser-root/current-forecasts-desktop.png": {
+      "sha256": "0f44db913aab4f6d17abbbe0ec167aa3d089aa7e8880e3618da4a864cea0f830",
+      "bytes": 664161
+    },
+    "artifacts/rc1/browser-root/current-forecasts-mobile.png": {
+      "sha256": "6c4bf12772e940a813b2b8c86bcc36195842a1be01b3f6a26f0c4f0ae3a2d458",
+      "bytes": 2313454
+    },
+    "artifacts/rc1/browser-root/current-viewport-desktop.png": {
+      "sha256": "a21c1e3f2830eafb7fe0909ebc9cf17afc7f9544d9fb16c5af25e7076dca02ee",
+      "bytes": 81072
+    },
+    "artifacts/rc1/browser-root/current-viewport-mobile.png": {
+      "sha256": "28a89bf980af81c056afb865644c74f724672efbcac7534f9967bd7666114c28",
+      "bytes": 39532
+    },
+    "artifacts/rc1/browser-root/root-context-desktop.png": {
+      "sha256": "2f284786b63e84f851b90f1b59020f65989fc715741651f724863af69c391dd9",
+      "bytes": 119986
+    },
+    "artifacts/rc1/browser-root/root-context-mobile.png": {
+      "sha256": "167c7779ad4977b6ac7e050aaa031d8fe6eea6e4668b5835767d4d2e5fa0309c",
+      "bytes": 163877
+    },
+    "artifacts/rc1/browser-root/root-platform-history-desktop.png": {
+      "sha256": "6a53113f7fd3e2190b5d490008981bbb7c4f36a6d9c5b04cdb98792a5f42c619",
+      "bytes": 250693
+    },
+    "artifacts/rc1/browser-root/root-platform-history-mobile.png": {
+      "sha256": "b1bae438275dac9ee1a791b391de0a9833cc4521a0605f9763026cac24fb4a72",
+      "bytes": 862896
+    },
+    "artifacts/rc1/browser-root/root-platform-intelligence-desktop.png": {
+      "sha256": "344862985c05ee7d4b856f9dd325e2edd6aae1949d3d043262f122c35e4148b4",
+      "bytes": 766392
+    },
+    "artifacts/rc1/browser-root/root-platform-intelligence-mobile.png": {
+      "sha256": "58ce9f4406c1ecb5ad134922b5394005bd329ba14c4965c86cf4972980a84c15",
+      "bytes": 2908067
+    },
+    "artifacts/rc1/browser-root/root-platform-models-desktop.png": {
+      "sha256": "93254f1f258a3eb6cafd05d6ed52397a7f529c8b49ea39e46bb5a9af6e6e3ac1",
+      "bytes": 534589
+    },
+    "artifacts/rc1/browser-root/root-platform-models-mobile.png": {
+      "sha256": "54def4ed54370062d1c454cd91e33373abea62adc9416f38d17454b38dcb9bb0",
+      "bytes": 1924614
+    },
+    "artifacts/rc1/browser-root/root-platform-postgame-desktop.png": {
+      "sha256": "4220e17f9cc4b40664c092e207d3f8a3de5f626215ddcb27c1d500ef6f7f2116",
+      "bytes": 186825
+    },
+    "artifacts/rc1/browser-root/root-platform-postgame-mobile.png": {
+      "sha256": "a4e6b65cfe0c4f2ace1162f388518841a93ed5276a61ee3f80888678514c0d68",
+      "bytes": 642902
+    },
+    "artifacts/rc1/browser-root/root-viewport-history-desktop.png": {
+      "sha256": "c75fc712459e832a431ab3a6b35c7c1356f2b49127c07247f62d056842fae058",
+      "bytes": 77357
+    },
+    "artifacts/rc1/browser-root/root-viewport-history-mobile.png": {
+      "sha256": "c82ff5a76698dab1af7e983593b8139378732e01588a52edb1ec20f94ed3130f",
+      "bytes": 170159
+    },
+    "artifacts/rc1/browser-root/root-viewport-intelligence-desktop.png": {
+      "sha256": "f9dba169d6885b4f765a4bd2ef8d6496fe44f73a5c2ab7b6defa8b9729e9ea91",
+      "bytes": 87726
+    },
+    "artifacts/rc1/browser-root/root-viewport-intelligence-mobile.png": {
+      "sha256": "36d521726ac1f64ff188eb2d039a46e12b27341782d0ecbfcfdcdb5ad6bee6a1",
+      "bytes": 145425
+    },
+    "artifacts/rc1/browser-root/root-viewport-models-desktop.png": {
+      "sha256": "452c57a96f65c661653c50b84e0f6d528cecd356dcb9be7c6940744cddd6e77b",
+      "bytes": 77632
+    },
+    "artifacts/rc1/browser-root/root-viewport-models-mobile.png": {
+      "sha256": "d8f503526c1b4eb00a4d11181e32802e8c063b435786d50173f21f1060071420",
+      "bytes": 188711
+    },
+    "artifacts/rc1/browser-root/root-viewport-postgame-desktop.png": {
+      "sha256": "c9d0690387b1efad0ee9012c22b03aebc5b77c0399fb1fc3304ab33b5290d064",
+      "bytes": 84637
+    },
+    "artifacts/rc1/browser-root/root-viewport-postgame-mobile.png": {
+      "sha256": "9d54d179cfde29c631c657693e8e222d8d26203012bfb885b7ec3ef5280e0c16",
+      "bytes": 140424
+    },
+    "artifacts/rc1/browser-root.txt": {
+      "sha256": "c204d61be8d5b7c1f597598c2a4d93e2b46cfc952e019e82cded78e1d50dbb59",
+      "bytes": 2670
+    },
+    "artifacts/rc1/browser-subpath/corrective-architecture-desktop.png": {
+      "sha256": "05f187416795d35cabe4caa0ad7f753fc6e0b044754a105ffe6e8ca41c9cb62b",
+      "bytes": 302437
+    },
+    "artifacts/rc1/browser-subpath/corrective-architecture-mobile.png": {
+      "sha256": "63fb0b9bd56e3e312c0bdce91f3a95dbec8a2f0e5cbed7ebce263b537dc6704c",
+      "bytes": 1110935
+    },
+    "artifacts/rc1/browser-subpath/corrective-desktop.png": {
+      "sha256": "5fbca175e8b4d66d18df2012882b36b3de771ed56e0c41bda99c7e02d63433e1",
+      "bytes": 340079
+    },
+    "artifacts/rc1/browser-subpath/corrective-mobile.png": {
+      "sha256": "0f867895e50292384dae79b664b736df01bcbb72bc25335deb44f462b72fa75b",
+      "bytes": 842944
+    },
+    "artifacts/rc1/browser-subpath/corrective-model-performance-desktop.png": {
+      "sha256": "025dc3bfcf406a30b13a013ae9ecd919f22c2488d7e6d877a19b89a64d651b3d",
+      "bytes": 285573
+    },
+    "artifacts/rc1/browser-subpath/corrective-model-performance-mobile.png": {
+      "sha256": "f9bb476688a7cdb56aa995fc79b65f08aeb2b5fd576298047422338719b1a12f",
+      "bytes": 902729
+    },
+    "artifacts/rc1/browser-subpath/corrective-prediction-explanation-desktop.png": {
+      "sha256": "ed14b47a081deb38c4b3948bb56d4f7720e19ae201989d6f47c9461706262b65",
+      "bytes": 297416
+    },
+    "artifacts/rc1/browser-subpath/corrective-prediction-explanation-mobile.png": {
+      "sha256": "bde9967a8bbbe1b0f6a7711ff13be9cd217b7b7b768fa3a991e41ab5c84d9d2f",
+      "bytes": 847080
+    },
+    "artifacts/rc1/browser-subpath/current-forecasts-desktop.png": {
+      "sha256": "0f44db913aab4f6d17abbbe0ec167aa3d089aa7e8880e3618da4a864cea0f830",
+      "bytes": 664161
+    },
+    "artifacts/rc1/browser-subpath/current-forecasts-mobile.png": {
+      "sha256": "6c4bf12772e940a813b2b8c86bcc36195842a1be01b3f6a26f0c4f0ae3a2d458",
+      "bytes": 2313454
+    },
+    "artifacts/rc1/browser-subpath/current-viewport-desktop.png": {
+      "sha256": "a21c1e3f2830eafb7fe0909ebc9cf17afc7f9544d9fb16c5af25e7076dca02ee",
+      "bytes": 81072
+    },
+    "artifacts/rc1/browser-subpath/current-viewport-mobile.png": {
+      "sha256": "28a89bf980af81c056afb865644c74f724672efbcac7534f9967bd7666114c28",
+      "bytes": 39532
+    },
+    "artifacts/rc1/browser-subpath/subpath-context-desktop.png": {
+      "sha256": "2f284786b63e84f851b90f1b59020f65989fc715741651f724863af69c391dd9",
+      "bytes": 119986
+    },
+    "artifacts/rc1/browser-subpath/subpath-context-mobile.png": {
+      "sha256": "167c7779ad4977b6ac7e050aaa031d8fe6eea6e4668b5835767d4d2e5fa0309c",
+      "bytes": 163877
+    },
+    "artifacts/rc1/browser-subpath/subpath-platform-history-desktop.png": {
+      "sha256": "6a53113f7fd3e2190b5d490008981bbb7c4f36a6d9c5b04cdb98792a5f42c619",
+      "bytes": 250693
+    },
+    "artifacts/rc1/browser-subpath/subpath-platform-history-mobile.png": {
+      "sha256": "b1bae438275dac9ee1a791b391de0a9833cc4521a0605f9763026cac24fb4a72",
+      "bytes": 862896
+    },
+    "artifacts/rc1/browser-subpath/subpath-platform-intelligence-desktop.png": {
+      "sha256": "344862985c05ee7d4b856f9dd325e2edd6aae1949d3d043262f122c35e4148b4",
+      "bytes": 766392
+    },
+    "artifacts/rc1/browser-subpath/subpath-platform-intelligence-mobile.png": {
+      "sha256": "58ce9f4406c1ecb5ad134922b5394005bd329ba14c4965c86cf4972980a84c15",
+      "bytes": 2908067
+    },
+    "artifacts/rc1/browser-subpath/subpath-platform-models-desktop.png": {
+      "sha256": "93254f1f258a3eb6cafd05d6ed52397a7f529c8b49ea39e46bb5a9af6e6e3ac1",
+      "bytes": 534589
+    },
+    "artifacts/rc1/browser-subpath/subpath-platform-models-mobile.png": {
+      "sha256": "54def4ed54370062d1c454cd91e33373abea62adc9416f38d17454b38dcb9bb0",
+      "bytes": 1924614
+    },
+    "artifacts/rc1/browser-subpath/subpath-platform-postgame-desktop.png": {
+      "sha256": "7c91cc5519ab22bb13979013651f41f69e6d8ae428f996ff62e9611f7814bc70",
+      "bytes": 186773
+    },
+    "artifacts/rc1/browser-subpath/subpath-platform-postgame-mobile.png": {
+      "sha256": "a4e6b65cfe0c4f2ace1162f388518841a93ed5276a61ee3f80888678514c0d68",
+      "bytes": 642902
+    },
+    "artifacts/rc1/browser-subpath/subpath-viewport-history-desktop.png": {
+      "sha256": "c75fc712459e832a431ab3a6b35c7c1356f2b49127c07247f62d056842fae058",
+      "bytes": 77357
+    },
+    "artifacts/rc1/browser-subpath/subpath-viewport-history-mobile.png": {
+      "sha256": "c82ff5a76698dab1af7e983593b8139378732e01588a52edb1ec20f94ed3130f",
+      "bytes": 170159
+    },
+    "artifacts/rc1/browser-subpath/subpath-viewport-intelligence-desktop.png": {
+      "sha256": "f9dba169d6885b4f765a4bd2ef8d6496fe44f73a5c2ab7b6defa8b9729e9ea91",
+      "bytes": 87726
+    },
+    "artifacts/rc1/browser-subpath/subpath-viewport-intelligence-mobile.png": {
+      "sha256": "36d521726ac1f64ff188eb2d039a46e12b27341782d0ecbfcfdcdb5ad6bee6a1",
+      "bytes": 145425
+    },
+    "artifacts/rc1/browser-subpath/subpath-viewport-models-desktop.png": {
+      "sha256": "452c57a96f65c661653c50b84e0f6d528cecd356dcb9be7c6940744cddd6e77b",
+      "bytes": 77632
+    },
+    "artifacts/rc1/browser-subpath/subpath-viewport-models-mobile.png": {
+      "sha256": "d8f503526c1b4eb00a4d11181e32802e8c063b435786d50173f21f1060071420",
+      "bytes": 188711
+    },
+    "artifacts/rc1/browser-subpath/subpath-viewport-postgame-desktop.png": {
+      "sha256": "ab6abee3da8c79347278570db749ac5e39cc189de05cd8ea97d401a6d2bdfebc",
+      "bytes": 84636
+    },
+    "artifacts/rc1/browser-subpath/subpath-viewport-postgame-mobile.png": {
+      "sha256": "9d54d179cfde29c631c657693e8e222d8d26203012bfb885b7ec3ef5280e0c16",
+      "bytes": 140424
+    },
+    "artifacts/rc1/browser-subpath.txt": {
+      "sha256": "b7b3156a6052a9d67e16205cae549f9cc7a58b352b419b2aa11af3b8c3ffe69b",
+      "bytes": 2670
+    },
+    "artifacts/rc1/clean-build.txt": {
+      "sha256": "1511dc091831bcfed0a7998115813b8a279f1eddc2e5935da77eb5a0c56e32c8",
+      "bytes": 1640
+    },
+    "artifacts/rc1/clean-frontend-tests.txt": {
+      "sha256": "3817590639a54f8aaea09a142e2d668fe5faf06f6ffbab296b57d3294955fbac",
+      "bytes": 275
+    },
+    "artifacts/rc1/clean-install.txt": {
+      "sha256": "60354b7a0f26ed7313e1ad6c43933b88484f250ff030d02aa6767551d673660f",
+      "bytes": 265
+    },
+    "artifacts/rc1/clean-packaging-tests.txt": {
+      "sha256": "f41860971078b4fbeac03c6c45275ce5398390176aaed4ed3d8f8efedfc13da7",
+      "bytes": 1979
+    },
+    "artifacts/rc1/clean-python-tests.txt": {
+      "sha256": "1297bb623f3a8a74e7e27f88fa675f6156a622d6d85f284b364fdf46def29c99",
+      "bytes": 998
+    },
+    "artifacts/rc1/clean-source.json": {
+      "sha256": "6a7b60a1d7cf3cc6c327f27493c0b6fd79cbc67f9b73caa45b422046f44cee8f",
+      "bytes": 305
+    },
+    "artifacts/rc1/current-independent.json": {
+      "sha256": "13980983484387ed6d9b4c5e310e3cbff12095fa0cc1beb96b4f5fa8a069a4c4",
+      "bytes": 531
+    },
+    "artifacts/rc1/current-replay.json": {
+      "sha256": "31ef4f505a75ba9d8c9582668727bca4cd00a100d538fdfb4d958befeb0571ae",
+      "bytes": 232
+    },
+    "artifacts/rc1/frontend-tests.txt": {
+      "sha256": "64f9f50b4f804690da8cb2973c5072694f4d3fe33e36d76caac9b586f75ffe35",
+      "bytes": 287
+    },
+    "artifacts/rc1/integrity-current-recovery-run.txt": {
+      "sha256": "e2d1e8867f0c68a6ea830ed4b4f4c91b1c9d772d8a13ddd54f67916f3683e8e1",
+      "bytes": 3670
+    },
+    "artifacts/rc1/integrity-current-recovery.json": {
+      "sha256": "d55ef1201b406f906c07d0c147e91bfba8bff6e442391a8e383228f110821586",
+      "bytes": 11564
+    },
+    "artifacts/rc1/monte-carlo/evidence-index.json": {
+      "sha256": "93a142e484ae1961d1f27e3c835b8fc0bb5852a6f9949d521fb8b898c96e7dcb",
+      "bytes": 7436
+    },
+    "artifacts/rc1/monte-carlo/simulation-50fc7c23a5adb37e484223c418d28507161565e384458b4a4439aa7ce6e35471.json": {
+      "sha256": "50fc7c23a5adb37e484223c418d28507161565e384458b4a4439aa7ce6e35471",
+      "bytes": 2021
+    },
+    "artifacts/rc1/monte-carlo/simulation-531f9bb6ae362f3c8ae9b54ce333e46fe093e82045c6cec1e331b068102e8838.json": {
+      "sha256": "531f9bb6ae362f3c8ae9b54ce333e46fe093e82045c6cec1e331b068102e8838",
+      "bytes": 2156
+    },
+    "artifacts/rc1/monte-carlo/simulation-6c930a8200e97b120f1ad99a55fd8885088fcb27d4f5ea683be2814afab9fae3.json": {
+      "sha256": "6c930a8200e97b120f1ad99a55fd8885088fcb27d4f5ea683be2814afab9fae3",
+      "bytes": 2104
+    },
+    "artifacts/rc1/monte-carlo/simulation-6e5d49570a4163d065f760f1b94bb25e283d376e9ad3f36c12df43ea305199ed.json": {
+      "sha256": "6e5d49570a4163d065f760f1b94bb25e283d376e9ad3f36c12df43ea305199ed",
+      "bytes": 3736
+    },
+    "artifacts/rc1/monte-carlo/simulation-72ecbaee719363ac22bab15f5615545c19bd00af47bbeeecd3b9c060f9426634.json": {
+      "sha256": "72ecbaee719363ac22bab15f5615545c19bd00af47bbeeecd3b9c060f9426634",
+      "bytes": 2017
+    },
+    "artifacts/rc1/monte-carlo/simulation-806b59c02974e558043fdd780626b7ff69fdc567f9bb72c8e23f3d08114c2897.json": {
+      "sha256": "806b59c02974e558043fdd780626b7ff69fdc567f9bb72c8e23f3d08114c2897",
+      "bytes": 2114
+    },
+    "artifacts/rc1/monte-carlo/simulation-80a8631efb1c8596afdf774f2f21f6261d7dd18e97148d4f67b05c75a531f4ee.json": {
+      "sha256": "80a8631efb1c8596afdf774f2f21f6261d7dd18e97148d4f67b05c75a531f4ee",
+      "bytes": 2027
+    },
+    "artifacts/rc1/monte-carlo/simulation-9bef33078e27d74cc1a1f9533b12e1b5a7e4da7810344f1d033a455f2425c741.json": {
+      "sha256": "9bef33078e27d74cc1a1f9533b12e1b5a7e4da7810344f1d033a455f2425c741",
+      "bytes": 2011
+    },
+    "artifacts/rc1/monte-carlo/simulation-d2d79a7f65c82a096f20a4ddeda50841455df0f0462f54158f80283e3065390c.json": {
+      "sha256": "d2d79a7f65c82a096f20a4ddeda50841455df0f0462f54158f80283e3065390c",
+      "bytes": 2172
+    },
+    "artifacts/rc1/monte-carlo/simulation-e4127778571c803c5728506d2c06b724127efc980927537d9e0f9a9022198384.json": {
+      "sha256": "e4127778571c803c5728506d2c06b724127efc980927537d9e0f9a9022198384",
+      "bytes": 2166
+    },
+    "artifacts/rc1/monte-carlo/simulation-ef1c5f45bdd1300c73a63bf429f43dde1d86ba6b707a442a21baae25ec7adafb.json": {
+      "sha256": "ef1c5f45bdd1300c73a63bf429f43dde1d86ba6b707a442a21baae25ec7adafb",
+      "bytes": 2162
+    },
+    "artifacts/rc1/monte-carlo/tests.log": {
+      "sha256": "dc98a23dea49e29fe74fe549b5abcd6eb58bffc14b572c838d33f71bcf0b0743",
+      "bytes": 139
+    },
+    "artifacts/rc1/npm-audit.json": {
+      "sha256": "0a0b328a6e0ed0c891952bff3a29ff13f9906e2ab3d7a3049111431829bbce71",
+      "bytes": 363
+    },
+    "artifacts/rc1/operations/dry-run-11da4b0b896629d267446c64a53127fd9f1d133e9b18158020720a41ebe16461.json": {
+      "sha256": "11da4b0b896629d267446c64a53127fd9f1d133e9b18158020720a41ebe16461",
+      "bytes": 3205
+    },
+    "artifacts/rc1/operations/dry-run-1ff585197bd119a8a0b9f161dfdcf8d47080220aade41839249116cbc46a38b3.json": {
+      "sha256": "1ff585197bd119a8a0b9f161dfdcf8d47080220aade41839249116cbc46a38b3",
+      "bytes": 3003
+    },
+    "artifacts/rc1/operations/dry-run-6e81e0fb16d1a2e8748b5a036a7bb9baa1766940b137f25f3f7a8da31f04994f.json": {
+      "sha256": "6e81e0fb16d1a2e8748b5a036a7bb9baa1766940b137f25f3f7a8da31f04994f",
+      "bytes": 3082
+    },
+    "artifacts/rc1/operations-run.json": {
+      "sha256": "21c07d085ecd5feeb0a8882b35488fdf34e6e328703f0237bc37b75e740417f8",
+      "bytes": 4248
+    },
+    "artifacts/rc1/packaging-tests.txt": {
+      "sha256": "e42328350041c3aa91faad339bf1db0f73d42f25130c92c0e0cf795ef56eecbe",
+      "bytes": 1983
+    },
+    "artifacts/rc1/pip-audit.json": {
+      "sha256": "7048e9219723da4c744d67f326044998d224150d691c8d4b1b615c81417cc842",
+      "bytes": 2365
+    },
+    "artifacts/rc1/pip-check.txt": {
+      "sha256": "9261363b733079a641c2e4cc9bc46ffa1d8336945a87f807b6cf68847dbc9b09",
+      "bytes": 30
+    },
+    "artifacts/rc1/python-notices.txt": {
+      "sha256": "f0881261e41330feedcb8aafa520910183575788607cdea201561c7cf872b410",
+      "bytes": 52
+    },
+    "artifacts/rc1/python-tests.txt": {
+      "sha256": "72b16ff4ff3f32e7f3e069a7ba2c259a5d710240708b2692fc1ddc0b6f4cded4",
+      "bytes": 640
+    },
+    "artifacts/rc1/real-evidence-bundle/evidence-2026-439e2c06080614733e1fe86c096d713e087f95a7d0a3f46a87502f84b10393f9.zip": {
+      "sha256": "439e2c06080614733e1fe86c096d713e087f95a7d0a3f46a87502f84b10393f9",
+      "bytes": 96362
+    },
+    "artifacts/rc1/real-evidence-bundle/evidence-2026-6abcf35b97f97377d1e33710dcb07b23021f9cc048a742bede93bfc998d2080d.zip": {
+      "sha256": "6abcf35b97f97377d1e33710dcb07b23021f9cc048a742bede93bfc998d2080d",
+      "bytes": 96363
+    },
+    "artifacts/rc1/replay/replay-12167f35e8d602c3a22e682b223d48f7a3bd1718b534aefe8fc494a937cbc8d2.json": {
+      "sha256": "12167f35e8d602c3a22e682b223d48f7a3bd1718b534aefe8fc494a937cbc8d2",
+      "bytes": 506768
+    },
+    "artifacts/rc1/replay/replay-26182a4772c551178eb88513ab093166f0ad3508ae8994b7fd852d8537aaffc3.json": {
+      "sha256": "26182a4772c551178eb88513ab093166f0ad3508ae8994b7fd852d8537aaffc3",
+      "bytes": 506768
+    },
+    "artifacts/rc1/replay/run-summary.json": {
+      "sha256": "4d29606617b2390ffc94923504e8ab5c5ec8d410e4463f7f92aab4e98792a4c4",
+      "bytes": 2376
+    },
+    "artifacts/rc1/root-build.txt": {
+      "sha256": "acf77c1456022180f50f849f4312e455fbdbccaa396caab98c40bda185598825",
+      "bytes": 1626
+    },
+    "artifacts/rc1/scenarios/scenario-evidence-223204fbced9e0580a1b259f0ff666822907af44bb245e3cd8121c411cb4c0a5.json": {
+      "sha256": "223204fbced9e0580a1b259f0ff666822907af44bb245e3cd8121c411cb4c0a5",
+      "bytes": 468986
+    },
+    "artifacts/rc1/scenarios/scenario-evidence-6cdc71e2d475649438d9338a4106e8ff60dc1c565f36c1db23bc5b6bc81b0965.json": {
+      "sha256": "6cdc71e2d475649438d9338a4106e8ff60dc1c565f36c1db23bc5b6bc81b0965",
+      "bytes": 468986
+    },
+    "artifacts/rc1/static-package.json": {
+      "sha256": "d95ba872dfe0f091c7a0f54a50ef2029736815652dcb381b47930b8b241986b9",
+      "bytes": 3510
+    },
+    "artifacts/rc1/static-pages.tar": {
+      "sha256": "a816c323e0c07da1311bc6826d52ed5f79591a4be19cea621b46618a9ddc5693",
+      "bytes": 4751360
+    },
+    "artifacts/rc1/subpath-build.txt": {
+      "sha256": "399e8c0c6430a1f70a6464463625c334ac55e51f3150132fc96c8454eda6e5ed",
+      "bytes": 1640
+    }
+  }
+}

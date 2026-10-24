@@ -1,4 +1,20 @@
-# Product execution gate report — 2026-10-24
+# RC1 release gate report — 2026-10-24
+
+**Current recommendation: NO-GO for public release/hosted refresh; GO for local RC1 owner review.** The accepted visual/product increment is preserved. Current evidence is [RC1_RELEASE_REPORT.md](RC1_RELEASE_REPORT.md), [RC1_VALIDATION.json](RC1_VALIDATION.json), [SIMULATION_RESULTS.md](SIMULATION_RESULTS.md) and [OPERATIONAL_READINESS.md](OPERATIONAL_READINESS.md). The report maps the owner's ten OS v1.1 dimensions; it does not claim certification against unavailable additional framework text.
+
+| Gate | RC1 result | Remaining boundary |
+|---|---|---|
+| G0 — product | Local visual acceptance recorded; no unrelated feature/design changes | Owner RC1/public acceptance required |
+| G1 — data/ML | 272-game independent retrospective replay and13 current forecasts reproduce; all frozen artifacts preserved | Publication vintages absent, selection-exposed validation, no prospective quality claim; holdout locked |
+| G2 — implementation | Python/frontend/package/browser, deterministic Bernoulli and14 lifecycle scenarios pass | Scope limited to local tested runtime; no synthetic result presented as NFL performance |
+| G3 — release/operations | NO-GO; 15 operational dry-run checks expose and bound faults | Upstream/source-license decisions; durable trusted restoration; crash-safe version writes and coherent pointer publication; hosted compatibility/protection; quota/retention controls; current forecast refresh and explicit activation approval |
+| G4 — controlled learning | Zero real prospective games scored; fixed lifecycle and explanation rules exercised synthetically | Challenger remains research-only; no training/promotion/holdout authority from RC1 |
+
+RC1 adds two concrete operational findings: a failure between the two latest-pointer replacements leaves mixed generations, and a truncated immutable version requires verified recovery. Both preserve old evidence but prevent claiming transaction/crash safety. See the operational report for exact rehearsal limits and recovery requirements. The source expires before the upcoming games; neither verification nor rollback resets timestamps.
+
+The prior increment's gate assessment follows as preserved context; the RC1 decision above supersedes its evidence counts and framework version.
+
+## Prior product-execution assessment
 
 **GO for local owner review of the integrated forecasting/evaluation increment. NO-GO for public deployment, recurring hosted execution, challenger promotion or additional 2024–2025 assessment.** Tests supply evidence; only the owner approves G0–G4. The complete separate OS source was not available in the inspected workspace; the directive's explicit gates govern this increment without a broader certification claim.
 

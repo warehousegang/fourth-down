@@ -1,4 +1,16 @@
 # Risks and owners
+
+## RC1 additions — 2026-10-24
+
+| Risk | Evidence / mitigation required | Owner |
+|---|---|---|
+| Interrupted version creation leaves truncated immutable file | RC1 fault fixture fails closed; implement crash-safe version publication and verified recovery before hosted activation | Engineering |
+| Current/operations pointers expose different generations | Second-write failure reproduced; same-input rerun recovers locally; coherent package transaction and production rollback remain required | Engineering |
+| Simulation mistaken for model validation | Separate synthetic outputs, explicit Bernoulli assumptions and no scores; retrospective selection/vintage limits remain prominent | ML maintainer |
+| Temporary checkout bypasses scenario output isolation | Clean-source tests exercise output paths even when repository itself is under OS temp; production paths must stay forbidden | Engineering |
+| OS v1.1 claims exceed available authority | Map ten dimensions in owner RC1 directive; reconcile any additional full-framework controls before public release | Thomas |
+
+## Existing risk register
 | Risk | Mitigation | Owner |
 |---|---|---|
 | Holdout contamination | Partial exposure already occurred in the legacy baseline; disclose it, preserve guards, freeze prospective protocol, require approval before any further assessment | ML maintainer |

@@ -1,4 +1,16 @@
-# Product execution handoff — 2026-10-24
+# RC1 engineering handoff — 2026-10-24
+
+**RC1 preparation is complete for local review. NO-GO for public deployment or recurring refresh.** Review [RC1_RELEASE_REPORT.md](RC1_RELEASE_REPORT.md) for the decision, [RC1_VALIDATION.json](RC1_VALIDATION.json) for exact counts/hashes and [OPERATIONAL_READINESS.md](OPERATIONAL_READINESS.md) for unresolved operational findings.
+
+The `codex/rc1-release-preparation` branch preserves approved commit 3121344, the frozen incumbent and every existing forecast. RC1 adds independent historical replay, deterministic Bernoulli uncertainty, 14 controlled lifecycle scenarios, isolated operational failure/rollback rehearsals, current-source verification and separately saved browser evidence. No dashboard redesign or production forecasting change was introduced. Reproduction commands are in [SIMULATION_RESULTS.md](SIMULATION_RESULTS.md).
+
+The 272-game 2023 replay reproduces accuracy .588235, Brier .237045 and log loss .665782. This is selection-exposed, event-time retrospective evidence; historical publication availability is not proven. All 13 current forecasts / 52 factors reproduce and the latest artifact is byte-identical. It expires October 25 at 07:47 Eastern; no refresh was performed to hide that limit. Synthetic scenarios/Monte Carlo draws are isolated and cannot count as real accuracy. Zero prospective games are scored.
+
+Remaining public-release blockers: source-code/upstream redistribution decisions; durable trusted source-bundle restoration/retention; crash-safe immutable-file writes and coherent current/operations publication; hosted runner/environment verification; account budget/overage review; fresh eligible real data and owner release approval. Long-season history needs partitioning before client budgets are reached. The ten explicit OS v1.1 dimensions are assessed; reconcile any additional unavailable framework text before release.
+
+All original protected hashes and data captures remain unchanged; original legacy scripts still match. Dependencies/notices remain unchanged. No fitting, promotion, protected 2024–2025 evaluation, deployment, scheduled execution, purchase or personal-site modification occurred. Stop here for owner review; public activation, ML promotion and holdout authorization are separate decisions.
+
+## Prior product execution handoff — preserved context
 
 **Ready for local review; NO-GO for public/recurring release or model promotion.** Fourth Down now has a working local Forecast → Archive → Observe → Evaluate → Investigate path and a separate controlled challenger research path. The owner retains G0–G4 approval. Start at [PROJECT.md](PROJECT.md), [RELEASE_GATES.md](RELEASE_GATES.md) and [EXECUTION_VALIDATION.json](EXECUTION_VALIDATION.json).
 
