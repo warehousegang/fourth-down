@@ -1,3 +1,7 @@
+# Current portfolio release — 2026-10-24
+
+The owner’s **Simplify and Ship** instruction supersedes the earlier commercial release process below. Publication uses the existing frozen model, a single GitHub Pages workflow, Git-retained original observations and a complete static snapshot. The local implementation includes an interactive simulation, deterministic cited research walkthrough and commercial scaling explanation. See [DEPLOYMENT.md](DEPLOYMENT.md) for exact publication steps and the $0 plan. Deployment, recurring activation and personal-site changes still await explicit approval; training, promotion and the 2024–2025 holdout remain separately prohibited. Earlier reports and metrics below are preserved as historical evidence, not additional release gates.
+
 # RC1 release gate report — 2026-10-24
 
 **Current recommendation: NO-GO for public release/hosted refresh; GO for local RC1 owner review.** The accepted visual/product increment is preserved. Current evidence is [RC1_RELEASE_REPORT.md](RC1_RELEASE_REPORT.md), [RC1_VALIDATION.json](RC1_VALIDATION.json), [SIMULATION_RESULTS.md](SIMULATION_RESULTS.md) and [OPERATIONAL_READINESS.md](OPERATIONAL_READINESS.md). The report maps the owner's ten OS v1.1 dimensions; it does not claim certification against unavailable additional framework text.

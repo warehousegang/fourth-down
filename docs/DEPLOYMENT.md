@@ -1,28 +1,69 @@
-# Local demonstration and future deployment
+# Publish Fourth Down
 
-## Local
-Use README.md for installation and run commands. Current forecast versions and the unchanged 2023 replay JSON are already included. See CURRENT_FORECASTS.md for explicit local refresh and expiry behavior. Training is not necessary to open it. For production-subpath previews, use VITE_BASE_PATH=/nfl-predictor/ for both build and preview (README.md); the preview server does not infer the base from an earlier build. The browser makes no calls to external data services, uses system fonts, and needs no keys.
+Prepared locally on 2026-10-24. **No deployment or personal-site change is authorized yet.** This is an Applied AI portfolio demonstration using a frozen model and static artifacts. The older RC1 reports remain historical evidence, not an additional approval cycle.
 
-## Cost and limits (checked 2026-10-24)
-Target recurring infrastructure cost $0 with local inference and a GitHub Pages project site. [GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits) is available for public repositories on GitHub Free; private repository availability depends on plan. Published site limit 1 GB, soft bandwidth 100 GB/month, deployment timeout 10 minutes; soft 10 builds/hour does not apply to custom Actions builds. This educational portfolio is not a commercial SaaS.
+## Cost and publication target
 
-[GitHub Actions billing](https://docs.github.com/en/billing/concepts/product-billing/github-actions): standard GitHub-hosted runners for public repositories are free; private repositories use plan-dependent allowances and excess can be billed. Larger runners and storage have separate rules. Do not assume the user's account plan or remaining allowance. The prepared CI has workflow_dispatch only, one job, a 10-minute timeout, no scheduled or push triggers and no artifact uploads. Do not enable paid usage; review budgets first. No remote workflow has been run. Local runtime/energy/storage still have a practical cost.
+Target **$0/month**: public repository, standard Ubuntu GitHub Actions runners, GitHub Pages, public data, no database or paid LLM. [Standard public runners are free](https://docs.github.com/en/billing/concepts/product-billing/github-actions); [Pages supports public repositories on GitHub Free](https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits). The site is about 5 MB, versus Pages' 1 GB limit and 100 GB/month soft bandwidth limit. Deployment uploads expire after one day; the optional daily run has two ten-minute job limits. Do not select larger paid runners.
 
-## Publication procedure — requires approval, not executed
-1. Review G0–G4 evidence, source attribution, source code license decision, dependencies and account billing. Obtain Thomas's explicit public-release approval; final-holdout approval is separate.
-2. Create or choose a separate project repository, e.g. `nfl-predictor`, only after approval. Do not use the personal site's repository. The package tracks web/public/data/demo.json and content-addressed current forecasts with checksums; raw data/, artifacts/, node_modules/, environments, traces and credentials stay excluded. Local history includes the frozen baseline and corrective commits; current forecasting is an additive change. No push or remote creation is authorized.
-3. Official Actions are pinned to verified full commit SHAs; see ACTIONS_LOCK.json. The inactive Pages template packages dist as artifact.tar and uses SHA-pinned upload-artifact directly, avoiding the mutable nested action inside upload-pages-artifact. Do not enable or execute it before approval. The pinned revisions use the Node 20 action runtime; check current runner compatibility at activation, without silently replacing reviewed pins. Remote execution is unverified.
-4. In repository Settings → Pages, choose GitHub Actions. Set up the `github-pages` environment with a required human reviewer. Rename `.github/workflows/pages.yml.disabled` to `pages.yml` only after approval.
-5. Set base path to `/<repository-name>/` using VITE_BASE_PATH. For an approved dedicated user site, `/` is appropriate, but this project is designed as a subdirectory. Do not change the existing personal site.
-6. Manually run the deployment workflow on the approved commit and enter the exact confirmation phrase. The template builds only the frontend, uses the committed JSON, and deploys no backend. Verify hash deep links, refresh, model version, artifact SHA and mobile layout at the returned URL.
+The connected account is `warehousegang`. Its existing `nfl-predictor` repository is private. Use a separate public `fourth-down` repository; read-only lookup found no accessible repository at that name. Stop on a collision rather than overwrite another repository or change its visibility.
 
-## Rollback
-Before deployment, record approved Git commit, model ID and artifact checksum. To roll back, revert the release change or restore the previous approved source/artifact commit and manually redeploy after owner authorization. Never replace the source snapshot or model in place without a new version. If a forecast error occurs, disable public access through Pages settings with owner authorization until a reviewed fix is available. Keep previous reviewed artifacts locally or in normal source history; do not upload raw datasets.
+## Exact publication steps — after explicit approval
 
-## Featured project link — future manual change only
-After verifying the separate approved deployment, identify the personal site's actual project-card component or content file. Add one card titled `Fourth Down — NFL Prediction Research`, with the approved `https://<owner>.github.io/<repository>/` URL and description `Explainable NFL forecasts, temporal backtesting, and transparent model evaluation.` Add a separate source-code link if approved. Preview the personal site, review the diff and request permission before publishing that unrelated site. No such files were opened or changed by this task.
+1. Activate the reviewed template and publish the prepared Git history:
 
-## Current refresh design — inactive
-`.github/workflows/current-refresh.yml.disabled` remains a manual candidate generator with immutable Action pins, contents:read, a 10-minute timeout and a short-retention review upload. It has no schedule, push or deployment. OPERATIONS.md defines the actual advisory planner: Tuesday and Saturday Eastern updates, 90-minute pregame opportunities, and bounded official-final checks using actual kickoff times. The planner only returns a plan; no jobs were registered.
+   ```sh
+   cd '/Users/thomas/Documents/ChatGPT/nfl predictor'
+   mv .github/workflows/pages.yml.disabled .github/workflows/pages.yml
+   git add .github/workflows/pages.yml .github/workflows/pages.yml.disabled
+   git commit -m 'Enable approved Fourth Down Pages publication'
+   gh repo create warehousegang/fourth-down --public --source=. --remote=origin
+   git push -u origin HEAD:main
+   gh repo edit warehousegang/fourth-down --default-branch main
+   ```
 
-The local evidence bundle provides verified portable source/forecast retention. A future hosted runner still needs approved restoration of the preceding bundle and hosted roundtrip verification before recurring operation. The template does not silently substitute an empty runner cache for genuine earlier observations. Review artifact storage, upstream rights, archive growth and account-specific allowance before activation. The planning maximum is 320 runner minutes/week; no account-specific zero-cost guarantee is made. GitHub's billing and Pages primary references above were rechecked on 2026-10-24. Model promotion and public publishing require separate approval.
+   The source license is MIT; data/dependency terms and attribution remain separate. Raw local datasets, environments, audit logs and retired logos are excluded. The small `ops/` bundle deliberately retains current-season original observations and forecast history.
+
+2. In the new repository, choose **Settings → Pages → Build and deployment → Source → GitHub Actions**. Ensure Actions are enabled. No secrets or service accounts are needed. The build job has `contents: write` to retain forecasts; the separate deploy job has Pages/identity permissions. Repository rules must permit this workflow's forecast commit.
+
+3. Run the release with a real current-data refresh:
+
+   ```sh
+   gh workflow run pages.yml --repo warehousegang/fourth-down --ref main -f refresh=true
+   gh run list --repo warehousegang/fourth-down --workflow pages.yml --limit 1
+   # Substitute the run ID printed above:
+   gh run watch RUN_ID --repo warehousegang/fourth-down --exit-status
+   ```
+
+   The job tests the frozen pipeline, restores original evidence, refreshes the current season, generates forecasts/history/postgame scoring, tests and builds the site, then commits retained state together. A complete site is uploaded only after success. A failed refresh/test/push leaves the previous public deployment intact. No fitting, promotion or protected holdout access occurs.
+
+4. Open **https://warehousegang.github.io/fourth-down/**. Check Upcoming Games, matchup explanations, Forecast History, Model Intelligence's simulation/research demonstration, Postgame Analysis and Architecture. Refresh a deep link such as `#intelligence`, check mobile layout, and verify source timestamps/model ID. Expired/missing probabilities must remain withheld. The first hosted run is the real-environment smoke test; it has not been claimed as already executed.
+
+5. If daily refresh is approved, uncomment only these prepared lines under `on:` in `pages.yml`, commit and push to `main`:
+
+   ```yaml
+   schedule:
+     - cron: '17 12 * * *'
+   ```
+
+   This runs about once daily at 12:17 UTC; GitHub may delay jobs. Manual dispatch is available before an interview. This is not a last-minute injury/news service: context annotations keep independent timestamps and do not influence the model. Remove the schedule to stop recurring execution. No schedule is currently active.
+
+6. **After separate personal-site approval**, add a project card linking to the verified Pages URL: **Fourth Down — Applied AI NFL Forecasting**, with description **Explainable upcoming-game predictions, historical evaluation, forecast tracking and controlled research.** Source link: `https://github.com/warehousegang/fourth-down`. Preview/publish through the personal site's existing process. No personal-site files have been touched.
+
+## Local preview and recovery
+
+```sh
+cd web
+npm ci --ignore-scripts
+npm test
+npm run test:release
+VITE_BASE_PATH=/fourth-down/ npm run build
+VITE_BASE_PATH=/fourth-down/ npm run preview -- --port 4174 --strictPort
+# Open http://127.0.0.1:4174/fourth-down/
+```
+
+The model uses only current-season win rate, scoring margin, recent margin and rest. Injuries, weather, news and prior-season strength are not predictive inputs. Original forecasts and timestamps stay unchanged; publication refreshes instead of rewriting their age. Prospective performance is unknown until eligible recorded games finish.
+
+`ops/forecast-evidence-<season>.zip` and its checksum receipt retain original observations alongside public JSON in one Git commit. Fresh runners restore verified captures; missing/corrupt required evidence fails closed. The disposable checkout and complete-site deployment form the publication boundary: local pointer writes are not claimed to be a database transaction. New empty seasons are allowed; protected 2024–2025 seasons are rejected. Git retains previous bundles without a paid storage service.
+
+For rollback, restore the last good source, `ops/` pair and public artifact tree from Git in a new commit; run the workflow with `refresh=false`. Preserve original timestamps and model identity. Disable optional scheduling while diagnosing source failures. Commercial operation would move long-lived history into partitioned storage and add stronger availability/monitoring; that is not required to publish this portfolio.

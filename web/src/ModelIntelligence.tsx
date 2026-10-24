@@ -3,12 +3,14 @@ import { loadOperations, type Operations } from "./operations-contracts";
 import { loadResearch, type Research } from "./research-contracts";
 import { useArtifact } from "./use-artifact";
 import { decimal, Heading, Metrics, pct, Provenance, Table } from "./IntelligenceShared";
+import { InterviewDemo } from "./InterviewDemo";
 
 export function ModelIntelligence() {
   const operations=useArtifact(loadOperations);
   const research=useArtifact(loadResearch);
   return <>
     <Heading label="MEASURE · COMPARE · KEEP THE BOUNDARIES" title="Model Intelligence">Prospective performance, retrospective validation and challenger research are different kinds of evidence. Each keeps its own population and model version.</Heading>
+    {operations.data && <InterviewDemo data={operations.data.data} />}
     <section className="panel"><div className="eyebrow">OPERATIONAL INCUMBENT</div><h2>Current-season forecast performance</h2>{operations.error?<div role="alert"><p>{operations.error}</p><button className="current-reload" onClick={operations.retry}>Retry current performance</button></div>:!operations.data?<p role="status">Checking current-season outcome evidence…</p>:<CurrentPerformance data={operations.data.data}/>}</section>
     <section className="panel"><div className="eyebrow">PRESERVED HISTORICAL EVIDENCE</div><h2>Original 2023 validation</h2><p>The incumbent’s 2023 results came from retrospective model selection. They are not current-season accuracy or prospective evidence. The original predictions, baseline comparison, calibration and uncertainty analysis remain available unchanged.</p><a href="#performance">Open the separate 2023 model performance report</a><p>The 2024–2025 period remains locked and partially exposed by the previously observed legacy baseline aggregates. No new holdout results are consumed by this application.</p></section>
     <section className="panel"><div className="eyebrow">SEPARATE RESEARCH TRACK</div><h2>Schedule intelligence challenger</h2>{research.error?<div role="alert"><p>{research.error}</p><button className="current-reload" onClick={research.retry}>Retry model research</button></div>:!research.data?<p role="status">Checking research lineage, model arithmetic and metrics…</p>:<ResearchEvidence data={research.data.data}/>}</section>

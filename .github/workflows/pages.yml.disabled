@@ -1,47 +1,81 @@
-# INACTIVE TEMPLATE. Rename only after explicit G3 approval. Actions are SHA-pinned.
-name: Approved manual Pages deployment
+# INACTIVE: rename only after the owner approves publication.
+name: Fourth Down Pages
 on:
   workflow_dispatch:
     inputs:
-      approval:
-        description: Enter APPROVED-G3 after the owner has approved this exact release
-        required: true
-        type: string
+      refresh:
+        description: Refresh current forecasts (disable only for a reviewed rollback)
+        type: boolean
+        default: true
+  # Optional after approval: one refresh per day, 12:17 UTC.
+  # schedule:
+  #   - cron: '17 12 * * *'
 permissions:
   contents: read
-  pages: write
-  id-token: write
 concurrency:
-  group: pages
+  group: fourth-down-pages
   cancel-in-progress: false
 jobs:
-  build-and-deploy:
-    if: inputs.approval == 'APPROVED-G3'
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  build:
+    if: github.ref_name == github.event.repository.default_branch
     runs-on: ubuntu-24.04
     timeout-minutes: 10
+    permissions:
+      contents: write
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          persist-credentials: false
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+          persist-credentials: true
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: '3.14.2'
+      - run: python -m pip install -r requirements.txt -c requirements-lock.txt
+      - run: python scripts/test_release.py
+      - name: Restore, forecast and retain original observations
+        if: github.event_name == 'schedule' || inputs.refresh
+        run: |
+          python scripts/forecast_state.py restore
+          python -m ml.refresh
+          python scripts/forecast_state.py save
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: '22.14.0'
-      - uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5
-      - run: npm ci --ignore-scripts && npm test && npm run test:release && npm run build
+          package-manager-cache: false
+      - name: Verify and build the entire site
         working-directory: web
         env:
           VITE_BASE_PATH: /${{ github.event.repository.name }}/
-      - name: Package static Pages artifact
-        run: tar --dereference --hard-dereference --exclude=.git --exclude=.github -C web/dist -cvf "$RUNNER_TEMP/artifact.tar" .
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        run: npm ci --ignore-scripts && npm test && npm run test:release && npm audit --audit-level=moderate && npm run build
+      - name: Retain successful forecast history in one Git commit
+        if: github.event_name == 'schedule' || inputs.refresh
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add ops/ web/public/data/current/ web/public/data/operations/
+          if ! git diff --cached --quiet; then
+            git commit -m 'Refresh current forecasts and retained observations'
+            git push origin HEAD
+          fi
+      - name: Package complete static snapshot
+        run: tar --dereference --hard-dereference --exclude=.git --exclude=.github -C web/dist -cf "$RUNNER_TEMP/artifact.tar" .
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: github-pages
           path: ${{ runner.temp }}/artifact.tar
           if-no-files-found: error
           retention-days: 1
-      - name: Deploy approved artifact
+  deploy:
+    needs: build
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Publish the verified complete snapshot
         id: deployment
-        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1

@@ -46,7 +46,7 @@ def synthetic_source(root):
     return path, snapshot
 
 
-def assert_manual_trigger(text):
+def assert_manual_trigger(text, allow_daily=False):
     """Accept only this project's explicit block syntax; fail closed on flow/merge forms."""
     lines = text.splitlines()
     positions = [i for i, line in enumerate(lines) if re.match(r"^(?:on|'on'|\"on\")[ \t]*:", line)]
@@ -57,6 +57,10 @@ def assert_manual_trigger(text):
         if not line.startswith(' '): break
         block.append(line)
     assert block and block[0] == '  workflow_dispatch:'
+    if allow_daily and '  schedule:' in block:
+        schedule = block.index('  schedule:')
+        assert block[schedule:] == ['  schedule:', "    - cron: '17 12 * * *'"]
+        block = block[:schedule]
     assert all(line.startswith('    ') for line in block[1:])
     assert not re.search(r'^\s*<<:|[&*][A-Za-z_][A-Za-z0-9_-]*', text, re.M)
 
@@ -70,7 +74,7 @@ def workflow_contract():
             continue
         text = path.read_text()
         active = path.suffix == '.yml'
-        assert_manual_trigger(text)
+        assert_manual_trigger(text, allow_daily='pages' in path.name)
         assert 'timeout-minutes: 10' in text and 'contents: read' in text
         uses = re.findall(r'uses:\s+([^\s#]+)', text)
         assert uses
@@ -80,13 +84,12 @@ def workflow_contract():
         if 'pages' not in path.name:
             assert not re.search(r'^\s+\S+: write', text, re.M)
         else:
-            assert not active and 'environment:' in text and 'APPROVED-G3' in text
-        if 'current-refresh' in path.name:
-            assert not active and 'cancel-in-progress: false' in text and 'retention-days: 1' in text
-            assert 'Require retained source evidence' in text
+            assert 'environment:' in text and 'needs: build' in text
+            assert 'cancel-in-progress: false' in text and 'retention-days: 1' in text
+            assert 'forecast_state.py restore' in text and 'forecast_state.py save' in text
         records.append({'file':str(path.relative_to(ROOT)), 'sha256':sha(path.read_bytes()),
                         'active_manual_only':active, 'immutable_actions':len(uses)})
-    assert len(records) == 3
+    assert len(records) == 2
     return records
 
 

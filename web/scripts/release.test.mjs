@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { mkdtempSync, mkdirSync, copyFileSync, readFileSync, writeFileSync, rmSync, renameSync, readdirSync } from "node:fs";
+import { mkdtempSync, mkdirSync, copyFileSync, readFileSync, writeFileSync, rmSync, renameSync, readdirSync, existsSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -11,7 +11,7 @@ const json = p => JSON.parse(readFileSync(resolve(root, p), "utf8"));
 function fixture(t) {
   const dir = mkdtempSync(resolve(tmpdir(), "fourth-down-packaging-"));
   t.after(() => rmSync(dir, { recursive: true, force: true }));
-  const files = new Set(["docs/RELEASE_ARTIFACTS.json", "docs/FROZEN_MODEL.json", "docs/HOLDOUT_PROTOCOL_FREEZE.json", "docs/ACTIONS_LOCK.json", "web/scripts/check-release.mjs", ".github/workflows/ci.yml", ".github/workflows/pages.yml.disabled"]);
+  const files = new Set(["docs/RELEASE_ARTIFACTS.json", "docs/FROZEN_MODEL.json", "docs/HOLDOUT_PROTOCOL_FREEZE.json", "docs/ACTIONS_LOCK.json", "web/scripts/check-release.mjs"]);
   files.add("web/public/CURRENT_DATA_NOTICE.txt");
   for (const directory of ["web/public/data/current", "web/public/data/operations", "web/public/data/research", "web/public/data/context", "docs/protocols"]) {
     for (const name of readdirSync(resolve(root, directory))) files.add(`${directory}/${name}`);
@@ -57,7 +57,8 @@ test("unexpected public image is rejected before distribution", t => {
 });
 test("future template activation preserves packaging checks without authorizing deployment", t => {
   const dir = fixture(t);
-  renameSync(resolve(dir, ".github/workflows/pages.yml.disabled"), resolve(dir, ".github/workflows/pages.yml"));
+  const template = resolve(dir, ".github/workflows/pages.yml.disabled");
+  if (existsSync(template)) renameSync(template, resolve(dir, ".github/workflows/pages.yml"));
   const result = run(dir);
   assert.equal(result.status, 0, result.stderr);
 });

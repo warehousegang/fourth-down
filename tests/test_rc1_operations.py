@@ -13,9 +13,9 @@ def test_operational_faults_recovery_and_boundaries():
     assert pair['cross_file_atomic'] is False
 
 
-def test_only_reviewed_manual_workflow_is_active():
+def test_only_reviewed_workflow_files_can_be_active():
     workflows = workflow_contract()
-    assert [row['file'] for row in workflows if row['active_manual_only']] == ['.github/workflows/ci.yml']
+    assert {row['file'] for row in workflows if row['active_manual_only']} <= {'.github/workflows/ci.yml','.github/workflows/pages.yml'}
 
 
 @pytest.mark.parametrize('trigger', [

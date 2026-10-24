@@ -1,3 +1,7 @@
+# Current portfolio release — 2026-10-24
+
+The owner’s **Simplify and Ship** instruction supersedes the earlier commercial release process below. Publication uses the existing frozen model, a single GitHub Pages workflow, Git-retained original observations and a complete static snapshot. The local implementation includes an interactive simulation, deterministic cited research walkthrough and commercial scaling explanation. See [DEPLOYMENT.md](DEPLOYMENT.md) for exact publication steps and the $0 plan. Deployment, recurring activation and personal-site changes still await explicit approval; training, promotion and the 2024–2025 holdout remain separately prohibited. Earlier reports and metrics below are preserved as historical evidence, not additional release gates.
+
 # Fourth Down — authoritative project record
 
 Owner: Thomas. Classification: provisional Tier A personal research/portfolio; public-release risks are assessed separately. Current authority: the owner's **RC1 Release Preparation & Simulation Validation Directive**, received 2026-10-24, following the accepted product increment. Product definition and local visual experience are accepted; RC1 adds verification, not a redesign. This record links the authoritative specifications and evidence.

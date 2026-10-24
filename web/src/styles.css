@@ -1988,6 +1988,12 @@ footer p {
 @media(max-width:900px) { .site-header {align-items:flex-start;}.site-header nav { max-width:620px; }.history-summary-grid,.intelligence-metrics {grid-template-columns:repeat(2,minmax(0,1fr));}.postgame-score-grid {grid-template-columns:repeat(2,minmax(0,1fr));} }
 @media(max-width:600px) { .site-header { flex-direction:column; gap:14px; }.site-header nav { justify-content:flex-start; gap:4px; }.site-header .nav-item {padding:9px 7px;font-size:10px;}.historical-nav {width:calc(100% - 40px);gap:13px;font-size:9px;}.historical-nav>span {width:100%;}.intelligence-select {align-items:flex-start;flex-direction:column;gap:10px;}.intelligence-select select {width:100%;font-size:11px;}.history-summary-grid,.postgame-evidence,.domain-grid {grid-template-columns:1fr;}.intelligence-metrics {gap:10px;}.intelligence-metrics .panel {padding:17px 12px;}.history-summary-grid {gap:15px;}.history-summary-grid>div {padding-top:15px;border-top:1px solid #2d3931;}.history-summary-grid strong {font-size:23px;margin:10px 0;}.domain-card dl {grid-template-columns:1fr;gap:5px;}.domain-card dd {margin-bottom:10px;}.intelligence-table th,.intelligence-table td {padding:10px;}.postgame-score-grid strong {font-size:17px;}.intelligence-team-comparison {gap:10px;}.intelligence-team-comparison strong {font-size:23px;} }
 .current-intelligence-link { display:inline-flex;align-items:center;gap:8px;color:var(--green-soft);font:11px var(--mono);margin-bottom:16px; }
+.demo-controls { display:flex; flex-wrap:wrap; gap:16px; align-items:flex-end; margin:20px 0; }
+.demo-controls label { display:flex; flex-direction:column; gap:8px; font:12px var(--mono); max-width:100%; }
+.demo-controls input { box-sizing:border-box; width:180px; max-width:100%; padding:12px; border:1px solid #38483f; border-radius:5px; background:#111c17; color:var(--ink); font:13px var(--mono); }
+.demo-research-steps { padding-left:22px; }
+.demo-research-steps li { padding-left:4px; margin:20px 0; }
+.demo-research-steps h4 { color:var(--green-soft); }
 .observed-schedule {margin-top:28px;}
 .observed-schedule .intelligence-table td:nth-child(2) {min-width:200px;}
 .current-context-panel { border-color:#395141; }

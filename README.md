@@ -1,6 +1,6 @@
 # Fourth Down · NFL Predictive Intelligence
 
-A local NFL forecasting and evaluation system: real upcoming probabilities, immutable prediction history, current team/player context, postgame scoring, deterministic investigation and separately versioned challenger research. Python produces checksummed static JSON; React verifies and displays it. **The frozen schedule model remains operational. Nothing has been deployed or promoted.** Start with [the authoritative project record](docs/PROJECT.md), [handoff](docs/HANDOFF.md) and [G0–G4 gate report](docs/RELEASE_GATES.md).
+An Applied AI engineering portfolio demonstration: real upcoming probabilities, immutable prediction history, current team/player context, postgame scoring, deterministic investigation and separately versioned challenger research. Python produces checksummed static JSON; React verifies and displays it. **The frozen schedule model remains operational. Nothing has been deployed or promoted.** Start with [publication steps and the $0 hosting plan](docs/DEPLOYMENT.md). Model Intelligence includes an interactive seeded simulation and a cited, deterministic research walkthrough; Architecture explains how the design would scale commercially.
 
 ## Open locally
 
@@ -44,17 +44,17 @@ python scripts/recompute_validation.py
 cd web
 npm test
 npm run test:release
-VITE_BASE_PATH=/nfl-predictor/ npm run build
-VITE_BASE_PATH=/nfl-predictor/ npm run preview -- --port 4174 --strictPort
+VITE_BASE_PATH=/fourth-down/ npm run build
+VITE_BASE_PATH=/fourth-down/ npm run preview -- --port 4174 --strictPort
 # In another terminal, using installed Google Chrome:
-TEST_BASE_URL=http://127.0.0.1:4174/nfl-predictor/ npm run test:e2e
+TEST_BASE_URL=http://127.0.0.1:4174/fourth-down/ npm run test:e2e
 ```
 
 The release runner forbids estimator/scaler fitting and skips the original fit-repeatability test. Raw-data integration tests skip in a clean checkout; synthetic leakage/integrity tests remain active. Frontend tests verify artifact arithmetic and chronology independently. Browser tests cover desktop/mobile, deep links, errors, responsive layout and selected axe checks; they are not exhaustive accessibility certification. Production builds verify every public artifact, original freezes, registry, protocols, dependency notices and Action SHA pins.
 
 ## Separate challenger research
 
-The locked directive permits intentional local challenger experiments on approved data. `python -m ml.challenger --verify-repeat` runs only the fixed predeclared experiment in [CHALLENGER_PROTOCOL.md](docs/CHALLENGER_PROTOCOL.md), using the previously preserved hash-verified 2010–2023 CSV. It never downloads historical data or replaces the incumbent. This command fits separate research models and is deliberately excluded from release verification. Re-running is unnecessary to browse the saved experiment.
+Saved challenger experiments remain browsable under [CHALLENGER_PROTOCOL.md](docs/CHALLENGER_PROTOCOL.md). Do not rerun training or tune/promote models without explicit approval. The release workflow performs frozen inference and tests only; saved research results need no fitting.
 
 The actual challenger has ten features across seven schedule-derived domains, six chronological 2018–2023 diagnostic folds, independent prior-season calibration, seven domain ablations, baselines and season-week bootstrap intervals. Its 2023 Brier is 0.23228 versus the frozen incumbent 0.23704, with paired 95% difference interval crossing zero. Pooled historical results compare a contemporaneously refitted incumbent recipe, not the frozen model on its training years; calibration and training-window differences prevent a feature-only interpretation. 2023 was already used for model selection. All results remain research diagnostics.
 
@@ -66,6 +66,6 @@ The original five scripts remain unchanged in `legacy/`, with hashes matching `~
 
 The candidate coefficients/preprocessing/features, eight frozen files, 2023 replay, validation evidence and holdout protocol/exposure remain unchanged. The locked 2024–2025 period is **partially exposed**: previously observed legacy aggregate accuracy 0.5359, Brier 0.2492 and log loss 0.6915 remain disclosure only. No additional protected results were acquired or evaluated.
 
-The owner controls G0–G4 approvals. Local implementation, current-season scoring and separate bounded challenger research are authorized. Public deployment, recurring scheduled execution, paid services, account changes, personal-site changes, protected holdout use and model promotion require explicit approval. Workflow templates remain inactive and no remote workflow ran. Deterministic investigation is implemented; an LLM research adapter is only a bounded design.
+The latest Simplify and Ship instruction governs this portfolio release. Public deployment, recurring scheduling, personal-site changes, training, protected holdout use and model promotion still require explicit approval. The combined refresh/Pages template remains inactive. It retains original source evidence in Git and publishes one complete static snapshot after verification; no database, paid service or LLM call is required. Earlier RC1 findings remain historical evidence rather than a new release process.
 
-Current schedule attribution: [SportsDataverse](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nfl_ngs_schedules), repository MIT notice in `web/public/CURRENT_DATA_NOTICE.txt`. Historical/current context: [nflverse](https://github.com/nflverse/nflverse-data), historical schedule contribution by Lee Sharpe, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Transformations and predictions are derived modifications. Upstream redistribution/source-code licensing remain public-release review items. Original text team identifiers replace NFL/ESPN logo assets. Full dependency notices ship with the app; see [THIRD_PARTY.md](docs/THIRD_PARTY.md). No affiliation with NFL or nflverse. Educational research, not betting advice.
+Current schedule attribution: [SportsDataverse](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nfl_ngs_schedules), repository MIT notice in `web/public/CURRENT_DATA_NOTICE.txt`. Historical/current context: [nflverse](https://github.com/nflverse/nflverse-data), historical schedule contribution by Lee Sharpe, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Transformations and predictions are derived modifications. Project source is MIT; the cited public datasets and bundled dependencies retain their own terms and attribution. Original text team identifiers replace NFL/ESPN logo assets. Full dependency notices ship with the app; see [THIRD_PARTY.md](docs/THIRD_PARTY.md). No affiliation with NFL or nflverse. Educational research, not betting advice.

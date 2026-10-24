@@ -1205,7 +1205,7 @@ function Architecture({ data: d }: { data: Artifact }) {
             <div>
               <strong>Owner controlled</strong>
               <p>
-                Approve model promotion, unlock holdout evaluation, review source licensing, enable scheduled workflows and authorize publication.
+                Final public publication approval. Future model promotion, holdout evaluation and scheduled execution remain separate owner-controlled decisions.
               </p>
             </div>
           </div>
@@ -1214,7 +1214,7 @@ function Architecture({ data: d }: { data: Artifact }) {
             <div>
               <strong>Prepared, not activated</strong>
               <p>
-                Current refresh and GitHub Pages deployment templates. No cloud provisioning,
+                Manual local refresh and prepared GitHub Pages publication. No cloud provisioning,
                 schedules, paid APIs or personal website edits.
               </p>
             </div>
@@ -1233,16 +1233,15 @@ function Architecture({ data: d }: { data: Artifact }) {
       </div>
       <section className="panel research-design">
         <div>
-          <span className="eyebrow">BOUNDED POSTGAME RESEARCH</span>
-          <h2>Research assistance, with receipts.</h2>
+          <span className="eyebrow">PORTFOLIO SCOPE</span>
+          <h2>Small by design. Clear about scale.</h2>
           <p>
-            The local deterministic analyst separates verified result facts, measured forecast error, explanatory hypotheses and demonstrated model limitations. Each verified fact carries a source URL and observation time. Expanded injury, quarterback, weather and news evidence remains unavailable until its source and prediction-time provenance pass review.
+            This portfolio build demonstrates reproducible forecasting, immutable evidence, postgame evaluation and a static React interface. Model Intelligence includes a seeded outcome simulation and a deterministic research walkthrough using cited saved inputs. Neither validates accuracy, runs an LLM or changes probabilities.
           </p>
           <p>
-            An LLM may summarize cited evidence. It may not change the model’s
-            probabilities. Conflicts, stale reports and missing evidence remain
-            explicit.
+            A commercial service would need reliable refresh operations, durable versioned storage, monitoring and incident ownership, broader data-rights review, and prospective performance evidence. Those are future operating requirements, not capabilities claimed by this demonstration.
           </p>
+          <a href="#models">Try the Model Intelligence demonstration <ArrowUpRight size={13} /></a>
         </div>
         <span className="research-status">
           <LockKeyhole size={16} /> DETERMINISTIC / LOCAL
@@ -1251,11 +1250,9 @@ function Architecture({ data: d }: { data: Artifact }) {
       <section className="release-banner">
         <ShieldCheck size={24} />
         <div>
-          <strong>Local research build · provisional Tier A</strong>
+          <strong>Prepared for final publication approval</strong>
           <p>
-            Public release is NO-GO until the owner approves G0–G4 evidence and
-            licensing. The 2024–2025 period is partially exposed; candidate
-            evaluation remains locked under a separate frozen protocol.
+            Publication requires the owner’s final approval. The frozen model remains unchanged, and the partially exposed 2024–2025 holdout stays locked under its separate protocol. Simulations and research proposals are not real NFL outcomes or model promotion.
           </p>
         </div>
       </section>

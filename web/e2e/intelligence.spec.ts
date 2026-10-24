@@ -75,3 +75,28 @@ test("expired current probabilities stay hidden while immutable history remains 
   await expect(page.getByText("Original record",{exact:true})).toBeVisible();
   await expect(page.locator(".forecast-timeline li").first()).toContainText("win:");
 });
+
+test("interview demonstration reproduces synthetic trials and a cited human research proposal",async({page})=>{
+  await page.clock.install({time:new Date(operations.generated_at)});
+  await page.goto("./#models");
+  await page.getByText("Open simulation and research walkthrough",{exact:true}).click();
+  await page.getByRole("spinbutton",{name:"Simulation draws"}).fill("100000");
+  await page.getByRole("spinbutton",{name:"Simulation seed"}).fill("7");
+  await page.getByRole("button",{name:"Run synthetic trials"}).click();
+  const result=page.getByRole("region",{name:"Synthetic simulation result"});
+  await expect(result).toContainText("100,000 trials");
+  const first=await result.textContent();
+  await page.getByRole("button",{name:"Run synthetic trials"}).click();
+  expect(await result.textContent()).toBe(first);
+  await expect(page.getByText(/Synthetic outcomes do not validate model accuracy/)).toBeVisible();
+  for(const name of ["Plan research","Inspect saved inputs","Draft hypothesis","Prepare human proposal"])await page.getByRole("button",{name,exact:true}).click();
+  await expect(page.getByRole("region",{name:"Research walkthrough saved factors"})).toBeVisible();
+  await expect(page.getByText(/Human review proposal:/)).toContainText("2024–2025 holdout remains locked");
+  await expect(page.getByRole("link",{name:"Download cited forecast inputs"})).toHaveAttribute("href",/data\/current\/forecast-2026-[a-f0-9]{64}\.json$/);
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth)).toBe(true);
+  const axe=await new AxeBuilder({page}).withTags(["wcag2a","wcag2aa","wcag21aa"]).analyze();
+  expect(axe.violations.map(v=>v.id)).toEqual([]);
+  await page.getByRole("link",{name:"Architecture",exact:true}).click();
+  await expect(page.getByText("Prepared for final publication approval",{exact:true})).toBeVisible();
+  await expect(page.getByText(/Public release is NO-GO until/)).toHaveCount(0);
+});
