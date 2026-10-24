@@ -33,7 +33,7 @@ test("real artifact, selection, deep links, responsive pages and accessibility",
     "Prediction explanation",
     "Model performance",
     "Architecture",
-    "Matchups",
+    "2023 Matchups",
   ]) {
     await page.getByRole("link", { name: label, exact: true }).click();
     await expect(page.getByRole("main")).toBeVisible();
@@ -50,7 +50,7 @@ test("real artifact, selection, deep links, responsive pages and accessibility",
     const accessibility = await new AxeBuilder({ page })
       .withTags(["wcag2a", "wcag2aa", "wcag21aa"])
       .analyze();
-    if (label !== "Matchups") {
+    if (label !== "2023 Matchups") {
       await page.screenshot({
         path: `../artifacts/corrective-${label.toLowerCase().replaceAll(" ", "-")}-${testInfo.project.name}.png`,
         fullPage: true,
@@ -78,7 +78,7 @@ test("failed artifact request shows explicit unavailable state", async ({
   await page.route("**/data/demo.json", (route) =>
     route.fulfill({ status: 503, body: "Unavailable" }),
   );
-  await page.goto("./");
+  await page.goto("./#matchups");
   await expect(page.getByRole("alert")).toContainText("Forecasts unavailable");
   await expect(page.getByText("58.8%")).toHaveCount(0);
 });

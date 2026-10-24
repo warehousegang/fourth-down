@@ -11,6 +11,6 @@ web/dist/
 playwright-report/
 test-results/
 *.tsbuildinfo
-# Only the checksummed 2023 replay is part of the corrective source package.
+# Preserve the frozen 2023 replay; current/ contains separately versioned forecast JSON.
 /web/public/data/*.json
 !/web/public/data/demo.json

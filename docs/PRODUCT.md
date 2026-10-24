@@ -1,13 +1,26 @@
-# Product definition — Fourth Down
-Local research build: provisional Tier A. Owner: Thomas. Engineering evidence date: 2026-10-24.
+# PRD — Fourth Down current NFL forecasting
 
-## Users and scope
-For an interviewer, applied ML engineer, or NFL researcher: explore historical matchups, audit model factors, compare validation metrics, and trace predictions to source data. Deliver a local React/TypeScript dashboard and an offline Python pipeline. No betting, live odds, personalized advice, paid APIs, accounts, database, autonomous research, or public release in this scope.
+Revision 2, 2026-10-24. Material scope change authorized by Thomas: locally runnable upcoming current-week forecasts alongside the unchanged 2023 retrospective analysis. Governed by the supplied Idea-to-Production Stage 0–3 artifacts and G0–G3 human gates. Local research remains provisional Tier A; public/automated operation requires reassessment. The separate full OS source remains unavailable, so no broader framework conformance is claimed.
 
-The demonstration uses 2023 regular-season historical replay. Every prediction is labeled retrospective. It is generated today from historical pregame features, not claimed to have been published in 2023. The daily forecast cutoff is 00:00 America/New_York on game day. Only results from strictly earlier calendar days enter features; schedule inputs are retrospectively corrected and not vintage snapshots. Probability is conditional on a non-tied outcome. The original legacy baseline previously exposed aggregate 2024–2025 metrics; this period is partially exposed. No further candidate evaluation without a frozen candidate/protocol and explicit approval.
+## Product and users
+An interviewer or NFL researcher can open Current Week Forecasts, see upcoming matchups and model probabilities, inspect every input/contribution, and distinguish forecast generation, observation and kickoff times. Historical analysis retains its own route and validation evidence. The current-season score is an application of the frozen model, not a new evaluation or model-selection experiment.
 
-## Acceptance
-Reproduce the original 2023 model; evaluate one justified schedule-only candidate and ablations on identical observations; show actual metrics and model-generated probabilities; reconstruct each probability from its explanation; build/test all four screens; work at mobile widths and a Pages subpath; fail explicitly on unavailable or invalid data. Recurring infrastructure target $0; no deployment.
+## Scope and forecast timing
+Retrieve only a documented current-season schedule asset (initial supported season: 2026), including final results, from SportsDataverse's per-season NFL Next Gen Stats schedule release. Do not retrieve the combined nflverse schedule or any 2024–2025 data. Preserve nflverse attribution on historical analysis. Persist checksummed snapshots locally, normalize a narrow field whitelist, and publish versioned static JSON locally.
 
-## Assumptions and unresolved decisions
-The named Idea-to-Production Operating System source was not supplied or found in the inspected local materials. The assignment's Stage 0–3 artifacts, Tier A classification and G0–G3 human gates govern this build; full framework conformance remains unverified. Public data redistribution, branding, source snapshot freshness, release tier, and future live forecast cadence require owner review. Validation selection is exploratory, not an unbiased estimate of future performance.
+Each forecast uses only this season's final results with scheduled game dates strictly earlier than the target date and confirmed observed-final evidence before its information cutoff. The cutoff is the earlier of the decision time and 00:00 America/New_York on the target game date. A first observation after that cutoff cannot prove earlier availability: mark affected predictions unavailable. Do not infer a completion timestamp from kickoff. New snapshots can establish conservative observed-final bounds for later forecasts. Future and same-day scores never enter state. The previous season, injuries, player news, weather, market odds and new strength estimates are excluded.
+
+Reuse the frozen Record.values formulas and score function without modifying their files, coefficients, absorbed training scaler, feature order, season reset, tie handling, rest cap or decision threshold. Week 1 uses the frozen priors. Byes create no games; rest uses actual elapsed calendar days. A changed kickoff/date requires a newly versioned forecast. Unknown dates/times and postponed games have no guessed probability. Missing or unconfirmed historical results fail closed for affected teams.
+
+## Acceptance criteria
+- AC1: One explicit command fetches only the allowed current-season asset, records URL/retrieval/source-update/checksums, and creates forecasts without training or touching the 2024–2025 protocol.
+- AC2: All source rows are season-checked before result normalization. Production coverage, identity, unique matchup IDs, team aliases, dates, scores and statuses are validated. Schema/coverage failures never promote a new artifact.
+- AC3: Leakage tests perturb future/same-day results, incomplete statuses and observations after cutoff; earlier forecasts stay unchanged or become explicitly unavailable. Independent parity tests reproduce the frozen feature definitions.
+- AC4: Week 1, byes, reschedules, postponements, missing outcomes, missing/unconfirmed kickoffs and season boundaries have explicit deterministic behavior and warnings.
+- AC5: Every available forecast carries stable matchup ID, source game ID, kickoff, cutoff, generation time, snapshot/model/code lineage, per-team feature values, contributions and both probabilities. Same inputs/timestamps produce identical bytes. Changed input creates a new version; old versions remain.
+- AC6: Current Week Forecasts is the default screen. It loads independently of historical data, displays freshness and missing-data/model warnings, and validates probabilities against the unchanged frozen coefficients before rendering. Past-kickoff and expired snapshots cannot masquerade as upcoming forecasts.
+- AC7: Existing historical UI/ML tests, current-flow tests, production-subpath checks and immutable artifact checks pass. No holdout evaluation, fitting, deployment, purchases or personal-site edits occur.
+- AC8: A disabled, SHA-pinned Actions refresh design is bounded, writes only a downloadable candidate artifact, and has no schedule, push, publication or deployment permission.
+
+## Non-goals and success measures
+No retraining, tuning, automatic evaluation, paid data, persistent backend, roster/news enrichment, betting advice or automatic publication. Target recurring infrastructure cost remains $0 subject to GitHub account limits. Success means verified artifact lineage and all eligible upcoming games either scored or accompanied by a specific unavailability reason, with no invented data or performance claims. Timely refresh is a manual responsibility in this slice; source freshness is visible, not guaranteed.

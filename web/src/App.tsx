@@ -5,6 +5,7 @@ import {
   ArrowUpRight,
   BarChart3,
   Check,
+  Clock3,
   ChevronRight,
   CircleHelp,
   Database,
@@ -21,8 +22,10 @@ import {
 import { loadArtifact, type Artifact, type Game } from "./contracts";
 import { team } from "./teams";
 import exposure from "../../docs/HOLDOUT_EXPOSURE.json";
+import { CurrentForecasts } from "./CurrentForecasts";
 
 const routes = [
+  "current",
   "matchups",
   "explanation",
   "performance",
@@ -30,7 +33,8 @@ const routes = [
 ] as const;
 type Route = (typeof routes)[number];
 const nav = [
-  ["matchups", "Matchups", Trophy],
+  ["current", "Current Week Forecasts", Clock3],
+  ["matchups", "2023 Matchups", Trophy],
   ["explanation", "Prediction explanation", Target],
   ["performance", "Model performance", BarChart3],
   ["architecture", "Architecture", Layers3],
@@ -38,7 +42,7 @@ const nav = [
 function locationState() {
   const [path, query = ""] = window.location.hash.slice(1).split("?");
   return {
-    route: (routes.includes(path as Route) ? path : "matchups") as Route,
+    route: (routes.includes(path as Route) ? path : "current") as Route,
     game: new URLSearchParams(query).get("game"),
   };
 }
@@ -72,6 +76,7 @@ export function App() {
   const [week, setWeek] = useState(4);
   const [attempt, setAttempt] = useState(0);
   useEffect(() => {
+    if (location.route === "current") return;
     let active = true;
     setError("");
     loadArtifact()
@@ -85,7 +90,7 @@ export function App() {
     return () => {
       active = false;
     };
-  }, [attempt]);
+  }, [attempt, location.route === "current"]);
   useEffect(() => {
     const handler = () => setLocation(locationState());
     window.addEventListener("hashchange", handler);
@@ -123,7 +128,7 @@ export function App() {
         Skip to content
       </a>
       <header className="site-header">
-        <a className="brand" href="#matchups" aria-label="Fourth Down home">
+        <a className="brand" href="#current" aria-label="Fourth Down home">
           <span className="brand-mark">
             4<span>↗</span>
           </span>
@@ -141,7 +146,7 @@ export function App() {
               key={id}
               aria-label={label}
               className={location.route === id ? "nav-item active" : "nav-item"}
-              href={`#${id}${selected ? `?game=${selected.id}` : ""}`}
+              href={`#${id}${id !== "current" && selected ? `?game=${selected.id}` : ""}`}
               aria-current={location.route === id ? "page" : undefined}
             >
               <Icon size={18} />
@@ -158,11 +163,11 @@ export function App() {
             <strong>{nav.find((n) => n[0] === location.route)?.[1]}</strong>
           </span>
           <span className="replay-badge">
-            <span /> 2023 HISTORICAL REPLAY
+            <span /> {location.route === "current" ? "UPCOMING · STATIC FORECAST" : "2023 HISTORICAL REPLAY"}
           </span>
         </header>
         <main id="main-content" tabIndex={-1}>
-          {error ? (
+          {location.route === "current" ? <CurrentForecasts /> : error ? (
             <section className="empty-state" role="alert">
               <CircleHelp size={36} />
               <h1>Forecasts unavailable</h1>
@@ -1114,6 +1119,12 @@ function Architecture({ data: d }: { data: Artifact }) {
           </div>
         ))}
       </section>
+      <section className="panel current-limitations">
+        <PanelTitle label="CURRENT-SEASON PATH" title="New games. The same frozen model." />
+        <p>The stages above describe the historical model build. Current forecasts fetch a separate, season-specific SportsDataverse schedule. Only earlier-date results observed as final before each cutoff enter team state. The frozen feature formulas and coefficients produce a versioned static artifact without fitting a model.</p>
+        <p>Missing results, unconfirmed kickoffs and postponed games show an unavailable reason. Source timestamps, exact inputs and artifact checksums appear on the current screen. Current-season performance has not been established.</p>
+        <a href="#current">Inspect Current Week Forecasts <ArrowUpRight size={13} /></a>
+      </section>
       <div className="two-column">
         <section className="panel">
           <PanelTitle
@@ -1157,8 +1168,9 @@ function Architecture({ data: d }: { data: Artifact }) {
             <div>
               <strong>Automated when run locally</strong>
               <p>
-                Data validation, temporal features, model fitting, metrics,
-                static artifacts, schema checks and tests.
+                Current-season acquisition, pre-cutoff state, frozen-model scoring,
+                static artifacts, schema checks and tests. Training and holdout
+                evaluation remain outside the authorized refresh path.
               </p>
             </div>
           </div>
@@ -1177,7 +1189,7 @@ function Architecture({ data: d }: { data: Artifact }) {
             <div>
               <strong>Prepared, not activated</strong>
               <p>
-                GitHub Pages deployment template. No cloud provisioning,
+                Current refresh and GitHub Pages deployment templates. No cloud provisioning,
                 schedules, paid APIs or personal website edits.
               </p>
             </div>

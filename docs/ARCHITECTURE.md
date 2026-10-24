@@ -1,17 +1,24 @@
-# Architecture
+# Architecture — current forecasts and historical analysis
+
 ```mermaid
 flowchart LR
- A[nflverse schedules] --> B[Explicit acquisition: whitelist seasons and fields]
- B --> C[Ignored local snapshot + SHA256 manifest]
- C --> D[Temporal features: earlier days only]
- D --> E[Training 2010–2022 / validation 2023]
- E --> F[Versioned coefficients + evaluation]
- F --> G[Separate deterministic forecast generation]
- G --> H[Schema-validated static JSON]
- H --> I[React / TypeScript / Vite]
- I -. human approval .-> J[GitHub Pages project]
- K[Future cited research] -. facts only, no probability edits .-> I
+ A[2026-only NGS schedule asset] --> B[Bounded explicit fetch + season/coverage checks]
+ B --> C[Immutable local snapshot + provenance]
+ C --> D[Observed-final evidence + pre-cutoff state]
+ D --> E[Frozen Record.values + score]
+ F[Unchanged model freeze] --> E
+ E --> G[Versioned current JSON + latest pointer]
+ G --> H[Current Week Forecasts]
+ I[Unchanged 2023 JSON] --> J[Historical screens]
+ H --> K[Static React / GitHub Pages compatible build]
+ J --> K
+ K -. separate human approval .-> L[Publication]
 ```
-Training, forecast generation, and rendering are separate commands/components. Source data is untrusted: whitelist columns; reject duplicate IDs, incomplete outcomes, invalid dates and protected seasons. Fitting statistics use training only. Generated artifacts carry source/model/feature identifiers and timestamps. Browser validates the contract before rendering; no raw HTML or external requests besides its own static JSON. Model explanations sum coefficient × feature contributions in log-odds; they are not causal effects.
 
-No database or application server. Raw data and model intermediates are ignored. The checksummed compact 2023 demo is tracked for clean-checkout builds; public redistribution still requires G3 approval. The additive holdout protocol and exposure record are distinct from the unchanged candidate artifacts. CI is manual-only, bounded and does not train/download data or deploy. Deployment workflow is a disabled template. Hash routes support refresh. Vite base is configurable. Research is a documented, unimplemented boundary.
+The current adapter is separate from the historical loader, feature-builder guards, training and holdout protocol. It imports only frozen feature definitions/state formulas and deterministic scoring; it never imports training or relabels protected seasons. Current acquisition whitelists a single current-season URL. No all-season fallback exists. Every raw row must match the requested non-protected season before scores are normalized; only REG enters state. Bounded requests, schema/coverage validation and snapshot checksums form the input trust boundary.
+
+Source FINAL is evidence of completion by observation time, not an exact end timestamp. Immutable earlier snapshots establish first-observed bounds only for identical result/date/team records. Missing prior records, uncertain completion, delayed results or unknown historical dates cause affected forecasts to be unavailable. The cutoff is min(decision time, target Eastern midnight); state also excludes target-day results. Rescheduled rows retain a stable source game-key ID; changed schedule fingerprints produce new versions and warnings. Stale snapshots and kickoff-passed games are visibly invalidated in the browser.
+
+Versioned JSON and an atomic latest pointer are separate from the frozen historical demo. Failed refreshes leave the last good version intact, with age shown; they never manufacture current data. The browser verifies content hash, season, time ordering, exact frozen model and feature arithmetic before displaying probabilities. Forecast records carry no target outcomes. All rendering remains static, uses text team identifiers and requires no keys or live browser data-provider calls. Current and historical load/error states are independent.
+
+A disabled refresh workflow may later run bounded Python scoring and upload one candidate artifact using read-only repository permissions. It has no cron or deployment step. Manual review/promotion remains necessary; $0 depends on account/runner quotas. Existing Pages deployment remains disabled. No personal-site integration is authorized.

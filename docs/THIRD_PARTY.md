@@ -9,3 +9,6 @@ The dashboard and notices retain **nflverse schedules / Lee Sharpe**, source lin
 All 32 ESPN-hosted team PNGs were removed from public assets and excluded from Git and dist. Historical URLs and hashes remain in TEAM_ASSETS.json, explicitly marked retired. An ignored local artifacts/retired-team-logos/ directory preserves the previous files only; it is not a release input. Matchups now display original CSS text identifiers. No official team mark or third-party font is shipped. Lucide UI icons are covered by the bundled notices.
 
 The notices do not grant a license to the project's own source. Thomas must choose a source-code license and approve the data/attribution package before public publication. Local Git inclusion is authorized; public redistribution is not.
+
+## Current forecast addition
+No dependency or lockfile changed. The new per-season source has a separate full MIT notice at web/public/CURRENT_DATA_NOTICE.txt, linked from the Current Week Forecasts footer and verified in the static output. It attributes SportsDataverse and NFL Next Gen Stats and labels forecasts as derived work. Historical nflverse/Lee Sharpe attribution and existing dependency notices remain byte-identical. The upstream rights/public-release caveat still applies; this is no blanket grant of NFL marks or data rights.

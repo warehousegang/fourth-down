@@ -90,7 +90,7 @@ p {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 32px;
+  gap: 20px;
   height: 88px;
   border-bottom: 1px solid #23282b;
 }
@@ -1855,4 +1855,64 @@ footer p {
       color 0.15s,
       border-color 0.15s;
   }
+}
+
+/* Current forecasts: a separate, dated snapshot from historical analysis. */
+.current-heading h2 { margin: 25px 0 8px; font-size: 22px; }
+.current-provenance { display: grid; grid-template-columns: 1.15fr 1.15fr .8fr; gap: 22px; }
+.current-provenance .eyebrow { display: flex; align-items: center; gap: 7px; margin-bottom: 12px; }
+.current-provenance strong { font: 600 16px var(--mono); line-height: 1.6; }
+.current-provenance p { grid-column: 1 / -1; color: #b7bcc9; margin: 0; font-size: 12px; }
+.current-warning { padding: 13px 16px; color: #ebd6a1; background: #252015; border: 1px solid #655536; border-radius: 8px; line-height: 1.6; font-size: 13px; }
+.current-warning.small { font-size: 12px; margin: 14px 0; }
+.current-context { color: #b7bcc9; margin: 24px 0; max-width: 900px; }
+.current-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
+.current-card { margin: 0; min-width: 0; }
+.current-card-top { display: flex; justify-content: space-between; gap: 12px; font: 600 10px var(--mono); color: #9cdbb4; line-height: 1.6; }
+.current-teams { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; text-align: center; margin: 28px 0 14px; }
+.current-code { display: inline-flex; justify-content: center; align-items: center; background: #0a1712; color: #7defad; border: 1px solid #3c6d4d; border-radius: 12px; width: 80px; height: 72px; font: 700 28px var(--mono); }
+.current-teams h3 { font: 700 21px var(--mono); text-transform: uppercase; margin: 14px 0 8px; }
+.current-teams small, .current-at { color: #b0b6c4; font: 600 10px var(--mono); }
+.current-at { font-size: 14px; }
+.current-venue { text-align: center; font-size: 12px; }
+.current-probabilities { padding-top: 20px; }
+.current-probabilities > div:first-child { display: grid; grid-template-columns: auto 1fr 1fr auto; gap: 10px; align-items: center; font: 600 11px var(--mono); }
+.current-probabilities strong { color: #9dd5e9; font: 700 32px var(--mono); }
+.current-probabilities strong + strong { color: #7defad; text-align: right; }
+.current-probability-bar { background: #00e676; border-radius: 5px; height: 6px; margin: 15px 0 10px; overflow: hidden; }
+.current-probability-bar span { display: block; background: #9dd5e9; height: 100%; border-right: 3px solid #111; }
+.current-probabilities small { color: #a6aebb; font: 500 9px var(--mono); }
+.current-unavailable { background: #211c16; padding: 16px; border-radius: 8px; color: #ebd6a1; margin-top: 20px; }
+.current-unavailable p { font-size: 13px; margin-bottom: 0; }
+.current-cutoff { font: 500 10px/1.8 var(--mono); color: #a6aebb; margin-top: 20px; overflow-wrap: anywhere; }
+.current-inputs { border-top: 1px solid #30373b; padding-top: 16px; margin-top: 20px; }
+.current-inputs summary { color: #87e6ad; cursor: pointer; font-size: 13px; }
+.current-inputs summary svg { vertical-align: middle; margin-left: 8px; }
+.current-inputs p { font-size: 12px; color: #b7bcc9; }
+.current-feature-table { overflow-x: auto; }
+.current-feature-table th, .current-feature-table td { padding: 12px 7px; font-size: 11px; }
+.current-feature-table th { color: #b7bcc9; }
+.current-limitations { margin-top: 28px; }
+.current-limitations li { color: #b7bcc9; line-height: 1.8; margin: 8px 0; }
+.current-limitations a { color: #87e6ad; }
+.current-footer details { width: 100%; overflow-wrap: anywhere; }
+.current-footer summary { cursor: pointer; }
+.current-footer details p { font: 500 10px/1.8 var(--mono); }
+.current-reload { display: inline-flex; align-items: center; gap: 8px; padding: 10px 12px; background: #14221b; color: #87e6ad; border: 1px solid #335640; border-radius: 5px; font-size: 11px; cursor: pointer; }
+@media (max-width: 1100px) {
+  .site-header .nav-item { padding: 10px; }
+  .site-header .nav-item span { display: none; }
+}
+@media (max-width: 700px) {
+  .current-grid, .current-provenance { grid-template-columns: 1fr; }
+  .current-provenance { gap: 18px; }
+  .current-heading h2 { font-size: 19px; }
+  .current-card-top { font-size: 9px; }
+  .current-probabilities strong { font-size: 28px; }
+  .current-teams h3 { font-size: 18px; }
+  .current-context { font-size: 13px; }
+  .current-limitations ul { padding-left: 20px; }
+  .site-header { gap: 8px; }
+  .site-header nav { gap: 1px; }
+  .site-header .nav-item { padding: 9px; }
 }

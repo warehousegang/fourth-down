@@ -24,12 +24,27 @@ assert(demo.games.every(g => g.season === 2023));
 assert.equal(demo.evaluation.holdout_status, "locked");
 assert.equal(protocol.execution_authorized, false);
 assert.equal(json("docs/HOLDOUT_EXPOSURE.json").status, "partially-exposed");
-assert.deepEqual(readdirSync(resolve(root, "web/public")).sort(), ["THIRD_PARTY_NOTICES.txt", "data"]);
-assert.deepEqual(readdirSync(resolve(root, "web/public/data")), ["demo.json"]);
+assert.deepEqual(readdirSync(resolve(root, "web/public")).sort(), ["CURRENT_DATA_NOTICE.txt", "THIRD_PARTY_NOTICES.txt", "data"]);
+assert.deepEqual(readdirSync(resolve(root, "web/public/data")).sort(), ["current", "demo.json"]);
+const currentPath = "web/public/data/current/";
+const pointer = json(currentPath + "latest.json");
+assert.match(pointer.sha256, /^[a-f0-9]{64}$/);
+assert(Number.isInteger(pointer.season) && pointer.season >= 2026);
+assert.equal(pointer.file, `forecast-${pointer.season}-${pointer.sha256}.json`);
+assert.equal(sha(currentPath + pointer.file), pointer.sha256);
+for (const name of readdirSync(resolve(root, currentPath))) {
+  if (name === "latest.json") continue;
+  assert.match(name, /^forecast-20\d{2}-[a-f0-9]{64}\.json$/);
+  const artifact = json(currentPath + name);
+  assert(artifact.season >= 2026 && artifact.mode === "current-forecast");
+  assert.equal(name, `forecast-${artifact.season}-${sha(currentPath + name)}.json`);
+  assert.deepEqual(artifact.model, original.model);
+  assert(artifact.games.every(g => g.season === artifact.season));
+}
 const lock = json("docs/ACTIONS_LOCK.json");
 const pages = ["pages.yml.disabled", "pages.yml"].filter(name => existsSync(resolve(root, ".github/workflows", name)));
 assert.equal(pages.length, 1, "Keep exactly one Pages template/workflow; activation requires separate owner approval");
-for (const workflow of ["ci.yml", ...pages]) {
+for (const workflow of readdirSync(resolve(root, ".github/workflows")).filter(name => /\.yml(?:\.disabled)?$/.test(name))) {
   const content = readFileSync(resolve(root, ".github/workflows", workflow), "utf8");
   for (const match of content.matchAll(/uses:\s*([^\s#]+)/g)) {
     const [action, ref] = match[1].split("@");

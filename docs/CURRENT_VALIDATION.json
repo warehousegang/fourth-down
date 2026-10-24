@@ -1,0 +1,232 @@
+{
+  "reviewed_on": "2026-10-24",
+  "scope": "Current-season local inference and UI only; no fitting/tuning, protected-season acquisition/evaluation, remote write, deployment, purchase or personal-site change",
+  "baseline_commit": "1932001",
+  "candidate_id": "schedule-v1-741cf41752",
+  "current_artifact": {
+    "file": "forecast-2026-11d4518833ef149e9a4e6b239094468dbc90f516be058bce02d40d4141618445.json",
+    "generated_at": "2026-10-24T13:43:14.289900+00:00",
+    "schema_version": 1,
+    "season": 2026,
+    "sha256": "11d4518833ef149e9a4e6b239094468dbc90f516be058bce02d40d4141618445"
+  },
+  "current_snapshot_sha256": "8ca053cf9a54ca3f4e980ec733e89ff88ba115946a05752ef91b64a674ba202b",
+  "current_source": {
+    "asset_id": 668960439,
+    "license_url": "https://github.com/sportsdataverse/sportsdataverse-data/blob/main/LICENSE",
+    "raw_sha256": "1922b31983e74a7c53c661084c7d68e70bd9ea2ffd63ff410aaa754dc5023d9c",
+    "retrieved_at": "2026-10-24T13:38:08.048809+00:00",
+    "schema_version": 1,
+    "season": 2026,
+    "source_name": "SportsDataverse / NFL Next Gen Stats schedules",
+    "source_updated_at": "2026-10-23T11:47:43+00:00",
+    "source_url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nfl_ngs_schedules/ngs_schedule_2026.csv"
+  },
+  "as_of": "2026-10-24T13:43:14.289319+00:00",
+  "valid_until": "2026-10-25T11:47:43+00:00",
+  "season": 2026,
+  "week": 7,
+  "available_games": 13,
+  "total_games": 13,
+  "pipeline_sha256": {
+    "ml/current.py": "51b493b57669780876f7b6ca5d8fe9e77577770e40e0c6437a2a2d403be8c9a3",
+    "ml/current_source.py": "1dd40b9cfb9e8d5522e7cfeff0bf65aa2d9d2b72b6cdeaf2ccbc3be68eabc9c4"
+  },
+  "protected_file_sha256_unchanged": {
+    "web/public/data/demo.json": "41c3ad0d8d2997238b464f196b700ce328f38eb6e93831a18d504c7ef6aa24a9",
+    "web/public/THIRD_PARTY_NOTICES.txt": "f6daec4cdeeadeb95ecf930b8f1ea9b704574d5ad5bfe64a6806d45287dad54c",
+    "web/package-lock.json": "2ad2822b75b6c6c8c5e4a7cb50416857f5bb037a6decb6f0a62eea811d237c9d",
+    "docs/FROZEN_MODEL.json": "2896a526ed8035b1674a6beb3c8d27c76ba4b3f466309bfeb729c6ddbf80f957",
+    "docs/HOLDOUT_PROTOCOL_FREEZE.json": "61fbf6127a62a3240686b12ab3b0016f8e60feb2260bed577e9550ba953d4020",
+    "docs/HOLDOUT_EXPOSURE.json": "686cbb616ee7d828879c825c9b12c84c269f789374d8aee0f46718950a1d7d4c",
+    "legacy/SHA256.json": "ad182b6c4f80cbbb8ee283273b92e6b3bbd117b9b5f13c367f6cd695fc0250cc",
+    "ml/data.py": "7523ad95de1742fcc067e75c112845c76ba65ffb15486dabe980beb935375873",
+    "ml/features.py": "64279b7ca027d9477f1780a83ff04d19eea837e5d219b4786b927bff65366b0a",
+    "ml/train.py": "18ffadaca7ca5dcc6e4e7c8df2816c0c7dc173947792b1e07fddc094aca18383",
+    "ml/forecast.py": "57583405dc336e63f2c016da8d1d2d9b3e4831006c1d4204a31fd9240238ce04",
+    "docs/ML_EVALUATION.md": "303d9e481d3fc1a6d054580863c723d31c6522158fbbd3e6a7a6af82740f2067",
+    "docs/FEATURES.md": "39feebb3aea483459a97176747d17fa0d6929a6fc3c7a2d1d53bad8dbb361eb8",
+    "requirements.txt": "23df77316f3e66a8da2a7dfee8ae9dae342265f297a0d63d335cb1f33ff0d253",
+    "requirements-lock.txt": "107ccd3fe0f7cfa5846e9dd7af09b8cd15ee4872fd69d355f262da30c37559d8",
+    "docs/HOLDOUT_PROTOCOL.md": "ed08d57acb7efac02930848608573cf3be0e4f261ffa553868965b4b57fa56f5",
+    "docs/CORRECTIVE_VALIDATION.json": "a6a301344cfe3d7187cdff62de07766f11e014f263263af0948e49bfb3f7d6cb"
+  },
+  "holdout_status": "partially-exposed; candidate evaluation locked",
+  "holdout_execution_authorized": false,
+  "current_independent_check": {
+    "forecast_sha256": "11d4518833ef149e9a4e6b239094468dbc90f516be058bce02d40d4141618445",
+    "raw_sha256": "1922b31983e74a7c53c661084c7d68e70bd9ea2ffd63ff410aaa754dc5023d9c",
+    "season": 2026,
+    "week": 7,
+    "source_regular_season_games": 272,
+    "available_forecasts": 13,
+    "factors_checked": 52,
+    "max_probability_error": 1.1102230246251565e-16,
+    "max_factor_error": 0.0,
+    "method": "Independent 2026 raw CSV queries and direct formulas; no production state/scoring functions, fitting, holdout reads or accuracy evaluation"
+  },
+  "current_cli_reproduction": {
+    "byte_identical_cli_reproduction": true,
+    "artifact": "forecast-2026-11d4518833ef149e9a4e6b239094468dbc90f516be058bce02d40d4141618445.json",
+    "as_of": "2026-10-24T13:43:14.289319+00:00",
+    "generated_at": "2026-10-24T13:43:14.289900+00:00",
+    "snapshot": "8ca053cf9a54ca3f4e980ec733e89ff88ba115946a05752ef91b64a674ba202b",
+    "output": {
+      "artifact": "/Users/thomas/Documents/ChatGPT/nfl predictor/web/public/data/current/forecast-2026-11d4518833ef149e9a4e6b239094468dbc90f516be058bce02d40d4141618445.json",
+      "snapshot": "/Users/thomas/Documents/ChatGPT/nfl predictor/data/current/2026/snapshot-8ca053cf9a54ca3f4e980ec733e89ff88ba115946a05752ef91b64a674ba202b.json",
+      "season": 2026,
+      "week": 7,
+      "available": 13,
+      "games": 13
+    }
+  },
+  "checks": {
+    "python": {
+      "passed": 48,
+      "skipped": 1,
+      "skip_reason": "Prohibited training-repeatability test; estimator/scaler fit methods blocked"
+    },
+    "frontend_unit": 29,
+    "release_packaging": 7,
+    "typescript_build": "passed",
+    "production_base": "/nfl-predictor/",
+    "browser_root": {
+      "passed": 8,
+      "url": "http://127.0.0.1:4175/"
+    },
+    "browser_production_subpath": {
+      "passed": 8,
+      "url": "http://127.0.0.1:4174/nfl-predictor/"
+    },
+    "browser_scope": "Desktop Chrome and iPhone viewport, current/history navigation, failed loads, feature details, downloads/notices, deep links; no uncaught errors, overflow or axe violations under selected rules; viewport screenshots visually reviewed",
+    "clean_source_package": {
+      "status": "pending"
+    },
+    "python_license_notices": 41,
+    "frontend_license_notices": 5,
+    "new_dependencies": 0,
+    "official_logos_shipped": 0
+  },
+  "validation_2023": {
+    "recomputed": {
+      "coin": {
+        "n": 272,
+        "accuracy": 0.5551470588235294,
+        "brier": 0.25,
+        "log_loss": 0.6931471805599453
+      },
+      "home": {
+        "n": 272,
+        "accuracy": 0.5551470588235294,
+        "brier": 0.24696308000779646,
+        "log_loss": 0.6870610591071165
+      },
+      "schedule": {
+        "n": 272,
+        "accuracy": 0.5882352941176471,
+        "brier": 0.23704473172141693,
+        "log_loss": 0.6657815064516025
+      }
+    },
+    "brier_difference": {
+      "mean": -0.009918348286379495,
+      "low": -0.024714685176909074,
+      "high": 0.006381807129210394,
+      "unit": "week",
+      "replicates": 2000
+    },
+    "all_272_forecasts_and_1088_factors_match": true,
+    "source_sha256": "20f573837dac7d9ea41dade07b165de6164b3370d60e49d5242e5255cabb7d01",
+    "demo_sha256": "41c3ad0d8d2997238b464f196b700ce328f38eb6e93831a18d504c7ef6aa24a9",
+    "original_script_checks": {
+      "explore.py": {
+        "manifest_matches_original": true,
+        "manifest_matches_legacy": true
+      },
+      "baseline.py": {
+        "manifest_matches_original": true,
+        "manifest_matches_legacy": true
+      },
+      "features.py": {
+        "manifest_matches_original": true,
+        "manifest_matches_legacy": true
+      },
+      "test_features.py": {
+        "manifest_matches_original": true,
+        "manifest_matches_legacy": true
+      },
+      "train.py": {
+        "manifest_matches_original": true,
+        "manifest_matches_legacy": true
+      }
+    }
+  },
+  "security": {
+    "source_scan": {
+      "source_files_scanned": 85,
+      "credential_pattern_matches": [],
+      "method": "Targeted private-key/AWS/GitHub/OpenAI token patterns; not exhaustive secret detection",
+      "protected_files_unchanged": 17
+    },
+    "npm_audit": {
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "high": 0,
+      "critical": 0,
+      "total": 0
+    },
+    "python_packages_audited": 41,
+    "python_known_vulnerabilities": 0,
+    "python_skipped": [],
+    "pip_check": "No broken requirements found"
+  },
+  "automation": {
+    "refresh_file": ".github/workflows/current-refresh.yml.disabled",
+    "enabled": false,
+    "scheduled": false,
+    "remote_executed": false,
+    "permissions": "contents: read",
+    "timeout_minutes": 10,
+    "artifact_retention_days": 1,
+    "deployment_enabled": false
+  },
+  "limitations": [
+    "First final observation after cutoff cannot prove earlier availability; preserve prior same-season snapshots.",
+    "Initial source is over 24h old; visible warning and expiry before first upcoming kickoff.",
+    "Current-season predictive performance is unmeasured; no new performance claim.",
+    "No hosted Linux execution or clean Python dependency installation; existing two Zod annotation warnings.",
+    "Full separate OS source unavailable; upstream public rights/source-code license/account-cost approval remains open."
+  ],
+  "gates": {
+    "local_review": "GO",
+    "automatic_refresh": "NO-GO pending approval and retention/account review",
+    "public_release": "NO-GO",
+    "additional_holdout_evaluation": "NO-GO"
+  },
+  "dist_total_bytes": 810879,
+  "evidence_sha256": {
+    "artifacts/current/after.json": "e217b2fbc62f04b8223f9d22bc2bac1d54bd97e1ca4cfdc4891c0c23e56541c7",
+    "artifacts/current/before.json": "e217b2fbc62f04b8223f9d22bc2bac1d54bd97e1ca4cfdc4891c0c23e56541c7",
+    "artifacts/current/browser-root.log": "d37de498b473ce91a0ec7c56cab0f1c22151ca6fa20e8fba9efb36566b444f43",
+    "artifacts/current/browser-subpath.log": "f66e12d89a5cbd4804001ae3ef8918b187ca662beb18fcfb29bd5b73d4fa6cc0",
+    "artifacts/current/generation.json": "1e8012cc9569af4143116f90e6886e0962bccdaf4d99226ccc6c64a02e558dc0",
+    "artifacts/current/npm-audit.json": "0a0b328a6e0ed0c891952bff3a29ff13f9906e2ab3d7a3049111431829bbce71",
+    "artifacts/current/oracle.json": "6923648fe985323eb11427ef6e98f559b43ec2a1cd6ecb89c49ccaab32cf149e",
+    "artifacts/current/python-audit.json": "7048e9219723da4c744d67f326044998d224150d691c8d4b1b615c81417cc842",
+    "artifacts/current/python-tests.log": "481e8555a1d0d96998e07ddfe42ffefc02088438769c384526b79bcf2192e2be",
+    "artifacts/current/reproduction.json": "7ffe2c47e298a9e26ad12228238ce1f5e74e9d01c5d9652c033934dbe1542f9f",
+    "artifacts/current/security.json": "85cf3b5896013e9b26e45a3aaf72beeefe9e29cf44f089de1f6f4baffb5427fc",
+    "artifacts/current/validation-2023.json": "06d642329d3d6a57704386d0e1a3c68d8a014029077c179cdccd0add21c8423e"
+  },
+  "screenshots": [
+    "artifacts/current-viewport-desktop.png",
+    "artifacts/current-viewport-mobile.png"
+  ],
+  "versions": {
+    "node": "22.14.0",
+    "npm": "10.9.2",
+    "python": "3.14.2",
+    "pip_audit": "2.10.1"
+  }
+}

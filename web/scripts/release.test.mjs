@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { mkdtempSync, mkdirSync, copyFileSync, readFileSync, writeFileSync, rmSync, renameSync } from "node:fs";
+import { mkdtempSync, mkdirSync, copyFileSync, readFileSync, writeFileSync, rmSync, renameSync, readdirSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -12,6 +12,9 @@ function fixture(t) {
   const dir = mkdtempSync(resolve(tmpdir(), "fourth-down-packaging-"));
   t.after(() => rmSync(dir, { recursive: true, force: true }));
   const files = new Set(["docs/RELEASE_ARTIFACTS.json", "docs/FROZEN_MODEL.json", "docs/HOLDOUT_PROTOCOL_FREEZE.json", "docs/ACTIONS_LOCK.json", "web/scripts/check-release.mjs", ".github/workflows/ci.yml", ".github/workflows/pages.yml.disabled"]);
+  files.add("web/public/CURRENT_DATA_NOTICE.txt");
+  for (const name of readdirSync(resolve(root, "web/public/data/current"))) files.add(`web/public/data/current/${name}`);
+  for (const name of readdirSync(resolve(root, ".github/workflows"))) files.add(`.github/workflows/${name}`);
   for (const name of ["docs/RELEASE_ARTIFACTS.json", "docs/FROZEN_MODEL.json", "docs/HOLDOUT_PROTOCOL_FREEZE.json"]) {
     for (const file of Object.keys(json(name).file_sha256)) files.add(file);
   }
@@ -54,4 +57,11 @@ test("future template activation preserves packaging checks without authorizing 
   renameSync(resolve(dir, ".github/workflows/pages.yml.disabled"), resolve(dir, ".github/workflows/pages.yml"));
   const result = run(dir);
   assert.equal(result.status, 0, result.stderr);
+});
+test("current pointer tampering is rejected", t => {
+  const dir = fixture(t), path = resolve(dir, "web/public/data/current/latest.json");
+  const pointer = JSON.parse(readFileSync(path, "utf8"));
+  pointer.file = "../demo.json";
+  writeFileSync(path, JSON.stringify(pointer));
+  assert.notEqual(run(dir).status, 0);
 });
