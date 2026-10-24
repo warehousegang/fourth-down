@@ -15,7 +15,7 @@ test("real artifact, selection, deep links, responsive pages and accessibility",
   expect(noticeResponse.ok()).toBe(true);
   expect(await noticeResponse.text()).toContain("lucide-react@0.468.0");
   await page.screenshot({
-    path: `../artifacts/corrective-${testInfo.project.name}.png`,
+    path: `${process.env.TEST_ARTIFACT_DIR || "../artifacts"}/corrective-${testInfo.project.name}.png`,
     fullPage: true,
     animations: "disabled",
   });
@@ -52,7 +52,7 @@ test("real artifact, selection, deep links, responsive pages and accessibility",
       .analyze();
     if (label !== "2023 Matchups") {
       await page.screenshot({
-        path: `../artifacts/corrective-${label.toLowerCase().replaceAll(" ", "-")}-${testInfo.project.name}.png`,
+        path: `${process.env.TEST_ARTIFACT_DIR || "../artifacts"}/corrective-${label.toLowerCase().replaceAll(" ", "-")}-${testInfo.project.name}.png`,
         fullPage: true,
         animations: "disabled",
       });

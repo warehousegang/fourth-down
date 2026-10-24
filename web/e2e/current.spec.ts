@@ -34,8 +34,8 @@ test("current artifact, inputs, source lineage, history separation and accessibi
   const accessibility = await new AxeBuilder({page}).withTags(["wcag2a","wcag2aa","wcag21aa"]).analyze();
   expect(accessibility.violations.map(v=>({id:v.id,nodes:v.nodes.map(n=>({target:n.target,summary:n.failureSummary}))}))).toEqual([]);
   await page.evaluate(()=>window.scrollTo(0,0));
-  await page.screenshot({path:`../artifacts/current-viewport-${info.project.name}.png`,fullPage:false,scale:"css",animations:"disabled"});
-  await page.screenshot({path:`../artifacts/current-forecasts-${info.project.name}.png`,fullPage:true,animations:"disabled"});
+  await page.screenshot({path:`${process.env.TEST_ARTIFACT_DIR || "../artifacts"}/current-viewport-${info.project.name}.png`,fullPage:false,scale:"css",animations:"disabled"});
+  await page.screenshot({path:`${process.env.TEST_ARTIFACT_DIR || "../artifacts"}/current-forecasts-${info.project.name}.png`,fullPage:true,animations:"disabled"});
   await page.getByRole("link",{name:"2023 Matchups",exact:true}).click();
   await expect(page.getByRole("heading",{name:/Game on/})).toBeVisible();
   await page.getByRole("link",{name:"Current Week Forecasts",exact:true}).click();

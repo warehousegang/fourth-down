@@ -44,9 +44,9 @@ test("operational intelligence routes, honest evidence, responsive layout and ac
     const axe=await new AxeBuilder({page}).withTags(["wcag2a","wcag2aa","wcag21aa"]).analyze();
     expect(axe.violations.map(v=>({id:v.id,nodes:v.nodes.map(n=>({target:n.target,message:n.failureSummary}))}))).toEqual([]);
     await page.evaluate(()=>window.scrollTo(0,0));
-    await page.screenshot({path:`../artifacts/execution/${process.env.TEST_BASE_URL?.includes("/nfl-predictor/")?"subpath":"root"}-platform-${route}-${info.project.name}.png`,fullPage:true,animations:"disabled"});
-    await page.screenshot({path:`../artifacts/execution/${process.env.TEST_BASE_URL?.includes("/nfl-predictor/")?"subpath":"root"}-viewport-${route}-${info.project.name}.png`,fullPage:false,animations:"disabled"});
-    if(route==="intelligence") {await page.locator(".current-context-panel").scrollIntoViewIfNeeded();await page.screenshot({path:`../artifacts/execution/${process.env.TEST_BASE_URL?.includes("/nfl-predictor/")?"subpath":"root"}-context-${info.project.name}.png`,fullPage:false,animations:"disabled"});}
+    await page.screenshot({path:`${process.env.TEST_ARTIFACT_DIR || "../artifacts/execution"}/${process.env.TEST_BASE_URL?.includes("/nfl-predictor/")?"subpath":"root"}-platform-${route}-${info.project.name}.png`,fullPage:true,animations:"disabled"});
+    await page.screenshot({path:`${process.env.TEST_ARTIFACT_DIR || "../artifacts/execution"}/${process.env.TEST_BASE_URL?.includes("/nfl-predictor/")?"subpath":"root"}-viewport-${route}-${info.project.name}.png`,fullPage:false,animations:"disabled"});
+    if(route==="intelligence") {await page.locator(".current-context-panel").scrollIntoViewIfNeeded();await page.screenshot({path:`${process.env.TEST_ARTIFACT_DIR || "../artifacts/execution"}/${process.env.TEST_BASE_URL?.includes("/nfl-predictor/")?"subpath":"root"}-context-${info.project.name}.png`,fullPage:false,animations:"disabled"});}
     await page.reload();
     await expect(page.getByRole("heading",{name:label,exact:true})).toBeVisible();
   }
