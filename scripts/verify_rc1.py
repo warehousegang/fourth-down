@@ -72,17 +72,19 @@ def main():
     result = {'schema_version':1, 'checked_at':now.isoformat(), 'source_commit':baseline['source_commit'],
         'protected_files_verified':len(baseline['file_sha256']), 'local_datasets_verified':len(baseline['local_dataset_sha256']),
         'sha256':verified, 'legacy_original_matches':legacy, 'independent_current':independent,
-        'byte_replay':replay, 'all_real_source_proofs':proofs,
+        'byte_replay':replay, 'current_schedule_forecast_operations_proofs':proofs,
+        'source_proof_scope':'Current schedule, forecast and operations bundle only; excludes context and research',
         'freshness':{'as_of':artifact['as_of'], 'generated_at':artifact['generated_at'],
             'source_updated_at':artifact['source']['source_updated_at'], 'valid_until':artifact['valid_until'],
             'source_age_hours':(now-timestamp(artifact['source']['source_updated_at'])).total_seconds()/3600,
             'expired_at_review':now>=timestamp(artifact['valid_until']),
-            'upcoming_at_review':sum(timestamp(g['kickoff'])>now for g in artifact['games'] if g['kickoff']),
+            'future_kickoff_count_at_review':sum(timestamp(g['kickoff'])>now for g in artifact['games'] if g['kickoff']),
             'availability_limit':'Saved source only; no live source reacquisition or schedule-change assertion'},
         'real_bundle':bundle, 'restore':restored, 'idempotent_repeat_restored':repeated['restored'],
         'credential_scan':{'files':len(files), 'patterns':list(patterns), 'findings':findings,
             'scope':'Tracked and nonignored candidate source plus dist; finite patterns, not comprehensive secret detection'},
-        'prohibited_actions_executed':[]}
+        'prohibited_actions_executed':[],
+        'boundary_evidence_level':'Code-path review and artifact hashes; this field is not an instrumented runtime audit'}
     (output/'integrity-current-recovery.json').write_text(json.dumps(result,indent=2)+'\n')
     print(json.dumps({k:v for k,v in result.items() if k!='sha256'},indent=2))
 

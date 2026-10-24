@@ -233,12 +233,17 @@ def run_case(case_id, description, temporary_root):
 
 def allowed_output(directory):
     path = Path(directory).resolve()
-    roots = ((ROOT/"artifacts/rc1/scenarios").resolve(), Path(tempfile.gettempdir()).resolve(), Path("/private/tmp").resolve())
-    if not any(path == root or path.is_relative_to(root) for root in roots):
+    repository = ROOT.resolve()
+    # Repository restrictions take precedence when the entire checkout is in /tmp.
+    # Keep the approved suffix literal: a symlink there must not approve its target.
+    approved = repository/"artifacts/rc1/scenarios"
+    if path == repository or path.is_relative_to(repository):
+        if path == approved or path.is_relative_to(approved):
+            return path
+        raise ValueError("Synthetic output cannot target repository paths outside artifacts/rc1/scenarios")
+    temporary_roots = (Path(tempfile.gettempdir()).resolve(), Path("/private/tmp").resolve())
+    if not any(path == root or path.is_relative_to(root) for root in temporary_roots):
         raise ValueError("Synthetic output must stay under artifacts/rc1/scenarios or an OS temporary directory")
-    # A public path reached through a temporary symlink must still be forbidden.
-    if path == ROOT.resolve() or path.is_relative_to((ROOT/"web").resolve()) or path.is_relative_to((ROOT/"data").resolve()):
-        raise ValueError("Synthetic output cannot target production assets or source data")
     return path
 
 

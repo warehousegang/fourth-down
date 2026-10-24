@@ -179,3 +179,34 @@ def test_unexpected_generation_failure_does_not_publish_a_pass_report(tmp_path,m
     with pytest.raises(RuntimeError,match="injected generation"):
         run_scenarios(output)
     assert not output.exists()
+
+
+def test_temporary_checkout_does_not_approve_arbitrary_repository_outputs(tmp_path, monkeypatch):
+    from ml import lifecycle_simulation as module
+    checkout = tmp_path/"clean-checkout"
+    checkout.mkdir()
+    monkeypatch.setattr(module, "ROOT", checkout)
+    for relative in (".", "docs", "artifacts/model.json", "web/public/data/current", "data/current/2026"):
+        with pytest.raises(ValueError, match="outside artifacts/rc1/scenarios"):
+            module.allowed_output(checkout/relative)
+    approved = checkout/"artifacts/rc1/scenarios/repeat"
+    assert module.allowed_output(approved) == approved.resolve()
+    assert module.allowed_output(tmp_path/"independent-temporary-output") == (tmp_path/"independent-temporary-output").resolve()
+
+
+def test_approved_directory_symlink_does_not_whitelist_repository_target(tmp_path, monkeypatch):
+    from ml import lifecycle_simulation as module
+    checkout = tmp_path/"clean-checkout"
+    production = checkout/"web/public/data"
+    production.mkdir(parents=True)
+    approved = checkout/"artifacts/rc1/scenarios"
+    approved.parent.mkdir(parents=True)
+    approved.symlink_to(production, target_is_directory=True)
+    monkeypatch.setattr(module, "ROOT", checkout)
+    for candidate in (approved, approved/"nested", production):
+        with pytest.raises(ValueError, match="outside artifacts/rc1/scenarios"):
+            module.allowed_output(candidate)
+    external_alias = tmp_path/"external-alias"
+    external_alias.symlink_to(checkout/"docs", target_is_directory=True)
+    with pytest.raises(ValueError, match="outside artifacts/rc1/scenarios"):
+        module.allowed_output(external_alias)
