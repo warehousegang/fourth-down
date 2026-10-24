@@ -49,7 +49,7 @@ def synthetic_source(root):
 def assert_manual_trigger(text):
     """Accept only this project's explicit block syntax; fail closed on flow/merge forms."""
     lines = text.splitlines()
-    positions = [i for i, line in enumerate(lines) if re.match(r"^(?:on|'on'|\"on\"):", line)]
+    positions = [i for i, line in enumerate(lines) if re.match(r"^(?:on|'on'|\"on\")[ \t]*:", line)]
     assert len(positions) == 1 and lines[positions[0]] == 'on:'
     block = []
     for line in lines[positions[0]+1:]:

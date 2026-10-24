@@ -22,6 +22,8 @@ def test_only_reviewed_manual_workflow_is_active():
     'on: {workflow_dispatch: null, push: null}\n',
     'on:\n  workflow_dispatch:\n  push:\n',
     'on:\n  workflow_dispatch:\non:\n  push:\n',
+    'on:\n  workflow_dispatch:\non : [push]\n',
+    'on:\n  workflow_dispatch:\n"on" : [push]\n',
     'on:\n  workflow_dispatch:\n  schedule:\n    - cron: 0 * * * *\n',
     'on: &events\n  workflow_dispatch:\n',
     '"on":\n  workflow_dispatch:\n',
