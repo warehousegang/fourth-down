@@ -1,0 +1,33 @@
+# Forecast lifecycle evaluation protocol v2
+
+Version 1 was fixed before the first real reconciliation run (which had zero completed forecasted games). Version 2 strengthens source-proof reproduction before any genuine postgame score exists; the original version is retained by checksum under docs/protocols/. It applies only to recorded, prospective forecasts for seasons 2026 onward. It does not unlock the partially exposed 2024–2025 holdout, change the incumbent, select models, or authorize deployment. Its SHA-256 is embedded in every operations artifact; a future policy change requires a separately versioned protocol and must not overwrite earlier evaluations.
+
+## Receipt, identity, and cutoff rules
+
+Archive all content-addressed current forecast files without modifying them. A catalog receipt references the complete file checksum and original per-game input/provenance. Every snapshot is retained, including unavailable and subsequently superseded records. Catalog identity is artifact checksum plus stable game ID. Exact duplicate forecast payloads across packaging versions are retained but only one lexicographically first receipt is eligible, preventing inflated metrics.
+
+Require the original captured source and every historical result observation referenced by each available forecast. Reproduce the frozen feature state, explanation factors and probability from those captures; missing or inconsistent evidence excludes scoring but preserves the receipt. Never substitute a later corrected input capture.
+
+Accept only the frozen model and its exact feature order, coefficient-derived probabilities, source observation ordering, strictly pre-kickoff generation and cutoff, prior-day history observed strictly before cutoff, and a source no more than 48 hours old at its original decision time. A forecast must match the current result's stable ID, home/away teams, regular-season week, date, kickoff and schedule fingerprint. A changed kickoff requires a new prospective forecast; forecasts invalidated by schedule correction are retained with an exclusion reason. No identity matching by team names alone. Never backdate generation to create eligibility.
+
+The current-screen 24-hour display TTL is not a retrospective scoring rule: a legitimately issued pregame probability remains a historical forecast after the TTL expires. Show its original freshness timestamps. If kickoff moves earlier than generation, exclude the forecast; if result identity is corrected, create a new reconciliation artifact and retain the old one.
+
+For each game, show the original receipt and latest receipt. Designate the latest eligible forecast by actual generation time as final only once the confirmed kickoff has passed. Break equal timestamp ties lexicographically by catalog receipt ID, independent of outcomes. This final designation may remain pending while kickoff is unknown or the game is postponed. The designation is provisional until a verified final result exists. No final selection depends on accuracy or surprise.
+
+## Results and scoring
+
+Use the latest locally observed permitted current-season schedule snapshot, with validated explicit FINAL/FINAL OVERTIME status, both integer scores, confirmed kickoff in the past, and a retrieval timestamp after kickoff. The observation timestamp is an upper bound on when completion was known; do not invent completion time. Normalize schedule states to scheduled, postponed, canceled, in_progress, completed, or unknown. A passed kickoff with only scheduled source status is unknown, not proof the game started. Unknown or unvalidated finals never become scored outcomes. Conflicting results at the same observation timestamp fail closed.
+
+Reconcile every forecasted game, without selecting upsets. Score every distinct eligible snapshot after an observed non-tied final result, and report a separate primary set containing exactly the final eligible snapshot per game. Ties are reported and excluded from binary scores because the incumbent conditions probabilities on non-ties. Cancelled, postponed, missing-result and ineligible cases remain visible and unscored. No early-season metric is invented when the real completed sample is zero.
+
+For home-win outcome y and original probability p: accuracy uses p >= 0.5 as the home pick; Brier is (p-y)^2; log loss and surprise are -log(p) for a home win or -log(1-p) for an away win, clipping only inside the logarithm to [1e-15, 1-1e-15]. Surprise is measured in natural-log units and is not a causal explanation. Compare identical rows with a 0.5 coin baseline and the saved 2010–2022 home-rate baseline, p=0.5572154167911563. These baselines are fixed, not estimated from prospective outcomes.
+
+Report pooled and per-season accuracy/Brier/log loss, sample and unique-game counts, baseline scores, and fixed probability bins [0,.1),...,[.9,1]. Empty aggregates/bins use null metrics. All-snapshot summaries are descriptive and not statistically independent; the primary final-per-game set is the performance headline. No confidence intervals or claims of statistical improvement are made from a small prospective sample.
+
+## Investigation and learning boundary
+
+Every completed forecasted game receives deterministic analysis: verified final score and timestamp/provenance, original probability and score if eligible, explicit missing-domain limitations, and hypotheses labeled as unverified. A surprising loss alone demonstrates no model deficiency. A single result cannot establish calibration failure. Evidence needed for QB, turnover, injury, weather or matchup hypotheses must be named; absent evidence must remain absent. No paid LLM/API call occurs. A bounded future research adapter may propose cited facts and testable hypotheses, but cannot alter forecasts, scores, data, training or model registry. Promotion always requires owner approval.
+
+## Corrections, failures, and reproducibility
+
+Store operations-<sha256>.json and atomically update only latest.json after successful local validation. A result change creates a new result version and a new operations version; old artifacts remain byte-identical. A failed source refresh never synthesizes finals or promotes a replacement as fresh. Re-export from a previously captured source must expose its original observation/update times and warn on source staleness. Export is deterministic for identical inputs and an explicit generation timestamp. Full result details are scoped to forecasted games; schedule status may cover all games in the allowed season.

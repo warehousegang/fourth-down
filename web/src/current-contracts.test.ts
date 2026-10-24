@@ -46,3 +46,20 @@ describe("current artifact integrity", () => {
     await expect(loadCurrent()).rejects.toThrow(/integrity/);
   });
 });
+
+it("rejects an available forecast generated at or after kickoff", () => {
+  const data = currentFixture();
+  const first = data.games.find(g=>g.status==="available")!;
+  data.games=[first];
+  data.generated_at=first.kickoff!;
+  first.generated_at=data.generated_at;
+  expect(currentSchema.safeParse(data).success).toBe(false);
+});
+it("retains strict-before ordering for observations within one millisecond",()=>{
+  const d=currentFixture();const g=d.games[0];d.games=[g];g.cutoff="2026-10-24T13:38:08.054002Z";g.history.home[0].observed_at="2026-10-24T13:38:08.054001Z";
+  expect(currentSchema.safeParse(d).success).toBe(true);
+  g.history.home[0].observed_at=g.cutoff;expect(currentSchema.safeParse(d).success).toBe(false);
+});
+it("rejects a fractional instant after the frozen midnight cutoff",()=>{
+  const d=currentFixture();const g=d.games[0];d.games=[g];d.as_of="2026-10-25T04:00:00.000001Z";d.generated_at=d.as_of;g.generated_at=d.generated_at;g.cutoff=d.as_of;expect(currentSchema.safeParse(d).success).toBe(false);
+});

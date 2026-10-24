@@ -31,14 +31,9 @@ On this machine the matching interpreter is `/Users/thomas/Documents/ChatGPT/AI/
 The first real October 24 capture is retained as a regression fixture. Positive-path component tests use that immutable capture with a fixed clock so later offseason/unavailable refreshes do not break tests. Other tests validate the actual latest artifact and production fetch path. The acquisition/edge-case fixtures are explicitly synthetic 2026 schedules; they contain no protected-season outcomes.
 
 ## Exact offline reproduction
-Do not fetch again for byte-level reproduction. Keep the captured raw and normalized files, the matching pipeline code and the version's as_of/generated_at timestamps. For the verified local version:
-```sh
-python -m ml.current \
-  --snapshot data/current/2026/snapshot-8ca053cf9a54ca3f4e980ec733e89ff88ba115946a05752ef91b64a674ba202b.json \
-  --as-of 2026-10-24T13:43:14.289319+00:00 \
-  --generated-at 2026-10-24T13:43:14.289900+00:00
-```
-The exact decision timestamp must match the chosen JSON; do not guess or backdate a new acquisition. This command verifies input hashes and rewrites only the same local pointer/version. A different code hash or generation time deliberately creates a different version even when probabilities match. Without local raw evidence a clean checkout can browse and test the committed artifacts but cannot independently reconstruct the input observations.
+Use `python scripts/replay_current.py` to reconstruct the actual latest forecast without changing any file or pointer. It verifies recorded code hashes, raw/normalized observations and original decision/generation times, rebuilds using the exact frozen scorer, and requires byte-identical output. Use `--forecast web/public/data/current/forecast-<season>-<sha>.json` for a specific version. For an older artifact whose recorded pipeline hashes differ, use the matching Git revision in an isolated checkout with retained same-season observations. Never backdate a new production acquisition or replace latest merely to demonstrate reproduction.
+
+A different code hash or generation time deliberately creates a different version even when probabilities match. Without local raw evidence a clean checkout can browse and test committed artifacts but cannot independently reconstruct source observations. `scripts/verify_current.py` separately checks actual latest probabilities and factors directly from the raw CSV without using production state/scoring functions.
 
 ```sh
 python scripts/test_release.py
@@ -54,7 +49,9 @@ VITE_BASE_PATH=/nfl-predictor/ npm run preview -- --port 4174 --strictPort
 TEST_BASE_URL=http://127.0.0.1:4174/nfl-predictor/ npm run test:e2e
 ```
 
-## Refresh design and gates
-The SHA-pinned `.github/workflows/current-refresh.yml.disabled` proposes one manual job, read-only repository access, ten-minute timeout and one-day review artifact retention. There is no cron, write/push permission, deployment or enabled execution. Proposed cadence after approval: Wednesday and Saturday before game-day cutoffs, plus a manual check after schedule changes. A fresh runner has no earlier observation cache; missing proof intentionally prevents affected forecasts. Persisting approved same-season snapshot artifacts between future runs needs an explicit retention/access design before recurring activation.
+## Product lifecycle and refresh gates
+`python -m ml.refresh` is now the preferred integrated command: it acquires current data, records forecasts, verifies immutable history and reconciles official final outcomes without fitting. `ml.current` remains inference-only. OPERATIONS.md defines kickoff-relative advisory planning, bounded failures, portable evidence preservation, client size budgets, scoring/investigation and controlled learning. The workflow template remains disabled, with no cron, push or deployment. Hosted evidence restoration and recurring scheduling still require implementation verification and approval.
 
-Target infrastructure cost is $0 using standard public-repository runners within GitHub's applicable rules. Private-repository minutes/storage, larger runners, account configuration and artifact retention can alter that assumption; verify budgets and disable paid overage before activation. No account settings were changed and no hosted workflow ran. See RELEASE_GATES.md: local implementation is ready for review, while automation/publication and additional 2024–2025 evaluation remain separate NO-GO gates.
+The Product Execution Directive supersedes the earlier blanket no-training/no-evaluation restriction only for separately versioned challengers on authorized data and current-season lifecycle scoring. Incumbent retraining, holdout access and automatic promotion remain prohibited. Forecast inputs remain exactly the frozen four; independent current-context annotations do not enter them. Current source freshness is unchanged: copying or rereading unchanged source bytes does not advance its update time.
+
+Target infrastructure cost is $0 subject to account and storage limits; no settings were changed or hosted workflow run. RELEASE_GATES.md records local readiness and the remaining G1/G3/G4 blockers.

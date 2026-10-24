@@ -1,5 +1,6 @@
 import { z } from "zod";
 import frozen from "../../docs/FROZEN_MODEL.json";
+import { compareTimestamp } from "./versioned-artifact";
 
 const stamp = z.string().datetime({ offset: true });
 const hash = z.string().regex(/^[a-f0-9]{64}$/);
@@ -34,20 +35,20 @@ export const currentSchema = z.object({
   })).max(32),
 }).superRefine((d, ctx) => {
   const fail = (message: string) => ctx.addIssue({ code: "custom", message });
-  if (!(Date.parse(d.source.source_updated_at) <= Date.parse(d.source.retrieved_at)
-    && Date.parse(d.source.retrieved_at) <= Date.parse(d.as_of) && Date.parse(d.as_of) <= Date.parse(d.generated_at))) fail("Invalid source/forecast ordering");
+  if (!(compareTimestamp(d.source.source_updated_at, d.source.retrieved_at) <= 0
+    && compareTimestamp(d.source.retrieved_at, d.as_of) <= 0 && compareTimestamp(d.as_of, d.generated_at) <= 0)) fail("Invalid source/forecast ordering");
   if (Date.parse(d.valid_until) > Math.min(Date.parse(d.generated_at)+24*3600000, Date.parse(d.source.source_updated_at)+48*3600000)) fail("Invalid freshness limit");
   if (d.source.season !== d.season || d.source.source_url !== `https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nfl_ngs_schedules/ngs_schedule_${d.season}.csv`) fail("Source is not isolated to forecast season");
   if (new Set(d.games.map(g => g.id)).size !== d.games.length) fail("Duplicate matchups");
   for (const g of d.games) {
     if (g.season !== d.season || !g.id.startsWith(`ngs-${d.season}-`) || g.model_id !== d.model.id || g.home === g.away) fail("Invalid matchup lineage");
-    if (g.generated_at !== d.generated_at || Date.parse(g.cutoff) > Date.parse(d.as_of)) fail("Invalid game cutoff");
+    if (g.generated_at !== d.generated_at || compareTimestamp(g.cutoff, d.as_of) > 0) fail("Invalid game cutoff");
     if (g.status === "unavailable") {
       if (g.home_probability !== null || g.away_probability !== null || !g.reason || g.factors.length || Object.keys(g.features).length) fail("Unavailable forecast includes probability/features");
       continue;
     }
-    if (!g.kickoff || !g.day || Date.parse(g.kickoff) <= Date.parse(d.as_of) || Date.parse(g.cutoff) >= Date.parse(g.kickoff)) fail("Game is not upcoming");
-    if (g.day && easternTime(g.cutoff) > `${g.day}T00:00:00`) fail("After-midnight feature cutoff");
+    if (!g.kickoff || !g.day || compareTimestamp(g.kickoff, d.generated_at) <= 0 || compareTimestamp(g.cutoff, g.kickoff) >= 0) fail("Game is not upcoming");
+    if (g.day && easternTime(g.cutoff) > `${g.day}T00:00:00.000000000`) fail("After-midnight feature cutoff");
     if (g.kickoff && g.day !== easternTime(g.kickoff).slice(0, 10)) fail("Kickoff/day mismatch");
     if (!["", "SCHEDULED", "PREGAME", "PRE_GAME"].includes(g.source_phase)) fail("Game is not scheduled");
     if (g.reason !== null || g.home_probability === null || g.away_probability === null || g.factors.length !== d.model.features.length || Object.keys(g.features).length !== d.model.features.length) { fail("Missing probability/features"); continue; }
@@ -63,7 +64,7 @@ export const currentSchema = z.object({
       const records = g.history[side];
       if (new Set(records.map(r => r.id)).size !== records.length) fail("Duplicate historical game");
       for (const h of records) {
-        if (!h.id.startsWith(`ngs-${d.season}-`) || h.id === g.id || !g.day || h.game_day >= g.day || Date.parse(h.observed_at)>=Date.parse(g.cutoff)) fail("Future/current-day/cross-season history");
+        if (!h.id.startsWith(`ngs-${d.season}-`) || h.id === g.id || !g.day || h.game_day >= g.day || compareTimestamp(h.observed_at,g.cutoff)>=0) fail("Future/current-day/cross-season history");
       }
     }
   }
@@ -72,7 +73,8 @@ export const currentSchema = z.object({
 function easternTime(value: string) {
   const parts = new Intl.DateTimeFormat("en-US", { timeZone: "America/New_York", year:"numeric", month:"2-digit", day:"2-digit", hour:"2-digit", minute:"2-digit", second:"2-digit", hourCycle:"h23" }).formatToParts(new Date(value));
   const p = Object.fromEntries(parts.map(x => [x.type,x.value]));
-  return `${p.year}-${p.month}-${p.day}T${p.hour}:${p.minute}:${p.second}`;
+  const fraction=(value.match(/\.(\d+)(?:Z|[+-]\d{2}:\d{2})$/)?.[1]??"").padEnd(9,"0").slice(0,9);
+  return `${p.year}-${p.month}-${p.day}T${p.hour}:${p.minute}:${p.second}.${fraction}`;
 }
 export type CurrentArtifact = z.infer<typeof currentSchema>;
 export type CurrentGame = CurrentArtifact["games"][number];

@@ -1,31 +1,11 @@
-# Bounded research enrichment — design only
+# Bounded postgame investigation
 
-No LLM/API calls, agent jobs, background polling, or scheduled research are implemented. The prediction pipeline is deterministic and independent of this optional layer.
+The deterministic implementation is `ml/lifecycle.py:investigate`, governed by LIFECYCLE_PROTOCOL.md. It processes every verified completed forecasted game, records result and forecast facts with source observation timestamps, calculates surprise, and suggests additional evidence when the observed result had less than 25% probability. Facts, hypotheses and demonstrated deficiencies are separate fields. Empty deficiency lists are intentional: one unexpected result does not prove a model defect. Current production metrics remain empty until a recorded pregame forecast has a verified final result.
 
-An owner-triggered run would take game_id, forecast_cutoff, allowed source domains and a small explicit budget (at most 12 URLs, 2 model calls, 5 minutes). These are proposed future limits, not an activated workflow. Sources: official team/league injury reports and roster releases; official depth charts with explicit confirmation for starting quarterbacks; official coaching announcements; a named official weather provider for the stadium location; verified team reporting with direct citations. Source-specific license/access review precedes implementation.
+The real current-context adapter supplies separately timestamped injury, depth-chart and basic team-stat annotations. These are not retrospective causal findings and do not modify probabilities. It does not invent a publication timestamp absent from an upstream report, equate a depth slot with starter confirmation or infer private mental/emotional states. Context unavailable before the forecast cannot be attributed as an input to that forecast.
 
-Suggested structured output:
-```json
-{
-  "schema_version": 1,
-  "game_id": "SOURCE_GAME_ID",
-  "forecast_cutoff": "ISO8601_WITH_OFFSET",
-  "retrieved_at": "ISO8601_WITH_OFFSET",
-  "facts": [{
-    "category": "injury|quarterback|roster|coaching|weather|team_news",
-    "claim": "Short, source-grounded statement",
-    "source_url": "https://OFFICIAL_SOURCE",
-    "published_at": "ISO8601_WITH_OFFSET",
-    "retrieved_at": "ISO8601_WITH_OFFSET",
-    "verification": "verified|conflicted|stale|unavailable",
-    "supporting_excerpt": "Minimal necessary excerpt",
-    "applies_to_game_id": "SOURCE_GAME_ID"
-  }],
-  "unresolved": [],
-  "probability_adjustment": null
-}
-```
+No LLM/API research calls, autonomous news crawler or scheduled research job are implemented. The optional agent contract is design only: explicit game ID, original cutoff, allowlisted official sources, at most 12 URLs, two model calls and five minutes; paid calls require separate approval. Require claim, source URL, publication time (or explicit unknown), retrieval time, short supporting evidence and game/team/player identity. Unknown publication time cannot establish pre-cutoff availability. Postgame facts may have later timestamps but must be labeled postgame and cannot be added to the original feature state.
 
-Reject unknown team/player attribution, missing source timestamps, publications after the cutoff, URLs outside the allowlist, or uncited claims. Keep publication and retrieval time distinct. A live page retrieved today cannot establish historical availability. Do not convert questionable/out designation into invented starter status. Weather is a timestamped forecast, not observed postgame weather. A stale report cannot silently overwrite a newer official one. Conflicting official reports remain conflicted; speculation is separately labeled and excluded from facts. Empty results are a valid unavailable response.
+Reject unknown attribution, conflicting assertions masquerading as facts, uncited statistics, unconfirmed starters described as confirmed, observed weather described as a pregame forecast, or unsupported private-state assertions. Source-specific permissions and pregame vintage proof precede predictive feature use. No weather source is active until stadium coordinates, roof applicability and issued forecast validity are verified, including unsupported international venues.
 
-Treat retrieved text as untrusted data, not instructions. Bound fetch sizes; no tools capable of arbitrary writes, messaging, purchases or credentials. No automatic publication. The LLM summarizes verified material; it cannot change model probabilities. Future model features need a versioned dataset, feature definition, leakage tests and separately approved evaluation. Research annotations display with citations and never masquerade as learned predictive factors.
+Retrieved content is untrusted evidence, never instructions. A future agent may return cited observations, hypotheses and missing-evidence requests only. It has no tools for arbitrary writes, messaging, credentials, purchases, model fitting/promotion, forecast modification or protected-holdout access. Outputs require deterministic validation before a separately approved publication. Any proposed predictive contribution needs a new versioned challenger protocol and measured time-aware evaluation; narrative plausibility is not evidence of gain.

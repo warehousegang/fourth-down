@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "operational_model_id": "schedule-v1-741cf41752",
+  "promotion_approval": null,
+  "frozen_manifest_sha256": "2896a526ed8035b1674a6beb3c8d27c76ba4b3f466309bfeb729c6ddbf80f957",
+  "models": [
+    {
+      "id": "schedule-v1-741cf41752",
+      "role": "frozen-incumbent",
+      "artifact": "web/public/data/demo.json",
+      "sha256": "41c3ad0d8d2997238b464f196b700ce328f38eb6e93831a18d504c7ef6aa24a9",
+      "immutable": true
+    },
+    {
+      "id": "challenger-v1-da5c3ab79a98",
+      "role": "research-challenger",
+      "operational_status": "ineligible",
+      "artifact": "web/public/data/research/challenger-2b90c2f946ef4bac8a2841ae2d4abd8ad8b279449fc38cc1dea1dac32f8b3e68.json",
+      "sha256": "2b90c2f946ef4bac8a2841ae2d4abd8ad8b279449fc38cc1dea1dac32f8b3e68",
+      "promotion": {
+        "eligible": false,
+        "approval_required": true,
+        "criteria": {
+          "pooled_brier_improvement_at_least_0_002": true,
+          "paired_brier_upper_bound_below_zero": true,
+          "no_season_regression_above_0_01": true,
+          "pooled_ece_at_most_0_05": true,
+          "every_season_ece_at_most_0_10": false,
+          "prospective_full_season": false,
+          "live_all_features_available": false,
+          "owner_approved": false
+        },
+        "blockers": [
+          "At least one retrospective season exceeds the predeclared 0.10 ECE limit",
+          "No prospective full-season shadow evidence",
+          "2026 prior-season inputs unavailable under holdout restriction",
+          "Historical publication vintages unavailable",
+          "Owner promotion approval not granted"
+        ]
+      }
+    }
+  ],
+  "rollback": {
+    "strategy": "Explicit owner-approved registry revert to previously approved model and SHA; preserve forecast ledger",
+    "target_model_id": "schedule-v1-741cf41752",
+    "automatic_promotion": false
+  },
+  "protocol": "docs/CHALLENGER_PROTOCOL.md"
+}

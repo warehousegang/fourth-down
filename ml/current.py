@@ -143,6 +143,8 @@ def generate(snapshot, prior_snapshots, as_of, generated_at=None):
                 raise ValueError("Kickoff date/time unconfirmed; no probability generated")
             if g["phase"] not in SCHEDULED:
                 raise ValueError(f"Game status {g['phase']} is not confirmed scheduled")
+            if timestamp(g["kickoff"]) <= generated:
+                raise ValueError("Kickoff passed during generation; no pregame probability issued")
             row, history = feature_state(g, games, evidence, cutoff)
             probability, factors = score(model, row)
             item.update(status="available", home_probability=probability, away_probability=1-probability,

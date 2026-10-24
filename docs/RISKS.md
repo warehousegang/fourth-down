@@ -40,5 +40,8 @@
 | Prior-season strength accidentally opens 2025 holdout | Protected-season guards at acquisition, dataset and inference boundaries; missing permitted prior state blocks affected challenger inference | ML maintainer |
 | Narrative explains random outcomes as defects | Deterministic facts/hypotheses/verified defects separated; source timestamps; bounded evidence-only optional agent; no probability edits | Product owner |
 | Successive challengers become uncontrolled tuning | Version protocols/runs, fixed criteria and measured ablations; periodic intentional runs, human promotion, registry and rollback | Thomas |
-| Persistent observation cache lost between scheduled runs | Local retained immutable snapshots; prepared workflow restores only verified same-season artifacts after separate activation/retention review | Engineering |
+| Persistent observation cache lost between scheduled runs | Local retained immutable snapshots and verified export/import bundles; hosted restoration remains an unimplemented G3 activation dependency | Engineering |
 | Local execution mistaken for public gate approval | Explicit local-record status, disabled scheduling/publication and candidate-only models; owner controls all G0–G4 decisions | Thomas |
+
+| Whole-season static history outgrows client budget | Refuse current >1 MB or operations >5 MB / 10,000 receipts before pointer writes; require separately addressed history partitions before sustained operation | Engineering |
+| Context mistaken for trained probability inputs | Independent context cutoff, affects_probability=false, explicit source freshness and missing report times; no confirmed-starter inference or probability adjustment | Product owner |

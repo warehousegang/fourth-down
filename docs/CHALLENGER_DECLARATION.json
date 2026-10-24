@@ -1,0 +1,74 @@
+{
+  "declared_at": "2026-10-24T13:54:29.506906+00:00",
+  "status": "pre-fit-fixed-configuration",
+  "protocol_sha256": "e0ce915a410f1c0bcac18e43bfde519f14ceb899206752de96b9f5f999f0e414",
+  "config": {
+    "version": "schedule-intelligence-v1",
+    "features": [
+      "smooth_win_diff",
+      "margin_diff",
+      "recent_margin_diff",
+      "rest_diff",
+      "prior_smooth_win_diff",
+      "prior_margin_diff",
+      "opponent_adjusted_margin_diff",
+      "venue_margin_diff",
+      "bye_diff",
+      "neutral_site"
+    ],
+    "domain_groups": {
+      "prior_strength": [
+        "prior_smooth_win_diff",
+        "prior_margin_diff"
+      ],
+      "current_performance": [
+        "smooth_win_diff"
+      ],
+      "opponent_adjusted": [
+        "opponent_adjusted_margin_diff"
+      ],
+      "recent_trends": [
+        "recent_margin_diff"
+      ],
+      "home_road": [
+        "venue_margin_diff",
+        "neutral_site"
+      ],
+      "scoring_margins": [
+        "margin_diff"
+      ],
+      "rest_travel": [
+        "rest_diff",
+        "bye_diff"
+      ]
+    },
+    "seed": 42,
+    "estimator": {
+      "C": 1.0,
+      "solver": "lbfgs",
+      "max_iter": 2000,
+      "random_state": 42
+    },
+    "calibration": {
+      "C": 1000000.0,
+      "solver": "lbfgs",
+      "max_iter": 2000,
+      "random_state": 42
+    },
+    "fold_seasons": [
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023
+    ],
+    "training_start": 2011,
+    "classification_threshold": 0.5,
+    "bootstrap_replicates": 2000,
+    "locked_seasons": [
+      2024,
+      2025
+    ]
+  }
+}

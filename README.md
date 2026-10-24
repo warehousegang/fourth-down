@@ -1,76 +1,71 @@
 # Fourth Down · NFL Predictive Intelligence
 
-A local, reproducible NFL research dashboard. Python builds pre-cutoff current-season state and scores the unchanged frozen model; React displays versioned static forecasts. **Current Week Forecasts is the default screen; 2023 historical analysis stays separate.** The 2024–2025 period is partially exposed; further candidate evaluation is locked. See docs/HOLDOUT_EXPOSURE.json and the separately frozen docs/HOLDOUT_PROTOCOL.md. Nothing has been deployed.
+A local NFL forecasting and evaluation system: real upcoming probabilities, immutable prediction history, current team/player context, postgame scoring, deterministic investigation and separately versioned challenger research. Python produces checksummed static JSON; React verifies and displays it. **The frozen schedule model remains operational. Nothing has been deployed or promoted.** Start with [the authoritative project record](docs/PROJECT.md), [handoff](docs/HANDOFF.md) and [G0–G4 gate report](docs/RELEASE_GATES.md).
 
-## Open the demonstration
-Node 22.14.0 and npm 10.9.2 were used locally. From this project:
+## Open locally
+
+Node 22.14.0/npm 10.9.2 were used. From this project:
+
 ```sh
 cd web
 npm ci --ignore-scripts
-npm run dev -- --port 4173
+npm run dev -- --port 4175 --strictPort
 ```
-Open http://127.0.0.1:4173/. Explore Current Week Forecasts, 2023 Matchups, Prediction explanation, Model performance and Architecture. Current forecasts carry source age, cutoffs and expiry; they are manual snapshots, not a live feed. Select a week/game; URLs retain the selection across refresh. Checksummed current versions, the unchanged 2023 demo and complete notices are included in Git. No Python, raw data, training or data download is needed to browse a clean checkout. Build checks fail if the approved artifact, model freeze, protocol or notices change. See docs/DEPLOYMENT.md.
 
-## Generate upcoming current-week forecasts
-From the project root, using the existing Python 3.14.2 environment:
+Open http://127.0.0.1:4175/. The six product views are Upcoming Games, Matchup Intelligence, Forecast History, Model Intelligence, Postgame Analysis and Architecture. Existing 2023 retrospective matchups/explanations/performance remain separately accessible. Recorded current forecasts expire and suppress probabilities after kickoff; this is not an always-live service. Included static artifacts and notices make a clean checkout browsable without Python, raw data or training.
+
+## Explicit local operations
+
+Use Python 3.14.2 with the unchanged requirements and constraints. This machine's existing interpreter is `/Users/thomas/Documents/ChatGPT/AI/nfl-predictor/.venv/bin/python`; do not alter the original repository/environment.
+
 ```sh
-python -m ml.current
+# Exact current-season acquisition, frozen inference, history and official-final reconciliation:
+python -m ml.refresh
+# Advisory only; substitute an actual retained normalized snapshot:
+python -m ml.refresh --plan --snapshot data/current/2026/snapshot-<sha>.json
+# Independent context-only current annotations; no probability adjustments:
+python -m ml.context --season 2026 --snapshot data/current/2026/snapshot-<sha>.json
 ```
-This explicitly downloads the current season's SportsDataverse NFL Next Gen Stats schedule, saves immutable local observations under data/current/<season>/, and writes a content-addressed version plus latest.json under web/public/data/current/. The first local capture on October 24, 2026 contains 13 available Week 7 forecasts. Each later refresh uses its actual observation time; it never invents historical availability or reads 2024–2025. Source/coverage errors leave the previous version intact; incomplete team histories and unknown kickoffs produce unavailable reasons. The browser hides expired and past-kickoff probabilities.
 
-See [the current forecasting runbook](docs/CURRENT_FORECASTS.md) for exact reproduction, missing-data behavior and disabled automation. Refresh before game-day midnight Eastern where possible; a first late observation cannot prove earlier availability. Retain local snapshots between refreshes. This command performs no training, evaluation, publication or remote write.
+The schedule source is season-isolated SportsDataverse NFL NGS; current injury, QB depth-chart and basic team-stat context comes from season-isolated nflverse assets. Each capture records actual update/retrieval times and hashes. No current acquisition opens 2024–2025. Preserve earlier observations: a first capture after the cutoff cannot prove pregame availability. [OPERATIONS.md](docs/OPERATIONS.md) explains failure bounds, freshness, local evidence bundles, final-forecast selection, result corrections, cost and disabled scheduling. [CURRENT_FORECASTS.md](docs/CURRENT_FORECASTS.md) details the frozen feature contract.
 
-## Verify without retraining
-Use Python 3.14.2 with the unchanged dependency constraints. On this machine, the existing interpreter is `/Users/thomas/Documents/ChatGPT/AI/nfl-predictor/.venv/bin/python`; its environment is read only during these checks.
+Forecast inputs remain season win rate, scoring margin, recent margin and rest, with exact frozen smoothing/scaling/coefficient definitions. Current context has a separate cutoff and does not change these inputs. Missing injury report times remain unknown; missing reports do not mean healthy; a depth-chart slot does not confirm a starter. Weather, verified news, travel distance and individual QB performance remain unavailable. Real prospective performance is unknown until recorded games finish; the existing schedule's earlier results are not assigned retroactive predictions.
+
+## Verify without fitting
+
 ```sh
 python scripts/test_release.py
-# Local-only independent 2023 reproduction requires the captured data/ and artifacts/:
-python scripts/recompute_validation.py
-# Independent current-forecast formulas against the captured current-season CSV:
+# Read-only byte replay; requires retained current source observations and matching code:
+python scripts/replay_current.py
+# Independent raw-CSV probabilities/factors:
 python scripts/verify_current.py
-```
-The release runner blocks estimator/scaler fitting and explicitly skips the one repeatability test that would retrain. All other local Python tests run, including the preserved legacy feature tests. In a clean checkout, the real-snapshot test also skips because raw data is intentionally excluded. Full training entry points remain preserved for provenance; do not run ml.data, ml.train, ml.forecast, legacy/baseline.py or legacy/train.py during release preparation. Only the new season-isolated ml.current command is authorized to acquire current-season data. Do not use the historical all-season loader or execute the 2024–2025 assessment.
-
-The original frozen model manifest and its eight file hashes are unchanged. HOLDOUT_PROTOCOL_FREEZE.json adds a prospective protocol relative to further inspection, not a claim that earlier model selection or holdout exposure was preregistered. The original legacy baseline previously ran; owner-reported pooled 2024–2025 results were accuracy 0.5359, Brier 0.2492 and log loss 0.6915. They have not been recomputed here.
-
-## Actual 2023 results
-Training: 3,347 non-tied regular-season games, 2010–2022. Validation: the same 272 games for all contenders.
-
-| Model | Accuracy | Brier ↓ | Log loss ↓ |
-|---|---:|---:|---:|
-| 50/50 probability | 55.51% | 0.2500 | 0.6931 |
-| Historical home rate | 55.51% | 0.2470 | 0.6871 |
-| Original logistic | 55.51% | 0.2453 | 0.6844 |
-| Schedule logistic | 58.82% | 0.2370 | 0.6658 |
-
-The 50/50 classification uses p≥0.5 and therefore picks home. Candidate win-rate, margin, recent-margin and rest features use strictly earlier dates; probabilities exclude ties. Paired weekly-bootstrap Brier difference vs home baseline: −0.0099, descriptive 95% interval [−0.0247, +0.0064]. This does **not** establish a reliable improvement. Model selection used 2023. See the dashboard for expanding-window backtests, calibration counts, ablations and limitations.
-
-## Frontend checks
-```sh
+# Separate retained 2010–2023 source only; no historical acquisition or fitting:
+python scripts/recompute_validation.py
 cd web
 npm test
 npm run test:release
-npm run build
-# Start the local server before browser tests. Tests use installed Google Chrome.
-npm run test:e2e
-# Example GitHub Pages subpath build:
 VITE_BASE_PATH=/nfl-predictor/ npm run build
 VITE_BASE_PATH=/nfl-predictor/ npm run preview -- --port 4174 --strictPort
-# In another terminal:
+# In another terminal, using installed Google Chrome:
 TEST_BASE_URL=http://127.0.0.1:4174/nfl-predictor/ npm run test:e2e
 ```
-Browser tests cover desktop/mobile flows, refreshed hash URLs, failed data loading and axe accessibility scans. They are authored tests, not a claim of exhaustive accessibility certification. Build artifacts remain ignored.
 
-## Project map
-- `legacy/`: five original scripts, untouched, with SHA256 manifest. **Do not run legacy/baseline.py**: it evaluates the protected holdout. `legacy/train.py` also retrieves protected seasons. The new harness reproduces the original model on restricted data.
-- `ml/`: explicit acquisition, temporal features, validation-only model comparison and separate forecast generation.
-- `web/`: React/TypeScript/Vite, runtime contract, styles, tests and separate current/historical static artifacts.
-- `docs/`: product, architecture, data/feature provenance, evaluation, gates, risk register, research boundaries, deployment/rollback and engineering handoff.
-- `.github/workflows/ci.yml`: manual-only checks; not run remotely.
-- `.github/workflows/current-refresh.yml.disabled`: inactive manual candidate refresh; no cron, commit, deployment or paid infrastructure.
-- `.github/workflows/pages.yml.disabled`: inactive deployment preparation, requiring approval.
+The release runner forbids estimator/scaler fitting and skips the original fit-repeatability test. Raw-data integration tests skip in a clean checkout; synthetic leakage/integrity tests remain active. Frontend tests verify artifact arithmetic and chronology independently. Browser tests cover desktop/mobile, deep links, errors, responsive layout and selected axe checks; they are not exhaustive accessibility certification. Production builds verify every public artifact, original freezes, registry, protocols, dependency notices and Action SHA pins.
 
-## Boundaries
-Local research is provisionally Tier A. Public release is NO-GO until human approval and licensing/security/cost review. The assignment's supplied Idea-to-Production gates govern this build; the separate full framework source was not available. Research enrichment is design-only; no paid calls, agents, background loops, persistent compute or cloud resources.
+## Separate challenger research
 
-Current data: [SportsDataverse NFL Next Gen Stats schedules](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nfl_ngs_schedules), with repository MIT notice in web/public/CURRENT_DATA_NOTICE.txt. Upstream redistribution review remains a public-release gate. Historical data attribution: [nflverse schedules / Lee Sharpe](https://github.com/nflverse/nflverse-data), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Features and predictions are derived modifications. Upstream and trademark rights still require public-release review. The frontend uses original text team identifiers; NFL/ESPN image assets have been retired from the source package and build. Full bundled library notices ship at web/public/THIRD_PARTY_NOTICES.txt. The Python license inventory is in docs/PYTHON_DEPENDENCY_NOTICES.txt; see docs/THIRD_PARTY.md. This project is not affiliated with the NFL or nflverse. Educational research, not betting advice.
+The locked directive permits intentional local challenger experiments on approved data. `python -m ml.challenger --verify-repeat` runs only the fixed predeclared experiment in [CHALLENGER_PROTOCOL.md](docs/CHALLENGER_PROTOCOL.md), using the previously preserved hash-verified 2010–2023 CSV. It never downloads historical data or replaces the incumbent. This command fits separate research models and is deliberately excluded from release verification. Re-running is unnecessary to browse the saved experiment.
+
+The actual challenger has ten features across seven schedule-derived domains, six chronological 2018–2023 diagnostic folds, independent prior-season calibration, seven domain ablations, baselines and season-week bootstrap intervals. Its 2023 Brier is 0.23228 versus the frozen incumbent 0.23704, with paired 95% difference interval crossing zero. Pooled historical results compare a contemporaneously refitted incumbent recipe, not the frozen model on its training years; calibration and training-window differences prevent a feature-only interpretation. 2023 was already used for model selection. All results remain research diagnostics.
+
+**No promotion:** a per-season calibration criterion fails, prospective shadow evidence and historical publication vintages are missing, and current 2026 prior strength would require locked 2025 data. [MODEL_REGISTRY.json](docs/MODEL_REGISTRY.json) keeps `schedule-v1-741cf41752` operational. Further changes require a new versioned protocol, measured evidence and explicit owner promotion approval.
+
+## Preservation and approval boundaries
+
+The original five scripts remain unchanged in `legacy/`, with hashes matching `~/Documents/ChatGPT/AI/nfl-predictor`. The owner-selected working project is this separate `~/Documents/ChatGPT/nfl predictor` directory. Do not execute legacy baseline/training scripts, `ml.data`, `ml.train` or the historical all-season loader: they are preserved provenance, not authorized operational entry points.
+
+The candidate coefficients/preprocessing/features, eight frozen files, 2023 replay, validation evidence and holdout protocol/exposure remain unchanged. The locked 2024–2025 period is **partially exposed**: previously observed legacy aggregate accuracy 0.5359, Brier 0.2492 and log loss 0.6915 remain disclosure only. No additional protected results were acquired or evaluated.
+
+The owner controls G0–G4 approvals. Local implementation, current-season scoring and separate bounded challenger research are authorized. Public deployment, recurring scheduled execution, paid services, account changes, personal-site changes, protected holdout use and model promotion require explicit approval. Workflow templates remain inactive and no remote workflow ran. Deterministic investigation is implemented; an LLM research adapter is only a bounded design.
+
+Current schedule attribution: [SportsDataverse](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nfl_ngs_schedules), repository MIT notice in `web/public/CURRENT_DATA_NOTICE.txt`. Historical/current context: [nflverse](https://github.com/nflverse/nflverse-data), historical schedule contribution by Lee Sharpe, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Transformations and predictions are derived modifications. Upstream redistribution/source-code licensing remain public-release review items. Original text team identifiers replace NFL/ESPN logo assets. Full dependency notices ship with the app; see [THIRD_PARTY.md](docs/THIRD_PARTY.md). No affiliation with NFL or nflverse. Educational research, not betting advice.

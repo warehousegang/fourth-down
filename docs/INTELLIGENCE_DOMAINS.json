@@ -1,0 +1,270 @@
+{
+  "schema_version": 1,
+  "reviewed_at": "2026-10-24",
+  "operational_model_id": "schedule-v1-741cf41752",
+  "domains": [
+    {
+      "id": "prior_strength",
+      "name": "Prior-season team strength",
+      "incumbent_used": false,
+      "challenger_used": true,
+      "status": "implemented-research",
+      "source": {
+        "name": "nflverse / Lee Sharpe regular-season schedule snapshot",
+        "url": "https://github.com/nflverse/nflverse-data/releases/tag/schedules",
+        "license": "CC BY 4.0 (repository declaration); upstream public redistribution review remains G3",
+        "historical_availability": "Captured, SHA-verified 2010\u20132023 extract; corrected history, not publication-vintage evidence",
+        "license_url": "https://github.com/nflverse/nflverse-data/blob/main/LICENSE.md"
+      },
+      "prediction_time_rule": "Only strictly earlier calendar-date completed results; historical publication vintage unproven",
+      "transformation": "Previous-season completed team wins and margins, with franchise aliases preserved; same shrinkage as current-season features.",
+      "missing_behavior": "Requires actual prior season. Missing history excludes a row; 2026 blocked because 2025 is protected.",
+      "leakage_test": "No later-season result may affect previous-season values; protected-season guard.",
+      "contribution": null,
+      "contribution_status": "Measured in content-addressed research artifact via fixed-config leave-domain-out folds"
+    },
+    {
+      "id": "current_performance",
+      "name": "Current-season performance",
+      "incumbent_used": true,
+      "challenger_used": true,
+      "status": "implemented-research",
+      "source": {
+        "name": "nflverse / Lee Sharpe regular-season schedule snapshot",
+        "url": "https://github.com/nflverse/nflverse-data/releases/tag/schedules",
+        "license": "CC BY 4.0 (repository declaration); upstream public redistribution review remains G3",
+        "historical_availability": "Captured, SHA-verified 2010\u20132023 extract; corrected history, not publication-vintage evidence",
+        "license_url": "https://github.com/nflverse/nflverse-data/blob/main/LICENSE.md"
+      },
+      "prediction_time_rule": "Only strictly earlier calendar-date completed results; historical publication vintage unproven",
+      "transformation": "Home-away (wins+2)/(games+4), ties count half.",
+      "missing_behavior": "Week1 uses the explicit trained symmetric four-game shrinkage. Prior missing result excludes a challenger row.",
+      "leakage_test": "Target and future result mutation; same-day batch invariant; season reset.",
+      "contribution": null,
+      "contribution_status": "Measured in content-addressed research artifact via fixed-config leave-domain-out folds"
+    },
+    {
+      "id": "efficiency",
+      "name": "Offensive and defensive efficiency",
+      "incumbent_used": false,
+      "challenger_used": false,
+      "status": "unavailable-not-trained",
+      "source": {
+        "name": "nflverse play-by-play (candidate; not acquired)",
+        "url": "https://nflreadr.nflverse.com/reference/load_pbp.html",
+        "license": "nflverse-data CC BY 4.0 declaration; review provider-specific fields before use",
+        "historical_availability": "Documentation describes seasons since 1999; corrected datasets do not establish publication-time vintages"
+      },
+      "prediction_time_rule": "Verified source and license approval; published\u2264observed\u2264retrieved\u2264cutoff<kickoff, observed<cutoff<valid_until; domain staleness limits",
+      "transformation": "Proposed prior completed-game success rate and yards per play, offense and defense separately; no EPA model with unverified training vintage.",
+      "missing_behavior": "The trained models have no play-by-play efficiency input. Separate current team ratios are available only for matched verified completed games; missing or ambiguous stats withhold the aggregate.",
+      "leakage_test": "Timestamp contract implemented; actual PBP temporal joins and contribution not measured.",
+      "contribution": null,
+      "contribution_status": "Not measured; no trained feature or legitimate vintage dataset",
+      "current_context": {
+        "status": "implemented-observed-context-only",
+        "artifact_pointer": "web/public/data/context/latest.json",
+        "affects_probability": false,
+        "source_url": "https://github.com/nflverse/nflverse-data/releases/download/stats_team/stats_team_week_2026.csv",
+        "historical_training_vintage": "Not established; no trained contribution added",
+        "cutoff_rule": "Each source captured before the independently displayed context cutoff and generation before kickoff",
+        "limitation": "Observable completion and passing/rushing yards-per-attempt ratios only; EPA/CPOE excluded"
+      }
+    },
+    {
+      "id": "opponent_adjusted",
+      "name": "Opponent-adjusted performance",
+      "incumbent_used": false,
+      "challenger_used": true,
+      "status": "implemented-research",
+      "source": {
+        "name": "nflverse / Lee Sharpe regular-season schedule snapshot",
+        "url": "https://github.com/nflverse/nflverse-data/releases/tag/schedules",
+        "license": "CC BY 4.0 (repository declaration); upstream public redistribution review remains G3",
+        "historical_availability": "Captured, SHA-verified 2010\u20132023 extract; corrected history, not publication-vintage evidence",
+        "license_url": "https://github.com/nflverse/nflverse-data/blob/main/LICENSE.md"
+      },
+      "prediction_time_rule": "Only strictly earlier calendar-date completed results; historical publication vintage unproven",
+      "transformation": "Mean of each earlier game's margin plus opponent's shrunk margin known before that earlier game; four zero-margin prior games.",
+      "missing_behavior": "No later opponent games are used. Missing preceding observations make row unavailable.",
+      "leakage_test": "Future-opponent outcome perturbation and strictly earlier-date opponent state.",
+      "contribution": null,
+      "contribution_status": "Measured in content-addressed research artifact via fixed-config leave-domain-out folds"
+    },
+    {
+      "id": "recent_trends",
+      "name": "Recent-game trends",
+      "incumbent_used": true,
+      "challenger_used": true,
+      "status": "implemented-research",
+      "source": {
+        "name": "nflverse / Lee Sharpe regular-season schedule snapshot",
+        "url": "https://github.com/nflverse/nflverse-data/releases/tag/schedules",
+        "license": "CC BY 4.0 (repository declaration); upstream public redistribution review remains G3",
+        "historical_availability": "Captured, SHA-verified 2010\u20132023 extract; corrected history, not publication-vintage evidence",
+        "license_url": "https://github.com/nflverse/nflverse-data/blob/main/LICENSE.md"
+      },
+      "prediction_time_rule": "Only strictly earlier calendar-date completed results; historical publication vintage unproven",
+      "transformation": "Home-away last-five margin sums divided by min(5,games)+2.",
+      "missing_behavior": "Empty season uses documented zero-margin shrinkage; no previous-season carryover.",
+      "leakage_test": "Future target perturbation and independent current-season reference.",
+      "contribution": null,
+      "contribution_status": "Measured in content-addressed research artifact via fixed-config leave-domain-out folds"
+    },
+    {
+      "id": "home_road",
+      "name": "Home and road performance",
+      "incumbent_used": false,
+      "challenger_used": true,
+      "status": "implemented-research",
+      "source": {
+        "name": "nflverse / Lee Sharpe regular-season schedule snapshot",
+        "url": "https://github.com/nflverse/nflverse-data/releases/tag/schedules",
+        "license": "CC BY 4.0 (repository declaration); upstream public redistribution review remains G3",
+        "historical_availability": "Captured, SHA-verified 2010\u20132023 extract; corrected history, not publication-vintage evidence",
+        "license_url": "https://github.com/nflverse/nflverse-data/blob/main/LICENSE.md"
+      },
+      "prediction_time_rule": "Only strictly earlier calendar-date completed results; historical publication vintage unproven",
+      "transformation": "Home side prior home margin and away side prior road margin, each divided by role games+4; separate neutral-site flag.",
+      "missing_behavior": "First role appearance shrinks to zero; neutral matches excluded from role history. No fabricated venue inputs.",
+      "leakage_test": "Neutral-site and role-history unit tests; strictly earlier-date values.",
+      "contribution": null,
+      "contribution_status": "Measured in content-addressed research artifact via fixed-config leave-domain-out folds"
+    },
+    {
+      "id": "scoring_margins",
+      "name": "Scoring margins",
+      "incumbent_used": true,
+      "challenger_used": true,
+      "status": "implemented-research",
+      "source": {
+        "name": "nflverse / Lee Sharpe regular-season schedule snapshot",
+        "url": "https://github.com/nflverse/nflverse-data/releases/tag/schedules",
+        "license": "CC BY 4.0 (repository declaration); upstream public redistribution review remains G3",
+        "historical_availability": "Captured, SHA-verified 2010\u20132023 extract; corrected history, not publication-vintage evidence",
+        "license_url": "https://github.com/nflverse/nflverse-data/blob/main/LICENSE.md"
+      },
+      "prediction_time_rule": "Only strictly earlier calendar-date completed results; historical publication vintage unproven",
+      "transformation": "Home-away cumulative point-margin sum divided by games+4.",
+      "missing_behavior": "No score imputation; missing prior result blocks affected challenger history.",
+      "leakage_test": "Target, same-date and future score mutations cannot change predictors.",
+      "contribution": null,
+      "contribution_status": "Measured in content-addressed research artifact via fixed-config leave-domain-out folds"
+    },
+    {
+      "id": "rest_travel",
+      "name": "Rest days, bye weeks and travel",
+      "incumbent_used": true,
+      "challenger_used": true,
+      "status": "implemented-partial-travel-unavailable",
+      "source": {
+        "name": "nflverse / Lee Sharpe regular-season schedule snapshot",
+        "url": "https://github.com/nflverse/nflverse-data/releases/tag/schedules",
+        "license": "CC BY 4.0 (repository declaration); upstream public redistribution review remains G3",
+        "historical_availability": "Captured, SHA-verified 2010\u20132023 extract; corrected history, not publication-vintage evidence",
+        "license_url": "https://github.com/nflverse/nflverse-data/blob/main/LICENSE.md"
+      },
+      "prediction_time_rule": "Only strictly earlier calendar-date completed results; historical publication vintage unproven",
+      "transformation": "Rest capped14 days (seven before first game); challenger adds prior-game gap\u226512-day bye indicator. Travel distance is NOT included.",
+      "missing_behavior": "Week1 uses trained rest default; travel is unavailable pending licensed verified venue coordinates and itinerary assumptions.",
+      "leakage_test": "Week1, bye gap/cap, shifted dates; no future last-game dates.",
+      "contribution": null,
+      "contribution_status": "Measured in content-addressed research artifact via fixed-config leave-domain-out folds"
+    },
+    {
+      "id": "quarterback",
+      "name": "Starting quarterback availability and performance",
+      "incumbent_used": false,
+      "challenger_used": false,
+      "status": "unavailable-not-trained",
+      "source": {
+        "name": "Official NFL/team starter announcements; nflverse depth charts/PBP (candidate)",
+        "url": "https://nflreadr.nflverse.com/reference/load_depth_charts.html",
+        "license": "nflverse repository terms vary by dataset; official announcements are not blanket-licensed for redistribution",
+        "historical_availability": "Weekly depth-chart docs describe history since 2001, but historical starter-confirmation timestamps are not established"
+      },
+      "prediction_time_rule": "Verified source and license approval; published\u2264observed\u2264retrieved\u2264cutoff<kickoff, observed<cutoff<valid_until; domain staleness limits",
+      "transformation": "Proposed explicitly confirmed starter identity and earlier completed-game performance; depth chart position alone does not confirm starting availability.",
+      "missing_behavior": "The trained models have no player input. Current depth-chart context is available, but confirmed starters and individual QB performance remain unavailable.",
+      "leakage_test": "Synthetic unconfirmed starter, post-cutoff publication/retrieval and source-conflict rejection.",
+      "contribution": null,
+      "contribution_status": "Not measured; no trained feature or legitimate vintage dataset",
+      "current_context": {
+        "status": "implemented-observed-context-only",
+        "artifact_pointer": "web/public/data/context/latest.json",
+        "affects_probability": false,
+        "source_url": "https://github.com/nflverse/nflverse-data/releases/download/depth_charts/depth_charts_2026.parquet",
+        "historical_training_vintage": "Not established; no trained contribution added",
+        "cutoff_rule": "Each source captured before the independently displayed context cutoff and generation before kickoff",
+        "limitation": "Provider depth order is not confirmed starter availability"
+      }
+    },
+    {
+      "id": "injuries",
+      "name": "Injuries and roster availability",
+      "incumbent_used": false,
+      "challenger_used": false,
+      "status": "unavailable-not-trained",
+      "source": {
+        "name": "Official injury reports / nflverse injury archive (candidate)",
+        "url": "https://nflreadr.nflverse.com/reference/load_injuries.html",
+        "license": "Review source-specific access and redistribution terms; no report content copied",
+        "historical_availability": "Documented since 2009 and date_modified field; historical rows alone do not prove every pregame publication vintage or current feed completeness"
+      },
+      "prediction_time_rule": "Verified source and license approval; published\u2264observed\u2264retrieved\u2264cutoff<kickoff, observed<cutoff<valid_until; domain staleness limits",
+      "transformation": "Proposed official player status snapshots with identity and publication/observation timestamps; no inferred clinical severity.",
+      "missing_behavior": "The trained models have no injury input. Current separately timestamped context can show observed weekly reports; unknown status remains unknown and a missing report never means healthy.",
+      "leakage_test": "Synthetic stale, missing identity, unavailable designation and future-timestamp rejection.",
+      "contribution": null,
+      "contribution_status": "Not measured; no trained feature or legitimate vintage dataset",
+      "current_context": {
+        "status": "implemented-observed-context-only",
+        "artifact_pointer": "web/public/data/context/latest.json",
+        "affects_probability": false,
+        "source_url": "https://github.com/nflverse/nflverse-data/releases/download/injuries/injuries_2026.csv",
+        "historical_training_vintage": "Not established; no trained contribution added",
+        "cutoff_rule": "Each source captured before the independently displayed context cutoff and generation before kickoff",
+        "limitation": "No report publication timestamp; missing report does not mean healthy"
+      }
+    },
+    {
+      "id": "weather",
+      "name": "Weather and stadium conditions",
+      "incumbent_used": false,
+      "challenger_used": false,
+      "status": "unavailable-not-trained",
+      "source": {
+        "name": "Open-Meteo Single Runs forecast archive (candidate; not acquired)",
+        "url": "https://open-meteo.com/en/docs/single-runs-api",
+        "license": "Data CC BY4.0; free API non-commercial use only; portfolio promotional use requires review, no paid service approved",
+        "historical_availability": "Single-run docs: ECMWF from March 2024, most others April 2026; does not support this2011\u20132023 historical experiment",
+        "license_url": "https://open-meteo.com/en/terms"
+      },
+      "prediction_time_rule": "Verified source and license approval; published\u2264observed\u2264retrieved\u2264cutoff<kickoff, observed<cutoff<valid_until; domain staleness limits",
+      "transformation": "Proposed issued forecast for actual stadium coordinates and kickoff, plus verified roof state; never observed target-game weather. Stadium name is display metadata only.",
+      "missing_behavior": "Unavailable without vintage forecast and permitted source. Do not fill historical forecasts with postgame reanalysis.",
+      "leakage_test": "Synthetic forecast-issued-time, kickoff validity and observed-weather rejection.",
+      "contribution": null,
+      "contribution_status": "Not measured; no trained feature or legitimate vintage dataset"
+    },
+    {
+      "id": "developments",
+      "name": "Verified relevant team and player developments",
+      "incumbent_used": false,
+      "challenger_used": false,
+      "status": "unavailable-not-trained",
+      "source": {
+        "name": "Official NFL/team news and transaction announcements (candidate)",
+        "url": "https://www.nfl.com/transactions/",
+        "license": "Source-specific access/redistribution review required; public visibility is not blanket permission",
+        "historical_availability": "No timestamped, licensed historical evidence corpus captured; mutable pages cannot prove pregame availability"
+      },
+      "prediction_time_rule": "Verified source and license approval; published\u2264observed\u2264retrieved\u2264cutoff<kickoff, observed<cutoff<valid_until; domain staleness limits",
+      "transformation": "Allowlisted official roster transactions, coaching announcements and schedule changes as cited structured annotations. No private mental/emotional-state inference.",
+      "missing_behavior": "Unavailable without verified sources and timestamps. Annotations never adjust probabilities; no model contribution claimed.",
+      "leakage_test": "Synthetic unsupported/private-state category, unapproved host, conflict and target-time rejection.",
+      "contribution": null,
+      "contribution_status": "Not measured; no trained feature or legitimate vintage dataset"
+    }
+  ]
+}

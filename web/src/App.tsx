@@ -12,6 +12,8 @@ import {
   FlaskConical,
   GitBranch,
   Layers3,
+  History,
+  ClipboardCheck,
   LockKeyhole,
   MapPin,
   ShieldCheck,
@@ -23,9 +25,17 @@ import { loadArtifact, type Artifact, type Game } from "./contracts";
 import { team } from "./teams";
 import exposure from "../../docs/HOLDOUT_EXPOSURE.json";
 import { CurrentForecasts } from "./CurrentForecasts";
+import { ForecastHistory } from "./ForecastHistory";
+import { PostgameAnalysis } from "./PostgameAnalysis";
+import { MatchupIntelligence } from "./MatchupIntelligence";
+import { ModelIntelligence } from "./ModelIntelligence";
 
 const routes = [
   "current",
+  "intelligence",
+  "history",
+  "postgame",
+  "models",
   "matchups",
   "explanation",
   "performance",
@@ -33,12 +43,19 @@ const routes = [
 ] as const;
 type Route = (typeof routes)[number];
 const nav = [
-  ["current", "Current Week Forecasts", Clock3],
+  ["current", "Current Week Forecasts", Clock3, "Upcoming Games"],
+  ["intelligence", "Matchup Intelligence", Target, "Matchup Intelligence"],
+  ["history", "Forecast History", History, "Forecast History"],
+  ["models", "Model Intelligence", BarChart3, "Model Intelligence"],
+  ["postgame", "Postgame Analysis", ClipboardCheck, "Postgame Analysis"],
+  ["architecture", "Architecture", Layers3, "Engineering"],
+] as const;
+const historicalNav = [
   ["matchups", "2023 Matchups", Trophy],
   ["explanation", "Prediction explanation", Target],
   ["performance", "Model performance", BarChart3],
-  ["architecture", "Architecture", Layers3],
 ] as const;
+const needsHistorical = (route: Route) => ["matchups", "explanation", "performance", "architecture"].includes(route);
 function locationState() {
   const [path, query = ""] = window.location.hash.slice(1).split("?");
   return {
@@ -76,7 +93,7 @@ export function App() {
   const [week, setWeek] = useState(4);
   const [attempt, setAttempt] = useState(0);
   useEffect(() => {
-    if (location.route === "current") return;
+    if (!needsHistorical(location.route)) return;
     let active = true;
     setError("");
     loadArtifact()
@@ -90,7 +107,7 @@ export function App() {
     return () => {
       active = false;
     };
-  }, [attempt, location.route === "current"]);
+  }, [attempt, needsHistorical(location.route)]);
   useEffect(() => {
     const handler = () => setLocation(locationState());
     window.addEventListener("hashchange", handler);
@@ -141,33 +158,34 @@ export function App() {
         </a>
 
         <nav aria-label="Main navigation">
-          {nav.map(([id, label, Icon]) => (
+          {nav.map(([id, label, Icon, display]) => (
             <a
               key={id}
               aria-label={label}
               className={location.route === id ? "nav-item active" : "nav-item"}
-              href={`#${id}${id !== "current" && selected ? `?game=${selected.id}` : ""}`}
+              href={`#${id}`}
               aria-current={location.route === id ? "page" : undefined}
             >
               <Icon size={18} />
-              <span>{label}</span>
+              <span>{display}</span>
               {location.route === id && <span className="nav-dot" />}
             </a>
           ))}
         </nav>
       </header>
+      <nav className="historical-nav" aria-label="Historical research navigation"><span>2023 RESEARCH</span>{historicalNav.map(([id,label,Icon])=><a key={id} aria-label={label} aria-current={location.route===id ? "page" : undefined} href={`#${id}${selected ? `?game=${selected.id}` : ""}`}><Icon size={13}/>{label}</a>)}</nav>
       <div className="main-shell">
         <header className="topbar">
           <span>
             WORKSPACE <ChevronRight size={13} />{" "}
-            <strong>{nav.find((n) => n[0] === location.route)?.[1]}</strong>
+            <strong>{[...nav, ...historicalNav].find((n) => n[0] === location.route)?.[1]}</strong>
           </span>
           <span className="replay-badge">
-            <span /> {location.route === "current" ? "UPCOMING · STATIC FORECAST" : "2023 HISTORICAL REPLAY"}
+            <span /> {location.route === "current" || location.route === "intelligence" ? "UPCOMING · STATIC FORECAST" : needsHistorical(location.route) && location.route !== "architecture" ? "2023 HISTORICAL REPLAY" : "LOCAL EVIDENCE · REVIEW BUILD"}
           </span>
         </header>
         <main id="main-content" tabIndex={-1}>
-          {location.route === "current" ? <CurrentForecasts /> : error ? (
+          {location.route === "current" ? <CurrentForecasts /> : location.route === "history" ? <ForecastHistory/> : location.route === "postgame" ? <PostgameAnalysis/> : location.route === "intelligence" ? <MatchupIntelligence selectedId={location.game}/> : location.route === "models" ? <ModelIntelligence/> : error ? (
             <section className="empty-state" role="alert">
               <CircleHelp size={36} />
               <h1>Forecasts unavailable</h1>
@@ -1122,7 +1140,7 @@ function Architecture({ data: d }: { data: Artifact }) {
       <section className="panel current-limitations">
         <PanelTitle label="CURRENT-SEASON PATH" title="New games. The same frozen model." />
         <p>The stages above describe the historical model build. Current forecasts fetch a separate, season-specific SportsDataverse schedule. Only earlier-date results observed as final before each cutoff enter team state. The frozen feature formulas and coefficients produce a versioned static artifact without fitting a model.</p>
-        <p>Missing results, unconfirmed kickoffs and postponed games show an unavailable reason. Source timestamps, exact inputs and artifact checksums appear on the current screen. Current-season performance has not been established.</p>
+        <p>Missing results, unconfirmed kickoffs and postponed games show an unavailable reason. Source timestamps, exact inputs and artifact checksums appear on the current screen. Current-season performance is established only by reconciling genuinely pregame archived forecasts with later verified results. The postgame screen exposes the scored population, including an honest empty state before those games finish.</p>
         <a href="#current">Inspect Current Week Forecasts <ArrowUpRight size={13} /></a>
       </section>
       <div className="two-column">
@@ -1169,8 +1187,7 @@ function Architecture({ data: d }: { data: Artifact }) {
               <strong>Automated when run locally</strong>
               <p>
                 Current-season acquisition, pre-cutoff state, frozen-model scoring,
-                static artifacts, schema checks and tests. Training and holdout
-                evaluation remain outside the authorized refresh path.
+                immutable archives, result reconciliation, deterministic investigations, static artifacts, schema checks and tests. Challenger training is a separate local research command; holdout evaluation is excluded.
               </p>
             </div>
           </div>
@@ -1179,8 +1196,7 @@ function Architecture({ data: d }: { data: Artifact }) {
             <div>
               <strong>Owner controlled</strong>
               <p>
-                Refresh the source, freeze a model, approve holdout evaluation,
-                review licensing and authorize publication.
+                Approve model promotion, unlock holdout evaluation, review source licensing, enable scheduled workflows and authorize publication.
               </p>
             </div>
           </div>
@@ -1208,13 +1224,10 @@ function Architecture({ data: d }: { data: Artifact }) {
       </div>
       <section className="panel research-design">
         <div>
-          <span className="eyebrow">A BOUNDED NEXT CHAPTER</span>
+          <span className="eyebrow">BOUNDED POSTGAME RESEARCH</span>
           <h2>Research assistance, with receipts.</h2>
           <p>
-            Future research can summarize official injury reports, quarterback
-            availability, roster changes, coaching, weather and verified team
-            news. Each fact needs a source URL, publication time, retrieval time
-            and verification state.
+            The local deterministic analyst separates verified result facts, measured forecast error, explanatory hypotheses and demonstrated model limitations. Each verified fact carries a source URL and observation time. Expanded injury, quarterback, weather and news evidence remains unavailable until its source and prediction-time provenance pass review.
           </p>
           <p>
             An LLM may summarize cited evidence. It may not change the model’s
@@ -1223,7 +1236,7 @@ function Architecture({ data: d }: { data: Artifact }) {
           </p>
         </div>
         <span className="research-status">
-          <LockKeyhole size={16} /> DESIGN ONLY
+          <LockKeyhole size={16} /> DETERMINISTIC / LOCAL
         </span>
       </section>
       <section className="release-banner">
@@ -1231,7 +1244,7 @@ function Architecture({ data: d }: { data: Artifact }) {
         <div>
           <strong>Local research build · provisional Tier A</strong>
           <p>
-            Public release is NO-GO until the owner approves G0–G3 evidence and
+            Public release is NO-GO until the owner approves G0–G4 evidence and
             licensing. The 2024–2025 period is partially exposed; candidate
             evaluation remains locked under a separate frozen protocol.
           </p>

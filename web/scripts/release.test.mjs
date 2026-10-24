@@ -13,7 +13,10 @@ function fixture(t) {
   t.after(() => rmSync(dir, { recursive: true, force: true }));
   const files = new Set(["docs/RELEASE_ARTIFACTS.json", "docs/FROZEN_MODEL.json", "docs/HOLDOUT_PROTOCOL_FREEZE.json", "docs/ACTIONS_LOCK.json", "web/scripts/check-release.mjs", ".github/workflows/ci.yml", ".github/workflows/pages.yml.disabled"]);
   files.add("web/public/CURRENT_DATA_NOTICE.txt");
-  for (const name of readdirSync(resolve(root, "web/public/data/current"))) files.add(`web/public/data/current/${name}`);
+  for (const directory of ["web/public/data/current", "web/public/data/operations", "web/public/data/research", "web/public/data/context", "docs/protocols"]) {
+    for (const name of readdirSync(resolve(root, directory))) files.add(`${directory}/${name}`);
+  }
+  for (const name of ["MODEL_REGISTRY.json", "CHALLENGER_DECLARATION.json", "CHALLENGER_PROTOCOL.md"]) files.add(`docs/${name}`);
   for (const name of readdirSync(resolve(root, ".github/workflows"))) files.add(`.github/workflows/${name}`);
   for (const name of ["docs/RELEASE_ARTIFACTS.json", "docs/FROZEN_MODEL.json", "docs/HOLDOUT_PROTOCOL_FREEZE.json"]) {
     for (const file of Object.keys(json(name).file_sha256)) files.add(file);
@@ -63,5 +66,21 @@ test("current pointer tampering is rejected", t => {
   const pointer = JSON.parse(readFileSync(path, "utf8"));
   pointer.file = "../demo.json";
   writeFileSync(path, JSON.stringify(pointer));
+  assert.notEqual(run(dir).status, 0);
+});
+for (const directory of ["operations", "research", "context"]) {
+  test(`${directory} missing or altered version is rejected`, t => {
+    const dir = fixture(t), pointer = json(`web/public/data/${directory}/latest.json`);
+    const path = resolve(dir, `web/public/data/${directory}/${pointer.file}`);
+    writeFileSync(path, readFileSync(path, "utf8") + " ");
+    assert.notEqual(run(dir).status, 0);
+    rmSync(path);
+    assert.notEqual(run(dir).status, 0);
+  });
+}
+test("unapproved operational model registry change fails", t => {
+  const dir = fixture(t), path = resolve(dir, "docs/MODEL_REGISTRY.json"), registry = JSON.parse(readFileSync(path,"utf8"));
+  registry.operational_model_id = "challenger-v1";
+  writeFileSync(path, JSON.stringify(registry));
   assert.notEqual(run(dir).status, 0);
 });
