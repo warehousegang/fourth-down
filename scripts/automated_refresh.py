@@ -145,6 +145,8 @@ def stage(portfolio, result, output):
     root = Path(portfolio)
     old, _ = read_release(root)
     archive = portfolio_artifact.pack(output, generated_only=True)
+    if archive['source_commit'] != result['source_commit']:
+        raise ValueError('Source revision changed after preparation; regenerate from the pinned revision')
     files, _ = portfolio_artifact.read_archive(output, archive['sha256'])
     for name, body in old.items():
         if name.startswith(('data/current/', 'data/operations/', 'data/context/')) and not name.endswith('/latest.json'):
