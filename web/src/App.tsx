@@ -56,6 +56,8 @@ const historicalNav = [
   ["performance", "Model performance", BarChart3],
 ] as const;
 const needsHistorical = (route: Route) => ["matchups", "explanation", "performance", "architecture"].includes(route);
+// Integrated builds share the portfolio origin; standalone previews link to the public site.
+const portfolioRoot = import.meta.env.BASE_URL === "/" ? "https://thomashoward.dev" : "";
 function locationState() {
   const [path, query = ""] = window.location.hash.slice(1).split("?");
   return {
@@ -173,7 +175,7 @@ export function App() {
           ))}
         </nav>
       </header>
-      <nav className="historical-nav" aria-label="Historical research navigation"><span>2023 RESEARCH</span>{historicalNav.map(([id,label,Icon])=><a key={id} aria-label={label} aria-current={location.route===id ? "page" : undefined} href={`#${id}${selected ? `?game=${selected.id}` : ""}`}><Icon size={13}/>{label}</a>)}</nav>
+      <nav className="historical-nav" aria-label="Research and project navigation"><span>2023 RESEARCH</span>{historicalNav.map(([id,label,Icon])=><a key={id} aria-label={label} aria-current={location.route===id ? "page" : undefined} href={`#${id}${selected ? `?game=${selected.id}` : ""}`}><Icon size={13}/>{label}</a>)}<span>PROJECT</span><a href={`${portfolioRoot}/projects/nfl-predictor/`}>Technical article <ArrowUpRight size={13}/></a><a href={`${portfolioRoot}/`}>Thomas Howard <ArrowUpRight size={13}/></a></nav>
       <div className="main-shell">
         <header className="topbar">
           <span>

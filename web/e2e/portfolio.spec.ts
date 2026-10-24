@@ -51,3 +51,53 @@ test("all original portfolio HTML routes and their assets still load", async ({p
   expect((await page.request.get(new URL("fourth-down/not-a-react-path/",origin!).href)).status()).toBe(404);
   expect(failures).toEqual([]);
 });
+
+// Editorial metrics must remain tied to the exact artifact shipped with the article.
+test("technical article matches saved validation and links both ways", async ({page}, info) => {
+  await page.goto(new URL("projects/nfl-predictor/",origin!).href);
+  await expect(page.getByRole("heading",{name:"Fourth Down: from historical games to accountable NFL forecasts"})).toBeVisible();
+  const artifact=await (await page.request.get(new URL("fourth-down/data/demo.json",origin!).href)).json();
+  for(const model of artifact.evaluation.models) {
+    await expect(page.locator(`[data-model-id="${model.id}"] td`)).toHaveText([
+      `${(model.accuracy*100).toFixed(2)}%`, model.brier.toFixed(6), model.log_loss.toFixed(6),
+    ]);
+  }
+  const delta=artifact.evaluation.brier_difference;
+  const signed=(n:number)=>n.toFixed(6).replace("-","−");
+  await expect(page.locator("article")).toContainText(`[${signed(delta.low)}, ${signed(delta.high)}]`);
+  await expect(page.locator("article")).toContainText(signed(delta.mean));
+  for(const anchor of ["data","baseline","leakage","model","evaluation","agent","related-ml"]) {
+    await page.locator(`.essay-nav a[href="#${anchor}"]`).click();
+    await expect(page.locator(`#${anchor}`)).toBeInViewport();
+  }
+  await page.goto(new URL("projects/nfl-predictor/",origin!).href);
+  await page.screenshot({path:`${process.env.TEST_ARTIFACT_DIR}/technical-article-${info.project.name}.png`});
+  await page.locator("#evaluation").scrollIntoViewIfNeeded();
+  await page.screenshot({path:`${process.env.TEST_ARTIFACT_DIR}/article-evaluation-${info.project.name}.png`});
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+  await page.getByRole("link",{name:"Open Fourth Down",exact:true}).click();
+  await expect(page.getByRole("heading",{name:"Current Week Forecasts",exact:true})).toBeVisible();
+  await page.getByRole("link",{name:"Technical article",exact:true}).click();
+  await expect(page).toHaveURL(new URL("projects/nfl-predictor/",origin!).href);
+  await page.getByRole("link",{name:"archived Forecast Lab prototype"}).click();
+  await expect(page.getByRole("complementary",{name:"Archived prototype"})).toContainText("hand-authored 62% / 38%");
+  await page.getByRole("link",{name:"Open Fourth Down",exact:true}).click();
+  await page.getByRole("link",{name:"Thomas Howard",exact:true}).click();
+  await expect(page).toHaveURL(origin!+"/");
+});
+
+test("portfolio entry points and technical article pass accessibility and layout checks", async ({page}) => {
+  const {default:AxeBuilder}=await import("@axe-core/playwright");
+  for(const path of ["","about/","projects/","blog/","projects/nfl-predictor/","projects/nfl-predictor/lab/"]) {
+    await page.goto(new URL(path,origin!).href);
+    if(path==="projects/nfl-predictor/") {
+      await page.keyboard.press("Tab");
+      await expect(page.getByRole("link",{name:"Skip to content"})).toBeFocused();
+      await page.keyboard.press("Enter");
+      await expect(page.locator("#main")).toBeFocused();
+    }
+    expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),path).toBe(true);
+    const scan=await new AxeBuilder({page}).withTags(["wcag2a","wcag2aa","wcag21aa"]).analyze();
+    expect(scan.violations.map(v=>({id:v.id,nodes:v.nodes.map(n=>({target:n.target,summary:n.failureSummary}))})),path).toEqual([]);
+  }
+});

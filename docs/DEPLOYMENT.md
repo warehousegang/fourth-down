@@ -8,7 +8,7 @@ On 2026-10-24, `warehousegang/thomashowarddev` was at `0df446445f199b0e7f1329f58
 
 The local review checkout is `/Users/thomas/Documents/Codex/2026-10-24/files-pasted-by-the-user-codex/thomashowarddev-integration`, branch `codex/fourth-down-integration`. The original `/Users/thomas/PycharmProjects/thomashowarddev` checkout is untouched.
 
-The website change is limited to the compiled `fourth-down/` directory, the existing featured cards in `index.html` and `projects/index.html`, and a README explanation. All existing article URLs, the old illustrative lab, CSS, JavaScript, images, résumé and domain configuration remain intact. The new directory contains no Python, raw training data, Git metadata or credentials. Its `release.json` identifies the source commit, `/fourth-down/` base and every static file checksum. No portfolio deployment workflow change is necessary: the existing branch publisher copies these static files alongside the existing site.
+The website changes comprise the compiled `fourth-down/` directory, the featured cards in `index.html` and `projects/index.html`, the Writing index entry, the outdated About paragraph and related-article link labels, the rewritten technical article at `projects/nfl-predictor/` with a small scoped table stylesheet, an archive banner on the old illustrative lab, and README corrections. Existing article URLs and legacy section anchors are preserved. Shared CSS, JavaScript, images, résumé and domain configuration remain unchanged. The application links back to the article and portfolio, using same-origin URLs under `/fourth-down/` and the public portfolio origin for standalone root builds. The new directory contains no Python, raw training data, Git metadata or credentials. Its `release.json` identifies the source commit, `/fourth-down/` base and every static file checksum. No portfolio deployment workflow change is necessary: the existing branch publisher copies these static files alongside the existing site.
 
 Fourth Down source, ML and tests remain in this separate repository. Vite defaults to `/fourth-down/`; `VITE_BASE_PATH=/` remains available for standalone testing. The SHA-pinned `portfolio-artifact.yml.disabled` replaces the unused standalone Pages template. It refreshes only the current season, retains forecast evidence in its own Git history and produces a seven-day `fourth-down-static` download. It has no Pages deployment job, portfolio token, cross-repository push or active schedule. Building an artifact does not update the public website.
 
@@ -51,7 +51,7 @@ There is no SPA catch-all rewrite: Fourth Down uses hash routes. `/fourth-down` 
    ```
 
    Stop on an existing repository/name collision. Do **not** enable Pages on the Fourth Down repository or add a second CNAME. Hosting remains with `thomashowarddev`.
-3. In the portfolio review checkout, inspect `git diff 0df446445f199b0e7f1329f5817b97b22cf7b1e8 --stat` and the two card changes. Fetch the latest portfolio `main` and reconcile any intervening edits before proceeding. Once this exact integration is approved, push the feature branch and merge it through a reviewed pull request. The merge to `main` triggers the existing Pages deployment:
+3. In the portfolio review checkout, inspect `git diff 0df446445f199b0e7f1329f5817b97b22cf7b1e8 --stat` including the article, cards, Writing index, archived-lab banner and compiled application. Fetch the latest portfolio `main` and reconcile any intervening edits before proceeding. Once this exact integration is approved, push the feature branch and merge it through a reviewed pull request. The merge to `main` triggers the existing Pages deployment:
 
    ```sh
    cd '/Users/thomas/Documents/Codex/2026-10-24/files-pasted-by-the-user-codex/thomashowarddev-integration'
@@ -61,13 +61,13 @@ There is no SPA catch-all rewrite: Fourth Down uses hash routes. `/fourth-down` 
    gh pr create --repo warehousegang/thomashowarddev --base main \
      --head codex/fourth-down-integration \
      --title 'Feature Fourth Down under /fourth-down/' \
-     --body 'Adds the verified static Fourth Down artifact and updates the existing featured cards. Preserves portfolio routes, assets, CNAME and branch-based Pages publishing. ML source and tests remain in their separate repository.'
+     --body 'Integrates the verified Fourth Down artifact, updates project positioning and the technical article from saved evidence, and adds bidirectional navigation. Preserves existing routes, shared assets, CNAME and branch-based Pages publishing. ML source and tests remain separate.'
    # After approval of the exact pull request, merge it in GitHub.
    gh run list --repo warehousegang/thomashowarddev --limit 3
    gh run watch DEPLOYMENT_RUN_ID --repo warehousegang/thomashowarddev --exit-status
    ```
 
-4. Verify the live homepage card, `/projects/`, `/about/`, `/blog/`, `/resume/`, an existing project essay, `/fourth-down/` and a refreshed `#models` deep link. Compare `/fourth-down/release.json` with the approved source commit/checksums; inspect current forecast age and model ID. This is the first hosted verification, not an already-completed local test. Do not change DNS or Pages settings.
+4. Verify the live homepage card, `/projects/`, `/about/`, `/blog/`, `/resume/`, `/projects/nfl-predictor/`, article-to-app and app-to-article links, the archived lab, `/fourth-down/` and a refreshed `#models` deep link. Compare `/fourth-down/release.json` with the approved source commit/checksums; inspect current forecast age and model ID. This is the first hosted verification, not an already-completed local test. Do not change DNS or Pages settings.
 
 ## Future refreshes and rollback
 
@@ -83,7 +83,7 @@ gh run download BUILD_RUN_ID --repo warehousegang/fourth-down \
 
 Verify the checksum against that approved run, import the archive using the same installer, review/commit only `fourth-down/`, and publish through the website's normal merge. The commented daily cron may be enabled only with recurring-run approval; it prepares artifacts and never updates the website automatically. No new cross-repository credentials are required. Manual promotion is intentional for this small portfolio; public forecasts expire visibly until the next artifact is imported.
 
-For a data/application rollback, import the previous approved archive/checksum and commit the resulting `fourth-down/` diff. Alternatively restore the complete `fourth-down/` tree from a known-good portfolio commit. Preserve original probabilities and timestamps. To remove the first integration entirely, revert its portfolio integration commit; that restores both original cards and removes the new directory without touching `CNAME` or existing pages. Review and approve the revert before merging. Git history retains the older artifact; a seven-day Actions upload is not the only rollback copy.
+For a data/application rollback, import the previous approved archive/checksum and commit the resulting `fourth-down/` diff. Alternatively restore the complete `fourth-down/` tree from a known-good portfolio commit. Preserve original probabilities and timestamps. To remove the entire integration, revert the portfolio integration commits in reverse order (the editorial/application update, then `58d5f46b5cfb73db69c75c59eb96aefd5c7f3698`), or revert the single squash commit if publication used squash merge. This restores the original cards and essay and removes the new directory without changing `CNAME`. The pre-integration baseline is `0df446445f199b0e7f1329f5817b97b22cf7b1e8`. Reverting just the editorial update returns to the earlier locally prepared application. Verify the resulting tree against the intended baseline before publication. Review and approve the revert before merging. Git history retains the older artifact; a seven-day Actions upload is not the only rollback copy.
 
 ## Cost
 
