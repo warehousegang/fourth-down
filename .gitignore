@@ -1,0 +1,15 @@
+.venv/
+__pycache__/
+.pytest_cache/
+*.pyc
+node_modules/
+web/dist/
+/data/
+/artifacts/
+.env*
+.DS_Store
+playwright-report/
+test-results/
+*.tsbuildinfo
+# Generated replay stays local until the owner approves inclusion/redistribution.
+/web/public/data/*.json

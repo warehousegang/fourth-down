@@ -1,0 +1,84 @@
+{
+  "status": "frozen-for-owner-review",
+  "holdout_approval": null,
+  "holdout_evaluated": false,
+  "model": {
+    "kind": "schedule",
+    "features": [
+      "smooth_win_diff",
+      "margin_diff",
+      "recent_margin_diff",
+      "rest_diff"
+    ],
+    "intercept": 0.27418885265105075,
+    "coefficients": [
+      0.7570764437208019,
+      0.07521319127419845,
+      0.012158937786816839,
+      0.015117096047089522
+    ],
+    "name": "Schedule logistic regression",
+    "feature_version": "daily-schedule-v1",
+    "source_sha256": "20f573837dac7d9ea41dade07b165de6164b3370d60e49d5242e5255cabb7d01",
+    "train_seasons": [
+      2010,
+      2022
+    ],
+    "seed": 42,
+    "id": "schedule-v1-741cf41752"
+  },
+  "source_sha256": "20f573837dac7d9ea41dade07b165de6164b3370d60e49d5242e5255cabb7d01",
+  "protocol": "docs/ML_EVALUATION.md",
+  "file_sha256": {
+    "ml/data.py": "7523ad95de1742fcc067e75c112845c76ba65ffb15486dabe980beb935375873",
+    "ml/features.py": "64279b7ca027d9477f1780a83ff04d19eea837e5d219b4786b927bff65366b0a",
+    "ml/train.py": "18ffadaca7ca5dcc6e4e7c8df2816c0c7dc173947792b1e07fddc094aca18383",
+    "ml/forecast.py": "57583405dc336e63f2c016da8d1d2d9b3e4831006c1d4204a31fd9240238ce04",
+    "docs/ML_EVALUATION.md": "303d9e481d3fc1a6d054580863c723d31c6522158fbbd3e6a7a6af82740f2067",
+    "docs/FEATURES.md": "39feebb3aea483459a97176747d17fa0d6929a6fc3c7a2d1d53bad8dbb361eb8",
+    "requirements.txt": "23df77316f3e66a8da2a7dfee8ae9dae342265f297a0d63d335cb1f33ff0d253",
+    "requirements-lock.txt": "107ccd3fe0f7cfa5846e9dd7af09b8cd15ee4872fd69d355f262da30c37559d8"
+  },
+  "validation": [
+    {
+      "id": "coin",
+      "name": "50/50 baseline",
+      "n": 272,
+      "accuracy": 0.5551470588235294,
+      "brier": 0.25,
+      "log_loss": 0.6931471805599453
+    },
+    {
+      "id": "home",
+      "name": "Historical home advantage",
+      "n": 272,
+      "accuracy": 0.5551470588235294,
+      "brier": 0.24696308000779646,
+      "log_loss": 0.6870610591071165
+    },
+    {
+      "id": "original",
+      "name": "Original logistic regression",
+      "n": 272,
+      "accuracy": 0.5551470588235294,
+      "brier": 0.24530566280547597,
+      "log_loss": 0.6843893526087863
+    },
+    {
+      "id": "schedule",
+      "name": "Schedule logistic regression",
+      "n": 272,
+      "accuracy": 0.5882352941176471,
+      "brier": 0.23704473172141693,
+      "log_loss": 0.6657815064516025
+    }
+  ],
+  "selection_rule": "Simplest model within 0.001 Brier of validation best; fixed C=1; no search.",
+  "brier_difference": {
+    "mean": -0.009918348286379495,
+    "low": -0.024714685176909074,
+    "high": 0.006381807129210394,
+    "unit": "week",
+    "replicates": 2000
+  }
+}

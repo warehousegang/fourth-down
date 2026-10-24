@@ -1,0 +1,236 @@
+{
+  "generated_at": "2026-10-24T12:48:46.014475+00:00",
+  "source": {
+    "source": "https://github.com/nflverse/nflverse-data/releases/download/schedules/games.parquet",
+    "retrieved_at": "2026-10-24T12:48:36.377855+00:00",
+    "sha256": "20f573837dac7d9ea41dade07b165de6164b3370d60e49d5242e5255cabb7d01",
+    "rows": 3631,
+    "seasons": [
+      2010,
+      2023
+    ],
+    "python": "3.14.2",
+    "packages": {
+      "numpy": "2.5.4",
+      "pandas": "3.1.0",
+      "scikit-learn": "1.9.1",
+      "nflreadpy": "0.1.5"
+    }
+  },
+  "feature_version": "daily-schedule-v1",
+  "train_n": 3347,
+  "validation_n": 272,
+  "train_seasons": [
+    2010,
+    2022
+  ],
+  "validation_season": 2023,
+  "home_win_rate": 0.5572154167911563,
+  "selected": "schedule",
+  "models": [
+    {
+      "id": "coin",
+      "name": "50/50 baseline",
+      "n": 272,
+      "accuracy": 0.5551470588235294,
+      "brier": 0.25,
+      "log_loss": 0.6931471805599453
+    },
+    {
+      "id": "home",
+      "name": "Historical home advantage",
+      "n": 272,
+      "accuracy": 0.5551470588235294,
+      "brier": 0.24696308000779646,
+      "log_loss": 0.6870610591071165
+    },
+    {
+      "id": "original",
+      "name": "Original logistic regression",
+      "n": 272,
+      "accuracy": 0.5551470588235294,
+      "brier": 0.24530566280547597,
+      "log_loss": 0.6843893526087863
+    },
+    {
+      "id": "schedule",
+      "name": "Schedule logistic regression",
+      "n": 272,
+      "accuracy": 0.5882352941176471,
+      "brier": 0.23704473172141693,
+      "log_loss": 0.6657815064516025
+    }
+  ],
+  "ablations": [
+    {
+      "removed": "smooth_win_diff",
+      "n": 272,
+      "accuracy": 0.5955882352941176,
+      "brier": 0.2361231138385889,
+      "log_loss": 0.6639031420768717
+    },
+    {
+      "removed": "margin_diff",
+      "n": 272,
+      "accuracy": 0.5772058823529411,
+      "brier": 0.23922227338301372,
+      "log_loss": 0.6706702252678173
+    },
+    {
+      "removed": "recent_margin_diff",
+      "n": 272,
+      "accuracy": 0.5845588235294118,
+      "brier": 0.23712209233411746,
+      "log_loss": 0.6658841893278183
+    },
+    {
+      "removed": "rest_diff",
+      "n": 272,
+      "accuracy": 0.5845588235294118,
+      "brier": 0.23783252763386684,
+      "log_loss": 0.6676370172888203
+    }
+  ],
+  "backtests": [
+    {
+      "season": 2018,
+      "train_n": 2043,
+      "model": {
+        "n": 254,
+        "accuracy": 0.6456692913385826,
+        "brier": 0.2186010131072315,
+        "log_loss": 0.6263715966631169
+      },
+      "baseline": {
+        "n": 254,
+        "accuracy": 0.6023622047244095,
+        "brier": 0.2406503202260544,
+        "log_loss": 0.6743588285043615
+      }
+    },
+    {
+      "season": 2019,
+      "train_n": 2297,
+      "model": {
+        "n": 255,
+        "accuracy": 0.6078431372549019,
+        "brier": 0.23086276944039386,
+        "log_loss": 0.654485809417906
+      },
+      "baseline": {
+        "n": 255,
+        "accuracy": 0.5176470588235295,
+        "brier": 0.25269587445433334,
+        "log_loss": 0.6986146238013905
+      }
+    },
+    {
+      "season": 2020,
+      "train_n": 2552,
+      "model": {
+        "n": 255,
+        "accuracy": 0.6470588235294118,
+        "brier": 0.22383166548547534,
+        "log_loss": 0.6396018866400366
+      },
+      "baseline": {
+        "n": 255,
+        "accuracy": 0.4980392156862745,
+        "brier": 0.25475260984937603,
+        "log_loss": 0.7027371940017956
+      }
+    },
+    {
+      "season": 2021,
+      "train_n": 2807,
+      "model": {
+        "n": 271,
+        "accuracy": 0.5719557195571956,
+        "brier": 0.24457108648807002,
+        "log_loss": 0.6832704089670191
+      },
+      "baseline": {
+        "n": 271,
+        "accuracy": 0.5166051660516605,
+        "brier": 0.251672240707523,
+        "log_loss": 0.6965266281280897
+      }
+    },
+    {
+      "season": 2022,
+      "train_n": 3078,
+      "model": {
+        "n": 269,
+        "accuracy": 0.5910780669144982,
+        "brier": 0.23319037956848493,
+        "log_loss": 0.6571343503711164
+      },
+      "baseline": {
+        "n": 269,
+        "accuracy": 0.5613382899628253,
+        "brier": 0.24625771317027045,
+        "log_loss": 0.6856441734902052
+      }
+    }
+  ],
+  "calibration": [
+    {
+      "bin": 1,
+      "count": 4,
+      "predicted": 0.19121565416576394,
+      "observed": 0.25
+    },
+    {
+      "bin": 2,
+      "count": 6,
+      "predicted": 0.25810415697466743,
+      "observed": 0.5
+    },
+    {
+      "bin": 3,
+      "count": 30,
+      "predicted": 0.35698395112195735,
+      "observed": 0.4
+    },
+    {
+      "bin": 4,
+      "count": 43,
+      "predicted": 0.4589641821445729,
+      "observed": 0.4883720930232558
+    },
+    {
+      "bin": 5,
+      "count": 90,
+      "predicted": 0.5530923333261418,
+      "observed": 0.4888888888888889
+    },
+    {
+      "bin": 6,
+      "count": 47,
+      "predicted": 0.653420056221847,
+      "observed": 0.6808510638297872
+    },
+    {
+      "bin": 7,
+      "count": 39,
+      "predicted": 0.7415975395011069,
+      "observed": 0.6923076923076923
+    },
+    {
+      "bin": 8,
+      "count": 13,
+      "predicted": 0.8319683196612188,
+      "observed": 0.8461538461538461
+    }
+  ],
+  "brier_difference": {
+    "mean": -0.009918348286379495,
+    "low": -0.024714685176909074,
+    "high": 0.006381807129210394,
+    "unit": "week",
+    "replicates": 2000
+  },
+  "holdout_status": "locked",
+  "original_feature_parity": true,
+  "selection_rule": "Simplest model within 0.001 Brier of validation best; fixed C=1; no search."
+}
