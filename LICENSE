@@ -23,3 +23,8 @@ SOFTWARE.
 Third-party data and dependencies retain their own terms and attribution.
 See docs/THIRD_PARTY.md, web/public/THIRD_PARTY_NOTICES.txt and
 web/public/CURRENT_DATA_NOTICE.txt. This license grants no NFL/team trademark rights.
+
+Third-party logo artwork in web/src/assets/team-logos/ is excluded from this MIT
+license. Copyright and trademark rights remain with their respective holders.
+See docs/TEAM_LOGO_REVIEW.json and web/src/assets/team-logos/NOTICE.txt for the
+individual source status, limited-use rationale and unresolved uncertainties.

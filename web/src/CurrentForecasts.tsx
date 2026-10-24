@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { ArrowRight, Clock3, Database, RefreshCw, ShieldCheck } from "lucide-react";
 import { loadCurrent, unavailableReason, type LoadedCurrent } from "./current-contracts";
 import { team } from "./teams";
+import { TeamMark } from "./TeamMark";
 import { ObservedSchedule } from "./ObservedSchedule";
 import { useForecastClock } from "./use-forecast-clock";
 
@@ -45,7 +46,7 @@ export function CurrentForecasts() {
         const reason = unavailableReason(data,g,now);
         return <article key={g.id} className="panel current-card" aria-label={`${team(g.away).name} at ${team(g.home).name} current forecast`}>
           <div className="current-card-top"><span>WEEK {g.week}</span><span>{time(g.kickoff)}</span></div>
-          <div className="current-teams"><div><span className="current-code">{g.away}</span><h3>{team(g.away).name}</h3><small>AWAY</small></div><span className="current-at">at</span><div><span className="current-code">{g.home}</span><h3>{team(g.home).name}</h3><small>HOME</small></div></div>
+          <div className="current-teams"><div><TeamMark code={g.away} size="current"/><h3>{team(g.away).name}</h3><small>{g.away} · AWAY</small></div><span className="current-at">at</span><div><TeamMark code={g.home} size="current"/><h3>{team(g.home).name}</h3><small>{g.home} · HOME</small></div></div>
           <p className="muted current-venue">{g.stadium}</p>
           {reason ? <div className="current-unavailable"><strong>Prediction unavailable</strong><p>{reason}</p></div> : <div className="current-probabilities"><div><span>{g.away}</span><strong>{pct(g.away_probability!)}</strong><strong>{pct(g.home_probability!)}</strong><span>{g.home}</span></div><div className="current-probability-bar" aria-hidden="true"><span style={{width:pct(g.away_probability!)}}/></div><small>MODEL ESTIMATE · NOT A GUARANTEE</small></div>}
           {g.warnings.map(w => <p className="current-warning small" key={w}>{w}</p>)}

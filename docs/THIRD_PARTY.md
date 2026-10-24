@@ -1,5 +1,17 @@
 # Third-party attribution and notices
 
+## Current team-logo candidate — 2026-10-24
+
+All 32 recognizable team logos are locally bundled as low-resolution PNG thumbnails from documented English Wikipedia/Wikimedia Commons file pages. [TEAM_LOGO_REVIEW.json](TEAM_LOGO_REVIEW.json) records each exact page revision, image URL, source copyright status, credit, SHA256, dimensions, independent informational-use rationale and remaining concerns. [The bundled notice](../web/src/assets/team-logos/NOTICE.txt) ships with the application and is linked beside the non-affiliation statement. Artwork is expressly excluded from MIT. No ESPN image bytes, generic badges or remotely loaded logo images are used.
+
+The user authorized this local implementation on a limited referential/fair-use basis, not on an asserted free license for all team artwork. Wikipedia’s determinations do not transfer to Fourth Down. Commons public-domain tags are source claims; trademarks remain separate. The Titans 2026 file lists its copyright owner as unknown and uses a non-free 2D-art tag; its team brand-page source corroborates identity, not permission. Buffalo, Kansas City and Pittsburgh include publication-without-notice claims that have not been exhaustively independently verified. These uncertainties are retained in the manifest and shipped notice rather than represented as cleared rights. Public deployment remains unapproved.
+
+The UI uses the tested component from `5d49193`, with explicit non-inlining for small PNGs. Current identifiers are also used in historical replay; they do not purport to be season-specific historical artwork. All model, evidence, data and automation files remain unchanged.
+
+## Historical release record (preserved)
+
+The following paragraphs describe earlier releases. Their statements about text-only artwork are superseded by the current candidate above. The frozen dependency notice remains byte-identical, with a supplemental logo notice explaining the change.
+
 Corrective review date: 2026-10-24. Full bundled notices ship in `web/public/THIRD_PARTY_NOTICES.txt`, are linked from every dashboard screen, and are copied byte-for-byte into the static build. `npm run notices` generates them from the exact package-lock versions and installed LICENSE files; every build checks completeness and rejects stale output. The five production packages are lucide-react 0.468.0 (ISC plus its included Feather MIT attribution), react 19.3.1, react-dom 19.3.1, scheduler 0.28.0 and zod 4.6.7 (MIT). No new dependency was added.
 
 `PYTHON_DEPENDENCY_NOTICES.txt` preserves complete installed license/notice files for all 41 pinned Python distributions; `PYTHON_DEPENDENCY_LICENSES.json` records versions, source paths and SHA256 hashes. Reproduce with `python scripts/generate_python_notices.py --check` in the existing matching environment. nflreadpy's installed distribution omitted its full license, so the MIT text was retrieved from the official [v0.1.5 revision](https://github.com/nflverse/nflreadpy/blob/95b6cb50852523d043b8bf3abc62e801a3654b7d/LICENSE.md) and preserved under docs/licenses/. Python binaries and packages are not bundled in the source or static site. Future binary redistribution would require a separate review of source and other license obligations.

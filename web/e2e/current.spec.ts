@@ -14,7 +14,7 @@ test("current artifact, inputs, source lineage, history separation and accessibi
   await expect(page.getByRole("heading",{name:"Current Week Forecasts"})).toBeVisible();
   await expect(page.locator(".current-card")).toHaveCount(artifact.games.length);
   expect(historicalRequests).toEqual([]);
-  await expect(page.locator("img")).toHaveCount(0);
+  await expect(page.locator(".current-card .team-logo")).toHaveCount(artifact.games.length * 2);
   // A real upcoming probability may equal the historical accuracy after rounding.
   // Verify every displayed probability against this artifact instead of banning a number.
   for(const [index,game] of artifact.games.entries()){
