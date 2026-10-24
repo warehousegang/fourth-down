@@ -50,11 +50,26 @@ def validate(files, receipt):
         raise ValueError('Build must use /fourth-down/ with local static assets')
 
 
-def pack(output):
+def source_revision(generated_only=False):
+    """Permit generated data on a runner, never uncommitted implementation changes."""
+    dirty = subprocess.check_output(['git', 'status', '--porcelain', '-z', '--untracked-files=all'], cwd=ROOT)
+    prefixes = ('web/public/data/current/', 'web/public/data/operations/', 'web/public/data/context/')
+    for entry in dirty.decode().split('\0'):
+        if not entry:
+            continue
+        status, name = entry[:2], entry[3:]
+        evidence = re.fullmatch(r'ops/forecast-evidence-20[2-9][0-9]\.(json|zip)', name)
+        if evidence and int(name.split('-')[-1].split('.')[0]) < 2026:
+            evidence = None
+        if (not generated_only or any(c in status for c in 'DRCU')
+                or not (name.startswith(prefixes) or evidence)):
+            raise ValueError('Commit the reviewed source before packaging; only generated state may differ')
+    return subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT).decode().strip()
+
+
+def pack(output, generated_only=False):
     # The source commit plus per-file checksums identify the exported build.
-    dirty = subprocess.check_output(['git', 'status', '--porcelain', '--untracked-files=normal'], cwd=ROOT)
-    if dirty:
-        raise ValueError('Commit the reviewed source before packaging')
+    revision = source_revision(generated_only)
     env = {**os.environ, 'VITE_BASE_PATH': BASE}
     for script in ['check-release.mjs', 'check-dist.mjs']:
         subprocess.run(['node', str(ROOT/'web/scripts'/script)], cwd=ROOT, env=env, check=True)
@@ -65,7 +80,7 @@ def pack(output):
         if path.is_file():
             files[path.relative_to(ROOT/'web/dist').as_posix()] = path.read_bytes()
     receipt = dict(schema_version=1, application='fourth-down', base_path=BASE,
-                   source_commit=subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT).decode().strip(),
+                   source_commit=revision,
                    files={name:digest(body) for name,body in sorted(files.items())})
     validate(files, receipt)
     files['release.json'] = (json.dumps(receipt, indent=2, sort_keys=True)+'\n').encode()
@@ -139,9 +154,10 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     sub = parser.add_subparsers(dest='command', required=True)
     package = sub.add_parser('pack'); package.add_argument('--output', required=True)
+    package.add_argument('--generated-only', action='store_true', help='Allow only runner-generated data/evidence changes')
     importer = sub.add_parser('install')
     importer.add_argument('--archive', required=True); importer.add_argument('--sha256', required=True)
     importer.add_argument('--portfolio', required=True)
     args = parser.parse_args()
-    print(json.dumps(pack(args.output) if args.command == 'pack' else
+    print(json.dumps(pack(args.output, args.generated_only) if args.command == 'pack' else
                      install(args.archive, args.sha256, args.portfolio), indent=2))
