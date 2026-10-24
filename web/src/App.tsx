@@ -23,6 +23,8 @@ import {
 } from "lucide-react";
 import { loadArtifact, type Artifact, type Game } from "./contracts";
 import { team } from "./teams";
+import { TeamMark } from "./TeamMark";
+import { TeamIdentityNotice } from "./TeamIdentityNotice";
 import exposure from "../../docs/HOLDOUT_EXPOSURE.json";
 import { CurrentForecasts } from "./CurrentForecasts";
 import { ForecastHistory } from "./ForecastHistory";
@@ -558,6 +560,7 @@ export function App() {
               <a href={`${import.meta.env.BASE_URL}THIRD_PARTY_NOTICES.txt`}>Third-party dependency notices</a>
             </footer>
           )}
+          <TeamIdentityNotice />
         </main>
       </div>
     </div>
@@ -616,14 +619,6 @@ function formatFeature(key: string, value: number) {
   return key.includes("win")
     ? pct(value)
     : `${value.toFixed(1)}${key === "rest_diff" ? " d" : " pts"}`;
-}
-
-function TeamMark({ code }: { code: string }) {
-  return (
-    <div className="team-mark" aria-hidden="true">
-      <span className="team-identifier">{code}</span>
-    </div>
-  );
 }
 
 function Matchup({

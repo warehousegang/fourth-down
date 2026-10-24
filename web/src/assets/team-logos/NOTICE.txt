@@ -1,0 +1,421 @@
+FOURTH DOWN — TEAM LOGO SOURCES AND RIGHTS
+Reviewed October 24, 2026.
+
+Fourth Down is independent and is not affiliated with or endorsed by the NFL or its teams.
+
+Third-party logo artwork is excluded from the project's MIT software license.
+No NFL/team authorization or blanket redistribution license is claimed.
+Wikipedia's fair-use determinations do not transfer automatically to Fourth Down.
+This local release candidate uses an independent, limited informational-use rationale.
+All marks identify the teams being analyzed, not the source of Fourth Down.
+
+The frozen THIRD_PARTY_NOTICES.txt describes the earlier text-only release;
+this supplemental notice supersedes only that earlier artwork description.
+Dependency and nflverse attribution remain unchanged.
+
+ASSESSMENT
+SCOPE: Independent noncommercial sports-analytics portfolio. Logos identify the actual subjects of analysis. No ads, logo merchandise, paid logo service, claim of partnership or use as Fourth Down branding.
+
+TRADEMARK: A nominative/referential-use argument is plausible when the team is the subject, the mark is subordinate to the analysis and no endorsement is suggested. Names alone could identify teams, so use of graphic marks is not automatically protected.
+
+PURPOSE: The purpose is contextual team identification within statistical analysis and model explanation. Portfolio self-promotion is acknowledged; noncommercial or educational presentation is not an automatic exemption. The artwork is not itself criticized and identification overlaps its original purpose.
+
+NATURE: Many emblems are creative, published copyrighted artwork; this weighs against fair use where copyright subsists. Commons simple-shape/text and publication-without-notice labels are recorded separately as claims, not assumed worldwide rights.
+
+AMOUNT: A whole emblem is needed for accurate visual recognition, but only one small PNG per team is bundled, 250 pixels wide, at most 100000 pixels total, displayed at 156 pixels or less. Complete reproduction still weighs in the assessment; no vector originals are shipped.
+
+MARKET: The small contextual images are not substitutes for merchandise or production-quality art. A licensing market may nevertheless exist; no claim of zero market effect or guaranteed fair use is made.
+
+CONCLUSION: A reasonable limited informational-use position is recorded for this exact presentation, with residual copyright, trademark and source-status uncertainty. Wikipedia fair-use rationales do not transfer. No owner authorization or legal clearance is claimed.
+
+REFERENCES
+https://www.copyright.gov/fair-use/more-info.html
+https://en.wikipedia.org/wiki/Wikipedia:Reusing_Wikipedia_content#Fair_use_materials_and_special_requirements
+https://commons.wikimedia.org/wiki/Commons:Reusing_content_outside_Wikimedia
+https://cdn.ca9.uscourts.gov/datastore/opinions/2025/07/23/24-879.pdf
+
+ASSETS
+
+ARI — Arizona Cardinals
+Source: https://en.wikipedia.org/wiki/File:Arizona_Cardinals_logo.svg
+Reviewed revision: https://en.wikipedia.org/wiki/File:Arizona_Cardinals_logo.svg?oldid=1306634725
+PNG: https://thumb.wikimedia.org/wikipedia/en/thumb/7/72/Arizona_Cardinals_logo.svg/250px-Arizona_Cardinals_logo.svg.png
+Status: Wikipedia: copyrighted non-free logo; no reusable license
+Status reference: https://en.wikipedia.org/wiki/File:Arizona_Cardinals_logo.svg?oldid=1306634725#Licensing
+Credit: No individual artist identified; Arizona Cardinals logo
+Source https://static.www.nfl.com/league/api/clubs/logos/ARI.svg
+Use: Identify the Arizona Cardinals alongside that team's matchup, probability and statistical explanation. One unaltered low-resolution emblem, not Fourth Down branding, merchandise, advertising creative or an asset-download product; retain team-name alternative and non-affiliation disclaimer.
+Uncertainty: No NFL/team authorization obtained; nominative use and copyright fair use are fact- and jurisdiction-dependent.
+SHA256: 0253b24f72a40f22380662aa46c5e7658037f91cc2f03c0c55c62bcb46677d60
+
+ATL — Atlanta Falcons
+Source: https://en.wikipedia.org/wiki/File:Atlanta_Falcons_logo.svg
+Reviewed revision: https://en.wikipedia.org/wiki/File:Atlanta_Falcons_logo.svg?oldid=1306633090
+PNG: https://thumb.wikimedia.org/wikipedia/en/thumb/c/c5/Atlanta_Falcons_logo.svg/250px-Atlanta_Falcons_logo.svg.png
+Status: Wikipedia: copyrighted non-free logo; no reusable license
+Status reference: https://en.wikipedia.org/wiki/File:Atlanta_Falcons_logo.svg?oldid=1306633090#Licensing
+Credit: No individual artist identified; Atlanta Falcons logo
+Source https://static.www.nfl.com/league/api/clubs/logos/ATL.svg
+Use: Identify the Atlanta Falcons alongside that team's matchup, probability and statistical explanation. One unaltered low-resolution emblem, not Fourth Down branding, merchandise, advertising creative or an asset-download product; retain team-name alternative and non-affiliation disclaimer.
+Uncertainty: No NFL/team authorization obtained; nominative use and copyright fair use are fact- and jurisdiction-dependent.
+SHA256: 39a54f3f84fd8444d9f5797ad8243c0fe244d976ce1c93e7477b73880f601587
+
+BAL — Baltimore Ravens
+Source: https://en.wikipedia.org/wiki/File:Baltimore_Ravens_logo.svg
+Reviewed revision: https://en.wikipedia.org/wiki/File:Baltimore_Ravens_logo.svg?oldid=1306628399
+PNG: https://thumb.wikimedia.org/wikipedia/en/thumb/1/16/Baltimore_Ravens_logo.svg/250px-Baltimore_Ravens_logo.svg.png
+Status: Wikipedia: copyrighted non-free logo; no reusable license
+Status reference: https://en.wikipedia.org/wiki/File:Baltimore_Ravens_logo.svg?oldid=1306628399#Licensing
+Credit: No individual artist identified; Baltimore Ravens logo
+Source https://static.www.nfl.com/league/api/clubs/logos/BAL.svg
+Use: Identify the Baltimore Ravens alongside that team's matchup, probability and statistical explanation. One unaltered low-resolution emblem, not Fourth Down branding, merchandise, advertising creative or an asset-download product; retain team-name alternative and non-affiliation disclaimer.
+Uncertainty: No NFL/team authorization obtained; nominative use and copyright fair use are fact- and jurisdiction-dependent.
+SHA256: 45357b375d7469086fe410f95c2ca78334f021dfe44be1e8fcfc9c1d1d7c0a88
+
+BUF — Buffalo Bills
+Source: https://commons.wikimedia.org/wiki/File:Buffalo_Bills_logo_1974-present.svg
+Reviewed revision: https://commons.wikimedia.org/wiki/File:Buffalo_Bills_logo_1974-present.svg?oldid=1289117769
+PNG: https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a9/Buffalo_Bills_logo_1974-present.svg/250px-Buffalo_Bills_logo_1974-present.svg.png
+Status: Commons: PD-US-no-notice for illustration; CC0-1.0 for vectorization only
+Status reference: https://creativecommons.org/publicdomain/zero/1.0/
+Credit: Author Logo by Stevens Wright, vectorization by Based5290
+Source Own work , based on File:Buffalo Bills logo 1974-present.png
+Use: Identify the Buffalo Bills alongside that team's matchup, probability and statistical explanation. One unaltered low-resolution emblem, not Fourth Down branding, merchandise, advertising creative or an asset-download product; retain team-name alternative and non-affiliation disclaimer.
+Uncertainty: No NFL/team authorization obtained; nominative use and copyright fair use are fact- and jurisdiction-dependent. Commons publication-without-notice claim has not been independently adjudicated or exhaustively verified; no worldwide public-domain claim is made. Limited-use rationale also applies if copyright subsists.
+SHA256: 89f2c62b1fede699ee6eecf2bab003708fd3e86200f031ec54093d82bd34befc
+
+CAR — Carolina Panthers
+Source: https://en.wikipedia.org/wiki/File:Carolina_Panthers_logo.svg
+Reviewed revision: https://en.wikipedia.org/wiki/File:Carolina_Panthers_logo.svg?oldid=1306633360
+PNG: https://thumb.wikimedia.org/wikipedia/en/thumb/1/1c/Carolina_Panthers_logo.svg/250px-Carolina_Panthers_logo.svg.png
+Status: Wikipedia: copyrighted non-free logo; no reusable license
+Status reference: https://en.wikipedia.org/wiki/File:Carolina_Panthers_logo.svg?oldid=1306633360#Licensing
+Credit: No individual artist identified; Carolina Panthers logo
+Source The logo is from the following website: http://www.panthers.com https://static.www.nfl.com/league/api/clubs/logos/CAR.svg
+Use: Identify the Carolina Panthers alongside that team's matchup, probability and statistical explanation. One unaltered low-resolution emblem, not Fourth Down branding, merchandise, advertising creative or an asset-download product; retain team-name alternative and non-affiliation disclaimer.
+Uncertainty: No NFL/team authorization obtained; nominative use and copyright fair use are fact- and jurisdiction-dependent.
+SHA256: 0913f1f9ed8e1f81b17f1defa8909779aa6837631e9d676ae95f61229ae5ba08
+
+CHI — Chicago Bears
+Source: https://en.wikipedia.org/wiki/File:Chicago_Bears_logo_primary.svg
+Reviewed revision: https://en.wikipedia.org/wiki/File:Chicago_Bears_logo_primary.svg?oldid=1323072294
+PNG: https://thumb.wikimedia.org/wikipedia/en/thumb/1/15/Chicago_Bears_logo_primary.svg/250px-Chicago_Bears_logo_primary.svg.png
+Status: Wikipedia: copyrighted non-free logo; no reusable license
+Status reference: https://en.wikipedia.org/wiki/File:Chicago_Bears_logo_primary.svg?oldid=1323072294#Licensing
+Credit: No individual artist identified; Chicago Bears logo
+Source https://www.chicagobears.com/about/brand-guidelines
+Use: Identify the Chicago Bears alongside that team's matchup, probability and statistical explanation. One unaltered low-resolution emblem, not Fourth Down branding, merchandise, advertising creative or an asset-download product; retain team-name alternative and non-affiliation disclaimer.
+Uncertainty: No NFL/team authorization obtained; nominative use and copyright fair use are fact- and jurisdiction-dependent.
+SHA256: 8e57a8975c34cbaacdcff09e5ba223c8722c1a69e1ebf4e6c617fc67ce0684a0
+
+CIN — Cincinnati Bengals
+Source: https://commons.wikimedia.org/wiki/File:Cincinnati_Bengals_logo.svg
+Reviewed revision: https://commons.wikimedia.org/wiki/File:Cincinnati_Bengals_logo.svg?oldid=1167753846
+PNG: https://thumb.wikimedia.org/wikipedia/commons/thumb/8/81/Cincinnati_Bengals_logo.svg/250px-Cincinnati_Bengals_logo.svg.png
+Status: Commons: public-domain simple geometry/text or lack-of-originality claim
+Status reference: https://commons.wikimedia.org/wiki/Template:PD-textlogo
+Credit: Author Cincinnati Bengals
+Source https://static.www.nfl.com/league/api/clubs/logos/CIN.svg
+Use: Identify the Cincinnati Bengals alongside that team's matchup, probability and statistical explanation. One unaltered low-resolution emblem, not Fourth Down branding, merchandise, advertising creative or an asset-download product; retain team-name alternative and non-affiliation disclaimer.
+Uncertainty: No NFL/team authorization obtained; nominative use and copyright fair use are fact- and jurisdiction-dependent. Commons copyright classification is a source claim, not an NFL license or a court determination; trademark rights remain separate.
+SHA256: b347326f25ee1e8b390d70aca45ad949f5f5af0874ff4c45d544fede3070c2de
+
+CLE — Cleveland Browns
+Source: https://en.wikipedia.org/wiki/File:Cleveland_Browns_logo.svg
+Reviewed revision: https://en.wikipedia.org/wiki/File:Cleveland_Browns_logo.svg?oldid=1344999509
+PNG: https://thumb.wikimedia.org/wikipedia/en/thumb/d/d9/Cleveland_Browns_logo.svg/250px-Cleveland_Browns_logo.svg.png
+Status: Wikipedia: copyrighted non-free logo; no reusable license
+Status reference: https://en.wikipedia.org/wiki/File:Cleveland_Browns_logo.svg?oldid=1344999509#Licensing
+Credit: No individual artist identified; Cleveland Browns logo
+Source https://static.www.nfl.com/league/api/clubs/logos/CLE.svg
+Use: Identify the Cleveland Browns alongside that team's matchup, probability and statistical explanation. One unaltered low-resolution emblem, not Fourth Down branding, merchandise, advertising creative or an asset-download product; retain team-name alternative and non-affiliation disclaimer.
+Uncertainty: No NFL/team authorization obtained; nominative use and copyright fair use are fact- and jurisdiction-dependent.
+SHA256: 99927701169d95d438557233a991659ae7b0b2fcb60f60a62b3a980d4afa4810
+
+DAL — Dallas Cowboys
+Source: https://commons.wikimedia.org/wiki/File:Dallas_Cowboys.svg
+Reviewed revision: https://commons.wikimedia.org/wiki/File:Dallas_Cowboys.svg?oldid=1154117975
+PNG: https://thumb.wikimedia.org/wikipedia/commons/thumb/1/15/Dallas_Cowboys.svg/250px-Dallas_Cowboys.svg.png
+Status: Commons: public-domain simple geometry/text or lack-of-originality claim
+Status reference: https://commons.wikimedia.org/wiki/File:Dallas_Cowboys.svg?oldid=1154117975#Licensing
+Credit: Author Opertinicy
+Source https://static.www.nfl.com/league/api/clubs/logos/DAL.svg , made into SVG using Adobe Illustrator.
+Use: Identify the Dallas Cowboys alongside that team's matchup, probability and statistical explanation. One unaltered low-resolution emblem, not Fourth Down branding, merchandise, advertising creative or an asset-download product; retain team-name alternative and non-affiliation disclaimer.
+Uncertainty: No NFL/team authorization obtained; nominative use and copyright fair use are fact- and jurisdiction-dependent. Commons copyright classification is a source claim, not an NFL license or a court determination; trademark rights remain separate.
+SHA256: b14f06f4aa6d27abb319cc5da06f176924ca914f8075553d8bfb660243e1ee1e
+
+DEN — Denver Broncos
+Source: https://en.wikipedia.org/wiki/File:Denver_Broncos_logo.svg
+Reviewed revision: https://en.wikipedia.org/wiki/File:Denver_Broncos_logo.svg?oldid=1306630611
+PNG: https://thumb.wikimedia.org/wikipedia/en/thumb/4/44/Denver_Broncos_logo.svg/250px-Denver_Broncos_logo.svg.png
+Status: Wikipedia: copyrighted non-free logo; no reusable license
+Status reference: https://en.wikipedia.org/wiki/File:Denver_Broncos_logo.svg?oldid=1306630611#Licensing
+Credit: No individual artist identified; Denver Broncos logo
+Source https://static.www.nfl.com/league/api/clubs/logos/DEN.svg
+Use: Identify the Denver Broncos alongside that team's matchup, probability and statistical explanation. One unaltered low-resolution emblem, not Fourth Down branding, merchandise, advertising creative or an asset-download product; retain team-name alternative and non-affiliation disclaimer.
+Uncertainty: No NFL/team authorization obtained; nominative use and copyright fair use are fact- and jurisdiction-dependent.
+SHA256: f8f29b596167de904ef9995d5df49205b122c2740aa8cf2af12b22e5f6d34cef
+
+DET — Detroit Lions
+Source: https://en.wikipedia.org/wiki/File:Detroit_Lions_logo.svg
+Reviewed revision: https://en.wikipedia.org/wiki/File:Detroit_Lions_logo.svg?oldid=1280654261
+PNG: https://thumb.wikimedia.org/wikipedia/en/thumb/7/71/Detroit_Lions_logo.svg/250px-Detroit_Lions_logo.svg.png
+Status: Wikipedia: copyrighted non-free logo; no reusable license
+Status reference: https://en.wikipedia.org/wiki/File:Detroit_Lions_logo.svg?oldid=1280654261#Licensing
+Credit: No individual artist identified; Detroit Lions logo
+Source https://static.www.nfl.com/league/api/clubs/logos/DET.svg
+Use: Identify the Detroit Lions alongside that team's matchup, probability and statistical explanation. One unaltered low-resolution emblem, not Fourth Down branding, merchandise, advertising creative or an asset-download product; retain team-name alternative and non-affiliation disclaimer.
+Uncertainty: No NFL/team authorization obtained; nominative use and copyright fair use are fact- and jurisdiction-dependent.
+SHA256: 87c526e29bad65ccf3010334e6a9ed91c040e2ccb2bf858a338a726ac27ea213
+
+GB — Green Bay Packers
+Source: https://commons.wikimedia.org/wiki/File:Green_Bay_Packers_logo.svg
+Reviewed revision: https://commons.wikimedia.org/wiki/File:Green_Bay_Packers_logo.svg?oldid=1284767333
+PNG: https://thumb.wikimedia.org/wikipedia/commons/thumb/5/50/Green_Bay_Packers_logo.svg/250px-Green_Bay_Packers_logo.svg.png
+Status: Commons: public-domain simple geometry/text or lack-of-originality claim
+Status reference: https://commons.wikimedia.org/wiki/Template:PD-textlogo
+Credit: Author This vector image was created with Adobe Illustrator by Daris Bayliss , and then manually edited by Green Bay Packers.
+Source https://static.www.nfl.com/league/api/clubs/logos/GB.svg
+Use: Identify the Green Bay Packers alongside that team's matchup, probability and statistical explanation. One unaltered low-resolution emblem, not Fourth Down branding, merchandise, advertising creative or an asset-download product; retain team-name alternative and non-affiliation disclaimer.
+Uncertainty: No NFL/team authorization obtained; nominative use and copyright fair use are fact- and jurisdiction-dependent. Commons copyright classification is a source claim, not an NFL license or a court determination; trademark rights remain separate.
+SHA256: 1e74f210bb03f003d603a675ff439e286a94c771f8b859584d6c9dcae2c7c9d3
+
+HOU — Houston Texans
+Source: https://en.wikipedia.org/wiki/File:Houston_Texans_logo.svg
+Reviewed revision: https://en.wikipedia.org/wiki/File:Houston_Texans_logo.svg?oldid=1314556056
+PNG: https://thumb.wikimedia.org/wikipedia/en/thumb/2/28/Houston_Texans_logo.svg/250px-Houston_Texans_logo.svg.png
+Status: Wikipedia: copyrighted non-free logo; no reusable license
+Status reference: https://en.wikipedia.org/wiki/File:Houston_Texans_logo.svg?oldid=1314556056#Licensing
+Credit: No individual artist identified; Houston Texans logo
+Source https://static.www.nfl.com/league/api/clubs/logos/HOU.svg
+Use: Identify the Houston Texans alongside that team's matchup, probability and statistical explanation. One unaltered low-resolution emblem, not Fourth Down branding, merchandise, advertising creative or an asset-download product; retain team-name alternative and non-affiliation disclaimer.
+Uncertainty: No NFL/team authorization obtained; nominative use and copyright fair use are fact- and jurisdiction-dependent.
+SHA256: c9b5cbc5c98724c1d8d983d7447730c200d30301c5119ff57e22d2c58b1621b8
+
+IND — Indianapolis Colts
+Source: https://commons.wikimedia.org/wiki/File:Indianapolis_Colts_logo.svg
+Reviewed revision: https://commons.wikimedia.org/wiki/File:Indianapolis_Colts_logo.svg?oldid=1132048398
+PNG: https://thumb.wikimedia.org/wikipedia/commons/thumb/0/00/Indianapolis_Colts_logo.svg/250px-Indianapolis_Colts_logo.svg.png
+Status: Commons: public-domain simple geometry/text or lack-of-originality claim
+Status reference: https://commons.wikimedia.org/wiki/File:Indianapolis_Colts_logo.svg?oldid=1132048398#Licensing
+Credit: Author Indianapolis Colts
+Source https://static.www.nfl.com/league/api/clubs/logos/IND.svg
+Use: Identify the Indianapolis Colts alongside that team's matchup, probability and statistical explanation. One unaltered low-resolution emblem, not Fourth Down branding, merchandise, advertising creative or an asset-download product; retain team-name alternative and non-affiliation disclaimer.
+Uncertainty: No NFL/team authorization obtained; nominative use and copyright fair use are fact- and jurisdiction-dependent. Commons copyright classification is a source claim, not an NFL license or a court determination; trademark rights remain separate.
+SHA256: e3a83fde93106536dfbccef4827147a62d44e40235dd074bf6087c40312f2c4a
+
+JAX — Jacksonville Jaguars
+Source: https://en.wikipedia.org/wiki/File:Jacksonville_Jaguars_logo.svg
+Reviewed revision: https://en.wikipedia.org/wiki/File:Jacksonville_Jaguars_logo.svg?oldid=1306630202
+PNG: https://thumb.wikimedia.org/wikipedia/en/thumb/7/74/Jacksonville_Jaguars_logo.svg/250px-Jacksonville_Jaguars_logo.svg.png
+Status: Wikipedia: copyrighted non-free logo; no reusable license
+Status reference: https://en.wikipedia.org/wiki/File:Jacksonville_Jaguars_logo.svg?oldid=1306630202#Licensing
+Credit: No individual artist identified; Jacksonville Jaguars logo
+Source https://static.www.nfl.com/league/api/clubs/logos/JAX.svg
+Use: Identify the Jacksonville Jaguars alongside that team's matchup, probability and statistical explanation. One unaltered low-resolution emblem, not Fourth Down branding, merchandise, advertising creative or an asset-download product; retain team-name alternative and non-affiliation disclaimer.
+Uncertainty: No NFL/team authorization obtained; nominative use and copyright fair use are fact- and jurisdiction-dependent.
+SHA256: ed8e182aa241b68708621e016ca407d645abb059f37bbc3f16a11ec67f1b254e
+
+KC — Kansas City Chiefs
+Source: https://commons.wikimedia.org/wiki/File:Kansas_City_Chiefs_logo.svg
+Reviewed revision: https://commons.wikimedia.org/wiki/File:Kansas_City_Chiefs_logo.svg?oldid=1250223030
+PNG: https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e1/Kansas_City_Chiefs_logo.svg/250px-Kansas_City_Chiefs_logo.svg.png
+Status: Commons: PD-US-no-notice (U.S. publication without copyright notice)
+Status reference: https://commons.wikimedia.org/wiki/Template:PD-US-no_notice
+Credit: Author Kansas City Chiefs
+Source https://static.www.nfl.com/league/api/clubs/logos/KC.svg
+Use: Identify the Kansas City Chiefs alongside that team's matchup, probability and statistical explanation. One unaltered low-resolution emblem, not Fourth Down branding, merchandise, advertising creative or an asset-download product; retain team-name alternative and non-affiliation disclaimer.
+Uncertainty: No NFL/team authorization obtained; nominative use and copyright fair use are fact- and jurisdiction-dependent. Commons publication-without-notice claim has not been independently adjudicated or exhaustively verified; no worldwide public-domain claim is made. Limited-use rationale also applies if copyright subsists. Commons copyright classification is a source claim, not an NFL license or a court determination; trademark rights remain separate.
+SHA256: 292b38b94509842059c8d680383c8b7d3eeed2c00c8d52cea9e150d6cc13b51c
+
+LA — Los Angeles Rams
+Source: https://en.wikipedia.org/wiki/File:LA_Rams_logo.svg
+Reviewed revision: https://en.wikipedia.org/wiki/File:LA_Rams_logo.svg?oldid=1357861334
+PNG: https://thumb.wikimedia.org/wikipedia/en/thumb/1/14/LA_Rams_logo.svg/250px-LA_Rams_logo.svg.png
+Status: Wikipedia: copyrighted non-free logo; no reusable license
+Status reference: https://en.wikipedia.org/wiki/File:LA_Rams_logo.svg?oldid=1357861334#Licensing
+Credit: No individual artist identified; Los Angeles Rams logo
+Source https://static.www.nfl.com/league/api/clubs/logos/LAR.svg
+Use: Identify the Los Angeles Rams alongside that team's matchup, probability and statistical explanation. One unaltered low-resolution emblem, not Fourth Down branding, merchandise, advertising creative or an asset-download product; retain team-name alternative and non-affiliation disclaimer.
+Uncertainty: No NFL/team authorization obtained; nominative use and copyright fair use are fact- and jurisdiction-dependent.
+SHA256: acbaaf6e782f67d5f18f5563e0fb8c211bd1cca79276d89caf29ec8f1d2e6a94
+
+LAC — Los Angeles Chargers
+Source: https://commons.wikimedia.org/wiki/File:Los_Angeles_Chargers_logo.svg
+Reviewed revision: https://commons.wikimedia.org/wiki/File:Los_Angeles_Chargers_logo.svg?oldid=1216987325
+PNG: https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a6/Los_Angeles_Chargers_logo.svg/250px-Los_Angeles_Chargers_logo.svg.png
+Status: Commons: public-domain simple geometry/text or lack-of-originality claim
+Status reference: https://commons.wikimedia.org/wiki/Template:PD-textlogo
+Credit: Author Los Angeles Chargers
+Source https://static.www.nfl.com/league/api/clubs/logos/LAC.svg
+Use: Identify the Los Angeles Chargers alongside that team's matchup, probability and statistical explanation. One unaltered low-resolution emblem, not Fourth Down branding, merchandise, advertising creative or an asset-download product; retain team-name alternative and non-affiliation disclaimer.
+Uncertainty: No NFL/team authorization obtained; nominative use and copyright fair use are fact- and jurisdiction-dependent. Commons copyright classification is a source claim, not an NFL license or a court determination; trademark rights remain separate.
+SHA256: 5c465419304ede56a9737b8c1df0003cd8864af88e3871690a60c1750b9930ee
+
+LV — Las Vegas Raiders
+Source: https://en.wikipedia.org/wiki/File:Las_Vegas_Raiders_logo.svg
+Reviewed revision: https://en.wikipedia.org/wiki/File:Las_Vegas_Raiders_logo.svg?oldid=1209097283
+PNG: https://thumb.wikimedia.org/wikipedia/en/thumb/4/48/Las_Vegas_Raiders_logo.svg/250px-Las_Vegas_Raiders_logo.svg.png
+Status: Wikipedia: copyrighted non-free logo; no reusable license
+Status reference: https://en.wikipedia.org/wiki/File:Las_Vegas_Raiders_logo.svg?oldid=1209097283#Licensing
+Credit: No individual artist identified; Las Vegas Raiders logo
+Source https://static.www.nfl.com/league/api/clubs/logos/LV.svg
+Use: Identify the Las Vegas Raiders alongside that team's matchup, probability and statistical explanation. One unaltered low-resolution emblem, not Fourth Down branding, merchandise, advertising creative or an asset-download product; retain team-name alternative and non-affiliation disclaimer.
+Uncertainty: No NFL/team authorization obtained; nominative use and copyright fair use are fact- and jurisdiction-dependent.
+SHA256: 9c1dd1aa4e65673dcda27829e2a62ff327dbb9ee35739ed238ae22cde9381d45
+
+MIA — Miami Dolphins
+Source: https://en.wikipedia.org/wiki/File:Miami_Dolphins_logo.svg
+Reviewed revision: https://en.wikipedia.org/wiki/File:Miami_Dolphins_logo.svg?oldid=1231146641
+PNG: https://thumb.wikimedia.org/wikipedia/en/thumb/3/37/Miami_Dolphins_logo.svg/250px-Miami_Dolphins_logo.svg.png
+Status: Wikipedia: copyrighted non-free logo; no reusable license
+Status reference: https://en.wikipedia.org/wiki/File:Miami_Dolphins_logo.svg?oldid=1231146641#Licensing
+Credit: No individual artist identified; Miami Dolphins logo
+Source https://static.www.nfl.com/league/api/clubs/logos/MIA.svg
+Use: Identify the Miami Dolphins alongside that team's matchup, probability and statistical explanation. One unaltered low-resolution emblem, not Fourth Down branding, merchandise, advertising creative or an asset-download product; retain team-name alternative and non-affiliation disclaimer.
+Uncertainty: No NFL/team authorization obtained; nominative use and copyright fair use are fact- and jurisdiction-dependent.
+SHA256: 0eb19b6804d1a0a4f4360fa13d8a0a251804a75a36ebd6cd42ae994bb4790177
+
+MIN — Minnesota Vikings
+Source: https://en.wikipedia.org/wiki/File:Minnesota_Vikings_logo.svg
+Reviewed revision: https://en.wikipedia.org/wiki/File:Minnesota_Vikings_logo.svg?oldid=1306632841
+PNG: https://thumb.wikimedia.org/wikipedia/en/thumb/4/48/Minnesota_Vikings_logo.svg/250px-Minnesota_Vikings_logo.svg.png
+Status: Wikipedia: copyrighted non-free logo; no reusable license
+Status reference: https://en.wikipedia.org/wiki/File:Minnesota_Vikings_logo.svg?oldid=1306632841#Licensing
+Credit: No individual artist identified; Minnesota Vikings logo
+Source https://static.www.nfl.com/league/api/clubs/logos/MIN.svg
+Use: Identify the Minnesota Vikings alongside that team's matchup, probability and statistical explanation. One unaltered low-resolution emblem, not Fourth Down branding, merchandise, advertising creative or an asset-download product; retain team-name alternative and non-affiliation disclaimer.
+Uncertainty: No NFL/team authorization obtained; nominative use and copyright fair use are fact- and jurisdiction-dependent.
+SHA256: 6700f8cea6e2273f7cd4ccc4cd6789431b3057bc609b70ee1423ebb0e4353d98
+
+NE — New England Patriots
+Source: https://en.wikipedia.org/wiki/File:New_England_Patriots_logo.svg
+Reviewed revision: https://en.wikipedia.org/wiki/File:New_England_Patriots_logo.svg?oldid=1306627668
+PNG: https://thumb.wikimedia.org/wikipedia/en/thumb/b/b9/New_England_Patriots_logo.svg/250px-New_England_Patriots_logo.svg.png
+Status: Wikipedia: copyrighted non-free logo; no reusable license
+Status reference: https://en.wikipedia.org/wiki/File:New_England_Patriots_logo.svg?oldid=1306627668#Licensing
+Credit: No individual artist identified; New England Patriots logo
+Source https://static.www.nfl.com/league/api/clubs/logos/NE.svg
+Use: Identify the New England Patriots alongside that team's matchup, probability and statistical explanation. One unaltered low-resolution emblem, not Fourth Down branding, merchandise, advertising creative or an asset-download product; retain team-name alternative and non-affiliation disclaimer.
+Uncertainty: No NFL/team authorization obtained; nominative use and copyright fair use are fact- and jurisdiction-dependent.
+SHA256: 23135164029cc1a464721da8791854671cccf637a0426404f0f87343311b3dd6
+
+NO — New Orleans Saints
+Source: https://commons.wikimedia.org/wiki/File:New_Orleans_Saints_logo.svg
+Reviewed revision: https://commons.wikimedia.org/wiki/File:New_Orleans_Saints_logo.svg?oldid=1074491865
+PNG: https://thumb.wikimedia.org/wikipedia/commons/thumb/5/50/New_Orleans_Saints_logo.svg/250px-New_Orleans_Saints_logo.svg.png
+Status: Commons: public-domain simple geometry/text or lack-of-originality claim
+Status reference: https://commons.wikimedia.org/wiki/Template:PD-textlogo
+Credit: Author New Orleans Saints
+Source https://static.www.nfl.com/league/api/clubs/logos/NO.svg
+Use: Identify the New Orleans Saints alongside that team's matchup, probability and statistical explanation. One unaltered low-resolution emblem, not Fourth Down branding, merchandise, advertising creative or an asset-download product; retain team-name alternative and non-affiliation disclaimer.
+Uncertainty: No NFL/team authorization obtained; nominative use and copyright fair use are fact- and jurisdiction-dependent. Commons copyright classification is a source claim, not an NFL license or a court determination; trademark rights remain separate.
+SHA256: 46b8a7e02c23fdc3ae55c4a335b37c73ecd9395c531de67573693f3a43e12b76
+
+NYG — New York Giants
+Source: https://commons.wikimedia.org/wiki/File:New_York_Giants_logo.svg
+Reviewed revision: https://commons.wikimedia.org/wiki/File:New_York_Giants_logo.svg?oldid=1132049031
+PNG: https://thumb.wikimedia.org/wikipedia/commons/thumb/6/60/New_York_Giants_logo.svg/250px-New_York_Giants_logo.svg.png
+Status: Commons: public-domain simple geometry/text or lack-of-originality claim
+Status reference: https://commons.wikimedia.org/wiki/Template:PD-textlogo
+Credit: Author Opertinicy at en.wikipedia
+Source Transferred from en.wikipedia to Commons by Moe Epsilon . Original caption: " New York Giants logo "
+Use: Identify the New York Giants alongside that team's matchup, probability and statistical explanation. One unaltered low-resolution emblem, not Fourth Down branding, merchandise, advertising creative or an asset-download product; retain team-name alternative and non-affiliation disclaimer.
+Uncertainty: No NFL/team authorization obtained; nominative use and copyright fair use are fact- and jurisdiction-dependent. Commons copyright classification is a source claim, not an NFL license or a court determination; trademark rights remain separate.
+SHA256: 31a56d8470c18c3974426ee94b0c27920681a408a0b03cb4266590d084fb7511
+
+NYJ — New York Jets
+Source: https://commons.wikimedia.org/wiki/File:New_York_Jets_2024.svg
+Reviewed revision: https://commons.wikimedia.org/wiki/File:New_York_Jets_2024.svg?oldid=951713167
+PNG: https://thumb.wikimedia.org/wikipedia/commons/thumb/6/69/New_York_Jets_2024.svg/250px-New_York_Jets_2024.svg.png
+Status: Commons: public-domain simple geometry/text or lack-of-originality claim
+Status reference: https://commons.wikimedia.org/wiki/Template:PD-textlogo
+Credit: Author New York Jets
+Source https://static.www.nfl.com/league/api/clubs/logos/NYJ.svg
+Use: Identify the New York Jets alongside that team's matchup, probability and statistical explanation. One unaltered low-resolution emblem, not Fourth Down branding, merchandise, advertising creative or an asset-download product; retain team-name alternative and non-affiliation disclaimer.
+Uncertainty: No NFL/team authorization obtained; nominative use and copyright fair use are fact- and jurisdiction-dependent. Commons copyright classification is a source claim, not an NFL license or a court determination; trademark rights remain separate.
+SHA256: 6876c564f682a02776cc04741d440e388e9c7289270cf1f7d87e1ea1fd83e7f7
+
+PHI — Philadelphia Eagles
+Source: https://en.wikipedia.org/wiki/File:Philadelphia_Eagles_logo.svg
+Reviewed revision: https://en.wikipedia.org/wiki/File:Philadelphia_Eagles_logo.svg?oldid=1306631790
+PNG: https://thumb.wikimedia.org/wikipedia/en/thumb/8/8e/Philadelphia_Eagles_logo.svg/250px-Philadelphia_Eagles_logo.svg.png
+Status: Wikipedia: copyrighted non-free logo; no reusable license
+Status reference: https://en.wikipedia.org/wiki/File:Philadelphia_Eagles_logo.svg?oldid=1306631790#Licensing
+Credit: No individual artist identified; Philadelphia Eagles logo
+Source https://static.www.nfl.com/league/api/clubs/logos/PHI.svg , extracted from an unknown PDF file by Kalel2007 ( talk )
+Use: Identify the Philadelphia Eagles alongside that team's matchup, probability and statistical explanation. One unaltered low-resolution emblem, not Fourth Down branding, merchandise, advertising creative or an asset-download product; retain team-name alternative and non-affiliation disclaimer.
+Uncertainty: No NFL/team authorization obtained; nominative use and copyright fair use are fact- and jurisdiction-dependent.
+SHA256: 0bf8b698b71618214b78ff740577650cd4855a8aab7731d8777ac50f5d8a859e
+
+PIT — Pittsburgh Steelers
+Source: https://commons.wikimedia.org/wiki/File:Pittsburgh_Steelers_logo.svg
+Reviewed revision: https://commons.wikimedia.org/wiki/File:Pittsburgh_Steelers_logo.svg?oldid=1074473597
+PNG: https://thumb.wikimedia.org/wikipedia/commons/thumb/d/de/Pittsburgh_Steelers_logo.svg/250px-Pittsburgh_Steelers_logo.svg.png
+Status: Commons: PD-US-no-notice and PD-textlogo claims
+Status reference: https://commons.wikimedia.org/wiki/Template:PD-textlogo
+Credit: Author Brighterorange
+Source https://static.www.nfl.com/league/api/clubs/logos/PIT.svg
+Use: Identify the Pittsburgh Steelers alongside that team's matchup, probability and statistical explanation. One unaltered low-resolution emblem, not Fourth Down branding, merchandise, advertising creative or an asset-download product; retain team-name alternative and non-affiliation disclaimer.
+Uncertainty: No NFL/team authorization obtained; nominative use and copyright fair use are fact- and jurisdiction-dependent. Commons publication-without-notice claim has not been independently adjudicated or exhaustively verified; no worldwide public-domain claim is made. Limited-use rationale also applies if copyright subsists. Commons copyright classification is a source claim, not an NFL license or a court determination; trademark rights remain separate.
+SHA256: 28bfdd2e79f978b215e2a5bd8edc1edd718250c63afea42388c63afb5034a778
+
+SEA — Seattle Seahawks
+Source: https://en.wikipedia.org/wiki/File:Seattle_Seahawks_logo.svg
+Reviewed revision: https://en.wikipedia.org/wiki/File:Seattle_Seahawks_logo.svg?oldid=1306635426
+PNG: https://thumb.wikimedia.org/wikipedia/en/thumb/8/8e/Seattle_Seahawks_logo.svg/250px-Seattle_Seahawks_logo.svg.png
+Status: Wikipedia: copyrighted non-free logo; no reusable license
+Status reference: https://en.wikipedia.org/wiki/File:Seattle_Seahawks_logo.svg?oldid=1306635426#Licensing
+Credit: No individual artist identified; Seattle Seahawks logo
+Source https://static.www.nfl.com/league/api/clubs/logos/SEA.svg
+Use: Identify the Seattle Seahawks alongside that team's matchup, probability and statistical explanation. One unaltered low-resolution emblem, not Fourth Down branding, merchandise, advertising creative or an asset-download product; retain team-name alternative and non-affiliation disclaimer.
+Uncertainty: No NFL/team authorization obtained; nominative use and copyright fair use are fact- and jurisdiction-dependent.
+SHA256: 8292bb0d243301bef20f02295eaeba4ac28cf2ccc603ca68b42403cb57571ef8
+
+SF — San Francisco 49ers
+Source: https://commons.wikimedia.org/wiki/File:San_Francisco_49ers_logo.svg
+Reviewed revision: https://commons.wikimedia.org/wiki/File:San_Francisco_49ers_logo.svg?oldid=1115345778
+PNG: https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3a/San_Francisco_49ers_logo.svg/250px-San_Francisco_49ers_logo.svg.png
+Status: Commons: public-domain simple geometry/text or lack-of-originality claim
+Status reference: https://commons.wikimedia.org/wiki/Template:PD-textlogo
+Credit: Author San Francisco 49ers, User:Stepshep
+Source https://static.www.nfl.com/league/api/clubs/logos/SF.svg
+Use: Identify the San Francisco 49ers alongside that team's matchup, probability and statistical explanation. One unaltered low-resolution emblem, not Fourth Down branding, merchandise, advertising creative or an asset-download product; retain team-name alternative and non-affiliation disclaimer.
+Uncertainty: No NFL/team authorization obtained; nominative use and copyright fair use are fact- and jurisdiction-dependent. Commons copyright classification is a source claim, not an NFL license or a court determination; trademark rights remain separate.
+SHA256: 79e01747304b86e741b3375a17555c2ee0285d6e8b3c4fbec04cd87166b7937e
+
+TB — Tampa Bay Buccaneers
+Source: https://en.wikipedia.org/wiki/File:Tampa_Bay_Buccaneers_logo.svg
+Reviewed revision: https://en.wikipedia.org/wiki/File:Tampa_Bay_Buccaneers_logo.svg?oldid=1306634593
+PNG: https://thumb.wikimedia.org/wikipedia/en/thumb/a/a2/Tampa_Bay_Buccaneers_logo.svg/250px-Tampa_Bay_Buccaneers_logo.svg.png
+Status: Wikipedia: copyrighted non-free logo; no reusable license
+Status reference: https://en.wikipedia.org/wiki/File:Tampa_Bay_Buccaneers_logo.svg?oldid=1306634593#Licensing
+Credit: No individual artist identified; Tampa Bay Buccaneers logo
+Source https://static.www.nfl.com/league/api/clubs/logos/TB.svg
+Use: Identify the Tampa Bay Buccaneers alongside that team's matchup, probability and statistical explanation. One unaltered low-resolution emblem, not Fourth Down branding, merchandise, advertising creative or an asset-download product; retain team-name alternative and non-affiliation disclaimer.
+Uncertainty: No NFL/team authorization obtained; nominative use and copyright fair use are fact- and jurisdiction-dependent.
+SHA256: 9a0ea3667c50cf67e6bbda1c4b07a89ca83ee214cf51f4ce600d4b9384cf27e1
+
+TEN — Tennessee Titans
+Source: https://en.wikipedia.org/wiki/File:Tennessee_Titans_Logo_2026.svg
+Reviewed revision: https://en.wikipedia.org/wiki/File:Tennessee_Titans_Logo_2026.svg?oldid=1344542162
+PNG: https://thumb.wikimedia.org/wikipedia/en/thumb/5/53/Tennessee_Titans_Logo_2026.svg/250px-Tennessee_Titans_Logo_2026.svg.png
+Status: Wikipedia: copyrighted non-free 2D artwork; copyright owner listed as Unknown
+Status reference: https://en.wikipedia.org/wiki/File:Tennessee_Titans_Logo_2026.svg?oldid=1344542162#Licensing
+Credit: Author or copyright owner Unknown
+Source ( WP:NFCC#4 ) https://www.tennesseetitans.com/brand/
+Use: Identify the Tennessee Titans alongside that team's matchup, probability and statistical explanation. One unaltered low-resolution emblem, not Fourth Down branding, merchandise, advertising creative or an asset-download product; retain team-name alternative and non-affiliation disclaimer.
+Uncertainty: No NFL/team authorization obtained; nominative use and copyright fair use are fact- and jurisdiction-dependent. File page does not identify the copyright owner and uses a 2D-art fair-use tag. The team brand page corroborates the 2026 Shield identity, not permission. Included for local review on the same independent rationale; ownership/permission is not verified.
+SHA256: be001726ec14c76552406c312b3bacfc245835814b86d1ef6aecfc063362584d
+
+WAS — Washington Commanders
+Source: https://commons.wikimedia.org/wiki/File:Washington_Commanders_logo.svg
+Reviewed revision: https://commons.wikimedia.org/wiki/File:Washington_Commanders_logo.svg?oldid=1251611333
+PNG: https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0c/Washington_Commanders_logo.svg/250px-Washington_Commanders_logo.svg.png
+Status: Commons: public-domain simple geometry/text or lack-of-originality claim
+Status reference: https://commons.wikimedia.org/wiki/Template:PD-textlogo
+Credit: Author Washington Commanders
+Source https://static.www.nfl.com/league/api/clubs/logos/WAS.svg
+Use: Identify the Washington Commanders alongside that team's matchup, probability and statistical explanation. One unaltered low-resolution emblem, not Fourth Down branding, merchandise, advertising creative or an asset-download product; retain team-name alternative and non-affiliation disclaimer.
+Uncertainty: No NFL/team authorization obtained; nominative use and copyright fair use are fact- and jurisdiction-dependent. Commons copyright classification is a source claim, not an NFL license or a court determination; trademark rights remain separate.
+SHA256: c87313e4ffa7e2f32c133c8029c0c8535b3c31f023a3eb95affe1f215e49a2ae

@@ -7,8 +7,9 @@ test("real artifact, selection, deep links, responsive pages and accessibility",
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto("./#matchups");
   await expect(page.getByRole("heading", { name: /Game on/ })).toBeVisible();
-  await expect(page.locator(".team-identifier")).toHaveText(["DET", "GB"]);
-  await expect(page.locator("img")).toHaveCount(0);
+  await expect(page.getByRole("img", { name: "Detroit Lions" })).toBeVisible();
+  await expect(page.getByRole("img", { name: "Green Bay Packers" })).toBeVisible();
+  await expect(page.locator(".team-logo")).toHaveCount(2);
   const notices = page.getByRole("link", { name: "Third-party notices" });
   const noticesURL = new URL((await notices.getAttribute("href"))!, page.url());
   const noticeResponse = await page.request.get(noticesURL.toString());
