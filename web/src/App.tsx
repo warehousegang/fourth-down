@@ -547,6 +547,15 @@ export function App() {
               </footer>
             </>
           )}
+          {["intelligence", "history", "models", "postgame"].includes(location.route) && (
+            <footer className="current-footer">
+              <span>FOURTH DOWN / Predictive intelligence research</span>
+              <span>Schedule: <a href={`${import.meta.env.BASE_URL}CURRENT_DATA_NOTICE.txt`}>SportsDataverse / NFL Next Gen Stats attribution</a></span>
+              <span>Historical schedules: nflverse / Lee Sharpe. Current context: <a href="https://github.com/nflverse/nflverse-data" target="_blank" rel="noreferrer">nflverse</a> · <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noreferrer">CC BY 4.0</a></span>
+              <p>Features, forecasts and context ratios are derived modifications. No affiliation with the NFL. Educational research, not betting advice.</p>
+              <a href={`${import.meta.env.BASE_URL}THIRD_PARTY_NOTICES.txt`}>Third-party dependency notices</a>
+            </footer>
+          )}
         </main>
       </div>
     </div>

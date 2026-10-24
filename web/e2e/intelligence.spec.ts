@@ -38,6 +38,8 @@ test("operational intelligence routes, honest evidence, responsive layout and ac
       await expect(page.getByRole("region",{name:"Research calibration"})).toBeVisible();
     }
     await expect(page.getByRole("alert")).toHaveCount(0);
+    await expect(page.getByRole("link",{name:"Third-party dependency notices",exact:true})).toHaveAttribute("href",/THIRD_PARTY_NOTICES\.txt$/);
+    await expect(page.getByRole("link",{name:"SportsDataverse / NFL Next Gen Stats attribution",exact:true})).toHaveAttribute("href",/CURRENT_DATA_NOTICE\.txt$/);
     expect(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth)).toBe(true);
     const axe=await new AxeBuilder({page}).withTags(["wcag2a","wcag2aa","wcag21aa"]).analyze();
     expect(axe.violations.map(v=>({id:v.id,nodes:v.nodes.map(n=>({target:n.target,message:n.failureSummary}))}))).toEqual([]);
