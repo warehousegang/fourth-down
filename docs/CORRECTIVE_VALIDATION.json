@@ -39,10 +39,36 @@
     },
     "browser_scope": "Desktop Chrome and mobile viewport: all routes, selection, refresh, artifact-unavailable state, notices, no overflow/uncaught JS errors, zero axe violations under tested rules",
     "typescript_and_build": "passed",
-    "clean_git_archive_install_build": "pending",
+    "clean_git_archive_install_build": {
+      "commit": "ebdcd66c8a7390db4c3b68ecba6db49ec1441df6",
+      "path": "/private/tmp/fourth-down-clean-7772jqts/source",
+      "raw_data_present": false,
+      "model_intermediates_present": false,
+      "official_logos_present": false,
+      "node_modules_present": false,
+      "npm_ci": "passed; unchanged lockfile, lifecycle scripts disabled, fresh temporary cache",
+      "frontend_unit_tests": 14,
+      "packaging_tests": 6,
+      "build_base": "/nfl-predictor/",
+      "build": "passed",
+      "build_byte_identical_to_tested_workspace": true,
+      "dist_files_sha256": {
+        "index.html": "9b9276c35a2d6fbcec8ea132ae52084500ca498a89befed727d38b6e06f2dd9f",
+        "THIRD_PARTY_NOTICES.txt": "f6daec4cdeeadeb95ecf930b8f1ea9b704574d5ad5bfe64a6806d45287dad54c",
+        "data/demo.json": "41c3ad0d8d2997238b464f196b700ce328f38eb6e93831a18d504c7ef6aa24a9",
+        "assets/index-CR7fakFJ.js": "107991cc58d42e4548c7284333d4afbaef799a24cd434cf18084886038b6f6ad",
+        "assets/index-DXN_EZGn.css": "2d480c8b92c6801d58be72d5d2c8082a9af716ad31dbfe94c1b905b257fab83f"
+      },
+      "python_tests": {
+        "passed": 21,
+        "skipped": 2,
+        "reason": "Raw snapshot intentionally absent; retraining prohibited. Used existing Python environment, not a clean Python dependency install."
+      }
+    },
     "python_license_notices": 41,
     "frontend_license_notices": 5,
-    "official_logos_shipped": 0
+    "official_logos_shipped": 0,
+    "diff_whitespace": "Code/source diff check passed; verbatim upstream Python license text retains original trailing whitespace."
   },
   "validation_2023": {
     "review_method": "Independent CSV history queries and saved-coefficient scoring; no fitting, tuning, network acquisition, or holdout reads",
@@ -239,6 +265,9 @@
     "artifacts/corrective/browser-root.log": "6c1c0bb70c1df27b035537e97342014f81fa652f89a2203efc20c4ba908e879a",
     "artifacts/corrective/browser-subpath-initial-preview-misconfiguration.log": "43e1c96b59dcb69ab96e2f358979799059497084379541f49f53c12aac39bb1e",
     "artifacts/corrective/browser-subpath.log": "24dae6fd54506163d9ba74675140bf5a5261288cc6c63b59809a93dfdc2665e3",
+    "artifacts/corrective/clean-archive-install-build.log": "97d87fa59799df1e4ca859378841789394bc3deaa7fa5813199aff396c0bd348",
+    "artifacts/corrective/clean-archive-python.log": "d478de8b4e373f98ba127c9b28c5ac451ea9523997bc928e0fa323f039a460a6",
+    "artifacts/corrective/clean-archive.json": "221be88ae9707e76c9e4e89879dba3a0e54b960bf579549f5cf5505afea5e90d",
     "artifacts/corrective/evidence.json": "06d642329d3d6a57704386d0e1a3c68d8a014029077c179cdccd0add21c8423e",
     "artifacts/corrective/frontend-tests-build.log": "5c76197ffd5fc8b771efc3a359ab70c4b8cf126148bc8b62fd0269bfddcf24f4",
     "artifacts/corrective/npm-audit.json": "0a0b328a6e0ed0c891952bff3a29ff13f9906e2ab3d7a3049111431829bbce71",
@@ -247,5 +276,11 @@
     "artifacts/corrective/python-tests.log": "de1bffa812187f3a5b769d63005f3a23ee97079e92908d0b6fb48c43014ea5dd",
     "artifacts/corrective/security.json": "3df9b692182d056be89758644f5918e7ca4db7187bab143fc4af15995d7aecfa",
     "artifacts/corrective/validation-check.log": "06d642329d3d6a57704386d0e1a3c68d8a014029077c179cdccd0add21c8423e"
+  },
+  "versions": {
+    "node": "22.14.0",
+    "npm": "10.9.2",
+    "python": "3.14.2",
+    "pip_audit": "2.10.1"
   }
 }
