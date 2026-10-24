@@ -119,7 +119,14 @@ def test_exported_predictions_models_metrics_and_temporal_splits_match():
         np.testing.assert_allclose(p, [row["probabilities"]["challenger"] for row in rows], atol=1e-14)
         expected = metrics([row["home_win"] for row in rows], p)
         recorded = next(fold for fold in artifact["evaluation"]["backtests"] if fold["season"] == season)
-        assert expected == recorded["metrics"]["challenger"]
+        saved = recorded["metrics"]["challenger"]
+        assert expected.keys() == saved.keys()
+        assert expected["n"] == saved["n"]
+        assert expected["accuracy"] == saved["accuracy"]
+        # NumPy reductions differ by a few ULPs across macOS/ARM and Linux/x64.
+        # Compare saved numerical scores tightly without changing their evidence.
+        for metric in ("brier", "log_loss"):
+            assert expected[metric] == pytest.approx(saved[metric], rel=0, abs=1e-14)
         assert ("frozen_incumbent" in rows[0]["probabilities"]) == (season == 2023)
     raw = copy.deepcopy(artifact)
     verification = raw.pop("reproducibility")
