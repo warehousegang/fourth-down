@@ -262,6 +262,7 @@ def test_failed_refresh_preserves_last_good_pointer(tmp_path, monkeypatch):
     monkeypatch.setattr(current_source, "ROOT", tmp_path)
     monkeypatch.setattr(current, "ROOT", tmp_path)
     monkeypatch.setattr(current_source, "current_season", lambda now: 2026)
+    monkeypatch.setattr(current, "current_season", lambda now: 2026)
     monkeypatch.setattr(current_source, "download", lambda url: canonical(metadata) if url == current_source.RELEASE else raw)
     monkeypatch.setattr(sys, "argv", ["ml.current"])
     with pytest.raises(ValueError, match="Source changed"):

@@ -100,7 +100,35 @@
     },
     "browser_scope": "Desktop Chrome and iPhone viewport, current/history navigation, failed loads, feature details, downloads/notices, deep links; no uncaught errors, overflow or axe violations under selected rules; viewport screenshots visually reviewed",
     "clean_source_package": {
-      "status": "pending"
+      "commit": "e4406d396f1d73b89c76eac9002539d89bf3a495",
+      "path": "/private/tmp/fourth-down-current-clean-iqz31kjl/source",
+      "raw_data_present": false,
+      "model_intermediates_present": false,
+      "original_node_modules_present": false,
+      "status": "passed",
+      "npm_ci": "passed; fresh temporary cache and lifecycle scripts disabled",
+      "frontend_unit_tests": 29,
+      "release_packaging_tests": 7,
+      "typescript_build": "passed",
+      "production_base": "/nfl-predictor/",
+      "byte_identical_to_workspace": true,
+      "dist_files_sha256": {
+        "index.html": "3f62495657cbc12a9f23957ed3cfee485a8e819c26e6aa3216e42bf8430b81a8",
+        "CURRENT_DATA_NOTICE.txt": "6c66cb1fbcf86185dbf14748e7e6257ae954b803355fe0f47253222c7aca78ef",
+        "THIRD_PARTY_NOTICES.txt": "f6daec4cdeeadeb95ecf930b8f1ea9b704574d5ad5bfe64a6806d45287dad54c",
+        "data/demo.json": "41c3ad0d8d2997238b464f196b700ce328f38eb6e93831a18d504c7ef6aa24a9",
+        "assets/index-_TIkz80l.css": "9c77fa7f188140bc77d9bbe7878ad8ee136ded2903379fe2180adf133b869300",
+        "assets/index-BmIXzhlG.js": "d3216e29544645816f2268201fde8833f6d20638efb9f1760c47a75b8bea661e",
+        "data/current/latest.json": "bd4228edb9e2599f675da3edf7c26d2e2c9a005681c18efe88cbfd671735dc07",
+        "data/current/forecast-2026-3449f56cda00dca8e4f4c253458d471b8924cc3ec9a25fd4a5821d356d7737cb.json": "3449f56cda00dca8e4f4c253458d471b8924cc3ec9a25fd4a5821d356d7737cb",
+        "data/current/forecast-2026-11d4518833ef149e9a4e6b239094468dbc90f516be058bce02d40d4141618445.json": "11d4518833ef149e9a4e6b239094468dbc90f516be058bce02d40d4141618445"
+      },
+      "python_tests": {
+        "passed": 47,
+        "skipped": 2,
+        "reason": "Raw snapshot intentionally absent; retraining prohibited. Existing Python environment, not clean Python installation."
+      },
+      "scope_note": "Final subsequent changes are handoff/evidence and a date-independent failure-test stub; production source and output are unchanged."
     },
     "python_license_notices": 41,
     "frontend_license_notices": 5,
@@ -210,11 +238,15 @@
     "artifacts/current/before.json": "e217b2fbc62f04b8223f9d22bc2bac1d54bd97e1ca4cfdc4891c0c23e56541c7",
     "artifacts/current/browser-root.log": "d37de498b473ce91a0ec7c56cab0f1c22151ca6fa20e8fba9efb36566b444f43",
     "artifacts/current/browser-subpath.log": "f66e12d89a5cbd4804001ae3ef8918b187ca662beb18fcfb29bd5b73d4fa6cc0",
+    "artifacts/current/clean-install-build.log": "3a1c2a479d79ddf681f9bb1bd8245082f2578c95df8f189b3ab43fead7a3aca3",
+    "artifacts/current/clean-location.json": "2fe152db11d22e671146ba7a996dc73be81ff44180eadd7be0872aff3800396c",
+    "artifacts/current/clean-package.json": "acb111a0459230cec84e19ab8a5fa27e2297dfa12abd3dea5c7c6e70656883f0",
+    "artifacts/current/clean-python.log": "773469f83f9d0330ed82b1faaec8debdb8110c2ccef05cf5e617f9ea42e4a2c9",
     "artifacts/current/generation.json": "1e8012cc9569af4143116f90e6886e0962bccdaf4d99226ccc6c64a02e558dc0",
     "artifacts/current/npm-audit.json": "0a0b328a6e0ed0c891952bff3a29ff13f9906e2ab3d7a3049111431829bbce71",
     "artifacts/current/oracle.json": "6923648fe985323eb11427ef6e98f559b43ec2a1cd6ecb89c49ccaab32cf149e",
     "artifacts/current/python-audit.json": "7048e9219723da4c744d67f326044998d224150d691c8d4b1b615c81417cc842",
-    "artifacts/current/python-tests.log": "481e8555a1d0d96998e07ddfe42ffefc02088438769c384526b79bcf2192e2be",
+    "artifacts/current/python-tests.log": "fd09a93142fb98545c4d68f87fa61665d9b68898ff12ba9e8257cba336415403",
     "artifacts/current/reproduction.json": "7ffe2c47e298a9e26ad12228238ce1f5e74e9d01c5d9652c033934dbe1542f9f",
     "artifacts/current/security.json": "85cf3b5896013e9b26e45a3aaf72beeefe9e29cf44f089de1f6f4baffb5427fc",
     "artifacts/current/validation-2023.json": "06d642329d3d6a57704386d0e1a3c68d8a014029077c179cdccd0add21c8423e"
@@ -228,5 +260,9 @@
     "npm": "10.9.2",
     "python": "3.14.2",
     "pip_audit": "2.10.1"
+  },
+  "screenshots_sha256": {
+    "artifacts/current-viewport-desktop.png": "e406e38bee226912c94801b28bff8595b573b40a8c3bce384cf2d8e2303a46c6",
+    "artifacts/current-viewport-mobile.png": "1ebbb9bdb9e41d91389e4ddf95d2812ce76689cf93fb551dcd8a8d80a0a3799b"
   }
 }
