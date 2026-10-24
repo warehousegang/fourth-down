@@ -1,10 +1,10 @@
-# INACTIVE: rename only after the owner approves publication.
-name: Fourth Down Pages
+# INACTIVE: activate only after approval. Produces artifacts; never publishes the portfolio.
+name: Fourth Down portfolio artifact
 on:
   workflow_dispatch:
     inputs:
       refresh:
-        description: Refresh current forecasts (disable only for a reviewed rollback)
+        description: Refresh current forecasts before creating the static artifact
         type: boolean
         default: true
   # Optional after approval: one refresh per day, 12:17 UTC.
@@ -13,7 +13,7 @@ on:
 permissions:
   contents: read
 concurrency:
-  group: fourth-down-pages
+  group: fourth-down-portfolio-artifact
   cancel-in-progress: false
 jobs:
   build:
@@ -44,7 +44,7 @@ jobs:
       - name: Verify and build the entire site
         working-directory: web
         env:
-          VITE_BASE_PATH: /${{ github.event.repository.name }}/
+          VITE_BASE_PATH: /fourth-down/
         run: npm ci --ignore-scripts && npm test && npm run test:release && npm audit --audit-level=moderate && npm run build
       - name: Retain successful forecast history in one Git commit
         if: github.event_name == 'schedule' || inputs.refresh
@@ -56,26 +56,13 @@ jobs:
             git commit -m 'Refresh current forecasts and retained observations'
             git push origin HEAD
           fi
-      - name: Package complete static snapshot
-        run: tar --dereference --hard-dereference --exclude=.git --exclude=.github -C web/dist -cf "$RUNNER_TEMP/artifact.tar" .
+      - name: Package the reviewed portfolio artifact
+        run: python scripts/portfolio_artifact.py pack --output artifacts/portfolio/fourth-down-static.tar.gz
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
-          name: github-pages
-          path: ${{ runner.temp }}/artifact.tar
+          name: fourth-down-static
+          path: |
+            artifacts/portfolio/fourth-down-static.tar.gz
+            artifacts/portfolio/fourth-down-static.tar.gz.sha256
           if-no-files-found: error
-          retention-days: 1
-  deploy:
-    needs: build
-    runs-on: ubuntu-24.04
-    timeout-minutes: 10
-    permissions:
-      contents: read
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Publish the verified complete snapshot
-        id: deployment
-        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1
+          retention-days: 7

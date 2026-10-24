@@ -29,6 +29,6 @@ jobs:
       - run: npm test && npm run test:release && npm run build
         working-directory: web
         env:
-          VITE_BASE_PATH: /${{ github.event.repository.name }}/
+          VITE_BASE_PATH: /fourth-down/
       - run: npm audit --audit-level=moderate
         working-directory: web

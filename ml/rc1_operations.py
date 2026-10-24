@@ -74,19 +74,20 @@ def workflow_contract():
             continue
         text = path.read_text()
         active = path.suffix == '.yml'
-        assert_manual_trigger(text, allow_daily='pages' in path.name)
+        assert_manual_trigger(text, allow_daily='portfolio-artifact' in path.name)
         assert 'timeout-minutes: 10' in text and 'contents: read' in text
         uses = re.findall(r'uses:\s+([^\s#]+)', text)
         assert uses
         for use in uses:
             name, digest = use.split('@')
             assert digest == lock[name]['sha'] and re.fullmatch('[0-9a-f]{40}', digest)
-        if 'pages' not in path.name:
+        if 'portfolio-artifact' not in path.name:
             assert not re.search(r'^\s+\S+: write', text, re.M)
         else:
-            assert 'environment:' in text and 'needs: build' in text
-            assert 'cancel-in-progress: false' in text and 'retention-days: 1' in text
+            assert 'deploy-pages@' not in text and 'pages: write' not in text and 'id-token: write' not in text
+            assert 'cancel-in-progress: false' in text and 'retention-days: 7' in text
             assert 'forecast_state.py restore' in text and 'forecast_state.py save' in text
+            assert 'portfolio_artifact.py pack' in text and 'VITE_BASE_PATH: /fourth-down/' in text
         records.append({'file':str(path.relative_to(ROOT)), 'sha256':sha(path.read_bytes()),
                         'active_manual_only':active, 'immutable_actions':len(uses)})
     assert len(records) == 2

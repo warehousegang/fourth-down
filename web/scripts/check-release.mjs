@@ -101,8 +101,8 @@ for (const [directory, prefix, mode] of [["operations", "operations", "forecast-
   }
 }
 const lock = json("docs/ACTIONS_LOCK.json");
-const pages = ["pages.yml.disabled", "pages.yml"].filter(name => existsSync(resolve(root, ".github/workflows", name)));
-assert.equal(pages.length, 1, "Keep exactly one Pages template/workflow; activation requires separate owner approval");
+const portfolio = ["portfolio-artifact.yml.disabled", "portfolio-artifact.yml"].filter(name => existsSync(resolve(root, ".github/workflows", name)));
+assert.equal(portfolio.length, 1, "Keep exactly one portfolio artifact workflow/template; activation requires owner approval");
 for (const workflow of readdirSync(resolve(root, ".github/workflows")).filter(name => /\.yml(?:\.disabled)?$/.test(name))) {
   const content = readFileSync(resolve(root, ".github/workflows", workflow), "utf8");
   for (const match of content.matchAll(/uses:\s*([^\s#]+)/g)) {

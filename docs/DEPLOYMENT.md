@@ -1,69 +1,90 @@
-# Publish Fourth Down
+# Fourth Down on ThomasHoward.dev
 
-Prepared locally on 2026-10-24. **No deployment or personal-site change is authorized yet.** This is an Applied AI portfolio demonstration using a frozen model and static artifacts. The older RC1 reports remain historical evidence, not an additional approval cycle.
+Approved destination: **https://thomashoward.dev/fourth-down/**. This integration is prepared locally only. Pushing, deploying, DNS and production settings changes remain unauthorized.
 
-## Cost and publication target
+## Inspected configuration and proposed change
 
-Target **$0/month**: public repository, standard Ubuntu GitHub Actions runners, GitHub Pages, public data, no database or paid LLM. [Standard public runners are free](https://docs.github.com/en/billing/concepts/product-billing/github-actions); [Pages supports public repositories on GitHub Free](https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits). The site is about 5 MB, versus Pages' 1 GB limit and 100 GB/month soft bandwidth limit. Deployment uploads expire after one day; the optional daily run has two ten-minute job limits. Do not select larger paid runners.
+On 2026-10-24, `warehousegang/thomashowarddev` was at `0df446445f199b0e7f1329f5817b97b22cf7b1e8`. Its Pages API reports legacy branch publishing from `main` at `/`, custom domain `thomashoward.dev`, and a successful built-in `pages-build-deployment` run. There is no repository workflow to replace. HTTPS returned 200 with an approved certificate. `CNAME`, the current HTTPS enforcement setting, DNS and Pages source remain unchanged.
 
-The connected account is `warehousegang`. Its existing `nfl-predictor` repository is private. Use a separate public `fourth-down` repository; read-only lookup found no accessible repository at that name. Stop on a collision rather than overwrite another repository or change its visibility.
+The local review checkout is `/Users/thomas/Documents/Codex/2026-10-24/files-pasted-by-the-user-codex/thomashowarddev-integration`, branch `codex/fourth-down-integration`. The original `/Users/thomas/PycharmProjects/thomashowarddev` checkout is untouched.
 
-## Exact publication steps — after explicit approval
+The website change is limited to the compiled `fourth-down/` directory, the existing featured cards in `index.html` and `projects/index.html`, and a README explanation. All existing article URLs, the old illustrative lab, CSS, JavaScript, images, résumé and domain configuration remain intact. The new directory contains no Python, raw training data, Git metadata or credentials. Its `release.json` identifies the source commit, `/fourth-down/` base and every static file checksum. No portfolio deployment workflow change is necessary: the existing branch publisher copies these static files alongside the existing site.
 
-1. Activate the reviewed template and publish the prepared Git history:
+Fourth Down source, ML and tests remain in this separate repository. Vite defaults to `/fourth-down/`; `VITE_BASE_PATH=/` remains available for standalone testing. The SHA-pinned `portfolio-artifact.yml.disabled` replaces the unused standalone Pages template. It refreshes only the current season, retains forecast evidence in its own Git history and produces a seven-day `fourth-down-static` download. It has no Pages deployment job, portfolio token, cross-repository push or active schedule. Building an artifact does not update the public website.
+
+## Local build and import
+
+Use the matching Python environment for ML tests; the importer itself uses only Python's standard library. From this repository, with reviewed changes committed:
+
+```sh
+cd '/Users/thomas/Documents/ChatGPT/nfl predictor'
+(cd web && npm ci --ignore-scripts && npm test && npm run test:release && npm run build)
+python3 scripts/portfolio_artifact.py pack --output artifacts/portfolio/fourth-down-static.tar.gz
+python3 scripts/portfolio_artifact.py install \
+  --archive artifacts/portfolio/fourth-down-static.tar.gz \
+  --sha256 VERIFIED_SHA256_PRINTED_BY_PACK \
+  --portfolio '/Users/thomas/Documents/Codex/2026-10-24/files-pasted-by-the-user-codex/thomashowarddev-integration'
+```
+
+The installer requires the expected archive SHA256, verifies the file manifest/base path, rejects traversal/symlinks and refuses to discard local edits in an existing installed release. It replaces only `fourth-down/`. Review the resulting Git diff before publication. The source directory must be committed before packaging so the artifact has an unambiguous source revision.
+
+Preview the integrated website with a plain directory server, matching Pages path behavior:
+
+```sh
+cd '/Users/thomas/Documents/Codex/2026-10-24/files-pasted-by-the-user-codex/thomashowarddev-integration'
+python3 -m http.server 4180 --bind 127.0.0.1
+# http://127.0.0.1:4180/ and http://127.0.0.1:4180/fourth-down/#models
+```
+
+There is no SPA catch-all rewrite: Fourth Down uses hash routes. `/fourth-down` redirects to the directory's trailing slash; `/fourth-down/#models` survives refresh; unknown portfolio paths remain 404s. Existing root-relative and relative portfolio assets retain their original locations.
+
+## Exact publication steps — only after approval
+
+1. Approve the source and portfolio integration commits. Refresh current forecasts before publication or an interview if the saved snapshot has expired; never relabel old timestamps. In the Fourth Down environment, run `python -m ml.refresh`, then `python scripts/forecast_state.py save`, test and commit the new forecast/evidence files, rebuild, package and import as above. Do not fit/promote models or open 2024–2025.
+2. If the planned separate public source repository has not been created, publish it without changing the existing private `nfl-predictor` repository:
 
    ```sh
    cd '/Users/thomas/Documents/ChatGPT/nfl predictor'
-   mv .github/workflows/pages.yml.disabled .github/workflows/pages.yml
-   git add .github/workflows/pages.yml .github/workflows/pages.yml.disabled
-   git commit -m 'Enable approved Fourth Down Pages publication'
    gh repo create warehousegang/fourth-down --public --source=. --remote=origin
    git push -u origin HEAD:main
    gh repo edit warehousegang/fourth-down --default-branch main
    ```
 
-   The source license is MIT; data/dependency terms and attribution remain separate. Raw local datasets, environments, audit logs and retired logos are excluded. The small `ops/` bundle deliberately retains current-season original observations and forecast history.
-
-2. In the new repository, choose **Settings → Pages → Build and deployment → Source → GitHub Actions**. Ensure Actions are enabled. No secrets or service accounts are needed. The build job has `contents: write` to retain forecasts; the separate deploy job has Pages/identity permissions. Repository rules must permit this workflow's forecast commit.
-
-3. Run the release with a real current-data refresh:
+   Stop on an existing repository/name collision. Do **not** enable Pages on the Fourth Down repository or add a second CNAME. Hosting remains with `thomashowarddev`.
+3. In the portfolio review checkout, inspect `git diff 0df446445f199b0e7f1329f5817b97b22cf7b1e8 --stat` and the two card changes. Fetch the latest portfolio `main` and reconcile any intervening edits before proceeding. Once this exact integration is approved, push the feature branch and merge it through a reviewed pull request. The merge to `main` triggers the existing Pages deployment:
 
    ```sh
-   gh workflow run pages.yml --repo warehousegang/fourth-down --ref main -f refresh=true
-   gh run list --repo warehousegang/fourth-down --workflow pages.yml --limit 1
-   # Substitute the run ID printed above:
-   gh run watch RUN_ID --repo warehousegang/fourth-down --exit-status
+   cd '/Users/thomas/Documents/Codex/2026-10-24/files-pasted-by-the-user-codex/thomashowarddev-integration'
+   git fetch origin
+   # Reconcile/retest if origin/main moved from the inspected baseline.
+   git push -u origin codex/fourth-down-integration
+   gh pr create --repo warehousegang/thomashowarddev --base main \
+     --head codex/fourth-down-integration \
+     --title 'Feature Fourth Down under /fourth-down/' \
+     --body 'Adds the verified static Fourth Down artifact and updates the existing featured cards. Preserves portfolio routes, assets, CNAME and branch-based Pages publishing. ML source and tests remain in their separate repository.'
+   # After approval of the exact pull request, merge it in GitHub.
+   gh run list --repo warehousegang/thomashowarddev --limit 3
+   gh run watch DEPLOYMENT_RUN_ID --repo warehousegang/thomashowarddev --exit-status
    ```
 
-   The job tests the frozen pipeline, restores original evidence, refreshes the current season, generates forecasts/history/postgame scoring, tests and builds the site, then commits retained state together. A complete site is uploaded only after success. A failed refresh/test/push leaves the previous public deployment intact. No fitting, promotion or protected holdout access occurs.
+4. Verify the live homepage card, `/projects/`, `/about/`, `/blog/`, `/resume/`, an existing project essay, `/fourth-down/` and a refreshed `#models` deep link. Compare `/fourth-down/release.json` with the approved source commit/checksums; inspect current forecast age and model ID. This is the first hosted verification, not an already-completed local test. Do not change DNS or Pages settings.
 
-4. Open **https://warehousegang.github.io/fourth-down/**. Check Upcoming Games, matchup explanations, Forecast History, Model Intelligence's simulation/research demonstration, Postgame Analysis and Architecture. Refresh a deep link such as `#intelligence`, check mobile layout, and verify source timestamps/model ID. Expired/missing probabilities must remain withheld. The first hosted run is the real-environment smoke test; it has not been claimed as already executed.
+## Future refreshes and rollback
 
-5. If daily refresh is approved, uncomment only these prepared lines under `on:` in `pages.yml`, commit and push to `main`:
-
-   ```yaml
-   schedule:
-     - cron: '17 12 * * *'
-   ```
-
-   This runs about once daily at 12:17 UTC; GitHub may delay jobs. Manual dispatch is available before an interview. This is not a last-minute injury/news service: context annotations keep independent timestamps and do not influence the model. Remove the schedule to stop recurring execution. No schedule is currently active.
-
-6. **After separate personal-site approval**, add a project card linking to the verified Pages URL: **Fourth Down — Applied AI NFL Forecasting**, with description **Explainable upcoming-game predictions, historical evaluation, forecast tracking and controlled research.** Source link: `https://github.com/warehousegang/fourth-down`. Preview/publish through the personal site's existing process. No personal-site files have been touched.
-
-## Local preview and recovery
+For optional hosted artifact generation, after approval rename `.github/workflows/portfolio-artifact.yml.disabled` to `portfolio-artifact.yml` in the Fourth Down repository, commit and push. Run:
 
 ```sh
-cd web
-npm ci --ignore-scripts
-npm test
-npm run test:release
-VITE_BASE_PATH=/fourth-down/ npm run build
-VITE_BASE_PATH=/fourth-down/ npm run preview -- --port 4174 --strictPort
-# Open http://127.0.0.1:4174/fourth-down/
+gh workflow run portfolio-artifact.yml --repo warehousegang/fourth-down --ref main -f refresh=true
+gh run list --repo warehousegang/fourth-down --workflow portfolio-artifact.yml --limit 1
+gh run watch BUILD_RUN_ID --repo warehousegang/fourth-down --exit-status
+gh run download BUILD_RUN_ID --repo warehousegang/fourth-down \
+  --name fourth-down-static --dir artifacts/portfolio/downloaded
 ```
 
-The model uses only current-season win rate, scoring margin, recent margin and rest. Injuries, weather, news and prior-season strength are not predictive inputs. Original forecasts and timestamps stay unchanged; publication refreshes instead of rewriting their age. Prospective performance is unknown until eligible recorded games finish.
+Verify the checksum against that approved run, import the archive using the same installer, review/commit only `fourth-down/`, and publish through the website's normal merge. The commented daily cron may be enabled only with recurring-run approval; it prepares artifacts and never updates the website automatically. No new cross-repository credentials are required. Manual promotion is intentional for this small portfolio; public forecasts expire visibly until the next artifact is imported.
 
-`ops/forecast-evidence-<season>.zip` and its checksum receipt retain original observations alongside public JSON in one Git commit. Fresh runners restore verified captures; missing/corrupt required evidence fails closed. The disposable checkout and complete-site deployment form the publication boundary: local pointer writes are not claimed to be a database transaction. New empty seasons are allowed; protected 2024–2025 seasons are rejected. Git retains previous bundles without a paid storage service.
+For a data/application rollback, import the previous approved archive/checksum and commit the resulting `fourth-down/` diff. Alternatively restore the complete `fourth-down/` tree from a known-good portfolio commit. Preserve original probabilities and timestamps. To remove the first integration entirely, revert its portfolio integration commit; that restores both original cards and removes the new directory without touching `CNAME` or existing pages. Review and approve the revert before merging. Git history retains the older artifact; a seven-day Actions upload is not the only rollback copy.
 
-For rollback, restore the last good source, `ops/` pair and public artifact tree from Git in a new commit; run the workflow with `refresh=false`. Preserve original timestamps and model identity. Disable optional scheduling while diagnosing source failures. Commercial operation would move long-lived history into partitioned storage and add stronger availability/monitoring; that is not required to publish this portfolio.
+## Cost
+
+**$0 additional recurring hosting cost** using the existing public Pages site and standard public-repository Actions runners. Existing domain registration/renewal is unchanged. There is no server, paid sports feed, LLM subscription or new service. [GitHub Pages availability and limits](https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits) and [Actions billing](https://docs.github.com/en/billing/concepts/product-billing/github-actions) support this setup. The current static application is about 5 MB; seven retained compressed daily artifacts are about 5 MB. No schedule, workflow dispatch, push or deployment was executed during preparation.

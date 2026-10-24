@@ -12,7 +12,7 @@ for (const path of ["data/demo.json", "THIRD_PARTY_NOTICES.txt", "CURRENT_DATA_N
 assert.deepEqual(readdirSync(resolve(web, "dist")).sort(), ["CURRENT_DATA_NOTICE.txt", "THIRD_PARTY_NOTICES.txt", "assets", "data", "index.html"]);
 assert.deepEqual(readdirSync(resolve(web, "dist/data")).sort(), [...directories, "demo.json"].sort());
 for (const directory of directories) assert.deepEqual(readdirSync(resolve(web, `dist/data/${directory}`)).sort(), readdirSync(resolve(web, `public/data/${directory}`)).sort());
-const base = process.env.VITE_BASE_PATH || "/";
+const base = process.env.VITE_BASE_PATH || "/fourth-down/";
 assert(base.startsWith("/") && base.endsWith("/"), "Base must be an absolute path ending in /");
 const html = readFileSync(resolve(web, "dist/index.html"), "utf8");
 for (const [, path] of html.matchAll(/(?:src|href)="([^"]+)"/g)) {

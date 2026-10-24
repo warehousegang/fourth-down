@@ -57,8 +57,8 @@ test("unexpected public image is rejected before distribution", t => {
 });
 test("future template activation preserves packaging checks without authorizing deployment", t => {
   const dir = fixture(t);
-  const template = resolve(dir, ".github/workflows/pages.yml.disabled");
-  if (existsSync(template)) renameSync(template, resolve(dir, ".github/workflows/pages.yml"));
+  const template = resolve(dir, ".github/workflows/portfolio-artifact.yml.disabled");
+  if (existsSync(template)) renameSync(template, resolve(dir, ".github/workflows/portfolio-artifact.yml"));
   const result = run(dir);
   assert.equal(result.status, 0, result.stderr);
 });

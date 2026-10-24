@@ -1,6 +1,6 @@
 # Fourth Down · NFL Predictive Intelligence
 
-An Applied AI engineering portfolio demonstration: real upcoming probabilities, immutable prediction history, current team/player context, postgame scoring, deterministic investigation and separately versioned challenger research. Python produces checksummed static JSON; React verifies and displays it. **The frozen schedule model remains operational. Nothing has been deployed or promoted.** Start with [publication steps and the $0 hosting plan](docs/DEPLOYMENT.md). Model Intelligence includes an interactive seeded simulation and a cited, deterministic research walkthrough; Architecture explains how the design would scale commercially.
+An Applied AI engineering portfolio demonstration: real upcoming probabilities, immutable prediction history, current team/player context, postgame scoring, deterministic investigation and separately versioned challenger research. Python produces checksummed static JSON; React verifies and displays it. **The frozen schedule model remains operational. Nothing has been deployed or promoted.** The approved destination is https://thomashoward.dev/fourth-down/. Start with [publication steps and the $0 hosting plan](docs/DEPLOYMENT.md). Model Intelligence includes an interactive seeded simulation and a cited, deterministic research walkthrough; Architecture explains how the design would scale commercially.
 
 ## Open locally
 
@@ -12,7 +12,7 @@ npm ci --ignore-scripts
 npm run dev -- --port 4175 --strictPort
 ```
 
-Open http://127.0.0.1:4175/. The six product views are Upcoming Games, Matchup Intelligence, Forecast History, Model Intelligence, Postgame Analysis and Architecture. Existing 2023 retrospective matchups/explanations/performance remain separately accessible. Recorded current forecasts expire and suppress probabilities after kickoff; this is not an always-live service. Included static artifacts and notices make a clean checkout browsable without Python, raw data or training.
+Open http://127.0.0.1:4175/fourth-down/. The six product views are Upcoming Games, Matchup Intelligence, Forecast History, Model Intelligence, Postgame Analysis and Architecture. Existing 2023 retrospective matchups/explanations/performance remain separately accessible. Recorded current forecasts expire and suppress probabilities after kickoff; this is not an always-live service. Included static artifacts and notices make a clean checkout browsable without Python, raw data or training.
 
 ## Explicit local operations
 
@@ -66,6 +66,6 @@ The original five scripts remain unchanged in `legacy/`, with hashes matching `~
 
 The candidate coefficients/preprocessing/features, eight frozen files, 2023 replay, validation evidence and holdout protocol/exposure remain unchanged. The locked 2024–2025 period is **partially exposed**: previously observed legacy aggregate accuracy 0.5359, Brier 0.2492 and log loss 0.6915 remain disclosure only. No additional protected results were acquired or evaluated.
 
-The latest Simplify and Ship instruction governs this portfolio release. Public deployment, recurring scheduling, personal-site changes, training, protected holdout use and model promotion still require explicit approval. The combined refresh/Pages template remains inactive. It retains original source evidence in Git and publishes one complete static snapshot after verification; no database, paid service or LLM call is required. Earlier RC1 findings remain historical evidence rather than a new release process.
+The latest Simplify and Ship instruction governs this portfolio release. Public deployment, recurring scheduling, personal-site changes, training, protected holdout use and model promotion still require explicit approval. The portfolio artifact template remains inactive. It retains original source evidence in Git and exports a checksummed static snapshot for import into the existing website; no database, paid service or LLM call is required. Earlier RC1 findings remain historical evidence rather than a new release process.
 
 Current schedule attribution: [SportsDataverse](https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/nfl_ngs_schedules), repository MIT notice in `web/public/CURRENT_DATA_NOTICE.txt`. Historical/current context: [nflverse](https://github.com/nflverse/nflverse-data), historical schedule contribution by Lee Sharpe, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Transformations and predictions are derived modifications. Project source is MIT; the cited public datasets and bundled dependencies retain their own terms and attribution. Original text team identifiers replace NFL/ESPN logo assets. Full dependency notices ship with the app; see [THIRD_PARTY.md](docs/THIRD_PARTY.md). No affiliation with NFL or nflverse. Educational research, not betting advice.
