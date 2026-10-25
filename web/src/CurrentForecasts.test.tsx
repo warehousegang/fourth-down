@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import { afterEach, beforeEach, expect, it, vi } from "vitest";
 import { App } from "./App";
 import { readFileSync } from "node:fs";
@@ -34,10 +34,17 @@ it("shows independent current error while preserving historical navigation", asy
 it("labels verified expired forecasts as older without changing their probabilities", async () => {
   vi.spyOn(Date,"now").mockReturnValue(Date.parse(currentFixture().valid_until)+1);
   render(<App/>);
-  expect(await screen.findByText(/Older forecast warning/)).toBeInTheDocument();
+  expect(await screen.findByText("Older forecasts — not fresh")).toBeInTheDocument();
   expect(await screen.findAllByText("OLDER FORECAST · NOT FRESH")).toHaveLength(13);
   expect(screen.getByText("0 fresh · 13 older")).toBeInTheDocument();
-  expect(screen.getAllByRole("link",{name:"Original forecast JSON"})).toHaveLength(13);
+  expect(screen.getAllByRole("link",{name:"View prediction data (JSON)"})).toHaveLength(13);
+  const card=screen.getAllByRole("article")[0];
+  const actions=within(card).getAllByRole("link");
+  expect(actions.map(a=>a.textContent)).toEqual(["Explore matchup intelligence ","View prediction data (JSON)"]);
+  expect(actions[0]).toHaveAttribute("href",`#intelligence?game=${encodeURIComponent(currentFixture().games[0].id)}`);
+  expect(actions[1]).toHaveAttribute("href",`${import.meta.env.BASE_URL}data/current/${record.artifact_file}`);
+  expect(card.querySelector(".current-cutoff time")).toHaveAttribute("datetime",currentFixture().games[0].generated_at);
+  expect(within(card).getByText("Older forecast").closest("details")).not.toHaveAttribute("open");
   expect(screen.queryByText("MODEL ESTIMATE · NOT A GUARANTEE")).not.toBeInTheDocument();
 });
 
@@ -60,7 +67,10 @@ it("retains an eligible original after a stale-source attempt issues no new prob
   vi.mocked(loadCurrent).mockResolvedValue({data,...currentPointer});
   render(<App/>);
   expect(await screen.findAllByText("OLDER FORECAST · NOT FRESH")).toHaveLength(13);
-  expect(screen.getAllByText(/Older forecast: generated/)).toHaveLength(13);
+  expect(screen.getAllByText("Older forecast",{exact:true})).toHaveLength(13);
+  for (const [index,card] of screen.getAllByRole("article").entries()) {
+    expect(card.querySelector(".current-cutoff time")).toHaveAttribute("datetime",currentFixture().games[index].generated_at);
+  }
 });
 it("fails closed when archive provenance cannot be loaded",async()=>{
   vi.mocked(loadOperations).mockRejectedValue(new Error("History checksum mismatch"));
