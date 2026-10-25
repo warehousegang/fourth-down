@@ -98,7 +98,7 @@ test("freshness expiry keeps eligible older forecasts and immutable history insp
   await page.goto("./#current");
   await expect(page.getByText("Older forecasts — not fresh",{exact:true})).toBeVisible();
   const visible=await page.locator(".current-probabilities").count();
-  await expect(page.getByText("OLDER FORECAST · NOT FRESH",{exact:true})).toHaveCount(visible);
+  await expect(page.locator(".current-card summary strong").filter({hasText:/^Older forecast$/})).toHaveCount(visible);
   await page.getByRole("link",{name:"Matchup Intelligence",exact:true}).click();
   if(!current.games.length)await expect(page.getByRole("heading",{name:"No upcoming matchup"})).toBeVisible();
   else if(await page.locator(".intelligence-team-comparison").count())await expect(page.getByText("Older forecast — not fresh.",{exact:true})).toBeVisible();

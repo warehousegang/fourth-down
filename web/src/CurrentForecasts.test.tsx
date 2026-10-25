@@ -35,8 +35,10 @@ it("labels verified expired forecasts as older without changing their probabilit
   vi.spyOn(Date,"now").mockReturnValue(Date.parse(currentFixture().valid_until)+1);
   render(<App/>);
   expect(await screen.findByText("Older forecasts — not fresh")).toBeInTheDocument();
-  expect(await screen.findAllByText("OLDER FORECAST · NOT FRESH")).toHaveLength(13);
-  expect(screen.getByText("0 fresh · 13 older")).toBeInTheDocument();
+  expect(await screen.findAllByText("Older forecast",{exact:true})).toHaveLength(13);
+  const counts=document.querySelector(".current-status-counts")!;
+  expect([...counts.querySelectorAll("dt")].map(n=>n.textContent)).toEqual(["Displayable","Fresh","Older"]);
+  expect([...counts.querySelectorAll("dd")].map(n=>n.textContent)).toEqual(["13 of 13","0","13"]);
   expect(screen.getAllByRole("link",{name:"View prediction data (JSON)"})).toHaveLength(13);
   const card=screen.getAllByRole("article")[0];
   const actions=within(card).getAllByRole("link");
@@ -66,8 +68,8 @@ it("retains an eligible original after a stale-source attempt issues no new prob
   vi.spyOn(Date,"now").mockReturnValue(Date.parse(generated)+1000);
   vi.mocked(loadCurrent).mockResolvedValue({data,...currentPointer});
   render(<App/>);
-  expect(await screen.findAllByText("OLDER FORECAST · NOT FRESH")).toHaveLength(13);
-  expect(screen.getAllByText("Older forecast",{exact:true})).toHaveLength(13);
+  expect(await screen.findAllByText("Older forecast",{exact:true})).toHaveLength(13);
+  expect(screen.getAllByText(/No late-breaking injuries, weather or news are included/)).toHaveLength(1);
   for (const [index,card] of screen.getAllByRole("article").entries()) {
     expect(card.querySelector(".current-cutoff time")).toHaveAttribute("datetime",currentFixture().games[index].generated_at);
   }
