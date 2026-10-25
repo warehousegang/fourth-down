@@ -104,10 +104,3 @@ export async function loadCurrent(): Promise<LoadedCurrent> {
     throw new Error("Current forecast data failed integrity validation. No probabilities are displayed; refresh from the verified pipeline.");
   }
 }
-
-export function unavailableReason(data: CurrentArtifact, game: CurrentGame, now = Date.now()): string | null {
-  if (Date.parse(data.generated_at) > now+300000) return "Forecast timestamp is in the future; check the clock and refresh.";
-  if (now >= Date.parse(data.valid_until)) return "Snapshot expired. Refresh before using this forecast.";
-  if (game.kickoff && now >= Date.parse(game.kickoff)) return "Kickoff has passed; this is no longer an upcoming forecast.";
-  return game.status === "unavailable" ? game.reason : null;
-}

@@ -90,14 +90,16 @@ test("missing operational evidence preserves research and historical access",asy
   await expect(page.getByRole("heading",{name:/Game on/})).toBeVisible();
 });
 
-test("expired current probabilities stay hidden while immutable history remains inspectable",async({page})=>{
-  await page.clock.install({time:new Date(Math.max(Date.parse(current.valid_until),Date.parse(current.generated_at))+1000)});
+test("freshness expiry keeps eligible older forecasts and immutable history inspectable",async({page})=>{
+  const now=Math.max(Date.parse(current.valid_until),Date.parse(current.generated_at),Date.parse(operations.generated_at))+1000;
+  await page.clock.install({time:new Date(now)});
   await page.goto("./#current");
-  await expect(page.getByText(/Snapshot expired — probabilities hidden/)).toBeVisible();
-  await expect(page.locator(".current-probabilities")).toHaveCount(0);
+  await expect(page.getByText(/Older forecast warning — these are not fresh predictions/)).toBeVisible();
+  const visible=await page.locator(".current-probabilities").count();
+  await expect(page.getByText("OLDER FORECAST · NOT FRESH",{exact:true})).toHaveCount(visible);
   await page.getByRole("link",{name:"Matchup Intelligence",exact:true}).click();
-  if(current.games.length)await expect(page.getByText(/Current probability unavailable: Snapshot expired/)).toBeVisible();
-  else await expect(page.getByRole("heading",{name:"No upcoming matchup"})).toBeVisible();
+  if(!current.games.length)await expect(page.getByRole("heading",{name:"No upcoming matchup"})).toBeVisible();
+  else if(await page.locator(".intelligence-team-comparison").count())await expect(page.getByText("Older forecast — not fresh.",{exact:true})).toBeVisible();
   await page.getByRole("link",{name:"Forecast History",exact:true}).click();
   if(operations.games.length){
     await expect(page.getByText("Original record",{exact:true})).toBeVisible();

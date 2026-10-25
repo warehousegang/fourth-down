@@ -1,0 +1,511 @@
+{
+  "base": {
+    "current": {
+      "season": 2026,
+      "generated_at": "2026-10-25T00:22:38.161263+00:00",
+      "source": {
+        "asset_id": 668960439,
+        "license_url": "https://github.com/sportsdataverse/sportsdataverse-data/blob/main/LICENSE",
+        "raw_sha256": "1922b31983e74a7c53c661084c7d68e70bd9ea2ffd63ff410aaa754dc5023d9c",
+        "retrieved_at": "2026-10-25T00:22:38.036162+00:00",
+        "schema_version": 1,
+        "season": 2026,
+        "source_name": "SportsDataverse / NFL Next Gen Stats schedules",
+        "source_updated_at": "2026-10-23T11:47:43+00:00",
+        "source_url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nfl_ngs_schedules/ngs_schedule_2026.csv"
+      }
+    },
+    "game": {
+      "away": "PIT",
+      "away_probability": 0.5467062741859874,
+      "cutoff": "2026-10-25T00:22:38.047817+00:00",
+      "day": "2026-10-25",
+      "factors": [
+        {
+          "away": 0.6,
+          "coefficient": 0.7570764437208019,
+          "contribution": -0.15141528874416033,
+          "difference": -0.19999999999999996,
+          "home": 0.4,
+          "key": "smooth_win_diff",
+          "label": "Season win rate"
+        },
+        {
+          "away": 0.9,
+          "coefficient": 0.07521319127419845,
+          "contribution": -0.2632461694596946,
+          "difference": -3.5,
+          "home": -2.6,
+          "key": "margin_diff",
+          "label": "Season scoring margin"
+        },
+        {
+          "away": 0.2857142857142857,
+          "coefficient": 0.012158937786816839,
+          "contribution": -0.04689876003486495,
+          "difference": -3.857142857142857,
+          "home": -3.5714285714285716,
+          "key": "recent_margin_diff",
+          "label": "Recent scoring margin"
+        },
+        {
+          "away": 7.0,
+          "coefficient": 0.015117096047089522,
+          "contribution": 0.0,
+          "difference": 0.0,
+          "home": 7.0,
+          "key": "rest_diff",
+          "label": "Rest days"
+        }
+      ],
+      "features": {
+        "margin_diff": -3.5,
+        "recent_margin_diff": -3.857142857142857,
+        "rest_diff": 0,
+        "smooth_win_diff": -0.19999999999999996
+      },
+      "generated_at": "2026-10-25T00:22:38.161263+00:00",
+      "history": {
+        "away": [
+          {
+            "game_day": "2026-09-13",
+            "id": "ngs-2026-60186",
+            "observed_at": "2026-10-24T13:38:08.048809+00:00",
+            "snapshot_sha256": "8ca053cf9a54ca3f4e980ec733e89ff88ba115946a05752ef91b64a674ba202b"
+          },
+          {
+            "game_day": "2026-09-20",
+            "id": "ngs-2026-60199",
+            "observed_at": "2026-10-24T13:38:08.048809+00:00",
+            "snapshot_sha256": "8ca053cf9a54ca3f4e980ec733e89ff88ba115946a05752ef91b64a674ba202b"
+          },
+          {
+            "game_day": "2026-09-27",
+            "id": "ngs-2026-60218",
+            "observed_at": "2026-10-24T13:38:08.048809+00:00",
+            "snapshot_sha256": "8ca053cf9a54ca3f4e980ec733e89ff88ba115946a05752ef91b64a674ba202b"
+          },
+          {
+            "game_day": "2026-10-01",
+            "id": "ngs-2026-60226",
+            "observed_at": "2026-10-24T13:38:08.048809+00:00",
+            "snapshot_sha256": "8ca053cf9a54ca3f4e980ec733e89ff88ba115946a05752ef91b64a674ba202b"
+          },
+          {
+            "game_day": "2026-10-11",
+            "id": "ngs-2026-60248",
+            "observed_at": "2026-10-24T13:38:08.048809+00:00",
+            "snapshot_sha256": "8ca053cf9a54ca3f4e980ec733e89ff88ba115946a05752ef91b64a674ba202b"
+          },
+          {
+            "game_day": "2026-10-18",
+            "id": "ngs-2026-60265",
+            "observed_at": "2026-10-24T13:38:08.048809+00:00",
+            "snapshot_sha256": "8ca053cf9a54ca3f4e980ec733e89ff88ba115946a05752ef91b64a674ba202b"
+          }
+        ],
+        "home": [
+          {
+            "game_day": "2026-09-13",
+            "id": "ngs-2026-60182",
+            "observed_at": "2026-10-24T13:38:08.048809+00:00",
+            "snapshot_sha256": "8ca053cf9a54ca3f4e980ec733e89ff88ba115946a05752ef91b64a674ba202b"
+          },
+          {
+            "game_day": "2026-09-20",
+            "id": "ngs-2026-60196",
+            "observed_at": "2026-10-24T13:38:08.048809+00:00",
+            "snapshot_sha256": "8ca053cf9a54ca3f4e980ec733e89ff88ba115946a05752ef91b64a674ba202b"
+          },
+          {
+            "game_day": "2026-09-27",
+            "id": "ngs-2026-60223",
+            "observed_at": "2026-10-24T13:38:08.048809+00:00",
+            "snapshot_sha256": "8ca053cf9a54ca3f4e980ec733e89ff88ba115946a05752ef91b64a674ba202b"
+          },
+          {
+            "game_day": "2026-10-05",
+            "id": "ngs-2026-60241",
+            "observed_at": "2026-10-24T13:38:08.048809+00:00",
+            "snapshot_sha256": "8ca053cf9a54ca3f4e980ec733e89ff88ba115946a05752ef91b64a674ba202b"
+          },
+          {
+            "game_day": "2026-10-11",
+            "id": "ngs-2026-60246",
+            "observed_at": "2026-10-24T13:38:08.048809+00:00",
+            "snapshot_sha256": "8ca053cf9a54ca3f4e980ec733e89ff88ba115946a05752ef91b64a674ba202b"
+          },
+          {
+            "game_day": "2026-10-18",
+            "id": "ngs-2026-60263",
+            "observed_at": "2026-10-24T13:38:08.048809+00:00",
+            "snapshot_sha256": "8ca053cf9a54ca3f4e980ec733e89ff88ba115946a05752ef91b64a674ba202b"
+          }
+        ]
+      },
+      "home": "NO",
+      "home_probability": 0.45329372581401256,
+      "id": "ngs-2026-60272",
+      "kickoff": "2026-10-25T13:30:00+00:00",
+      "model_id": "schedule-v1-741cf41752",
+      "reason": null,
+      "schedule_fingerprint": "0b169d6694273141408c745c6b5428dc3dfbdbd2b858a9453f8ed2ae7fac1c10",
+      "season": 2026,
+      "source_game_id": "2026102500",
+      "source_phase": "",
+      "stadium": "Stade de France",
+      "status": "available",
+      "warnings": [],
+      "week": 7
+    },
+    "operations": {
+      "season": 2026,
+      "generated_at": "2026-10-25T00:22:38.161263+00:00",
+      "source": {
+        "raw_sha256": "1922b31983e74a7c53c661084c7d68e70bd9ea2ffd63ff410aaa754dc5023d9c",
+        "retrieved_at": "2026-10-25T00:22:38.036162+00:00",
+        "snapshot_sha256": "16504d01e4d451e4fde10b07df301849fd5a3f2b39a4c14d32057f1d93206636",
+        "source_updated_at": "2026-10-23T11:47:43+00:00",
+        "source_url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nfl_ngs_schedules/ngs_schedule_2026.csv"
+      },
+      "schedule": [
+        {
+          "away": "PIT",
+          "day": "2026-10-25",
+          "home": "NO",
+          "id": "ngs-2026-60272",
+          "kickoff": "2026-10-25T13:30:00+00:00",
+          "season": 2026,
+          "source_phase": "",
+          "stadium": "Stade de France",
+          "status": "scheduled",
+          "week": 7
+        }
+      ],
+      "catalog": [
+        {
+          "artifact_file": "forecast-2026-a692ad1ca1e530541125ad849f886cf52ab84764e82473c03c9f5f2aaa713e86.json",
+          "artifact_sha256": "a692ad1ca1e530541125ad849f886cf52ab84764e82473c03c9f5f2aaa713e86",
+          "away": "PIT",
+          "away_probability": 0.5467062741859874,
+          "cutoff": "2026-10-25T00:22:38.047817+00:00",
+          "day": "2026-10-25",
+          "eligible": true,
+          "exclusions": [],
+          "factors": [
+            {
+              "away": 0.6,
+              "coefficient": 0.7570764437208019,
+              "contribution": -0.15141528874416033,
+              "difference": -0.19999999999999996,
+              "home": 0.4,
+              "key": "smooth_win_diff",
+              "label": "Season win rate"
+            },
+            {
+              "away": 0.9,
+              "coefficient": 0.07521319127419845,
+              "contribution": -0.2632461694596946,
+              "difference": -3.5,
+              "home": -2.6,
+              "key": "margin_diff",
+              "label": "Season scoring margin"
+            },
+            {
+              "away": 0.2857142857142857,
+              "coefficient": 0.012158937786816839,
+              "contribution": -0.04689876003486495,
+              "difference": -3.857142857142857,
+              "home": -3.5714285714285716,
+              "key": "recent_margin_diff",
+              "label": "Recent scoring margin"
+            },
+            {
+              "away": 7.0,
+              "coefficient": 0.015117096047089522,
+              "contribution": 0.0,
+              "difference": 0.0,
+              "home": 7.0,
+              "key": "rest_diff",
+              "label": "Rest days"
+            }
+          ],
+          "features": {
+            "margin_diff": -3.5,
+            "recent_margin_diff": -3.857142857142857,
+            "rest_diff": 0,
+            "smooth_win_diff": -0.19999999999999996
+          },
+          "forecast_status": "available",
+          "game_id": "ngs-2026-60272",
+          "generated_at": "2026-10-25T00:22:38.161263+00:00",
+          "history": {
+            "away": [
+              {
+                "game_day": "2026-09-13",
+                "id": "ngs-2026-60186",
+                "observed_at": "2026-10-24T13:38:08.048809+00:00",
+                "snapshot_sha256": "8ca053cf9a54ca3f4e980ec733e89ff88ba115946a05752ef91b64a674ba202b"
+              },
+              {
+                "game_day": "2026-09-20",
+                "id": "ngs-2026-60199",
+                "observed_at": "2026-10-24T13:38:08.048809+00:00",
+                "snapshot_sha256": "8ca053cf9a54ca3f4e980ec733e89ff88ba115946a05752ef91b64a674ba202b"
+              },
+              {
+                "game_day": "2026-09-27",
+                "id": "ngs-2026-60218",
+                "observed_at": "2026-10-24T13:38:08.048809+00:00",
+                "snapshot_sha256": "8ca053cf9a54ca3f4e980ec733e89ff88ba115946a05752ef91b64a674ba202b"
+              },
+              {
+                "game_day": "2026-10-01",
+                "id": "ngs-2026-60226",
+                "observed_at": "2026-10-24T13:38:08.048809+00:00",
+                "snapshot_sha256": "8ca053cf9a54ca3f4e980ec733e89ff88ba115946a05752ef91b64a674ba202b"
+              },
+              {
+                "game_day": "2026-10-11",
+                "id": "ngs-2026-60248",
+                "observed_at": "2026-10-24T13:38:08.048809+00:00",
+                "snapshot_sha256": "8ca053cf9a54ca3f4e980ec733e89ff88ba115946a05752ef91b64a674ba202b"
+              },
+              {
+                "game_day": "2026-10-18",
+                "id": "ngs-2026-60265",
+                "observed_at": "2026-10-24T13:38:08.048809+00:00",
+                "snapshot_sha256": "8ca053cf9a54ca3f4e980ec733e89ff88ba115946a05752ef91b64a674ba202b"
+              }
+            ],
+            "home": [
+              {
+                "game_day": "2026-09-13",
+                "id": "ngs-2026-60182",
+                "observed_at": "2026-10-24T13:38:08.048809+00:00",
+                "snapshot_sha256": "8ca053cf9a54ca3f4e980ec733e89ff88ba115946a05752ef91b64a674ba202b"
+              },
+              {
+                "game_day": "2026-09-20",
+                "id": "ngs-2026-60196",
+                "observed_at": "2026-10-24T13:38:08.048809+00:00",
+                "snapshot_sha256": "8ca053cf9a54ca3f4e980ec733e89ff88ba115946a05752ef91b64a674ba202b"
+              },
+              {
+                "game_day": "2026-09-27",
+                "id": "ngs-2026-60223",
+                "observed_at": "2026-10-24T13:38:08.048809+00:00",
+                "snapshot_sha256": "8ca053cf9a54ca3f4e980ec733e89ff88ba115946a05752ef91b64a674ba202b"
+              },
+              {
+                "game_day": "2026-10-05",
+                "id": "ngs-2026-60241",
+                "observed_at": "2026-10-24T13:38:08.048809+00:00",
+                "snapshot_sha256": "8ca053cf9a54ca3f4e980ec733e89ff88ba115946a05752ef91b64a674ba202b"
+              },
+              {
+                "game_day": "2026-10-11",
+                "id": "ngs-2026-60246",
+                "observed_at": "2026-10-24T13:38:08.048809+00:00",
+                "snapshot_sha256": "8ca053cf9a54ca3f4e980ec733e89ff88ba115946a05752ef91b64a674ba202b"
+              },
+              {
+                "game_day": "2026-10-18",
+                "id": "ngs-2026-60263",
+                "observed_at": "2026-10-24T13:38:08.048809+00:00",
+                "snapshot_sha256": "8ca053cf9a54ca3f4e980ec733e89ff88ba115946a05752ef91b64a674ba202b"
+              }
+            ]
+          },
+          "home": "NO",
+          "home_probability": 0.45329372581401256,
+          "id": "b3e511b6096aded40a2c62638e3fb0c34a61e476ba671eb8649b80cd304c1a59",
+          "kickoff": "2026-10-25T13:30:00+00:00",
+          "latest": true,
+          "model_id": "schedule-v1-741cf41752",
+          "schedule_fingerprint": "0b169d6694273141408c745c6b5428dc3dfbdbd2b858a9453f8ed2ae7fac1c10",
+          "season": 2026,
+          "selected_final": false,
+          "snapshot_sha256": "16504d01e4d451e4fde10b07df301849fd5a3f2b39a4c14d32057f1d93206636",
+          "source": {
+            "asset_id": 668960439,
+            "license_url": "https://github.com/sportsdataverse/sportsdataverse-data/blob/main/LICENSE",
+            "raw_sha256": "1922b31983e74a7c53c661084c7d68e70bd9ea2ffd63ff410aaa754dc5023d9c",
+            "retrieved_at": "2026-10-25T00:22:38.036162+00:00",
+            "schema_version": 1,
+            "season": 2026,
+            "source_name": "SportsDataverse / NFL Next Gen Stats schedules",
+            "source_updated_at": "2026-10-23T11:47:43+00:00",
+            "source_url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nfl_ngs_schedules/ngs_schedule_2026.csv"
+          },
+          "valid_until": "2026-10-25T11:47:43+00:00",
+          "week": 7
+        }
+      ]
+    }
+  },
+  "cases": [
+    {
+      "name": "before-48h-boundary",
+      "expected": "fresh",
+      "now": "2026-10-25T11:47:42.999Z",
+      "changes": []
+    },
+    {
+      "name": "exact-48h-boundary",
+      "expected": "older",
+      "now": "2026-10-25T11:47:43Z",
+      "changes": []
+    },
+    {
+      "name": "after-48h-boundary",
+      "expected": "older",
+      "now": "2026-10-25T12:00:00Z",
+      "changes": []
+    },
+    {
+      "name": "outage-retains-last-verified-source",
+      "expected": "older",
+      "now": "2026-10-25T12:00:00Z",
+      "changes": []
+    },
+    {
+      "name": "stale-new-attempt-retains-original",
+      "expected": "older",
+      "now": "2026-10-25T12:00:00Z",
+      "changes": [
+        [
+          "game.status",
+          "unavailable"
+        ],
+        [
+          "game.reason",
+          "Source is over 48 hours old; refresh before using forecasts"
+        ],
+        [
+          "current.generated_at",
+          "2026-10-25T12:00:00Z"
+        ]
+      ]
+    },
+    {
+      "name": "missing-inputs",
+      "expected": "unavailable",
+      "now": "2026-10-25T12:00:00Z",
+      "changes": [
+        [
+          "game.status",
+          "unavailable"
+        ],
+        [
+          "game.reason",
+          "Final result not confirmed before cutoff"
+        ]
+      ]
+    },
+    {
+      "name": "missing-provenance",
+      "expected": "unavailable",
+      "now": "2026-10-25T12:00:00Z",
+      "changes": [
+        [
+          "operations",
+          null
+        ]
+      ]
+    },
+    {
+      "name": "source-content-changed",
+      "expected": "unavailable",
+      "now": "2026-10-25T12:00:00Z",
+      "changes": [
+        [
+          "current.source.raw_sha256",
+          "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        ],
+        [
+          "operations.source.raw_sha256",
+          "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        ]
+      ]
+    },
+    {
+      "name": "mismatched-source-receipts",
+      "expected": "unavailable",
+      "now": "2026-10-25T12:00:00Z",
+      "changes": [
+        [
+          "operations.source.raw_sha256",
+          "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        ]
+      ]
+    },
+    {
+      "name": "rescheduled",
+      "expected": "unavailable",
+      "now": "2026-10-25T12:00:00Z",
+      "changes": [
+        [
+          "operations.schedule.0.kickoff",
+          "2026-10-25T17:00:00Z"
+        ]
+      ]
+    },
+    {
+      "name": "postponed",
+      "expected": "unavailable",
+      "now": "2026-10-25T12:00:00Z",
+      "changes": [
+        [
+          "operations.schedule.0.status",
+          "postponed"
+        ]
+      ]
+    },
+    {
+      "name": "missing-evidence-exclusion",
+      "expected": "unavailable",
+      "now": "2026-10-25T12:00:00Z",
+      "changes": [
+        [
+          "operations.catalog.0.eligible",
+          false
+        ],
+        [
+          "operations.catalog.0.exclusions",
+          [
+            "Original input snapshot unavailable"
+          ]
+        ]
+      ]
+    },
+    {
+      "name": "kickoff-boundary",
+      "expected": "unavailable",
+      "now": "2026-10-25T13:30:00+00:00",
+      "changes": []
+    },
+    {
+      "name": "generated-at-kickoff",
+      "expected": "unavailable",
+      "now": "2026-10-25T12:00:00Z",
+      "changes": [
+        [
+          "operations.catalog.0.generated_at",
+          "2026-10-25T13:30:00+00:00"
+        ]
+      ]
+    },
+    {
+      "name": "future-dated-evidence",
+      "expected": "unavailable",
+      "now": "2026-10-25T12:00:00Z",
+      "changes": [
+        [
+          "operations.generated_at",
+          "2026-10-25T12:01:00Z"
+        ]
+      ]
+    }
+  ]
+}

@@ -1,8 +1,12 @@
 import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
-import { readFileSync } from "node:fs";
+import { readFileSync, readdirSync } from "node:fs";
+import { createHash } from "node:crypto";
+import type { Page } from "@playwright/test";
 const pointer = JSON.parse(readFileSync("public/data/current/latest.json", "utf8"));
 const artifact = JSON.parse(readFileSync(`public/data/current/${pointer.file}`, "utf8"));
+const operationsPointer = JSON.parse(readFileSync("public/data/operations/latest.json", "utf8"));
+const operations = JSON.parse(readFileSync(`public/data/operations/${operationsPointer.file}`, "utf8"));
 
 test("current artifact, inputs, source lineage, history separation and accessibility", async ({page}, info) => {
   const errors: string[] = [];
@@ -19,14 +23,14 @@ test("current artifact, inputs, source lineage, history separation and accessibi
   // Verify every displayed probability against this artifact instead of banning a number.
   for(const [index,game] of artifact.games.entries()){
     const card=page.locator(".current-card").nth(index);
-    const displayable=game.status==="available"&&Date.parse(artifact.generated_at)<Date.parse(artifact.valid_until)
-      &&game.kickoff&&Date.parse(artifact.generated_at)<Date.parse(game.kickoff);
+    const saved=operations.catalog.filter((f: {game_id:string;eligible:boolean;source:{raw_sha256:string}})=>f.game_id===game.id&&f.eligible&&f.source.raw_sha256===artifact.source.raw_sha256).at(-1);
+    const displayable=saved && game.kickoff&&Date.parse(artifact.generated_at)<Date.parse(game.kickoff);
     if(displayable)await expect(card.locator(".current-probabilities strong")).toHaveText([
-      `${(game.away_probability*100).toFixed(1)}%`,`${(game.home_probability*100).toFixed(1)}%`,
+      `${(saved.away_probability*100).toFixed(1)}%`,`${(saved.home_probability*100).toFixed(1)}%`,
     ]);
     else await expect(card.locator(".current-probabilities")).toHaveCount(0);
   }
-  if (artifact.games.some((g: {status:string})=>g.status==="available")) {
+  if (await page.locator(".current-inputs").count()) {
     await page.locator(".current-inputs summary").first().click();
     await expect(page.locator(".current-feature-table").first()).toBeVisible();
     await expect(page.locator(".current-feature-table").first().locator("tbody tr")).toHaveCount(4);
@@ -52,6 +56,69 @@ test("current artifact, inputs, source lineage, history separation and accessibi
   await page.reload();
   await expect(page.getByRole("heading",{name:"Current Week Forecasts"})).toBeVisible();
   expect(errors).toEqual([]);
+});
+
+// Exercise real archived inputs through checksum/schema validation and the built UI.
+const saved = operations.catalog.filter((f: {eligible:boolean})=>f.eligible).at(-1);
+const original = JSON.parse(readFileSync(`public/data/current/${saved.artifact_file}`,"utf8"));
+const originalOperations = readdirSync("public/data/operations").filter(f=>f.startsWith("operations-")).map(f=>JSON.parse(readFileSync(`public/data/operations/${f}`,"utf8"))).find(o=>o.generated_at===original.generated_at);
+const originalCount = original.games.length;
+async function serveArtifact(page: Page, directory: string, prefix: string, data: typeof artifact) {
+  const body=JSON.stringify(data);
+  const sha256=createHash("sha256").update(body).digest("hex");
+  const file=`${prefix}-${sha256}.json`;
+  await page.route(`**/data/${directory}/latest.json`,route=>route.fulfill({json:{schema_version:1,file,sha256,season:data.season,generated_at:data.generated_at}}));
+  await page.route(`**/data/${directory}/${file}`,route=>route.fulfill({contentType:"application/json",body}));
+}
+
+test("48-hour boundary retains explicitly older estimates, then hides them at kickoff", async ({page}, info)=>{
+  await serveArtifact(page,"current",`forecast-${original.season}`,original);
+  await serveArtifact(page,"operations","operations",originalOperations);
+  await page.clock.install({time:new Date(Date.parse(original.valid_until)-1000)});
+  await page.goto("./");
+  await expect(page.locator(".current-probabilities")).toHaveCount(originalCount);
+  await expect(page.getByText("OLDER FORECAST · NOT FRESH",{exact:true})).toHaveCount(0);
+  await page.clock.fastForward(1000);
+  await expect(page.getByText("OLDER FORECAST · NOT FRESH",{exact:true})).toHaveCount(originalCount);
+  await expect(page.getByText("Older forecast warning — these are not fresh predictions.",{exact:true})).toBeVisible();
+  const first=original.games[0];
+  await expect(page.locator(".current-card").first().locator(".current-probabilities strong")).toHaveText([`${(first.away_probability*100).toFixed(1)}%`,`${(first.home_probability*100).toFixed(1)}%`]);
+  await expect(page.getByRole("link",{name:"Original forecast JSON",exact:true})).toHaveCount(originalCount);
+  expect((await new AxeBuilder({page}).withTags(["wcag2a","wcag2aa","wcag21aa"]).analyze()).violations).toEqual([]);
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+  await page.screenshot({path:`${process.env.TEST_ARTIFACT_DIR || "../artifacts"}/older-forecasts-${info.project.name}.png`,fullPage:true});
+  await page.locator(".current-card").first().getByRole("link",{name:"Explore matchup intelligence"}).click();
+  await expect(page.getByText("Older forecast — not fresh.",{exact:true})).toBeVisible();
+  await expect(page.locator(".intelligence-team-comparison strong")).toHaveText([`${(first.away_probability*100).toFixed(1)}%`,`${(first.home_probability*100).toFixed(1)}%`]);
+  await page.goto("./");
+  await page.clock.fastForward(Date.parse(first.kickoff)-Date.parse(original.valid_until));
+  await expect(page.locator(".current-card").first()).toContainText("Kickoff is unconfirmed or has passed");
+  await expect(page.locator(".current-card").first().locator(".current-probabilities")).toHaveCount(0);
+});
+
+test("stale-source refresh displays original archived probabilities without minting new ones", async ({page})=>{
+  const stale=structuredClone(original);
+  stale.as_of=stale.generated_at=new Date(Date.parse(original.valid_until)+60000).toISOString();
+  stale.games=stale.games.map((g: typeof original.games[number])=>({...g,generated_at:stale.generated_at,status:"unavailable",reason:"Source is over 48 hours old; refresh before using forecasts",home_probability:null,away_probability:null,features:{},factors:[]}));
+  const ops=structuredClone(originalOperations); ops.generated_at=stale.generated_at;
+  await serveArtifact(page,"current",`forecast-${stale.season}`,stale);
+  await serveArtifact(page,"operations","operations",ops);
+  await page.clock.install({time:new Date(stale.generated_at)});
+  await page.goto("./");
+  await expect(page.getByText(`0 fresh · ${originalCount} older`,{exact:true})).toBeVisible();
+  for (const [index,g] of original.games.entries()) {
+    const card=page.locator(".current-card").nth(index);
+    await expect(card.locator(".current-probabilities strong")).toHaveText([`${(g.away_probability*100).toFixed(1)}%`,`${(g.home_probability*100).toFixed(1)}%`]);
+    await expect(card.getByRole("link",{name:"Original forecast JSON",exact:true})).toHaveAttribute("href",new RegExp(saved.artifact_file+"$"));
+  }
+});
+
+test("missing provenance never exposes probabilities", async ({page})=>{
+  await page.clock.install({time:new Date(original.generated_at)});
+  await page.route("**/data/operations/latest.json",route=>route.fulfill({status:503,body:"Unavailable"}));
+  await page.goto("./");
+  await expect(page.getByRole("alert")).toContainText("Forecast provenance unavailable");
+  await expect(page.locator(".current-probabilities")).toHaveCount(0);
 });
 
 test("current failure remains separate from historical availability", async ({page})=>{
