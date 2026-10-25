@@ -118,3 +118,25 @@ for (const status of ["in_progress","unknown","postponed","canceled","missing"] 
   await expect(card).not.toContainText("Verified final:");
   await expect(card).not.toContainText("Brier:");
 });
+
+
+test("scheduled kickoff changes presentation without a backend refresh or a confirmed-live claim",async({page})=>{
+  const operations=structuredClone(captured);
+  const record=operations.catalog.find((f:{game_id:string;eligible:boolean})=>f.game_id==='ngs-2026-60272'&&f.eligible)!;
+  const current=JSON.parse(readFileSync(`public/data/current/${record.artifact_file}`,"utf8"));
+  const kickoff=Date.parse(record.kickoff);
+  await serve(page,"current",`forecast-${current.season}`,current);
+  await serve(page,"operations","operations",operations);
+  await page.clock.install({time:new Date(kickoff-1000)});
+  await page.goto("./");
+  const card=page.getByRole("article",{name:"Steelers at Saints current forecast"});
+  await expect(card).toContainText("Upcoming");
+  const probabilities=await card.locator(".current-probabilities strong").allTextContents();
+  const stamp=await card.locator(".current-cutoff time").getAttribute("datetime");
+  await page.route("**/data/**/latest.json",r=>r.fulfill({status:503,body:"No new backend artifact"}));
+  await page.clock.fastForward(1500);
+  await expect(card).toContainText("Awaiting result update");
+  await expect(card).not.toContainText("In progress");
+  await expect(card.locator(".current-probabilities strong")).toHaveText(probabilities);
+  await expect(card.locator(".current-cutoff time")).toHaveAttribute("datetime",stamp!);
+});

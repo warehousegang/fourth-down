@@ -17,7 +17,7 @@ export function predictionPerformance(operations:Operations, week?:number) {
     brier:mean(scored.map(e=>e.brier)),logLoss:mean(scored.map(e=>e.log_loss)),lastVerified:updates.at(-1)??null};
 }
 
-export function PredictionScoreboard({operations,week,error}:{operations:Operations|null;week:number|null;error?:string}) {
+export function PredictionScoreboard({operations,week,error,checkedAt}:{operations:Operations|null;week:number|null;error?:string;checkedAt?:string|null}) {
   const [scope,setScope]=useState<"week"|"season">("week");
   const stats=operations?predictionPerformance(operations,scope==="week"?week??undefined:undefined):null;
   const percent=stats?.accuracy===null||stats?.accuracy===undefined?"—":`${(stats.accuracy*100).toFixed(1)}%`;
@@ -27,6 +27,8 @@ export function PredictionScoreboard({operations,week,error}:{operations:Operati
     {!stats?<p role={error?"alert":"status"}>{error?"Verified performance is temporarily unavailable. Predictions are never scored without their evidence.":"Loading verified forecast history…"}</p>:<>
       <dl className="scoreboard-primary"><div><dt>Accuracy</dt><dd>{percent}</dd></div><div><dt>Games scored</dt><dd>{stats.count}</dd></div><div><dt>Correct</dt><dd>{stats.correct}<small> / {stats.count}</small></dd></div><div><dt>Incorrect</dt><dd>{stats.incorrect}</dd></div><div><dt>Pending</dt><dd>{stats.pending}</dd></div></dl>
       <div className="scoreboard-secondary"><p><span>Brier score</span><strong>{stats.brier?.toFixed(4)??"—"}</strong></p><p><span>Log loss</span><strong>{stats.logLoss?.toFixed(4)??"—"}<small> nats</small></strong></p><p><span>Last verified results update</span><strong>{stats.lastVerified?<time dateTime={stats.lastVerified}>{time(stats.lastVerified)}</time>:"Awaiting the first verified final"}</strong></p></div>
+      <div className="scoreboard-secondary scoreboard-freshness"><p><span>Results last checked</span><strong>{checkedAt?<time dateTime={checkedAt}>{time(checkedAt)}</time>:"Not checked in this tab"}</strong></p><p><span>Result provider last published</span><strong>{operations?.result_feed?<time dateTime={operations.result_feed.source_updated_at}>{time(operations.result_feed.source_updated_at)}</time>:"No supplemental result received"}</strong></p></div>
+      <p className="scoreboard-note">This tab checks published results every minute while visible. The check time confirms a successful dashboard fetch; provider publication and verified result times can be earlier.</p>
       {!stats.count&&<p className="scoreboard-note">No games scored yet. Accuracy and scoring metrics appear when an eligible saved prediction has a verified, non-tied final result.</p>}
       <details className="scoreboard-method"><summary>How performance is measured</summary><p>One designated pregame prediction per game. Pending games, ties, canceled or postponed games, and games without an eligible prediction do not count toward accuracy. {stats.excluded} game{stats.excluded===1?" is":"s are"} currently outside this scoring sample.</p><p>Brier score and log loss measure the quality of the saved probabilities; lower is better. This is prospective V1 performance for {operations?.season}, separate from historical validation, simulations, and V2 research.</p><a href="#postgame">Explore verified postgame analysis</a></details>
     </>}

@@ -34,3 +34,14 @@ it('ties and canceled games never enter accuracy or pending totals',()=>{
   ops.games[0].status='canceled';ops.games[0].result=null;
   expect(predictionPerformance(ops).count).toBe(0);expect(predictionPerformance(ops).excluded).toBe(1);
 });
+
+it('distinguishes the browser check from provider publication and verified result observation',()=>{
+  const ops=completedFixture();
+  ops.result_feed={provider:'nflverse',source_url:'https://github.com/nflverse/nflverse-pbp',license_url:'https://github.com/nflverse/nflverse-pbp/blob/master/LICENSE.md',base_operations_sha256:'a'.repeat(64),last_observed_at:ops.generated_at,source_updated_at:'2026-10-25T16:46:11Z'};
+  const {container}=render(<PredictionScoreboard operations={ops} week={7} checkedAt="2026-10-25T17:01:00Z"/>);
+  expect(screen.getByText('Results last checked')).toBeInTheDocument();
+  expect(screen.getByText('Result provider last published')).toBeInTheDocument();
+  expect(container.querySelector('time[datetime="2026-10-25T17:01:00Z"]')).toBeInTheDocument();
+  expect(container.querySelector('time[datetime="2026-10-25T16:46:11Z"]')).toBeInTheDocument();
+  expect(screen.getByText(/check time confirms a successful dashboard fetch/)).toBeInTheDocument();
+});

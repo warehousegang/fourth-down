@@ -5,10 +5,12 @@
   "workers_dev": false,
   "preview_urls": false,
   "triggers": {
-    "crons": []
+    "crons": [
+      "2,17,32,47 * * * *"
+    ]
   },
   "vars": {
-    "ENABLED": "false"
+    "ENABLED": "true"
   },
   "observability": {
     "enabled": true
