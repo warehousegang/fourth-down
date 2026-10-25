@@ -1,3 +1,42 @@
+# V2 shadow preparation handoff — 2026-10-25
+
+**GO for local preparation review; NO-GO for real-data shadow execution.** The offline
+adapter and immutable store are implemented and tested with synthetic inputs and
+authorized 2023 feature parity. The real manifest loader/writer is behind an
+unconditional approval gate; no environment variable or command-line flag enables it.
+`python -m ml.v2_prospective` prints readiness. Providing an input manifest raises
+the disabled error before opening it. No real 2024–2025 data was fetched or read,
+and no new model was fitted, recalibrated, promoted or deployed.
+
+Required decision: approve a narrow append-only amendment permitting **2025 REG
+scores only as prior-season features for future 2026 V2 games**, acknowledging
+additional outcome exposure. This does not authorize protected evaluation or tuning.
+If declined, the accepted seven-feature V2 stays disabled for 2026; no 2023/zero
+substitute. Activation needs separate approval and a future start timestamp.
+See [the exact protocol and comparison plan](../research/v2/shadow/PROTOCOL.md) and
+[disabled configuration](../research/v2/shadow/PLAN.json).
+
+Frozen candidate `v2-efficiency-ff72f16c5ea3` retains base 2011–2021 coefficients,
+2022 Platt calibration and absorbed scaler. Current schedule/PBP captures are
+season-isolated, checksummed and required before T−60 minutes; generation must
+precede kickoff. Source publication age remains distinct from actual retrieval.
+Same-day/future games, unknown/postponed inputs, missing priors and incomplete
+efficiency cannot create invented probabilities. No QB/injury/weather/news effect.
+
+Private records retain features, source receipts, joins, original timestamps and
+model/protocol/code hashes. Atomic no-overwrite writes are concurrent/idempotent;
+conflicting retries preserve the first record. Synthetic fixtures remain explicitly
+non-prospective. A read-only 2026 PBP/schedule audit joined 94 games / 188 team-game
+totals without making predictions. The 2025 prior capture and actual archived-V1
+pairing still require the approved activation rehearsal. Local hashes cannot prove
+independent collection time; no real prospective result is claimed.
+
+Verification counts/hashes and the labeled synthetic example receipt are recorded
+in [shadow verification](../research/v2/shadow/verification.json). No production
+frontend, forecast/history, V1 scorecard, model registry, workflow or scheduler file
+changed. Incremental cost $0; no dependency or infrastructure added. Earlier
+research/release handoffs below remain historical evidence.
+
 # V2 efficiency research handoff — 2026-10-25
 
 **GO for a bounded prospective-data/shadow preparation phase; NO-GO for promotion or 2026 shadow execution.** Candidate `v2-efficiency-ff72f16c5ea3` is research-only. The seven-feature declaration was committed as `525376d` before fitting. Production V1, public assets/forecast history, the existing registry, schedules and locked 2024–2025 boundaries remain unchanged. Earlier handoffs below are preserved historical records.

@@ -1,3 +1,13 @@
+# V2 shadow preparation — 2026-10-25
+
+Local preparation from accepted `180f79f`; no activation, protected-data use, fitting,
+promotion or deployment. [Shadow protocol](../research/v2/shadow/PROTOCOL.md) defines
+the exact 2025 score-only data-use decision and separate activation approval, seven
+point-in-time feature inputs, immutable private records and paired future V1/V2
+evaluation. [PLAN.json](../research/v2/shadow/PLAN.json) remains disabled. The original
+V1 and V2 research evidence, holdout freezes and production automation are unchanged.
+Existing OS v1.1 G0–G4 boundaries apply; no additional production release cycle.
+
 # V2 research increment — 2026-10-25
 
 The owner authorized isolated historical V2 implementation, fitting and local commits. The fixed seven-feature specification was committed before fitting as `525376d`; see [research/v2/EXPERIMENT.md](../research/v2/EXPERIMENT.md). Production remains the frozen four-feature V1, and the public application/automation are outside this increment. All 2024–2025 inputs remain forbidden, including prior-2025 strength for 2026. No deployment, promotion or remote push is authorized here. [HANDOFF.md](HANDOFF.md) records measured results and limitations. This follows the existing OS v1.1 mapping: G0 fixed scope, G1 allowlisted data/temporal evaluation, G2 regression verification, G3 no production change, G4 owner-controlled next experiment. Earlier release records below are historical context, not current authorization.

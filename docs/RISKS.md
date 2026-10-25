@@ -1,5 +1,14 @@
 # Risks and owners
 
+## V2 shadow preparation — 2026-10-25
+
+| Risk | Mitigation / residual limitation | Owner |
+|---|---|---|
+| 2025 feature use mistaken for permitted holdout use | Separate proposed score-only amendment; no protected file opened. Both data use and activation await explicit owner approval; old freezes remain intact | Owner / ML maintainer |
+| Synthetic receipts mistaken for prospective results | Explicit simulation mode, separate namespace, fixture identity checks; real input and writes hard-disabled. No backfilled 2026 games in the prospective cohort | Engineering |
+| Corrected PBP or provider gaps leak/rewrite history | Captures before target cutoff; source age distinct from retrieval; earlier-date opponent state; missing inputs fail closed; immutable decisions and original timestamps | Engineering |
+| Paired comparison hides missingness or unequal forecast ages | Fixed T−60-minute cutoff, actual archived V1, all-game coverage/reasons and age strata, paired season-week uncertainty; no automatic promotion | ML maintainer |
+
 ## V2 research — 2026-10-25
 
 | Risk | Mitigation / residual limitation | Owner |
@@ -7,7 +16,7 @@
 | Better retrospective metrics mistaken for deployable skill | One predeclared configuration; calibrated four-feature comparison on identical rows; all seasons and paired block intervals reported. Reused diagnostics and corrected vintages remain limitations; no promotion | ML maintainer |
 | Opponent ratings or efficiency pull future information | Store each game's adjustment from its opponent's earlier-date raw state; no final-season rating. Same-date, future-result/PBP and order perturbation tests; missing state propagates | ML maintainer |
 | Prior-2025 input opens protected data | Explicit acquisition/feature/shadow guards; 2026 V2 disabled. No current-only substitute or previous-year imputation | Engineering |
-| Historical replay enters prospective scorecard | Separate research ledger, real generation timestamps, retrospective mode, no production imports/pointers; prospective input adapter remains unapproved/unimplemented | Engineering |
+| Historical replay enters prospective scorecard | Separate research ledger, real generation timestamps, retrospective mode, no production imports/pointers; prepared prospective adapter remains disabled pending the decisions above | Engineering |
 | Bundled feature gain mistaken for causal domain contribution | Seven-feature bundle compared as predeclared; no post-result ablations or causal claims. Defensive coefficient sign may reflect correlated predictors | ML maintainer |
 
 ## RC1 additions — 2026-10-24

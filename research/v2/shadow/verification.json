@@ -1,0 +1,97 @@
+{
+  "recorded_at": "2026-10-25T13:21:56.404725+00:00",
+  "accepted_research_commit": "180f79f",
+  "status": "local-preparation-complete; real-shadow-disabled",
+  "readiness": {
+    "enabled": false,
+    "status": "preparation-only",
+    "model_id": "v2-efficiency-ff72f16c5ea3",
+    "data_use_approved": false,
+    "activation_approved": false,
+    "blockers": [
+      "2025 score-only prior use requires an explicit holdout amendment",
+      "Prospective activation and a future start timestamp require separate approval",
+      "Approved 2025 prior capture and actual paired V1/V2 shadow rehearsal remain pending"
+    ]
+  },
+  "model_sha256": "d4832bedb306ef315d179e5ec102e3048c2dbc7f584dd7c9803870af3b5438a6",
+  "result_sha256": "47ba6e069a6e3ddcc4a3181017a856fd7a866f9462598d20e6a7238299265c8a",
+  "original_tracked_files_checked": 237,
+  "original_tracked_files_changed": [
+    "docs/HANDOFF.md",
+    "docs/PROJECT.md",
+    "docs/RISKS.md"
+  ],
+  "all_original_non_documentation_files_unchanged": true,
+  "v1_model_forecasts_scorecard_frontend_workflows_unchanged": true,
+  "original_v2_coefficients_calibration_transforms_evidence_unchanged": true,
+  "protected_2024_2025_outcomes_read": false,
+  "models_fitted": 0,
+  "deployments": 0,
+  "production_automation_changes": 0,
+  "tests": {
+    "python_release_passed": 435,
+    "python_release_skipped": 1,
+    "skip_reason": "Owner prohibits V1 retraining",
+    "final_adapter_tests_passed": 47,
+    "frontend_passed": 147,
+    "packaging_passed": 11,
+    "production_subpath_build": "passed",
+    "historical_probability_reproduction_games": 272,
+    "feature_parity_scope": "All 2023 games in weeks 1, 2, 7 and 18; tolerance 1e-14; authorized data only"
+  },
+  "current_source_audit": {
+    "status": "pass",
+    "season": 2026,
+    "schedule_sha256": "1922b31983e74a7c53c661084c7d68e70bd9ea2ffd63ff410aaa754dc5023d9c",
+    "pbp_sha256": "e568b906582ac25419fa0d08e99c0ce5b219a00c70e2570a5961f4a31b4c1d71",
+    "pbp_rows": 16551,
+    "joined_prior_games": 94,
+    "team_game_totals": 188,
+    "data_cutoff_day": "2026-10-25",
+    "forecast_generated": false,
+    "protected_seasons_read": false,
+    "expected_completed_games": 94,
+    "missing_completed_game_joins": 0,
+    "pbp_capture": {
+      "asset_id": 674570910,
+      "file": "ignored data/research-v2/prospective-inputs/2026/<raw_sha256>.parquet",
+      "kind": "pbp",
+      "license_url": "https://github.com/nflverse/nflverse-data/blob/main/LICENSE.md",
+      "raw_sha256": "e568b906582ac25419fa0d08e99c0ce5b219a00c70e2570a5961f4a31b4c1d71",
+      "retrieved_at": "2026-10-25T13:19:25.304215+00:00",
+      "season": 2026,
+      "source_updated_at": "2026-10-25T09:03:15Z",
+      "synthetic": false,
+      "url": "https://github.com/nflverse/nflverse-data/releases/download/pbp/play_by_play_2026.parquet"
+    },
+    "attribution": "nflverse/nflfastR PBP under CC BY 4.0; SportsDataverse / NFL Next Gen Stats schedule with retained attribution; derived totals"
+  },
+  "synthetic_example": {
+    "sha256": "e1d1aac0740fcbe7777a600a6b6e908a8fb2c87faeccbf3c64a69e7b11be76c7",
+    "decision_id": "df7eb4d0a6a433aed412308f6c68362aacde328279b36e54c209afe7b39e99ea",
+    "path": "data/research-v2/prospective/preparation-2026-10-25/simulations/df7eb4d0a6a433aed412308f6c68362aacde328279b36e54c209afe7b39e99ea.json",
+    "prospective": false,
+    "generated_at": "2026-09-27T16:05:00+00:00",
+    "meaning": "Artificial software-test clock and fabricated scores; not a real prediction"
+  },
+  "file_sha256": {
+    "ml/v2_prospective.py": "ecb1e64b3750ef4f62889de87d82198369a6f8e3877f239d945fc5865e26df25",
+    "ml/v2_shadow_store.py": "b60a78a4212e8a224bcbd5d5b79f050000f9e38937087b97ea51df1eae4d13e8",
+    "tests/test_v2_prospective.py": "44c136c3d091ec79a500aa5784b205029822215b102a97c9944c7ffec86110eb",
+    "research/v2/shadow/PLAN.json": "1f7daeaaaaaa0227260a785d6da933cdfe6d16377b03a15a62976ec45264a4b9",
+    "research/v2/shadow/PROTOCOL.md": "51db28cf3feb228b803067414c81758d5642e9aa798495dfaecbffac62e3852b",
+    "research/v2/shadow/current-source-audit.json": "db0b6c7cd431d2a3cb61352a042c9be94e2a2a7d5d5865545e4cad2302bfc13f"
+  },
+  "original_frozen_files": {
+    "docs/HOLDOUT_PROTOCOL.md": "ed08d57acb7efac02930848608573cf3be0e4f261ffa553868965b4b57fa56f5",
+    "docs/HOLDOUT_PROTOCOL_FREEZE.json": "61fbf6127a62a3240686b12ab3b0016f8e60feb2260bed577e9550ba953d4020",
+    "docs/HOLDOUT_EXPOSURE.json": "686cbb616ee7d828879c825c9b12c84c269f789374d8aee0f46718950a1d7d4c",
+    "docs/FROZEN_MODEL.json": "2896a526ed8035b1674a6beb3c8d27c76ba4b3f466309bfeb729c6ddbf80f957",
+    "ml/v2_features.py": "e62e983af39f3b56cbec372579482139f582c43f90bede2f63d312d053a702d6",
+    "ml/v2_data.py": "363001d0d66ab236f780057d80fcbcebe40652f46424dccb1d9992d45b03976c",
+    "ml/v2_experiment.py": "6f9d2bd2c1bb49bbce1a491aa506a1a3b8b2e3121e4302cd50fb22dd2ba77e6f",
+    "ml/v2_shadow.py": "52b0fcb4aaa8763ebe4649bc9c84912bb3c3bd1186ca04ddc66f49a3a0a28941"
+  },
+  "incremental_monthly_cost_usd": 0
+}
