@@ -2,6 +2,7 @@ import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 import { readFileSync, readdirSync } from "node:fs";
 import { createHash } from "node:crypto";
+import { displayGames, displayRecord, selectDisplayForecast } from "../src/forecast-display";
 import type { Page } from "@playwright/test";
 const pointer = JSON.parse(readFileSync("public/data/current/latest.json", "utf8"));
 const artifact = JSON.parse(readFileSync(`public/data/current/${pointer.file}`, "utf8"));
@@ -13,20 +14,24 @@ test("current artifact, inputs, source lineage, history separation and accessibi
   const historicalRequests: string[] = [];
   page.on("pageerror", e => errors.push(e.message));
   page.on("request", request => { if(request.url().endsWith("/data/demo.json")) historicalRequests.push(request.url()); });
-  await page.clock.install({time:new Date(artifact.generated_at)});
+  const now=Math.max(Date.parse(artifact.generated_at),Date.parse(operations.generated_at));
+  const games=displayGames(artifact,operations,now);
+  await page.clock.install({time:new Date(now)});
   await page.goto("./");
   await expect(page.getByRole("heading",{name:"Current Week Forecasts"})).toBeVisible();
-  await expect(page.locator(".current-card")).toHaveCount(artifact.games.length);
+  await expect(page.locator(".current-card")).toHaveCount(games.length);
   expect(historicalRequests).toEqual([]);
-  await expect(page.locator(".current-card .team-logo")).toHaveCount(artifact.games.length * 2);
+  await expect(page.locator(".current-card .team-logo")).toHaveCount(games.length * 2);
   // A real upcoming probability may equal the historical accuracy after rounding.
   // Verify every displayed probability against this artifact instead of banning a number.
-  for(const [index,game] of artifact.games.entries()){
+  for(const [index,game] of games.entries()){
     const card=page.locator(".current-card").nth(index);
-    const saved=operations.catalog.filter((f: {game_id:string;eligible:boolean;source:{raw_sha256:string}})=>f.game_id===game.id&&f.eligible&&f.source.raw_sha256===artifact.source.raw_sha256).at(-1);
-    const displayable=saved && game.kickoff&&Date.parse(artifact.generated_at)<Date.parse(game.kickoff);
+    const choice=selectDisplayForecast(artifact,game,operations,now);
+    const saved=displayRecord(operations,choice);
+    const displayable=saved!==null;
+    if(choice.state==="archived")await expect(card).toContainText("Archived pregame prediction");
     if(displayable)await expect(card.locator(".current-probabilities strong")).toHaveText([
-      `${(saved.away_probability*100).toFixed(1)}%`,`${(saved.home_probability*100).toFixed(1)}%`,
+      `${(saved!.away_probability!*100).toFixed(1)}%`,`${(saved!.home_probability!*100).toFixed(1)}%`,
     ]);
     else await expect(card.locator(".current-probabilities")).toHaveCount(0);
   }
