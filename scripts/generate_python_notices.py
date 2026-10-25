@@ -6,13 +6,16 @@ from pathlib import Path
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
+results = '--results' in sys.argv
 text = ["FOURTH DOWN — PYTHON DEPENDENCY NOTICES\n\n"
-        "Installed distributions matching requirements-lock.txt. Python packages and\n"
+        f"Installed distributions matching {'requirements-results.txt' if results else 'requirements-lock.txt'}. Python packages and\n"
         "their binaries are not redistributed in the static frontend or source tree.\n"
         "These complete installed license/notice files are retained for review.\n"
         "Do not treat this inventory as permission to bundle future binary releases.\n"]
 inventory = []
-for requirement in (ROOT / "requirements-lock.txt").read_text().splitlines():
+for requirement in (ROOT / ("requirements-results.txt" if results else "requirements-lock.txt")).read_text().splitlines():
+    if not requirement or requirement.startswith('#'):
+        continue
     name, version = requirement.split("==")
     dist = metadata.distribution(name)
     assert dist.version == version, f"Version mismatch: {name}"
@@ -30,9 +33,10 @@ for requirement in (ROOT / "requirements-lock.txt").read_text().splitlines():
         text.append(f"\nSource: {source}\n\n{raw.decode('utf-8').strip()}\n")
         entries.append({"source": source, "sha256": hashlib.sha256(raw).hexdigest()})
     inventory.append({"name": name, "version": version, "files": entries})
+prefix = 'RESULT_DEPENDENCY' if results else 'PYTHON_DEPENDENCY'
 outputs = {
-    "docs/PYTHON_DEPENDENCY_NOTICES.txt": "".join(text),
-    "docs/PYTHON_DEPENDENCY_LICENSES.json": json.dumps(inventory, indent=2) + "\n",
+    f"docs/{prefix}_NOTICES.txt": "".join(text),
+    f"docs/{prefix}_LICENSES.json": json.dumps(inventory, indent=2) + "\n",
 }
 for name, content in outputs.items():
     path = ROOT / name

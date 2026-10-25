@@ -63,6 +63,18 @@ def hydrate(portfolio, season, root=ROOT):
             if receipt['sha256'] != state.get('evidence_sha256'):
                 raise ValueError('Retained state and evidence receipt do not match')
     forecast_state.restore(season, root=root)
+    if state.get('result_evidence_sha256') and state['season'] == season:
+        for suffix in ('json','zip'):
+            name = f'result-evidence-{season}.{suffix}'
+            saved = destination(portfolio, f'{STATE}/{name}')
+            if not saved.is_file():
+                raise ValueError('Retained result evidence missing')
+            target = destination(root, f'ops/{name}')
+            target.write_bytes(saved.read_bytes())
+        receipt = json.loads((root/'ops'/f'result-evidence-{season}.json').read_bytes())
+        if receipt['sha256'] != state['result_evidence_sha256']:
+            raise ValueError('Retained result receipt does not match state')
+        forecast_state.restore(season, root=root, kind='result')
     for name, body in files.items():
         if not name.startswith(('data/current/', 'data/operations/', 'data/context/')):
             continue
@@ -113,12 +125,22 @@ def prepare(portfolio):
     previous, state, _ = hydrate(portfolio, season)
     revision = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()
     with refresh_lock():
-        path = acquire_bounded(season)
-        snapshot = load_snapshot(path, season)
-        reasons = refresh_reasons(snapshot, previous, state, revision, datetime.now(timezone.utc))
-        result = dict(schema_version=1, changed=bool(reasons), reasons=reasons, season=season,
+        # A schedule-provider outage must not prevent the independent result feed
+        # from reconciling against the last verified schedule and original archive.
+        schedule_error = None
+        try:
+            path = acquire_bounded(season)
+            snapshot = load_snapshot(path, season)
+            reasons = refresh_reasons(snapshot, previous, state, revision, datetime.now(timezone.utc))
+        except (HTTPError, URLError, TimeoutError) as error:
+            snapshot = previous['source']
+            reasons = []
+            schedule_error = type(error).__name__
+        result = dict(schema_version=1, changed=bool(reasons), reasons=list(reasons), season=season,
                       source_commit=revision, source_updated_at=snapshot['source_updated_at'],
                       source_raw_sha256=snapshot['raw_sha256'], checked_at=iso(datetime.now(timezone.utc)))
+        if schedule_error:
+            result['schedule_error'] = schedule_error
         if reasons:
             result['refresh'] = refresh(path)
             # These cards are separate annotations, never probability inputs. A
@@ -129,6 +151,30 @@ def prepare(portfolio):
                 result['context'] = 'refreshed; does not affect probabilities'
             except (HTTPError, URLError, TimeoutError) as error:
                 result['context'] = 'retained previous dated context: '+type(error).__name__
+        from ml.lifecycle import publish_operations
+        from ml.result_source import collect, load_observations
+        from ml.results import reconcile
+        directory = ROOT/'web/public/data/operations'
+        pointer = json.loads((directory/'latest.json').read_bytes())
+        operations = json.loads((directory/pointer['file']).read_bytes())
+        ids = {g['id'] for g in operations['games']}
+        try:
+            result['results'] = collect([g for g in operations['schedule'] if g['id'] in ids],season)
+        except (HTTPError, URLError, TimeoutError) as error:
+            result['results'] = {'changed':False,'error':type(error).__name__,'action':'retain verified outcomes'}
+        reconciled = reconcile(operations,load_observations(season))
+        outcomes_changed = canonical(operations) != canonical(reconciled)
+        if outcomes_changed:
+            if len(canonical(reconciled)) > 5_000_000:
+                raise ValueError('Operations exceed client budget; partition before publication')
+            publish_operations(reconciled)
+            result['reasons'].append('verified_outcome_changed')
+        # A source-code change still requires one complete checked build even if
+        # the schedule provider is down. Score-only checks reuse compiled assets.
+        implementation_changed = state.get('source_commit') != revision
+        result['changed'] = bool(reasons or outcomes_changed or implementation_changed)
+        result['data_only'] = bool(outcomes_changed and not reasons and not implementation_changed)
+        if result['changed']:
             result['evidence'] = forecast_state.save(season)
         return result
 
@@ -143,7 +189,19 @@ def stage(portfolio, result, output):
     if not result['changed']:
         return {'changed':False}
     root = Path(portfolio)
-    old, _ = read_release(root)
+    old, old_receipt = read_release(root)
+    if result.get('data_only'):
+        if old_receipt['source_commit'] != result['source_commit']:
+            raise ValueError('A changed implementation requires a frontend build')
+        dist = ROOT/'web/dist'
+        if dist.exists():
+            shutil.rmtree(dist)
+        dist.mkdir(parents=True)
+        for name, body in old.items():
+            target = destination(dist,name); target.parent.mkdir(parents=True,exist_ok=True); target.write_bytes(body)
+        shutil.copytree(ROOT/'web/public/data/operations',dist/'data/operations',dirs_exist_ok=True)
+        subprocess.run(['node','web/scripts/game-day-plan.mjs'],cwd=ROOT,check=True)
+        shutil.copyfile(ROOT/'web/public/data/game-day.json',dist/'data/game-day.json')
     archive = portfolio_artifact.pack(output, generated_only=True)
     if archive['source_commit'] != result['source_commit']:
         raise ValueError('Source revision changed after preparation; regenerate from the pinned revision')
@@ -154,16 +212,20 @@ def stage(portfolio, result, output):
                 raise ValueError('Previously published history would be lost or rewritten')
     pointer = json.loads(files['data/current/latest.json'])
     current = json.loads(files['data/current/'+pointer['file']])
-    publication_deadline(current, datetime.now(timezone.utc))
+    if pointer['sha256'] != json.loads(old['data/current/latest.json'])['sha256']:
+        publication_deadline(current, datetime.now(timezone.utc))
     portfolio_artifact.install(output, archive['sha256'], root)
-    for suffix in ('json', 'zip'):
-        name = f"forecast-evidence-{result['season']}.{suffix}"
-        target = destination(root, f'{STATE}/{name}')
-        target.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copyfile(ROOT/'ops'/name, target)
+    for kind in ('forecast','result') if result['evidence'].get('result_evidence') else ('forecast',):
+        for suffix in ('json', 'zip'):
+            name = f"{kind}-evidence-{result['season']}.{suffix}"
+            target = destination(root, f'{STATE}/{name}')
+            target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(ROOT/'ops'/name, target)
     state = dict(schema_version=1, season=result['season'], source_commit=result['source_commit'],
                  forecast_sha256=pointer['sha256'], generated_at=pointer['generated_at'],
                  evidence_sha256=result['evidence']['sha256'])
+    if result['evidence'].get('result_evidence'):
+        state['result_evidence_sha256'] = result['evidence']['result_evidence']['sha256']
     destination(root, f'{STATE}/automation.json').write_bytes(canonical(state))
     return {'changed':True, 'archive':archive, 'state':state}
 

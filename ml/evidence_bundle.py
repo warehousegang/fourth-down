@@ -41,7 +41,8 @@ def allowed_path(name, season):
     if not isinstance(name, str) or not name or name != name.strip():
         raise ValueError("Invalid evidence path")
     patterns = (rf"data/current/{season}/raw-({HEX})\.csv", rf"data/current/{season}/snapshot-({HEX})\.json",
-                rf"web/public/data/current/forecast-{season}-({HEX})\.json", rf"web/public/data/operations/operations-({HEX})\.json")
+                rf"web/public/data/current/forecast-{season}-({HEX})\.json", rf"web/public/data/operations/operations-({HEX})\.json",
+                rf"data/results/{season}/raw-({HEX})\.rds", rf"data/results/{season}/observation-({HEX})\.json")
     for pattern in patterns:
         matched = re.fullmatch(pattern, name)
         if matched:
@@ -72,7 +73,7 @@ def validate_payload(payload, season, created_at):
         raise ValueError("Evidence bundle must contain 1–4096 files")
     if sum(len(body) for body in payload.values()) > MAX_TOTAL_BYTES:
         raise ValueError("Evidence exceeds total size budget")
-    objects, snapshots, forecasts, operations = {}, {}, {}, []
+    objects, snapshots, forecasts, operations, results = {}, {}, {}, [], {}
     for name, body in sorted(payload.items()):
         expected = allowed_path(name, season)
         if not isinstance(body, bytes) or len(body) > MAX_ENTRY_BYTES or sha(body) != expected:
@@ -80,11 +81,20 @@ def validate_payload(payload, season, created_at):
         if name.endswith(".csv"):
             normalize(body, season)  # Checks every row's season before reading scores.
             continue
+        if name.endswith('.rds'):
+            continue  # Reparsed and matched through its observation below.
         data = strict_json(body)
         if not isinstance(data, dict) or data.get("season") != season or data.get("schema_version") != 1:
             raise ValueError("Mixed/protected season or unsupported evidence schema")
         objects[name] = data
-        if "/snapshot-" in name:
+        if '/results/' in name:
+            from ml.result_source import validate_observation
+            raw_name = f"data/results/{season}/raw-{data['raw_sha256']}.rds"
+            allowed_path(raw_name,season)
+            if raw_name not in payload:
+                raise ValueError('Missing raw result evidence')
+            results[sha(body)] = validate_observation(data,payload[raw_name],season,created_at)
+        elif "/snapshot-" in name:
             validate_snapshot(data, now)
             if data.get("source_url") != f"{DOWNLOAD}/ngs_schedule_{season}.csv":
                 raise ValueError("Unexpected source provenance URL")
@@ -135,7 +145,21 @@ def validate_payload(payload, season, created_at):
                 raise ValueError("Mixed season in operations game")
             if any(e.get("season") != season for e in game["evaluations"]):
                 raise ValueError("Mixed season in outcome evaluations")
-            if game["result"] and game["result"]["snapshot_sha256"] not in snapshots:
+            if game.get('result_evidence'):
+                observation = results.get(game['result_evidence'])
+                if not observation or any(observation['game'][k] != game[k] for k in ('id','home','away','week','kickoff','status')):
+                    raise ValueError('Supplemental outcome observation missing or mismatched')
+            if game["result"] and game["result"]["snapshot_sha256"] in results:
+                observed = results[game['result']['snapshot_sha256']]
+                if (observed['game']['status'] != 'completed' or
+                        any(game['result'][k] != observed['game'][k] for k in ('home_score','away_score')) or
+                        game.get('result_evidence') != game['result']['snapshot_sha256'] or
+                        game['result'].get('provider') != 'nflverse' or
+                        any(game['result'].get(k) != observed[k] for k in ('raw_sha256','source_updated_at')) or
+                        game['result']['observed_at'] != observed['observed_at'] or
+                        game['result']['source_url'] != observed['source_url']):
+                    raise ValueError('Final result differs from retained evidence')
+            elif game["result"] and game["result"]["snapshot_sha256"] not in snapshots:
                 raise ValueError("Result observation source is missing")
     return {"source_snapshots": len(snapshots), "forecast_versions": len(forecasts), "operations_versions": len(operations)}
 
@@ -145,7 +169,8 @@ def collect_payload(season, root=ROOT):
     root = Path(root).absolute()
     candidates = []
     for directory, pattern in ((f"data/current/{season}", "raw-*.csv"), (f"data/current/{season}", "snapshot-*.json"),
-                               ("web/public/data/current", f"forecast-{season}-*.json"), ("web/public/data/operations", "operations-*.json")):
+                               ("web/public/data/current", f"forecast-{season}-*.json"), ("web/public/data/operations", "operations-*.json"),
+                               (f"data/results/{season}","raw-*.rds"), (f"data/results/{season}","observation-*.json")):
         folder = destination(root, directory)
         if folder.is_symlink():
             raise ValueError("Symlink evidence folder")

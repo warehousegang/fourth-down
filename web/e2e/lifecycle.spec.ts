@@ -12,6 +12,43 @@ async function serve(page:Page, directory:string, prefix:string, data:unknown) {
   await page.route(`**/data/${directory}/${file}`,r=>r.fulfill({contentType:"application/json",body}));
 }
 
+test("open dashboard receives a final and corrected result without changing its archived prediction",async({page})=>{
+  const final=completedOperations(captured,24,17),live=structuredClone(final);
+  const row=live.games[0],record=live.catalog.find(f=>f.id===row.final_forecast_id)!;
+  live.generated_at=new Date(Date.parse(final.generated_at)-60_000).toISOString();
+  row.status="in_progress";row.result=null;row.evaluations=[];row.analysis=null;
+  live.schedule.find(g=>g.id===row.id)!.status="in_progress";
+  live.metrics=structuredClone(captured.metrics);
+  const current=JSON.parse(readFileSync(`public/data/current/${record.artifact_file}`,"utf8"));
+  current.games=[];current.as_of=current.generated_at=live.generated_at;
+  await serve(page,"current",`forecast-${current.season}`,current);
+  await serve(page,"operations","operations",live);
+  await page.clock.install({time:new Date(live.generated_at)});
+  await page.goto("./");
+  const card=page.getByRole("article",{name:"Steelers at Saints current forecast"});
+  const expected=[`${(record.away_probability!*100).toFixed(1)}%`,`${(record.home_probability!*100).toFixed(1)}%`];
+  await expect(card).toContainText("In progress");
+  await expect(card.locator(".current-probabilities strong")).toHaveText(expected);
+  await serve(page,"operations","operations",final);
+  await page.clock.fastForward(60_000);
+  await expect(card.getByLabel("Verified final: PIT 17 · NO 24")).toBeVisible();
+  await expect(page.locator(".scoreboard-primary dd").nth(1)).toHaveText("1");
+  await page.route("**/data/operations/latest.json",r=>r.fulfill({status:503,body:"Synthetic outage"}));
+  await page.clock.fastForward(60_000);
+  await expect(page.getByRole("alert").filter({hasText:"last verified saved evidence"})).toBeVisible();
+  await expect(card.getByLabel("Verified final: PIT 17 · NO 24")).toBeVisible();
+  const corrected=completedOperations(captured,17,24);
+  corrected.generated_at=new Date(Date.parse(final.generated_at)+120_000).toISOString();
+  corrected.games[0].result!.observed_at=corrected.generated_at;
+  await serve(page,"operations","operations",corrected);
+  await page.clock.fastForward(60_000);
+  await expect(card.getByLabel("Verified final: PIT 24 · NO 17")).toBeVisible();
+  await expect(card).toContainText("Correct prediction");
+  await expect(card.locator(".current-probabilities strong")).toHaveText(expected);
+  await expect(card.locator(".current-cutoff time")).toHaveAttribute("datetime",record.generated_at);
+  await expect(page.locator(".scoreboard-primary dd").nth(1)).toHaveText("1");
+});
+
 // Synthetic results only. No test outcome is written to public artifacts.
 for (const [home,away] of [[24,17],[17,24],[24,24]]) test(`archived card survives refresh and verified final ${home}-${away}`,async({page},info)=>{
   const operations=completedOperations(captured,home,away);
@@ -26,10 +63,10 @@ for (const [home,away] of [[24,17],[17,24],[24,24]]) test(`archived card survive
   await page.clock.install({time:new Date(operations.generated_at)});
   await page.goto("./");
   const card=page.getByRole("article",{name:"Steelers at Saints current forecast"});
-  await expect(card).toContainText("Archived pregame prediction");
+  await expect(card).toContainText("Pregame prediction");
   await expect(card.locator(".current-probabilities strong")).toHaveText([`${(record.away_probability!*100).toFixed(1)}%`,`${(record.home_probability!*100).toFixed(1)}%`]);
   await expect(card.locator(".current-cutoff time").first()).toHaveAttribute("datetime",record.generated_at);
-  await expect(card).toContainText(`Verified final: PIT ${away} · NO ${home}`);
+  await expect(card.getByLabel(`Verified final: PIT ${away} · NO ${home}`)).toBeVisible();
   if(home===away) {
     await expect(card).toContainText("Tie excluded from binary scoring");
     await expect(card).not.toContainText("Brier:");
@@ -39,12 +76,14 @@ for (const [home,away] of [[24,17],[17,24],[24,24]]) test(`archived card survive
   }
   expect((await new AxeBuilder({page}).withTags(["wcag2a","wcag2aa","wcag21aa"]).analyze()).violations).toEqual([]);
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+  await page.evaluate(()=>{if(document.activeElement instanceof HTMLElement)document.activeElement.blur()});
   await card.screenshot({path:`${process.env.TEST_ARTIFACT_DIR||"../artifacts"}/archived-final-${home}-${away}-${info.project.name}.png`});
   await card.getByRole("link",{name:"Explore matchup intelligence"}).click();
-  await expect(page.getByText("Archived pregame prediction",{exact:true})).toBeVisible();
-  await expect(page.locator(".current-outcome")).toContainText(`Verified final: PIT ${away} · NO ${home}`);
+  await expect(page.getByRole("heading",{name:"Matchup Intelligence",exact:true})).toBeVisible();
+  await expect(page.getByText("Pregame prediction",{exact:true})).toBeVisible();
+  await expect(page.getByLabel(`Verified final: PIT ${away} · NO ${home}`)).toBeVisible();
   await page.reload();
-  await expect(page.getByText("Archived pregame prediction",{exact:true})).toBeVisible();
+  await expect(page.getByText("Pregame prediction",{exact:true})).toBeVisible();
 });
 
 
@@ -59,7 +98,7 @@ for (const status of ["in_progress","unknown","postponed","canceled","missing"] 
   operations.metrics=structuredClone(captured.metrics);
   if(["postponed","canceled","missing"].includes(status)) {
     game.final_forecast_id=null;
-    for(const f of operations.catalog){f.eligible=false;f.selected_final=false;f.exclusions=["Synthetic exclusion: no eligible pregame receipt"]}
+    for(const f of operations.catalog){f.eligible=false;f.selected_final=false;f.exclusions=[status==="missing"?"Synthetic exclusion: no eligible pregame receipt":"Game is canceled or awaiting confirmed rescheduled kickoff"]}
   }
   await serve(page,"current",`forecast-${current.season}`,current);
   await serve(page,"operations","operations",operations);
@@ -67,9 +106,9 @@ for (const status of ["in_progress","unknown","postponed","canceled","missing"] 
   await page.goto("./");
   const card=page.getByRole("article",{name:"Steelers at Saints current forecast"});
   await expect(card).toBeVisible();
-  if(status==="in_progress"||status==="unknown") {
-    await expect(card).toContainText("Archived pregame prediction");
-    await expect(card).toContainText(status==="in_progress"?"In progress · awaiting verified final result":"awaiting verified game status and final result");
+  if(status!=="missing") {
+    await expect(card).toContainText("Pregame prediction");
+    await expect(card).toContainText(status==="in_progress"?"Awaiting a verified final score":status==="unknown"?"Awaiting a verified game update":status==="postponed"?"Awaiting a confirmed schedule":"This game is not scored");
     await expect(card.locator(".current-probabilities")).toHaveCount(1);
   } else {
     await expect(card).toContainText("Prediction unavailable");

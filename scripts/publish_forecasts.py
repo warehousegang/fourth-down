@@ -95,7 +95,9 @@ def publish(root, pause=time.sleep):
     if changed:
         files, _ = read_release(root)
         pointer = json.loads(files['data/current/latest.json'])
-        publication_deadline(json.loads(files['data/current/'+pointer['file']]), datetime.now(timezone.utc))
+        prior_pointer = json.loads(git(root,'show','HEAD:fourth-down/data/current/latest.json'))
+        if pointer['sha256'] != prior_pointer['sha256']:
+            publication_deadline(json.loads(files['data/current/'+pointer['file']]), datetime.now(timezone.utc))
         git(root, 'add', '--', 'fourth-down/', '.fourth-down-state/')
         permitted_changes(git(root, 'diff', '--cached', '--name-only').splitlines())
         git(root, 'config', 'user.name', 'github-actions[bot]')

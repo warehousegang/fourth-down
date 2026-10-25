@@ -29,7 +29,7 @@ test("current artifact, inputs, source lineage, history separation and accessibi
     const choice=selectDisplayForecast(artifact,game,operations,now);
     const saved=displayRecord(operations,choice);
     const displayable=saved!==null;
-    if(choice.state==="archived")await expect(card).toContainText("Archived pregame prediction");
+    if(choice.state==="archived")await expect(card).toContainText("Pregame prediction");
     if(displayable)await expect(card.locator(".current-probabilities strong")).toHaveText([
       `${(saved!.away_probability!*100).toFixed(1)}%`,`${(saved!.home_probability!*100).toFixed(1)}%`,
     ]);
@@ -40,7 +40,7 @@ test("current artifact, inputs, source lineage, history separation and accessibi
     await expect(page.locator(".current-feature-table").first()).toBeVisible();
     await expect(page.locator(".current-feature-table").first().locator("tbody tr")).toHaveCount(4);
   }
-  await page.getByText("Version and source provenance",{exact:true}).click();
+  await page.getByText("Published data and source provenance",{exact:true}).click();
   const link = page.getByRole("link",{name:"Download this forecast JSON"});
   const response = await page.request.get(new URL((await link.getAttribute("href"))!, page.url()).toString());
   expect(response.ok()).toBe(true);
@@ -76,66 +76,48 @@ async function serveArtifact(page: Page, directory: string, prefix: string, data
   await page.route(`**/data/${directory}/${file}`,route=>route.fulfill({contentType:"application/json",body}));
 }
 
-test("48-hour boundary retains explicitly older estimates, then archives them at kickoff", async ({page}, info)=>{
+test("source expiry and kickoff preserve the saved prediction and keyboard-accessible details", async ({page}, info)=>{
   await serveArtifact(page,"current",`forecast-${original.season}`,original);
   await serveArtifact(page,"operations","operations",originalOperations);
   await page.clock.install({time:new Date(Date.parse(original.valid_until)-1000)});
   await page.goto("./");
   await expect(page.locator(".current-probabilities")).toHaveCount(originalCount);
-  await expect(page.getByText("Older forecast",{exact:true})).toHaveCount(0);
   await page.clock.fastForward(1000);
-  await expect(page.getByText("Older forecast",{exact:true})).toHaveCount(originalCount);
-  await expect(page.getByText("Older forecasts — not fresh",{exact:true})).toBeVisible();
-  const first=original.games[0];
-  await expect(page.locator(".current-card").first().locator(".current-probabilities strong")).toHaveText([`${(first.away_probability*100).toFixed(1)}%`,`${(first.home_probability*100).toFixed(1)}%`]);
-  await expect(page.getByRole("link",{name:"View prediction data (JSON)",exact:true})).toHaveCount(originalCount);
-  const card=page.locator(".current-card").first();
-  const notice=card.locator(".current-freshness-notice");
-  const summary=notice.locator("summary");
+  await expect(page.getByText("Older forecast",{exact:true})).toHaveCount(0);
+  await expect(page.locator(".prediction-label")).toHaveText(Array(originalCount).fill("Pregame prediction"));
+  const first=original.games[0],card=page.locator(".current-card").first();
+  const probabilities=[`${(first.away_probability*100).toFixed(1)}%`,`${(first.home_probability*100).toFixed(1)}%`];
+  await expect(card.locator(".current-probabilities strong")).toHaveText(probabilities);
+  await expect(card.locator(".current-cutoff time")).toHaveAttribute("datetime",first.generated_at);
+  await expect(card).toContainText("Predicted winner");
+  const details=card.locator(".prediction-details"),summary=details.locator("summary");
+  await expect(details).not.toHaveAttribute("open","");
+  await summary.focus();await page.keyboard.press("Enter");
+  await expect(details.getByText("Data cutoff",{exact:true})).toBeVisible();
+  await expect(details.getByText("Source published",{exact:true})).toBeVisible();
+  await expect(details.locator("tbody tr")).toHaveCount(4);
+  expect(await summary.evaluate(el=>getComputedStyle(el).outlineStyle)).toBe("solid");
+  expect((await new AxeBuilder({page}).withTags(["wcag2a","wcag2aa","wcag21aa"]).analyze()).violations).toEqual([]);
+  await card.screenshot({path:methodPath(info.project.name,"prediction-details")});
+  await page.keyboard.press("Space");await expect(details).not.toHaveAttribute("open","");
   const primary=card.getByRole("link",{name:"Explore matchup intelligence"});
   const secondary=card.getByRole("link",{name:"View prediction data (JSON)"});
-  await expect(notice).not.toHaveAttribute("open","");
-  await expect(notice.locator("p")).not.toBeVisible();
-  await expect(card.locator(".current-cutoff time").first()).toHaveAttribute("datetime",first.generated_at);
-  await expect(card.locator(".current-cutoff time").nth(1)).toHaveAttribute("datetime",first.cutoff);
-  await summary.focus();
-  await expect(summary).toBeFocused();
-  await page.keyboard.press("Enter");
-  await expect(notice.locator("p")).toBeVisible();
-  await expect(notice).toContainText("Saved pregame estimate, not a live update or guarantee");
-  expect((await new AxeBuilder({page}).withTags(["wcag2a","wcag2aa","wcag21aa"]).analyze()).violations).toEqual([]);
-  await page.keyboard.press("Space");
-  await expect(notice.locator("p")).not.toBeVisible();
-  await page.keyboard.press("Tab");
-  await expect(primary).toBeFocused();
-  expect(await primary.evaluate(el=>getComputedStyle(el).outlineStyle)).toBe("solid");
-  await page.keyboard.press("Tab");
-  await expect(secondary).toBeFocused();
-  const primaryBox=(await primary.boundingBox())!;
-  const secondaryBox=(await secondary.boundingBox())!;
-  expect(primaryBox.height).toBeGreaterThanOrEqual(44);
-  expect(secondaryBox.height).toBeGreaterThanOrEqual(44);
-  expect(secondaryBox.y-primaryBox.y-primaryBox.height).toBeGreaterThanOrEqual(4);
+  await primary.focus();await page.keyboard.press("Tab");await expect(secondary).toBeFocused();
+  expect((await primary.boundingBox())!.height).toBeGreaterThanOrEqual(44);
+  expect((await secondary.boundingBox())!.height).toBeGreaterThanOrEqual(44);
   const response=await page.request.get(new URL((await secondary.getAttribute("href"))!,page.url()).toString());
-  expect(response.ok()).toBe(true);
   expect(await response.json()).toEqual(original);
-  await expect(primary).toHaveAttribute("href",`#intelligence?game=${encodeURIComponent(first.id)}`);
-  expect((await new AxeBuilder({page}).withTags(["wcag2a","wcag2aa","wcag21aa"]).analyze()).violations).toEqual([]);
-  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
-  await page.screenshot({path:`${process.env.TEST_ARTIFACT_DIR || "../artifacts"}/older-forecasts-${info.project.name}.png`,fullPage:true});
-  await card.screenshot({path:`${process.env.TEST_ARTIFACT_DIR || "../artifacts"}/older-card-${info.project.name}.png`});
-  await page.keyboard.press("Shift+Tab");
-  await expect(primary).toBeFocused();
-  await page.keyboard.press("Enter");
-  await expect(page).toHaveURL(new RegExp(`#intelligence\\?game=${encodeURIComponent(first.id)}$`));
-  await expect(page.getByText("Older forecast — not fresh.",{exact:true})).toBeVisible();
-  await expect(page.locator(".intelligence-team-comparison strong")).toHaveText([`${(first.away_probability*100).toFixed(1)}%`,`${(first.home_probability*100).toFixed(1)}%`]);
+  await primary.click();
+  await expect(page.getByRole("heading",{name:"Matchup Intelligence",exact:true})).toBeVisible();
+  await expect(page.getByText("Pregame prediction",{exact:true})).toBeVisible();
+  await expect(page.locator(".intelligence-team-comparison strong")).toHaveText(probabilities);
   await page.goto("./");
   await page.clock.fastForward(Date.parse(first.kickoff)-Date.parse(original.valid_until));
-  await expect(page.locator(".current-card").first()).toContainText("Archived pregame prediction");
-  await expect(page.locator(".current-card").first().locator(".current-probabilities strong")).toHaveText([`${(first.away_probability*100).toFixed(1)}%`,`${(first.home_probability*100).toFixed(1)}%`]);
-  await expect(page.locator(".current-card").first()).toContainText("awaiting verified game status and final result");
+  await expect(card).toContainText("Pregame prediction");
+  await expect(card.locator(".current-probabilities strong")).toHaveText(probabilities);
+  await expect(card).toContainText("Awaiting a verified game update");
 });
+const methodPath=(project:string,name:string)=>`${process.env.TEST_ARTIFACT_DIR||"../artifacts"}/${name}-${project}.png`;
 
 test("stale-source refresh displays original archived probabilities without minting new ones", async ({page})=>{
   const stale=structuredClone(original);
@@ -146,53 +128,42 @@ test("stale-source refresh displays original archived probabilities without mint
   await serveArtifact(page,"operations","operations",ops);
   await page.clock.install({time:new Date(stale.generated_at)});
   await page.goto("./");
-  await expect(page.locator(".current-status-counts dd")).toHaveText([`${originalCount} of ${originalCount}`,"0",String(originalCount)]);
+  await expect(page.locator(".prediction-label")).toHaveText(Array(originalCount).fill("Pregame prediction"));
   for (const [index,g] of original.games.entries()) {
     const card=page.locator(".current-card").nth(index);
     await expect(card.locator(".current-probabilities strong")).toHaveText([`${(g.away_probability*100).toFixed(1)}%`,`${(g.home_probability*100).toFixed(1)}%`]);
     await expect(card.getByRole("link",{name:"View prediction data (JSON)",exact:true})).toHaveAttribute("href",new RegExp(saved.artifact_file+"$"));
   }
   await page.locator(".current-card").first().getByRole("link",{name:"Explore matchup intelligence"}).click();
-  await expect(page.getByText("Older forecast — not fresh.",{exact:true})).toBeVisible();
+  await expect(page.getByText("Pregame prediction",{exact:true})).toBeVisible();
   await expect(page.getByRole("region",{name:"Current matchup model factors"}).locator("tbody tr")).toHaveCount(4);
 });
 
-test("freshness counts and expanded global notice stay separate at narrow widths with visible keyboard focus", async ({page}, info)=>{
+test("scoreboard and prediction details remain readable at narrow widths with keyboard focus", async ({page}, info)=>{
   await serveArtifact(page,"current",`forecast-${original.season}`,original);
   await serveArtifact(page,"operations","operations",originalOperations);
   await page.clock.install({time:new Date(Date.parse(original.valid_until)+1000)});
   if(info.project.name==="mobile")await page.setViewportSize({width:320,height:850});
   await page.goto("./");
-  const counts=page.locator(".current-status-counts");
-  await expect(counts.locator("dt")).toHaveText(["Displayable","Fresh","Older"]);
-  await expect(counts.locator("dd")).toHaveText([`${originalCount} of ${originalCount}`,"0",String(originalCount)]);
-  const groups=await counts.locator(":scope > div").all();
-  for(let i=0;i<groups.length;i++)for(let j=i+1;j<groups.length;j++){
-    const a=(await groups[i].boundingBox())!, b=(await groups[j].boundingBox())!;
-    expect(a.x+a.width<=b.x || b.x+b.width<=a.x || a.y+a.height<=b.y || b.y+b.height<=a.y).toBe(true);
-  }
-  const notice=page.locator(".current-global-freshness");
-  const summary=notice.locator("summary");
-  await expect(notice.locator("p")).not.toBeVisible();
+  const scoreboard=page.getByRole("region",{name:"Prediction Scoreboard"});
+  await expect(scoreboard.locator(".scoreboard-primary dd")).toHaveText(["—","0","0 / 0","0",String(originalCount)]);
+  const season=scoreboard.getByRole("button",{name:"Season to date"});
+  await season.focus();await page.keyboard.press("Enter");await expect(season).toHaveAttribute("aria-pressed","true");
+  const details=page.locator(".prediction-details").first(),summary=details.locator("summary");
   await summary.focus();await page.keyboard.press("Enter");
-  await expect(notice.locator("p")).toBeVisible();
-  const a=(await summary.boundingBox())!, b=(await notice.locator("p").boundingBox())!;
-  expect(b.y-a.y-a.height).toBeGreaterThanOrEqual(11);
-  expect(await summary.evaluate(el=>({style:getComputedStyle(el).outlineStyle,width:getComputedStyle(el).outlineWidth,color:getComputedStyle(el).outlineColor}))).toEqual({style:"solid",width:"2px",color:"rgb(235, 214, 161)"});
-  await expect(notice).toContainText("A source check is not a new prediction");
-  await expect(page.getByText(/No late-breaking injuries, weather or news are included/)).toHaveCount(1);
+  await expect(details.getByText("Source observed",{exact:true})).toBeVisible();
+  expect(await summary.evaluate(el=>getComputedStyle(el).outlineStyle)).toBe("solid");
   expect((await new AxeBuilder({page}).withTags(["wcag2a","wcag2aa","wcag21aa"]).analyze()).violations).toEqual([]);
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
-  await page.screenshot({path:`${process.env.TEST_ARTIFACT_DIR || "../artifacts"}/freshness-expanded-${info.project.name}.png`,fullPage:false,animations:"disabled"});
-  await page.keyboard.press("Space");await expect(notice.locator("p")).not.toBeVisible();
-  await expect(summary).toBeFocused();
+  await page.screenshot({path:methodPath(info.project.name,"scoreboard-and-details"),fullPage:true,animations:"disabled"});
+  await page.keyboard.press("Space");await expect(details).not.toHaveAttribute("open","");await expect(summary).toBeFocused();
 });
 
 test("missing provenance never exposes probabilities", async ({page})=>{
   await page.clock.install({time:new Date(original.generated_at)});
   await page.route("**/data/operations/latest.json",route=>route.fulfill({status:503,body:"Unavailable"}));
   await page.goto("./");
-  await expect(page.getByRole("alert")).toContainText("Forecast provenance unavailable");
+  await expect(page.getByRole("alert").filter({hasText:"Forecast provenance unavailable"})).toBeVisible();
   await expect(page.locator(".current-probabilities")).toHaveCount(0);
 });
 

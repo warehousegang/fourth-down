@@ -1,0 +1,3 @@
+# Outcome parsing only; the frozen model environment is unchanged.
+rdata==1.1.0
+xarray==2026.9.0

@@ -132,3 +132,81 @@ def test_unchanged_run_recovers_a_failed_pages_build_without_new_commit(tmp_path
     assert not result['changed'] and result['pages_build_requested']
     assert ('pages/builds','POST') in requests
     assert not any(args[0] in ('push','add','commit') for args in calls)
+
+
+@pytest.mark.parametrize('source_changed,schedule_outage,outcomes_changed',[(False,False,True),(False,True,True),(True,True,True),(False,False,False)])
+def test_score_only_prepare_never_runs_inference_and_selects_build_correctly(tmp_path,monkeypatch,source_changed,schedule_outage,outcomes_changed):
+    import json
+    from contextlib import nullcontext
+    from urllib.error import URLError
+    from scripts import automated_refresh as runner
+    from ml import result_source,results,lifecycle
+    snapshot,previous,state,revision=inputs()
+    if source_changed:state['source_commit']='c'*40
+    directory=tmp_path/'web/public/data/operations';directory.mkdir(parents=True)
+    operations={'games':[],'schedule':[]}
+    (directory/'latest.json').write_text(json.dumps({'file':'fixture.json'}))
+    (directory/'fixture.json').write_text(json.dumps(operations))
+    monkeypatch.setattr(runner,'ROOT',tmp_path)
+    monkeypatch.setattr(runner,'hydrate',lambda *_:(previous,state,{}))
+    monkeypatch.setattr(runner.subprocess,'check_output',lambda *a,**kw:revision)
+    monkeypatch.setattr(runner,'refresh_lock',nullcontext)
+    def acquire(*_):
+        if schedule_outage:raise URLError('synthetic outage')
+        return 'fixture'
+    monkeypatch.setattr(runner,'acquire_bounded',acquire)
+    monkeypatch.setattr(runner,'load_snapshot',lambda *_:snapshot)
+    monkeypatch.setattr(runner,'refresh_reasons',lambda *_:[])
+    def forbidden(*_):raise AssertionError('Inference must not run on a score-only check')
+    monkeypatch.setattr(runner,'refresh',forbidden)
+    monkeypatch.setattr(result_source,'collect',lambda *_:{'changed':True})
+    monkeypatch.setattr(result_source,'load_observations',lambda *_:[])
+    monkeypatch.setattr(results,'reconcile',lambda *_:{**operations,'verified_outcome':'synthetic'} if outcomes_changed else operations)
+    published=[];monkeypatch.setattr(lifecycle,'publish_operations',lambda value:published.append(value))
+    monkeypatch.setattr(runner.forecast_state,'save',lambda *_:{'sha256':'d'*64})
+    decision=runner.prepare('disposable')
+    assert decision['changed']==(outcomes_changed or source_changed)
+    assert decision['data_only']==(outcomes_changed and not source_changed)
+    assert decision['reasons']==(['verified_outcome_changed'] if outcomes_changed else [])
+    assert len(published)==int(outcomes_changed)
+
+
+def test_score_only_stage_keeps_compiled_assets_and_forecast_bytes(tmp_path,monkeypatch):
+    import json
+    from ml.current_source import canonical
+    from scripts import automated_refresh as runner
+    source=tmp_path/'source';portfolio=tmp_path/'portfolio';portfolio.mkdir()
+    directory=source/'web/public/data/operations';directory.mkdir(parents=True)
+    (directory/'latest.json').write_bytes(b'new operations pointer')
+    (directory/'operations-new.json').write_bytes(b'new verified outcome')
+    ops=source/'ops';ops.mkdir()
+    for kind in ('forecast','result'):
+        for suffix in ('json','zip'):(ops/f'{kind}-evidence-2026.{suffix}').write_bytes(b'checked evidence')
+    old={'assets/app.js':b'unchanged compiled application','data/game-day.json':b'old hint',
+         'data/current/latest.json':canonical({'file':'forecast-old.json','sha256':'a'*64,'generated_at':'2026-09-05T13:00:00Z'}),
+         'data/current/forecast-old.json':canonical({'games':[{'status':'available','kickoff':'2026-09-06T17:00:00Z'}]}),
+         'data/operations/operations-old.json':b'original outcome evidence'}
+    monkeypatch.setattr(runner,'ROOT',source)
+    monkeypatch.setattr(runner,'read_release',lambda _: (old,{'source_commit':'b'*40}))
+    def plan(*args,**kwargs):(source/'web/public/data/game-day.json').write_bytes(b'new bounded hint')
+    monkeypatch.setattr(runner.subprocess,'run',plan)
+    packed={}
+    def pack(*args,**kwargs):
+        packed.update({p.relative_to(source/'web/dist').as_posix():p.read_bytes() for p in (source/'web/dist').rglob('*') if p.is_file()})
+        return {'source_commit':'b'*40,'sha256':'c'*64}
+    monkeypatch.setattr(runner.portfolio_artifact,'pack',pack)
+    monkeypatch.setattr(runner.portfolio_artifact,'read_archive',lambda *_:(packed,{}))
+    monkeypatch.setattr(runner.portfolio_artifact,'install',lambda *_:None)
+    def forbidden(*_):raise AssertionError('An unchanged archived forecast has no new publication deadline')
+    monkeypatch.setattr(runner,'publication_deadline',forbidden)
+    decision={'changed':True,'data_only':True,'source_commit':'b'*40,'season':2026,
+        'evidence':{'sha256':'d'*64,'result_evidence':{'sha256':'e'*64}}}
+    result=runner.stage(portfolio,decision,'fixture.tar.gz')
+    for name,body in old.items():
+        if name!='data/game-day.json':assert packed[name]==body
+    assert packed['data/game-day.json']==b'new bounded hint'
+    assert packed['data/operations/operations-new.json']==b'new verified outcome'
+    assert result['state']['result_evidence_sha256']=='e'*64
+    assert (portfolio/'.fourth-down-state/result-evidence-2026.zip').exists()
+    with pytest.raises(ValueError,match='frontend build'):
+        runner.stage(portfolio,{**decision,'source_commit':'f'*40},'fixture.tar.gz')

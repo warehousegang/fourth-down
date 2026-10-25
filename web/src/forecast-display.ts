@@ -11,23 +11,24 @@ export function selectDisplayForecast(current: CurrentArtifact, game: DisplayGam
   const blocked = (reason: string): DisplayDecision => ({state:"unavailable",forecast_id:null,reason});
   if (!operations) return blocked("Verified forecast history is unavailable.");
   if (Date.parse(current.generated_at)>now || Date.parse(operations.generated_at)>now) return blocked("Forecast evidence is dated in the future.");
-  if (!game.kickoff) return blocked("Kickoff is unconfirmed; no eligible pregame prediction is displayed.");
   if (operations.season!==current.season || compareTimestamp(operations.source.retrieved_at,current.source.retrieved_at)<0) return blocked("Forecast and latest source evidence do not match.");
   const scheduled=operations.schedule.find(g=>g.id===game.id);
   const identity=["home","away","kickoff","day","week","season"] as const;
   if (!scheduled || identity.some(k=>scheduled[k]!==game[k])) return blocked("The observed schedule changed; inspect the retained forecast history.");
-  if (["postponed","canceled"].includes(scheduled.status)) return blocked("The game is postponed or canceled; earlier forecasts remain in Forecast History.");
-  const archived=now>=Date.parse(game.kickoff);
+  const halted=["postponed","canceled"].includes(scheduled.status);
+  if (!game.kickoff&&!halted) return blocked("Kickoff is unconfirmed; no eligible pregame prediction is displayed.");
+  const archived=halted||now>=Date.parse(game.kickoff!);
+  const historicExclusions=new Set(["Game is canceled or awaiting confirmed rescheduled kickoff","Schedule identity changed; a new pregame forecast is required"]);
   if (!archived) {
     if (scheduled.status!=="scheduled" || !["", "SCHEDULED", "PREGAME", "PRE_GAME"].includes(game.source_phase)) return blocked("The matchup is not confirmed scheduled.");
     if (!("schedule_fingerprint" in game)) return blocked("No current pregame decision is available; inspect Forecast History.");
     if (game.status!=="available" && game.reason!==SOURCE_STALE_REASON) return blocked(game.reason || "Required forecast inputs are unavailable.");
     if (operations.source.raw_sha256!==current.source.raw_sha256) return blocked("Forecast and latest source evidence do not match.");
   }
-  const candidates=operations.catalog.filter(f=>f.game_id===game.id && f.eligible && !f.exclusions.length && f.forecast_status==="available"
-    && identity.every(k=>f[k]===game[k])
+  const candidates=operations.catalog.filter(f=>f.game_id===game.id && (f.eligible&&!f.exclusions.length||halted&&f.exclusions.length>0&&f.exclusions.every(e=>historicExclusions.has(e))) && f.forecast_status==="available"
+    && identity.filter(k=>!halted||!["kickoff","day"].includes(k)).every(k=>f[k]===game[k])
     && (archived || "schedule_fingerprint" in game && f.schedule_fingerprint===game.schedule_fingerprint && f.source.raw_sha256===current.source.raw_sha256)
-    && Date.parse(f.generated_at)<=now && compareTimestamp(f.generated_at,game.kickoff!)<0);
+    && Date.parse(f.generated_at)<=now && f.kickoff!==null && compareTimestamp(f.generated_at,f.kickoff)<0);
   candidates.sort((a,b)=>compareTimestamp(a.generated_at,b.generated_at) || a.id.localeCompare(b.id));
   // A recorded evaluation designation is authoritative. Never pick another receipt for its outcome.
   const finalId=operations.games.find(g=>g.id===game.id)?.final_forecast_id;

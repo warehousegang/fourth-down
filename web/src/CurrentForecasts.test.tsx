@@ -21,9 +21,10 @@ afterEach(() => vi.restoreAllMocks());
 it("shows current forecasts with limitations and no historical metric presented as current accuracy", async () => {
   render(<App/>);
   expect(await screen.findByRole("heading",{name:"Current Week Forecasts"})).toBeInTheDocument();
-  expect(screen.getByText(/No injury, player-news, weather or prior-season strength adjustment/)).toBeInTheDocument();
+  expect(screen.getByText(/Injuries, weather, and breaking news are not included/)).toBeInTheDocument();
   expect(screen.queryByText("58.8%")).not.toBeInTheDocument();
-  expect(screen.getAllByText("MODEL ESTIMATE · NOT A GUARANTEE").length).toBeGreaterThan(0);
+  expect(screen.getAllByText("Pregame prediction",{exact:true})).toHaveLength(13);
+  expect(screen.getByRole("heading",{name:"Prediction Scoreboard"})).toBeInTheDocument();
 });
 it("shows independent current error while preserving historical navigation", async () => {
   vi.mocked(loadCurrent).mockRejectedValue(new Error("No current forecast artifact is available."));
@@ -31,23 +32,17 @@ it("shows independent current error while preserving historical navigation", asy
   expect(await screen.findByRole("alert")).toHaveTextContent("Current forecasts unavailable");
   expect(screen.getByRole("link",{name:"2023 Matchups"})).toHaveAttribute("href", "#matchups");
 });
-it("labels verified expired forecasts as older without changing their probabilities", async () => {
+it("keeps valid saved forecasts clear while placing integrity details in a closed disclosure", async () => {
   vi.spyOn(Date,"now").mockReturnValue(Date.parse(currentFixture().valid_until)+1);
   render(<App/>);
-  expect(await screen.findByText("Older forecasts — not fresh")).toBeInTheDocument();
-  expect(await screen.findAllByText("Older forecast",{exact:true})).toHaveLength(13);
-  const counts=document.querySelector(".current-status-counts")!;
-  expect([...counts.querySelectorAll("dt")].map(n=>n.textContent)).toEqual(["Displayable","Fresh","Older"]);
-  expect([...counts.querySelectorAll("dd")].map(n=>n.textContent)).toEqual(["13 of 13","0","13"]);
-  expect(screen.getAllByRole("link",{name:"View prediction data (JSON)"})).toHaveLength(13);
+  expect(await screen.findAllByText("Pregame prediction",{exact:true})).toHaveLength(13);
+  expect(screen.queryByText(/Older forecast|Not fresh|Refresh before kickoff/)).not.toBeInTheDocument();
   const card=screen.getAllByRole("article")[0];
-  const actions=within(card).getAllByRole("link");
-  expect(actions.map(a=>a.textContent)).toEqual(["Explore matchup intelligence ","View prediction data (JSON)"]);
-  expect(actions[0]).toHaveAttribute("href",`#intelligence?game=${encodeURIComponent(currentFixture().games[0].id)}`);
-  expect(actions[1]).toHaveAttribute("href",`${import.meta.env.BASE_URL}data/current/${record.artifact_file}`);
   expect(card.querySelector(".current-cutoff time")).toHaveAttribute("datetime",currentFixture().games[0].generated_at);
-  expect(within(card).getByText("Older forecast").closest("details")).not.toHaveAttribute("open");
-  expect(screen.queryByText("MODEL ESTIMATE · NOT A GUARANTEE")).not.toBeInTheDocument();
+  expect(within(card).getByText("Prediction details").closest("details")).not.toHaveAttribute("open");
+  expect(card).toHaveTextContent("Predicted winner");
+  expect(card).toHaveTextContent("Original forecast");
+  expect(card).toHaveTextContent("Source published");
 });
 
 it("shows a missing-result reason without a fabricated probability", async () => {
@@ -57,7 +52,7 @@ it("shows a missing-result reason without a fabricated probability", async () =>
   data.games = [g];
   vi.mocked(loadCurrent).mockResolvedValue({data,file:currentPointer.file,sha256:currentPointer.sha256});
   render(<App/>);
-  expect(await screen.findByText("Final result not confirmed before cutoff")).toBeInTheDocument();
+  expect(await screen.findByText(/Availability check: Final result not confirmed before cutoff/)).toBeInTheDocument();
   expect(screen.queryByText("MODEL ESTIMATE · NOT A GUARANTEE")).not.toBeInTheDocument();
 });
 
@@ -68,8 +63,8 @@ it("retains an eligible original after a stale-source attempt issues no new prob
   vi.spyOn(Date,"now").mockReturnValue(Date.parse(generated)+1000);
   vi.mocked(loadCurrent).mockResolvedValue({data,...currentPointer});
   render(<App/>);
-  expect(await screen.findAllByText("Older forecast",{exact:true})).toHaveLength(13);
-  expect(screen.getAllByText(/No late-breaking injuries, weather or news are included/)).toHaveLength(1);
+  expect(await screen.findAllByText("Pregame prediction",{exact:true})).toHaveLength(13);
+  expect(screen.getByText(/Injuries, weather, and breaking news are not included/)).toBeInTheDocument();
   for (const [index,card] of screen.getAllByRole("article").entries()) {
     expect(card.querySelector(".current-cutoff time")).toHaveAttribute("datetime",currentFixture().games[index].generated_at);
   }
@@ -93,8 +88,8 @@ it.each([[24,17,"Saints"],[17,24,"Steelers"],[24,24,null]] as const)("retains th
   vi.mocked(loadOperations).mockResolvedValue({data:ops,...operationsCapture.pointer});
   render(<App/>);
   const card=await screen.findByRole("article",{name:"Steelers at Saints current forecast"});
-  expect(within(card).getByText("Archived pregame prediction")).toBeInTheDocument();
-  expect(card).toHaveTextContent(`Verified final: PIT ${away} · NO ${home}`);
+  expect(within(card).getByText("Pregame prediction")).toBeInTheDocument();
+  expect(within(card).getByLabelText(`Verified final: PIT ${away} · NO ${home}`)).toBeInTheDocument();
   expect(card).toHaveTextContent(winner?`Actual winner: ${winner}`:"Tie excluded from binary scoring.");
   expect(card.querySelector(".current-cutoff time")).toHaveAttribute("datetime",selected.generated_at);
   expect([...card.querySelectorAll(".current-probabilities strong")].map(n=>n.textContent)).toEqual([`${(selected.away_probability!*100).toFixed(1)}%`,`${(selected.home_probability!*100).toFixed(1)}%`]);
@@ -107,8 +102,8 @@ it("keeps pregame percentages at kickoff without inferring a live status or resu
   vi.spyOn(Date,"now").mockReturnValue(Date.parse(first.kickoff!));
   render(<App/>);
   const card=await screen.findByRole("article",{name:"Steelers at Saints current forecast"});
-  expect(await within(card).findByText("Archived pregame prediction")).toBeInTheDocument();
-  expect(card).toHaveTextContent("awaiting verified game status and final result");
+  expect(await within(card).findByText("Pregame prediction")).toBeInTheDocument();
+  expect(card).toHaveTextContent("Awaiting a verified game update");
   expect(card).not.toHaveTextContent("Verified final:");
   expect(card).not.toHaveTextContent("Brier:");
 });
@@ -121,7 +116,7 @@ it("retains archived intelligence deep links when refresh has removed the upcomi
   vi.mocked(loadOperations).mockResolvedValue({data:ops,...operationsCapture.pointer});
   window.location.hash=`intelligence?game=${ops.games[0].id}`;
   render(<App/>);
-  expect(await screen.findByText("Archived pregame prediction")).toBeInTheDocument();
+  expect(await screen.findByText("Pregame prediction")).toBeInTheDocument();
   expect(screen.getByText(/Actual winner: Saints/)).toBeInTheDocument();
   expect(screen.getByRole("region",{name:"Current matchup model factors"}).querySelectorAll("tbody tr")).toHaveLength(4);
 });

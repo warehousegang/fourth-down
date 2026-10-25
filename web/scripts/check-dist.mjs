@@ -10,7 +10,8 @@ for (const path of ["data/demo.json", "THIRD_PARTY_NOTICES.txt", "CURRENT_DATA_N
   assert(readFileSync(resolve(web, "dist", path)).equals(readFileSync(resolve(web, "public", path))), `Dist artifact mismatch: ${path}`);
 }
 assert.deepEqual(readdirSync(resolve(web, "dist")).sort(), ["CURRENT_DATA_NOTICE.txt", "THIRD_PARTY_NOTICES.txt", "assets", "data", "index.html"]);
-assert.deepEqual(readdirSync(resolve(web, "dist/data")).sort(), [...directories, "demo.json"].sort());
+assert.deepEqual(readdirSync(resolve(web, "dist/data")).sort(), [...directories, "demo.json", "game-day.json"].sort());
+assert.equal(readFileSync(resolve(web,"dist/data/game-day.json"),"utf8"),readFileSync(resolve(web,"public/data/game-day.json"),"utf8"));
 for (const directory of directories) assert.deepEqual(readdirSync(resolve(web, `dist/data/${directory}`)).sort(), readdirSync(resolve(web, `public/data/${directory}`)).sort());
 const logos = JSON.parse(readFileSync(resolve(web, "../docs/TEAM_LOGO_REVIEW.json"), "utf8"));
 assert.equal(logos.assets.length, 32, "All teams must have a documented logo");

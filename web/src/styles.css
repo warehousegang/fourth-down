@@ -1875,7 +1875,69 @@ footer p {
 }
 
 /* Current forecasts: a separate, dated snapshot from historical analysis. */
-.current-heading h2 { margin: 25px 0 8px; font-size: 22px; }
+.current-heading { margin-bottom: 24px; }
+.current-heading h1 { font-size: clamp(32px, 4.2vw, 48px); margin-bottom: 16px; }
+.current-heading h2 { margin: 18px 0 8px; font-size: 22px; }
+.prediction-scoreboard { border-top: 3px solid #00d991; padding: 28px; }
+.scoreboard-heading { display:flex; justify-content:space-between; align-items:flex-start; gap:20px; }
+.scoreboard-heading h2 { margin:10px 0 8px; font-size:28px; }
+.scoreboard-heading p { color:#b7c9c0; margin:0; }
+.scoreboard-scope { display:flex; gap:4px; padding:4px; border:1px solid #38463e; border-radius:10px; }
+.scoreboard-scope button { padding:10px 14px; border:0; border-radius:6px; background:transparent; color:#c8d4cf; font:600 12px var(--mono); cursor:pointer; }
+.scoreboard-scope button[aria-pressed=true] { background:#173e2e; color:#9ef2bf; }
+.scoreboard-scope button:focus-visible,.prediction-details summary:focus-visible,.scoreboard-method summary:focus-visible,.outcome-evidence summary:focus-visible { outline:2px solid #9dd5e9; outline-offset:4px; }
+.scoreboard-primary { display:grid; grid-template-columns:1.4fr repeat(4,1fr); gap:20px; margin:30px 0 25px; }
+.scoreboard-primary dt { color:#b8c6bf; font:500 11px var(--mono); }
+.scoreboard-primary dd { margin:10px 0 0; font:700 32px var(--mono); color:#f2f6f3; }
+.scoreboard-primary>div:first-child dd { color:#82edac; font-size:38px; }
+.scoreboard-primary small { color:#a9b8b0; font-size:16px; }
+.scoreboard-secondary { display:grid; grid-template-columns:1fr 1fr 2fr; gap:20px; border-top:1px solid #354038; padding-top:20px; }
+.scoreboard-secondary p { margin:0; display:flex; flex-direction:column; gap:8px; }
+.scoreboard-secondary span { color:#b8c6bf; font-size:11px; }
+.scoreboard-secondary strong { font:500 13px var(--mono); line-height:1.6; color:#d6e4dc; }
+.scoreboard-secondary small { color:#b8c6bf; }
+.scoreboard-note,.game-day-note { color:#b8c6bf; font-size:13px; line-height:1.7; }
+.game-day-note { margin:0 0 24px; max-width:850px; }
+.scoreboard-method { margin-top:20px; font-size:12px; line-height:1.7; color:#b8c6bf; }
+.scoreboard-method summary,.outcome-evidence summary { color:#a4dec0; cursor:pointer; }
+.game-status { border:1px solid #46524e; border-radius:20px; padding:3px 10px; color:#d5e2db; background:#202a25; }
+.status-final { color:#9ef2bf; border-color:#388053; }
+.status-in-progress { color:#a5dff2; border-color:#46849a; }
+.game-kickoff { color:#c6cec9; font:500 11px var(--mono); line-height:1.7; margin:16px 0 0; }
+.prediction-label { color:#b8c6bf; text-transform:uppercase; letter-spacing:.1em; font:600 10px var(--mono); margin-top:25px; }
+.game-day-card .current-probabilities { padding-top:10px; }
+.predicted-winner { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:12px 0; border-bottom:1px solid #303b35; color:#b8c6bf; font-size:12px; }
+.predicted-winner strong { color:#eef5f0; font-size:16px; }
+.prediction-provenance { display:grid; grid-template-columns:1fr 1.4fr; gap:10px; color:#bac7c0; font:500 11px var(--mono); line-height:1.6; }
+.prediction-provenance dd { margin:0; color:#e0e8e3; }
+.prediction-details code { overflow-wrap:anywhere; }
+.current-outcome { border:1px solid #3b5245; border-radius:10px; padding:18px; margin-top:20px; background:#16261c; }
+.current-outcome.outcome-incorrect { border-color:#72514e; background:#2b1f20; }
+.current-outcome.outcome-unscored { border-color:#46524e; background:#1b2420; }
+.outcome-heading { display:flex; justify-content:space-between; align-items:center; gap:10px; font:600 10px var(--mono); color:#bbd2c5; }
+.outcome-heading strong { color:#91efb5; font-size:11px; }
+.outcome-incorrect .outcome-heading strong { color:#ffc2b9; }
+.final-score { display:flex; justify-content:space-between; gap:20px; font:600 13px var(--mono); color:#c4d6cc; }
+.final-score strong { display:block; margin-top:10px; font-size:36px; color:#f1f5f2; }
+.current-outcome p:not(.final-score) { font-size:12px; line-height:1.7; }
+.outcome-evidence { font-size:11px; }
+@media(max-width:750px) {
+  .scoreboard-heading { flex-direction:column; }
+  .scoreboard-primary { grid-template-columns:repeat(3,minmax(0,1fr)); gap:22px 12px; }
+  .scoreboard-primary>div:first-child { grid-column:span 3; }
+  .scoreboard-secondary { grid-template-columns:1fr 1fr; }
+  .scoreboard-secondary p:last-child { grid-column:span 2; }
+  .scoreboard-primary dd { font-size:26px; }
+  .prediction-scoreboard { padding:22px; }
+  .scoreboard-heading h2 { font-size:24px; }
+}
+@media(max-width:400px) {
+  .scoreboard-primary { grid-template-columns:1fr 1fr; }
+  .scoreboard-primary>div:first-child { grid-column:span 2; }
+  .prediction-provenance { grid-template-columns:1fr; gap:5px; }
+  .prediction-provenance dd { margin-bottom:8px; }
+  .outcome-heading { flex-direction:column; align-items:flex-start; }
+}
 .current-provenance { display: grid; grid-template-columns: 1.15fr 1.15fr .8fr; gap: 22px; }
 .current-provenance .eyebrow { display: flex; align-items: center; gap: 7px; margin-bottom: 12px; }
 .current-provenance strong { font: 600 16px var(--mono); line-height: 1.6; }
