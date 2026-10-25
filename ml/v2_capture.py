@@ -80,7 +80,12 @@ class Ledger:
         self.root = Path(directory).absolute()
         allowed = (ROOT / 'data/research-v2/prospective').resolve()
         temp = Path(tempfile.gettempdir()).resolve()
-        if not any(self.root.resolve().is_relative_to(p) for p in (allowed, temp)):
+        roots = [allowed, temp]
+        if os.environ.get('GITHUB_ACTIONS') == 'true' and os.environ.get('RUNNER_TEMP'):
+            runner = Path(os.environ['RUNNER_TEMP']).resolve()
+            if not runner.is_relative_to(ROOT.resolve()):
+                roots.append(runner)
+        if not any(self.root.resolve().is_relative_to(p) for p in roots):
             raise ValueError('Shadow ledger must be isolated from public/V1 files')
         for p in (self.root, *self.root.parents):
             if p.is_symlink():
@@ -254,7 +259,7 @@ def decision_record(target, decision, generated, captures, archive, archive_rece
                     'Source publication time is not retrieval time; no injury/news/weather/QB inputs'])
 
 
-def finalize(ledger, target, now, *, synthetic=False, schedule_observed_at=None):
+def finalize(ledger, target, now, *, synthetic=False, schedule_observed_at=None, persisted_stages=None):
     """Testable T-60 execution. Real prospective writes are disabled before any I/O."""
     if not synthetic:
         require_activation()
@@ -267,7 +272,7 @@ def finalize(ledger, target, now, *, synthetic=False, schedule_observed_at=None)
     if state in ('pending', 'stage'):
         raise ValueError('Decision is not due')
     base = dict(schema_version=1, target=identity(target), cutoff=iso(due), generated_at=iso(now),
-                mode='synthetic-t60', prospective=False, scorecard_eligible=False,
+                mode='synthetic-t60' if synthetic else 'v2-prospective-shadow', prospective=not synthetic, scorecard_eligible=False,
                 pair_category='neither', v1=None, v2=None)
     invalidated = {json.loads(p.read_bytes())['invalidated_identity'] for p in (ledger.root/'voids').glob('*.json')}
     if slot in invalidated:
@@ -278,7 +283,11 @@ def finalize(ledger, target, now, *, synthetic=False, schedule_observed_at=None)
         record = dict(base, exclusion='schedule_not_rechecked_at_finalization')
     else:
         stages = [json.loads(p.read_bytes()) for p in (ledger.root/'stages').glob('*.json')]
-        candidates = [s for s in stages if s['target'] == identity(target)
+        persisted_stages = persisted_stages or {}
+        candidates = [s for s in stages if (synthetic or
+                      (sha(canonical(s)) in persisted_stages and
+                       timestamp(s['observed_at']) <= timestamp(persisted_stages[sha(canonical(s))]['committed_at']) < due))
+                      and s['target'] == identity(target)
                       and s['config_sha256'] == sha(CONFIG.read_bytes())
                       and due-timedelta(minutes=config()['stage_minutes_before_cutoff']) <= timestamp(s['observed_at']) < due]
         if not candidates:
@@ -289,9 +298,15 @@ def finalize(ledger, target, now, *, synthetic=False, schedule_observed_at=None)
             record = decision_record(target,due,now,captures,ledger.read(s['v1_archive']['object']),
                                      s['v1_archive']['receipt'],synthetic=synthetic)
             record['stage_sha256'] = sha(canonical(s))
+            record['stage_persistence'] = persisted_stages.get(record['stage_sha256'])
             record['finalization_delay_seconds'] = (now-due).total_seconds()
             if not synthetic:
-                record.update(mode='v2-prospective-shadow',prospective=True,
+                finished = datetime.now(timezone.utc)
+                if phase(target,finished) != 'finalize':
+                    record = dict(base,generated_at=iso(finished),exclusion='missed_cutoff_during_inference')
+                else:
+                    record.update(generated_at=iso(finished),finalization_delay_seconds=(finished-due).total_seconds())
+                    record.update(mode='v2-prospective-shadow',prospective=True,
                               scorecard_eligible=record['pair_category']=='both',
                               activation_at=config()['activation_at'],approval_reference=config()['approval_reference'])
     ledger.receipt('decisions',record,slot)

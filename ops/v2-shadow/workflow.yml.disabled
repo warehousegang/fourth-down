@@ -27,6 +27,7 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
           ref: v2-shadow-state
+          fetch-depth: 0
           path: state
           persist-credentials: true
       - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0
@@ -39,8 +40,8 @@ jobs:
         working-directory: source
         run: |
           mkdir -p "$RUNNER_TEMP/v2-shadow-ledger"
-          cp -R ../state/ledger/. "$RUNNER_TEMP/v2-shadow-ledger/"
-          python scripts/v2_shadow_tick.py --output "$RUNNER_TEMP/v2-shadow-ledger"
+          if [ -d ../state/ledger ]; then cp -R ../state/ledger/. "$RUNNER_TEMP/v2-shadow-ledger/"; fi
+          python scripts/v2_shadow_tick.py --output "$RUNNER_TEMP/v2-shadow-ledger" --state-checkout ../state
       - name: Persist add-only evidence, including source-outage receipts
         if: ${{ !cancelled() && steps.capture.outcome != 'skipped' }}
         working-directory: source

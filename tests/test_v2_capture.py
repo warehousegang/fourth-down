@@ -172,3 +172,22 @@ def test_git_state_persistence_is_add_only_and_rejects_stale_writer(tmp_path):
     assert git(remote,'rev-parse','refs/heads/v2-shadow-state')==git(a,'rev-parse','HEAD')
     (one/'objects'/sha(b'one')).write_bytes(b'changed')
     with pytest.raises(ValueError,match='mutation'): append_state(a,one)
+
+
+def test_real_runner_requires_stage_commit_before_cutoff(tmp_path,archived,monkeypatch):
+    import ml.v2_capture as capture
+    c,g=inputs();l=Ledger(tmp_path)
+    s=stage(l,c,*archived,g,timestamp('2026-11-01T15:36:00Z'),synthetic=True)
+    # Synthetic fixtures only: exercise the prospective persistence gate without acquisition.
+    monkeypatch.setattr(capture,'require_activation',lambda:None)
+    late={sha(canonical(s)):{'commit':'b'*40,'committed_at':iso(cutoff(g))}}
+    r=finalize(l,g,cutoff(g),schedule_observed_at=iso(cutoff(g)),persisted_stages=late)
+    assert r['exclusion']=='no_sealed_pre_cutoff_capture' and not r['scorecard_eligible']
+
+
+def test_github_temp_is_accepted_only_for_hosted_isolated_root(tmp_path,monkeypatch):
+    import ml.v2_capture as capture
+    # ROOT-relative public assets stay forbidden even if a misconfigured runner points there.
+    monkeypatch.setenv('GITHUB_ACTIONS','true')
+    monkeypatch.setenv('RUNNER_TEMP',str(capture.ROOT/'web/public'))
+    with pytest.raises(ValueError,match='isolated'): Ledger(capture.ROOT/'web/public/forbidden-shadow')
