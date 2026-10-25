@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ArrowRight, Clock3, Database, RefreshCw, ShieldCheck } from "lucide-react";
+import { ArrowRight, ChevronDown, Clock3, Database, RefreshCw, ShieldCheck } from "lucide-react";
 import { loadCurrent, type LoadedCurrent } from "./current-contracts";
 import { loadOperations } from "./operations-contracts";
 import { useArtifact } from "./use-artifact";
@@ -39,12 +39,16 @@ export function CurrentForecasts() {
         <h2>Current Week Forecasts</h2><p>Upcoming games. The original frozen model.<br/>A dated snapshot of what the model knows.</p></div>
     </section>
     <section className="current-provenance panel" aria-label="Current forecast provenance">
-      <div><span className="eyebrow"><Clock3 size={14}/> LATEST DECISION TIME</span><strong>{time(data.as_of)}</strong></div>
-      <div><span className="eyebrow"><Database size={14}/> SOURCE UPDATED</span><strong>{time(data.source.source_updated_at)}</strong></div>
-      <div><span className="eyebrow"><ShieldCheck size={14}/> DISPLAYABLE FORECASTS</span><strong>{fresh + older} / {data.games.length}</strong><small>{fresh} fresh · {older} older</small></div>
-      <p>Generated {time(data.generated_at)} · Source retrieved {time(data.source.retrieved_at)}.<br/>Freshness deadline: {time(data.valid_until)}. Source age is separate from the validity of a saved pregame estimate.</p>
+      <div><span className="eyebrow"><Clock3 size={14}/> LATEST DECISION TIME</span><strong><time dateTime={data.as_of} title={data.as_of}>{time(data.as_of)}</time></strong></div>
+      <div><span className="eyebrow"><Database size={14}/> SOURCE FILE UPDATED</span><strong><time dateTime={data.source.source_updated_at} title={data.source.source_updated_at}>{time(data.source.source_updated_at)}</time></strong></div>
+      <div><span className="eyebrow"><ShieldCheck size={14}/> FORECAST AVAILABILITY</span><dl className="current-status-counts" aria-label="Forecast availability">
+        <div><dt>Displayable</dt><dd>{fresh + older}<span> of {data.games.length}</span></dd></div>
+        <div><dt>Fresh</dt><dd>{fresh}</dd></div>
+        <div><dt>Older</dt><dd>{older}</dd></div>
+      </dl></div>
+      <p>Latest decision artifact: <time dateTime={data.generated_at} title={data.generated_at}>{time(data.generated_at)}</time> · Source retrieved: <time dateTime={data.source.retrieved_at} title={data.source.retrieved_at}>{time(data.source.retrieved_at)}</time>.<br/>Source freshness deadline: {time(data.valid_until)}. Checking the source again does not change its file-update time or the original prediction timestamps.</p>
     </section>
-    {(expired || older > 0) && <details className="current-freshness-notice"><summary><strong>Older forecasts — not fresh</strong><span>Details</span></summary><p>Eligible saved estimates retain their original timestamps. The latest recorded source must match; schedule changes since that observation are not ruled out. No late-breaking injuries, weather or news are included.</p></details>}
+    {(expired || older > 0) && <details className="current-freshness-notice current-global-freshness"><summary><strong>Older forecasts — not fresh</strong><span className="current-notice-toggle">Details <ChevronDown size={14} aria-hidden="true"/></span></summary><p>A source check is not a new prediction. Eligible saved estimates keep their original timestamps and verified inputs. The latest recorded source matches those inputs; later schedule changes are still possible. No late-breaking injuries, weather or news are included.</p></details>}
     {operations.error && <p className="current-warning" role="alert">Forecast provenance unavailable: {operations.error} Probabilities remain hidden until history is verified.</p>}
     {data.warnings.map(w => <p className="current-warning" key={w}>{w}</p>)}
     <p className="current-context">Current-season inputs only: season win rate, scoring margin, recent margin and rest. No injury, player-news, weather or prior-season strength adjustment. Probabilities are conditional on no tie.</p>
@@ -59,8 +63,8 @@ export function CurrentForecasts() {
           <div className="current-card-top"><span>WEEK {g.week}</span><span>{time(g.kickoff)}</span></div>
           <div className="current-teams"><div><TeamMark code={g.away} size="current"/><h3>{team(g.away).name}</h3><small>{g.away} · AWAY</small></div><span className="current-at">at</span><div><TeamMark code={g.home} size="current"/><h3>{team(g.home).name}</h3><small>{g.home} · HOME</small></div></div>
           <p className="muted current-venue">{g.stadium}</p>
-          {reason ? <div className="current-unavailable"><strong>Prediction unavailable</strong><p>{reason}</p></div> : <div className="current-probabilities"><div><span>{g.away}</span><strong>{pct(view.away_probability!)}</strong><strong>{pct(view.home_probability!)}</strong><span>{g.home}</span></div><div className="current-probability-bar" aria-hidden="true"><span style={{width:pct(view.away_probability!)}}/></div><small>{choice.state === "older" ? "OLDER FORECAST · NOT FRESH" : "MODEL ESTIMATE · NOT A GUARANTEE"}</small></div>}
-          {choice.state === "older" && record && <details className="current-freshness-notice"><summary><strong>Older forecast</strong><span>Details</span></summary><p>Freshness deadline passed or a newer check could not issue a forecast. Inputs remain verified at their original cutoff; the latest recorded source content is unchanged, but later schedule changes are not ruled out. This is not a live update and includes no late-breaking injuries, weather or news.</p></details>}
+          {reason ? <div className="current-unavailable"><strong>Prediction unavailable</strong><p>{reason}</p></div> : <div className="current-probabilities"><div><span>{g.away}</span><strong>{pct(view.away_probability!)}</strong><strong>{pct(view.home_probability!)}</strong><span>{g.home}</span></div><div className="current-probability-bar" aria-hidden="true"><span style={{width:pct(view.away_probability!)}}/></div>{choice.state === "fresh" && <small>MODEL ESTIMATE · NOT A GUARANTEE</small>}</div>}
+          {choice.state === "older" && record && <details className="current-freshness-notice"><summary><strong>Older forecast</strong><span className="current-notice-toggle">Details <ChevronDown size={14} aria-hidden="true"/></span></summary><p>Saved pregame estimate, not a live update or guarantee. Original timestamp below; source limitations above apply.</p></details>}
           {g.warnings.map(w => <p className="current-warning small" key={w}>{w}</p>)}
           <p className="current-cutoff">Forecast generated: <time dateTime={view.generated_at} title={view.generated_at}>{time(view.generated_at)}</time><br/>Feature cutoff: <time dateTime={view.cutoff} title={view.cutoff}>{time(view.cutoff)}</time><br/>Matchup: {g.id}</p>
           <div className="current-card-actions">

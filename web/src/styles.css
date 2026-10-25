@@ -1880,11 +1880,21 @@ footer p {
 .current-provenance .eyebrow { display: flex; align-items: center; gap: 7px; margin-bottom: 12px; }
 .current-provenance strong { font: 600 16px var(--mono); line-height: 1.6; }
 .current-provenance p { grid-column: 1 / -1; color: #b7bcc9; margin: 0; font-size: 12px; }
+.current-status-counts { display: flex; flex-wrap: wrap; gap: 14px 20px; margin: 0; }
+.current-status-counts > div { display: flex; flex-direction: column; gap: 5px; }
+.current-status-counts dt { color: #b7bcc9; font-size: 11px; }
+.current-status-counts dd { margin: 0; font: 600 20px/1.4 var(--mono); }
+.current-status-counts dd span { color: #b7bcc9; font-size: 12px; font-weight: 400; }
 .current-warning { padding: 13px 16px; color: #ebd6a1; background: #252015; border: 1px solid #655536; border-radius: 8px; line-height: 1.6; font-size: 13px; }
 .current-warning.small { font-size: 12px; margin: 14px 0; }
 .current-freshness-notice { margin: 14px 0; border: 1px solid #655536; border-radius: 6px; color: #ebd6a1; font-size: 12px; line-height: 1.6; }
-.current-freshness-notice summary { min-height: 44px; padding: 12px; cursor: pointer; }
-.current-freshness-notice summary span { margin-left: 8px; color: var(--muted); }
+.current-freshness-notice summary { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 44px; padding: 12px; line-height: 1.6; cursor: pointer; list-style: none; }
+.current-freshness-notice summary::-webkit-details-marker { display: none; }
+.current-freshness-notice summary strong { min-width: 0; overflow-wrap: anywhere; }
+.current-notice-toggle { display: inline-flex; align-items: center; gap: 8px; flex-shrink: 0; color: #b7bcc9; }
+.current-freshness-notice[open] > summary { border-bottom: 1px solid #655536; margin-bottom: 12px; }
+.current-freshness-notice[open] > summary .current-notice-toggle svg { transform: rotate(180deg); }
+.current-freshness-notice summary:focus-visible { outline: 2px solid #ebd6a1; outline-offset: -4px; border-radius: 5px; }
 .current-freshness-notice p { margin: 0; padding: 0 12px 12px; color: #b7bcc9; }
 .current-context { color: #b7bcc9; margin: 24px 0; max-width: 900px; }
 .current-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }

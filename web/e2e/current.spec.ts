@@ -77,9 +77,9 @@ test("48-hour boundary retains explicitly older estimates, then hides them at ki
   await page.clock.install({time:new Date(Date.parse(original.valid_until)-1000)});
   await page.goto("./");
   await expect(page.locator(".current-probabilities")).toHaveCount(originalCount);
-  await expect(page.getByText("OLDER FORECAST · NOT FRESH",{exact:true})).toHaveCount(0);
+  await expect(page.getByText("Older forecast",{exact:true})).toHaveCount(0);
   await page.clock.fastForward(1000);
-  await expect(page.getByText("OLDER FORECAST · NOT FRESH",{exact:true})).toHaveCount(originalCount);
+  await expect(page.getByText("Older forecast",{exact:true})).toHaveCount(originalCount);
   await expect(page.getByText("Older forecasts — not fresh",{exact:true})).toBeVisible();
   const first=original.games[0];
   await expect(page.locator(".current-card").first().locator(".current-probabilities strong")).toHaveText([`${(first.away_probability*100).toFixed(1)}%`,`${(first.home_probability*100).toFixed(1)}%`]);
@@ -97,7 +97,7 @@ test("48-hour boundary retains explicitly older estimates, then hides them at ki
   await expect(summary).toBeFocused();
   await page.keyboard.press("Enter");
   await expect(notice.locator("p")).toBeVisible();
-  await expect(notice).toContainText("includes no late-breaking injuries, weather or news");
+  await expect(notice).toContainText("Saved pregame estimate, not a live update or guarantee");
   expect((await new AxeBuilder({page}).withTags(["wcag2a","wcag2aa","wcag21aa"]).analyze()).violations).toEqual([]);
   await page.keyboard.press("Space");
   await expect(notice.locator("p")).not.toBeVisible();
@@ -140,7 +140,7 @@ test("stale-source refresh displays original archived probabilities without mint
   await serveArtifact(page,"operations","operations",ops);
   await page.clock.install({time:new Date(stale.generated_at)});
   await page.goto("./");
-  await expect(page.getByText(`0 fresh · ${originalCount} older`,{exact:true})).toBeVisible();
+  await expect(page.locator(".current-status-counts dd")).toHaveText([`${originalCount} of ${originalCount}`,"0",String(originalCount)]);
   for (const [index,g] of original.games.entries()) {
     const card=page.locator(".current-card").nth(index);
     await expect(card.locator(".current-probabilities strong")).toHaveText([`${(g.away_probability*100).toFixed(1)}%`,`${(g.home_probability*100).toFixed(1)}%`]);
@@ -149,6 +149,37 @@ test("stale-source refresh displays original archived probabilities without mint
   await page.locator(".current-card").first().getByRole("link",{name:"Explore matchup intelligence"}).click();
   await expect(page.getByText("Older forecast — not fresh.",{exact:true})).toBeVisible();
   await expect(page.getByRole("region",{name:"Current matchup model factors"}).locator("tbody tr")).toHaveCount(4);
+});
+
+test("freshness counts and expanded global notice stay separate at narrow widths with visible keyboard focus", async ({page}, info)=>{
+  await serveArtifact(page,"current",`forecast-${original.season}`,original);
+  await serveArtifact(page,"operations","operations",originalOperations);
+  await page.clock.install({time:new Date(Date.parse(original.valid_until)+1000)});
+  if(info.project.name==="mobile")await page.setViewportSize({width:320,height:850});
+  await page.goto("./");
+  const counts=page.locator(".current-status-counts");
+  await expect(counts.locator("dt")).toHaveText(["Displayable","Fresh","Older"]);
+  await expect(counts.locator("dd")).toHaveText([`${originalCount} of ${originalCount}`,"0",String(originalCount)]);
+  const groups=await counts.locator(":scope > div").all();
+  for(let i=0;i<groups.length;i++)for(let j=i+1;j<groups.length;j++){
+    const a=(await groups[i].boundingBox())!, b=(await groups[j].boundingBox())!;
+    expect(a.x+a.width<=b.x || b.x+b.width<=a.x || a.y+a.height<=b.y || b.y+b.height<=a.y).toBe(true);
+  }
+  const notice=page.locator(".current-global-freshness");
+  const summary=notice.locator("summary");
+  await expect(notice.locator("p")).not.toBeVisible();
+  await summary.focus();await page.keyboard.press("Enter");
+  await expect(notice.locator("p")).toBeVisible();
+  const a=(await summary.boundingBox())!, b=(await notice.locator("p").boundingBox())!;
+  expect(b.y-a.y-a.height).toBeGreaterThanOrEqual(11);
+  expect(await summary.evaluate(el=>({style:getComputedStyle(el).outlineStyle,width:getComputedStyle(el).outlineWidth,color:getComputedStyle(el).outlineColor}))).toEqual({style:"solid",width:"2px",color:"rgb(235, 214, 161)"});
+  await expect(notice).toContainText("A source check is not a new prediction");
+  await expect(page.getByText(/No late-breaking injuries, weather or news are included/)).toHaveCount(1);
+  expect((await new AxeBuilder({page}).withTags(["wcag2a","wcag2aa","wcag21aa"]).analyze()).violations).toEqual([]);
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+  await page.screenshot({path:`${process.env.TEST_ARTIFACT_DIR || "../artifacts"}/freshness-expanded-${info.project.name}.png`,fullPage:false,animations:"disabled"});
+  await page.keyboard.press("Space");await expect(notice.locator("p")).not.toBeVisible();
+  await expect(summary).toBeFocused();
 });
 
 test("missing provenance never exposes probabilities", async ({page})=>{
