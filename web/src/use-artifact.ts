@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 export function useArtifact<T>(load: () => Promise<T>, intervalMs=0) {
   const [data, setData] = useState<T | null>(null);
   const [error, setError] = useState("");
+  const [checkedAt, setCheckedAt] = useState<string | null>(null);
   const [attempt, setAttempt] = useState(0);
   useEffect(() => {
     let active = true;
@@ -10,7 +11,7 @@ export function useArtifact<T>(load: () => Promise<T>, intervalMs=0) {
     const refresh=()=>{
       if(pending)return;
       pending=true;
-      load().then(value=>{if(active){setData(value);setError("");}})
+      load().then(value=>{if(active){setData(value);setError("");setCheckedAt(new Date().toISOString());}})
         .catch(e=>{if(active)setError(e instanceof Error?e.message:"Artifact unavailable");})
         .finally(()=>{pending=false;});
     };
@@ -20,5 +21,5 @@ export function useArtifact<T>(load: () => Promise<T>, intervalMs=0) {
     document.addEventListener("visibilitychange",resume);
     return () => { active = false; if(timer)clearInterval(timer);document.removeEventListener("visibilitychange",resume); };
   }, [load, attempt, intervalMs]);
-  return { data, error, retry: () => setAttempt(value => value + 1) };
+  return { data, error, checkedAt, retry: () => setAttempt(value => value + 1) };
 }

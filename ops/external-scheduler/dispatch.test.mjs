@@ -19,9 +19,11 @@ function fixture(hint=plan,runs=[],post=204) {
   };
   return {calls,fetcher};
 }
-test('review configuration cannot activate a schedule',()=>{
+test('approved configuration activates only the existing bounded V1 schedule',()=>{
   const config=JSON.parse(readFileSync(new URL('./wrangler.json',import.meta.url)));
-  assert.equal(config.vars.ENABLED,'false');assert.deepEqual(config.triggers.crons,[]);
+  assert.equal(config.name,'fourth-down-scheduler');
+  assert.equal(config.vars.ENABLED,'true');assert.deepEqual(config.triggers.crons,[CRON]);
+  assert.equal(config.workers_dev,false);assert.equal(config.preview_urls,false);
   assert.equal(CRON,'2,17,32,47 * * * *');
 });
 test('disabled worker makes no request',async()=>{
