@@ -18,6 +18,22 @@ REPOSITORY = "https://github.com/nflverse/nflverse-pbp"
 LICENSE = REPOSITORY + "/blob/master/LICENSE.md"
 MAX_RAW = 2_000_000
 MAX_EXPANDED = 5_000_000
+# The supplemental provider uses an underscore for overtime finals. Keep its
+# original phase in evidence; map only when applying shared lifecycle rules.
+FINAL_PHASES = {'FINAL', 'FINAL OVERTIME', 'FINAL_OVERTIME'}
+
+
+def effective_game(observation):
+    """Interpret a validated legacy observation without rewriting its receipt.
+
+    Before the overtime alias was recognized, the exact same raw final was
+    retained as unknown/unvalidated. validate_observation still proves every
+    field against those raw bytes before this interpretation can be used.
+    """
+    game = observation['game']
+    if game['phase'] == 'FINAL_OVERTIME' and game['status'] == 'unknown' and game['validated'] is False:
+        return {**game, 'validated':True, 'status':'completed'}
+    return game
 
 
 def provider_id(game):
@@ -66,10 +82,10 @@ def normalize_detail(detail, game, observed_at):
     if any(value is not None and (type(value) is not int or not 0 <= value <= 200) for value in scores):
         raise ValueError('Invalid provider score')
     normalized = {**{k:game[k] for k in ('id','season','week','home','away','kickoff','day')},
-                  'phase':phase, 'validated':phase in {'FINAL','FINAL OVERTIME'},
+                  'phase':phase, 'validated':phase in FINAL_PHASES,
                   'home_score':scores[0], 'away_score':scores[1]}
-    state = status(normalized, observed_at)
-    if phase in {'FINAL','FINAL OVERTIME'} and (state != 'completed' or start >= timestamp(observed_at)):
+    state = status({**normalized, 'phase':'FINAL OVERTIME' if phase == 'FINAL_OVERTIME' else phase}, observed_at)
+    if phase in FINAL_PHASES and (state != 'completed' or start >= timestamp(observed_at)):
         raise ValueError('Final result lacks valid scores or follows an invalid time ordering')
     return {**normalized, 'status':state, 'provider_game_id':provider_id(game),
             'provider_event_id':str(scalar(detail['id'])), 'actual_start':iso(start)}
@@ -96,9 +112,14 @@ def validate_observation(observation, raw, season, now):
             or observation.get('provider_digest') != 'sha256:'+sha(raw)
             or not timestamp(observation['source_updated_at']) <= timestamp(observation['observed_at']) <= timestamp(now)):
         raise ValueError('Invalid result observation provenance')
-    if normalize(raw, observation['game'], observation['observed_at']) != observation['game']:
+    normalized = normalize(raw, observation['game'], observation['observed_at'])
+    # Accept only the exact old representation of this one provider alias.
+    # Original JSON, digest and observation time remain immutable, including
+    # when a fresh runner restores an archive produced by the old parser.
+    legacy = {**normalized, 'validated':False, 'status':'unknown'} if normalized['phase'] == 'FINAL_OVERTIME' else normalized
+    if observation['game'] not in (normalized, legacy):
         raise ValueError('Result observation does not reproduce from its raw source')
-    if (observation['game']['status'] == 'completed'
+    if (normalized['status'] == 'completed'
             and timestamp(observation['source_updated_at']) <= timestamp(observation['game']['actual_start'])):
         raise ValueError('Final result publication must follow the actual start')
     return observation
