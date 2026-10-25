@@ -3,8 +3,9 @@
 Owner-approved start: **2026-10-29T00:00:00Z** (October 28, 8:00 PM EDT).
 Authorized on October 25, 2026 in `AUTHORIZATION-2026-10-25.json`. The hosted
 workflow gate is enabled for commissioning; the future cohort boundary remains
-fixed. The separate Worker stays disabled until its scoped credential is installed
-and external dispatch is verified. The accepted rehearsal, its PLAN/PROTOCOL, prior
+fixed. The separate Worker was activated after its encrypted credential and a successful
+Cloudflare-hosted dispatch were verified; prospective capture still begins only
+after the future cohort boundary. The accepted rehearsal, its PLAN/PROTOCOL, prior
 amendments, and seven-feature fitted model are unchanged.
 
 Each evaluation cutoff is kickoff minus 60 minutes and must be strictly after
@@ -63,10 +64,12 @@ performed by this preparation.
    Record approval in ACTIVATION.json and enable its gate. Public V1 source pin,
    website, hourly scheduler and model stay unchanged.
 4. The approved separate Free Worker `fourth-down-v2-shadow-prepared` is deployed.
-   Its commissioning config has `ENABLED=false`, no cron, no route. Create a fine-grained token for Actions
+   Its original commissioning config had `ENABLED=false`, no cron, no route. The
+   activated config has `ENABLED=true`, `*/5 * * * *`, invocation observability,
+   and no public route. Use a fine-grained token for Actions
    read/write on `warehousegang/fourth-down` only; store only as encrypted
    `GITHUB_TOKEN`. Do not reuse or alter the public V1 scheduler/token.
-5. After verifying a manual tick and durable ledger commit, enable the Worker
+5. After verifying external dispatch and its durable ledger commit, enable the Worker
    with `*/5 * * * *`. It checks the 2026 calendar each tick, dispatching only in
    T−90..T−45 windows plus one daily 11:00 UTC coverage/recovery sweep. No weekday
    assumptions: Thursday, Sunday, Monday, international, odd-minute and DST
@@ -88,6 +91,28 @@ no paid resources are required or authorized.
 
 Cost references checked October 25, 2026: [standard runners for public repositories](https://docs.github.com/en/actions/concepts/billing-and-usage)
 and [Workers Free limits](https://developers.cloudflare.com/workers/platform/limits/).
-The proposed 288 lightweight calendar checks/day are below the shared 100,000
+The configured 288 lightweight calendar checks/day are below the shared 100,000
 request/day allowance; verify the account's remaining trigger quota and CPU
 usage when deployment is approved. No paid plan is required by the design.
+
+## Activation verification — October 25, 2026
+
+Encrypted `GITHUB_TOKEN` was verified as `secret_text` by name/type only. A
+temporary Cloudflare-hosted preview invoked the unchanged scheduler handler
+with a synthetic daily-sweep event (October 29, 11:00 UTC); it sent no test
+clock to GitHub. GitHub's real October 25 clock retained the activation boundary.
+The preview was stopped after the test. This is controlled dispatch evidence,
+not a successful unattended prospective capture.
+
+[External-dispatch run 40212735889](https://github.com/warehousegang/fourth-down/actions/runs/40212735889)
+passed restoration, bounded capture, add-only persistence and duplicate no-op
+checks. Ledger commit `3f35e0a58ff827898935cc4803f8d3d1af365c15` preserved all
+previous bytes and added one coverage receipt: 107 pre-activation, 141 pending,
+24 unconfirmed kickoffs. Zero prospective decisions or pairs. Earlier unscored
+rehearsals remain excluded.
+
+First currently scheduled candidate: CAR at GB, October 30 00:15 UTC kickoff;
+stage window October 29 22:45–23:15 UTC, cutoff 23:15, finalization through
+23:30. Recheck actual schedule and data availability. **First unattended
+prospective capture remains pending.** No retrospective V1 reconstruction or
+missed-cutoff backfill is permitted.
