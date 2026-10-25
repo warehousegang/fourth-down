@@ -1,0 +1,12 @@
+diff --git a/.github/workflows/fourth-down-refresh.yml b/.github/workflows/fourth-down-refresh.yml
+--- a/.github/workflows/fourth-down-refresh.yml
++++ b/.github/workflows/fourth-down-refresh.yml
+@@ -1,8 +1,6 @@
+ name: Refresh Fourth Down
+ on:
+   workflow_dispatch:
+-  schedule:
+-    - cron: '17 * * * *'
+ permissions:
+   contents: read
+ concurrency:
