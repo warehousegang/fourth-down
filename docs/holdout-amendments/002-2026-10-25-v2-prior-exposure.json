@@ -1,0 +1,29 @@
+{
+  "2025_outcome_exposure": "Additional game-level exposure beyond original legacy aggregates; consumed operational feature data",
+  "amendment_id": "2026-10-25-v2-prior-exposure",
+  "authority": "Limited 2025 score-only owner authorization in amendment 001",
+  "evaluation_authorized": false,
+  "event": "2025-only raw schedule/score bytes retrieved and sealed; REG score parsing authorized for prior margins only",
+  "fitting_calibration_selection_authorized": false,
+  "incidental_non_regular_rows": "Retained transport bytes only; excluded before score fields are interpreted",
+  "original_holdout_files_modified": false,
+  "previous_amendment_sha256": "0cf4d3328446aeebada7c2a9d3f487b5ef74130ddcb14e7e836dc1ec3d86c254",
+  "raw_file": "data/research-v2/limited-rehearsal-2026-10-25/inputs/prior-bbccec126c53f8992353a58d3ac9c15f7bac9971c38da1726f65507171860c25.csv",
+  "recorded_at": "2026-10-25T13:35:03.407991+00:00",
+  "recurring_activation_authorized": false,
+  "schema_version": 1,
+  "source": {
+    "asset_id": 564279453,
+    "kind": "prior",
+    "license_url": "https://github.com/sportsdataverse/sportsdataverse-data/blob/main/LICENSE",
+    "raw_sha256": "bbccec126c53f8992353a58d3ac9c15f7bac9971c38da1726f65507171860c25",
+    "retrieval_started_at": "2026-10-25T13:35:02.892217+00:00",
+    "retrieved_at": "2026-10-25T13:35:03.407991+00:00",
+    "season": 2025,
+    "size": 89491,
+    "source_updated_at": "2026-09-14T21:37:39Z",
+    "synthetic": false,
+    "upstream_digest": "sha256:bbccec126c53f8992353a58d3ac9c15f7bac9971c38da1726f65507171860c25",
+    "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nfl_ngs_schedules/ngs_schedule_2025.csv"
+  }
+}

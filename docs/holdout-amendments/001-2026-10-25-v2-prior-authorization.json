@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "amendment_id": "2026-10-25-v2-limited-prior-authorization",
+  "recorded_at": "2026-10-25T13:34:32.573499+00:00",
+  "authority": "Thomas: Fourth Down \u2014 V2 Limited Historical Data Authorization, explicit instruction in this chat",
+  "original_holdout_freeze_sha256": "61fbf6127a62a3240686b12ab3b0016f8e60feb2260bed577e9550ba953d4020",
+  "previous_amendment_sha256": null,
+  "approved": {
+    "source": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nfl_ngs_schedules/ngs_schedule_2025.csv",
+    "season": 2025,
+    "derivation": "REG final validated scores only; team sum(scoring margin)/(completed games+4)",
+    "incidental_non_regular_rows": "Sealed as received; excluded before reading score fields",
+    "local_rehearsal": true
+  },
+  "prohibited": [
+    "2024 data acquisition",
+    "2025 play-by-play or player data",
+    "2024\u20132025 retrospective model evaluation",
+    "model fitting, calibration or selection",
+    "V2 recurring execution, promotion or deployment",
+    "V1 or production scheduling changes"
+  ],
+  "model_result_sha256": "47ba6e069a6e3ddcc4a3181017a856fd7a866f9462598d20e6a7238299265c8a",
+  "model_sha256": "d4832bedb306ef315d179e5ec102e3048c2dbc7f584dd7c9803870af3b5438a6",
+  "exposure_consequence": "2025 outcome-level scores become consumed operational feature data, beyond the previously disclosed legacy aggregate metrics. The 2024\u20132025 assessment remains partially exposed and locked; no later assessment may be called pristine or independent of this exposure.",
+  "rehearsal_timing": "Use actual current capture/decision/generation times for future 2026 games; no backdating. Ad hoc rehearsal is not the T-60 prospective cohort and is excluded from all scorecards.",
+  "activation_approved": false
+}

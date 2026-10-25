@@ -1,0 +1,27 @@
+{
+  "status": "pass",
+  "season": 2026,
+  "schedule_sha256": "1922b31983e74a7c53c661084c7d68e70bd9ea2ffd63ff410aaa754dc5023d9c",
+  "pbp_sha256": "e568b906582ac25419fa0d08e99c0ce5b219a00c70e2570a5961f4a31b4c1d71",
+  "pbp_rows": 16551,
+  "joined_prior_games": 94,
+  "team_game_totals": 188,
+  "data_cutoff_day": "2026-10-25",
+  "forecast_generated": false,
+  "protected_seasons_read": false,
+  "expected_completed_games": 94,
+  "missing_completed_game_joins": 0,
+  "pbp_capture": {
+    "asset_id": 674570910,
+    "file": "ignored data/research-v2/prospective-inputs/2026/<raw_sha256>.parquet",
+    "kind": "pbp",
+    "license_url": "https://github.com/nflverse/nflverse-data/blob/main/LICENSE.md",
+    "raw_sha256": "e568b906582ac25419fa0d08e99c0ce5b219a00c70e2570a5961f4a31b4c1d71",
+    "retrieved_at": "2026-10-25T13:19:25.304215+00:00",
+    "season": 2026,
+    "source_updated_at": "2026-10-25T09:03:15Z",
+    "synthetic": false,
+    "url": "https://github.com/nflverse/nflverse-data/releases/download/pbp/play_by_play_2026.parquet"
+  },
+  "attribution": "nflverse/nflfastR PBP under CC BY 4.0; SportsDataverse / NFL Next Gen Stats schedule with retained attribution; derived totals"
+}

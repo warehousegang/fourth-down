@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "authorization_id": "v2-shadow-activation-2026-10-25",
+  "recorded_at": "2026-10-25T15:58:39.997778+00:00",
+  "authority": "Explicit owner instruction: Fourth Down V2 \u2014 Controlled Shadow Activation",
+  "accepted_preparation_commit": "f08fc821cc8a2b73e5eb7410c0ce151ba235bf4d",
+  "activation_at": "2026-10-29T00:00:00+00:00",
+  "decision_minutes_before_kickoff": 60,
+  "maximum_finalization_delay_minutes": 15,
+  "model_sha256": "d4832bedb306ef315d179e5ec102e3048c2dbc7f584dd7c9803870af3b5438a6",
+  "prior_sha256": "bbccec126c53f8992353a58d3ac9c15f7bac9971c38da1726f65507171860c25",
+  "storage": "warehousegang/fourth-down:v2-shadow-state; append-only",
+  "scheduler": "Separate Cloudflare Workers Free scheduler; scoped Actions dispatch only",
+  "v1_changes_authorized": false,
+  "retraining_calibration_promotion_authorized": false,
+  "protected_retrospective_evaluation_authorized": false,
+  "preactivation_scorecard_eligible": false
+}
