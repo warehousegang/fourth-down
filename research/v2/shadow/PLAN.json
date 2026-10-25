@@ -2,8 +2,8 @@
   "schema_version": 1,
   "protocol_id": "v2-paired-prospective-2026-preparation-1",
   "enabled": false,
-  "prior_2025_use_approved": false,
-  "data_use_approval_reference": null,
+  "prior_2025_use_approved": true,
+  "data_use_approval_reference": "docs/holdout-amendments/001-2026-10-25-v2-prior-authorization.json",
   "activation_approved": false,
   "activation_approval_reference": null,
   "activation_at": null,
@@ -16,8 +16,13 @@
   "model_id": "v2-efficiency-ff72f16c5ea3",
   "v1_model_id": "schedule-v1-741cf41752",
   "primary_metric": "paired Brier difference, V2 minus actual archived V1",
-  "outcome_seasons_allowed": [2026],
-  "protected_evaluation_seasons": [2024, 2025],
+  "outcome_seasons_allowed": [
+    2026
+  ],
+  "protected_evaluation_seasons": [
+    2024,
+    2025
+  ],
   "automatic_promotion": false,
   "public_publication": false
 }

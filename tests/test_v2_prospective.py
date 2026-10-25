@@ -75,7 +75,8 @@ def schedule_rows(captures, kind="schedule"):
 def test_disabled_before_any_input_open(monkeypatch):
     assert readiness()["enabled"] is False
     assert plan()["enabled"] is False and plan()["activation_at"] is None
-    assert plan()["prior_2025_use_approved"] is False
+    assert plan()["prior_2025_use_approved"] is True
+    assert plan()["activation_approved"] is False
     monkeypatch.setattr(Path, "read_bytes", lambda *_: pytest.fail("Input must not be opened"))
     with pytest.raises(PermissionError, match="disabled"):
         run(Path("protected-2025-inputs-must-not-be-read.json"))

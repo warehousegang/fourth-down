@@ -13,7 +13,11 @@ DIRECTORY = ROOT / "data/research-v2/prospective"
 
 def validate(record):
     synthetic = record.get("mode") == "v2-shadow-simulation" and record.get("prospective") is False
-    if not synthetic:
+    rehearsal = record.get("mode") == "v2-shadow-rehearsal" and record.get("prospective") is False
+    if rehearsal:
+        from ml.v2_rehearsal import validate_record
+        validate_record(record)
+    elif not synthetic:
         require_activation()
         if record.get("mode") != "v2-shadow-forecast" or record.get("prospective") is not True:
             raise ValueError("Unsupported shadow record mode")
@@ -44,7 +48,8 @@ def _directory(path):
 
 def write(record, directory=DIRECTORY):
     synthetic = validate(record)
-    directory = _directory(directory) / ("simulations" if synthetic else "forecasts")
+    namespace = "rehearsals" if record.get("mode") == "v2-shadow-rehearsal" else ("simulations" if synthetic else "forecasts")
+    directory = _directory(directory) / namespace
     # One immutable decision per game/scheduled kickoff, not one new entry per retry.
     identity = {k: record[k] for k in ("mode", "season", "game_id", "kickoff", "cutoff")}
     key, body = sha(canonical(identity)), canonical(record)
@@ -64,7 +69,7 @@ def write(record, directory=DIRECTORY):
                 raise ValueError("Immutable decision conflict; preserve the first record and investigate")
     finally:
         temporary.unlink(missing_ok=True)
-    return {"file": str(path), "sha256": sha(body), "decision_id": key, "prospective": not synthetic}
+    return {"file": str(path), "sha256": sha(body), "decision_id": key, "prospective": record["prospective"]}
 
 
 def read(receipt):

@@ -1,3 +1,13 @@
+# V2 limited-data rehearsal handoff — 2026-10-25
+
+The owner approved 2025 REG score-only priors and a controlled local rehearsal.
+Twelve future Week 7 predictions were sealed and independently reproduced; 456 Python
+tests passed with the prohibited fitting test skipped. Recurring activation,
+protected evaluation, model changes and deployment remain prohibited.
+See [rehearsal results and remaining activation requirements](../research/v2/shadow/REHEARSAL.md).
+The append-only amendments preserve the original holdout files and disclose the
+additional 2025 outcome exposure. Earlier sections below are historical records.
+
 # V2 shadow preparation handoff — 2026-10-25
 
 **GO for local preparation review; NO-GO for real-data shadow execution.** The offline

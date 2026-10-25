@@ -1,0 +1,2857 @@
+{
+  "schema_version": 1,
+  "status": "controlled-local-rehearsal-complete; recurring-and-scorecards-disabled",
+  "base_commit": "f42ace407f294614250d00e979d45a935254b806",
+  "accepted_model_commit": "180f79f",
+  "model_id": "v2-efficiency-ff72f16c5ea3",
+  "model_sha256": "d4832bedb306ef315d179e5ec102e3048c2dbc7f584dd7c9803870af3b5438a6",
+  "model_result_sha256": "47ba6e069a6e3ddcc4a3181017a856fd7a866f9462598d20e6a7238299265c8a",
+  "session": {
+    "cutoff": "2026-10-25T13:38:07.065309+00:00",
+    "week": 7,
+    "manifest_sha256": "e4e647c093e97a4aca67e0497821be635d35dd527b4a374ec07a9b54247fa69a",
+    "authorization_sha256": "0cf4d3328446aeebada7c2a9d3f487b5ef74130ddcb14e7e836dc1ec3d86c254"
+  },
+  "prior_coverage": {
+    "season": 2025,
+    "raw_rows": 334,
+    "rows_by_type": {
+      "POST": 13,
+      "PRE": 49,
+      "REG": 272
+    },
+    "regular_games": 272,
+    "excluded_non_regular": 62,
+    "first_game_day": "2025-09-04",
+    "last_game_day": "2026-01-04",
+    "teams": {
+      "ARI": {
+        "games": 17,
+        "scoring_margin_sum": -133,
+        "shrunk_prior_margin": -6.333333333333333,
+        "game_ids": [
+          "ngs-2025-59850",
+          "ngs-2025-59869",
+          "ngs-2025-59888",
+          "ngs-2025-59891",
+          "ngs-2025-59915",
+          "ngs-2025-59925",
+          "ngs-2025-59946",
+          "ngs-2025-59977",
+          "ngs-2025-59987",
+          "ngs-2025-60001",
+          "ngs-2025-60015",
+          "ngs-2025-60030",
+          "ngs-2025-60047",
+          "ngs-2025-60054",
+          "ngs-2025-60077",
+          "ngs-2025-60087",
+          "ngs-2025-60106"
+        ]
+      },
+      "ATL": {
+        "games": 17,
+        "scoring_margin_sum": -48,
+        "shrunk_prior_margin": -2.2857142857142856,
+        "game_ids": [
+          "ngs-2025-59845",
+          "ngs-2025-59872",
+          "ngs-2025-59876",
+          "ngs-2025-59893",
+          "ngs-2025-59934",
+          "ngs-2025-59948",
+          "ngs-2025-59952",
+          "ngs-2025-59969",
+          "ngs-2025-59979",
+          "ngs-2025-59994",
+          "ngs-2025-60018",
+          "ngs-2025-60029",
+          "ngs-2025-60038",
+          "ngs-2025-60051",
+          "ngs-2025-60077",
+          "ngs-2025-60098",
+          "ngs-2025-60099"
+        ]
+      },
+      "BAL": {
+        "games": 17,
+        "scoring_margin_sum": 26,
+        "shrunk_prior_margin": 1.2380952380952381,
+        "game_ids": [
+          "ngs-2025-59857",
+          "ngs-2025-59860",
+          "ngs-2025-59890",
+          "ngs-2025-59902",
+          "ngs-2025-59909",
+          "ngs-2025-59923",
+          "ngs-2025-59953",
+          "ngs-2025-59964",
+          "ngs-2025-59984",
+          "ngs-2025-60003",
+          "ngs-2025-60008",
+          "ngs-2025-60023",
+          "ngs-2025-60039",
+          "ngs-2025-60053",
+          "ngs-2025-60070",
+          "ngs-2025-60088",
+          "ngs-2025-60112"
+        ]
+      },
+      "BUF": {
+        "games": 17,
+        "scoring_margin_sum": 116,
+        "shrunk_prior_margin": 5.523809523809524,
+        "game_ids": [
+          "ngs-2025-59857",
+          "ngs-2025-59866",
+          "ngs-2025-59875",
+          "ngs-2025-59894",
+          "ngs-2025-59919",
+          "ngs-2025-59934",
+          "ngs-2025-59954",
+          "ngs-2025-59975",
+          "ngs-2025-59983",
+          "ngs-2025-59995",
+          "ngs-2025-60007",
+          "ngs-2025-60034",
+          "ngs-2025-60048",
+          "ngs-2025-60057",
+          "ngs-2025-60072",
+          "ngs-2025-60096",
+          "ngs-2025-60100"
+        ]
+      },
+      "CAR": {
+        "games": 17,
+        "scoring_margin_sum": -69,
+        "shrunk_prior_margin": -3.2857142857142856,
+        "game_ids": [
+          "ngs-2025-59848",
+          "ngs-2025-59869",
+          "ngs-2025-59876",
+          "ngs-2025-59897",
+          "ngs-2025-59910",
+          "ngs-2025-59924",
+          "ngs-2025-59942",
+          "ngs-2025-59954",
+          "ngs-2025-59967",
+          "ngs-2025-59980",
+          "ngs-2025-59994",
+          "ngs-2025-60020",
+          "ngs-2025-60025",
+          "ngs-2025-60062",
+          "ngs-2025-60071",
+          "ngs-2025-60086",
+          "ngs-2025-60114"
+        ]
+      },
+      "CHI": {
+        "games": 17,
+        "scoring_margin_sum": 26,
+        "shrunk_prior_margin": 1.2380952380952381,
+        "game_ids": [
+          "ngs-2025-59858",
+          "ngs-2025-59863",
+          "ngs-2025-59887",
+          "ngs-2025-59903",
+          "ngs-2025-59935",
+          "ngs-2025-59938",
+          "ngs-2025-59953",
+          "ngs-2025-59965",
+          "ngs-2025-59981",
+          "ngs-2025-59997",
+          "ngs-2025-60009",
+          "ngs-2025-60024",
+          "ngs-2025-60041",
+          "ngs-2025-60052",
+          "ngs-2025-60068",
+          "ngs-2025-60097",
+          "ngs-2025-60101"
+        ]
+      },
+      "CIN": {
+        "games": 17,
+        "scoring_margin_sum": -78,
+        "shrunk_prior_margin": -3.7142857142857144,
+        "game_ids": [
+          "ngs-2025-59846",
+          "ngs-2025-59861",
+          "ngs-2025-59879",
+          "ngs-2025-59906",
+          "ngs-2025-59917",
+          "ngs-2025-59931",
+          "ngs-2025-59936",
+          "ngs-2025-59955",
+          "ngs-2025-59965",
+          "ngs-2025-59999",
+          "ngs-2025-60010",
+          "ngs-2025-60023",
+          "ngs-2025-60048",
+          "ngs-2025-60053",
+          "ngs-2025-60081",
+          "ngs-2025-60087",
+          "ngs-2025-60102"
+        ]
+      },
+      "CLE": {
+        "games": 17,
+        "scoring_margin_sum": -100,
+        "shrunk_prior_margin": -4.761904761904762,
+        "game_ids": [
+          "ngs-2025-59846",
+          "ngs-2025-59860",
+          "ngs-2025-59877",
+          "ngs-2025-59895",
+          "ngs-2025-59908",
+          "ngs-2025-59928",
+          "ngs-2025-59939",
+          "ngs-2025-59957",
+          "ngs-2025-59985",
+          "ngs-2025-60003",
+          "ngs-2025-60016",
+          "ngs-2025-60026",
+          "ngs-2025-60040",
+          "ngs-2025-60052",
+          "ngs-2025-60072",
+          "ngs-2025-60091",
+          "ngs-2025-60102"
+        ]
+      },
+      "DAL": {
+        "games": 17,
+        "scoring_margin_sum": -40,
+        "shrunk_prior_margin": -1.9047619047619047,
+        "game_ids": [
+          "ngs-2025-59843",
+          "ngs-2025-59862",
+          "ngs-2025-59887",
+          "ngs-2025-59904",
+          "ngs-2025-59913",
+          "ngs-2025-59924",
+          "ngs-2025-59947",
+          "ngs-2025-59960",
+          "ngs-2025-59977",
+          "ngs-2025-60006",
+          "ngs-2025-60017",
+          "ngs-2025-60022",
+          "ngs-2025-60037",
+          "ngs-2025-60065",
+          "ngs-2025-60073",
+          "ngs-2025-60083",
+          "ngs-2025-60110"
+        ]
+      },
+      "DEN": {
+        "games": 17,
+        "scoring_margin_sum": 90,
+        "shrunk_prior_margin": 4.285714285714286,
+        "game_ids": [
+          "ngs-2025-59853",
+          "ngs-2025-59870",
+          "ngs-2025-59885",
+          "ngs-2025-59906",
+          "ngs-2025-59914",
+          "ngs-2025-59922",
+          "ngs-2025-59944",
+          "ngs-2025-59960",
+          "ngs-2025-59968",
+          "ngs-2025-59978",
+          "ngs-2025-60004",
+          "ngs-2025-60035",
+          "ngs-2025-60046",
+          "ngs-2025-60060",
+          "ngs-2025-60078",
+          "ngs-2025-60085",
+          "ngs-2025-60103"
+        ]
+      },
+      "DET": {
+        "games": 17,
+        "scoring_margin_sum": 68,
+        "shrunk_prior_margin": 3.238095238095238,
+        "game_ids": [
+          "ngs-2025-59855",
+          "ngs-2025-59863",
+          "ngs-2025-59890",
+          "ngs-2025-59895",
+          "ngs-2025-59917",
+          "ngs-2025-59933",
+          "ngs-2025-59949",
+          "ngs-2025-59966",
+          "ngs-2025-59989",
+          "ngs-2025-60005",
+          "ngs-2025-60011",
+          "ngs-2025-60021",
+          "ngs-2025-60037",
+          "ngs-2025-60061",
+          "ngs-2025-60079",
+          "ngs-2025-60084",
+          "ngs-2025-60101"
+        ]
+      },
+      "GB": {
+        "games": 17,
+        "scoring_margin_sum": 31,
+        "shrunk_prior_margin": 1.4761904761904763,
+        "game_ids": [
+          "ngs-2025-59855",
+          "ngs-2025-59859",
+          "ngs-2025-59877",
+          "ngs-2025-59904",
+          "ngs-2025-59931",
+          "ngs-2025-59946",
+          "ngs-2025-59962",
+          "ngs-2025-59967",
+          "ngs-2025-59991",
+          "ngs-2025-59998",
+          "ngs-2025-60012",
+          "ngs-2025-60021",
+          "ngs-2025-60041",
+          "ngs-2025-60060",
+          "ngs-2025-60068",
+          "ngs-2025-60088",
+          "ngs-2025-60108"
+        ]
+      },
+      "HOU": {
+        "games": 17,
+        "scoring_margin_sum": 109,
+        "shrunk_prior_margin": 5.190476190476191,
+        "game_ids": [
+          "ngs-2025-59856",
+          "ngs-2025-59873",
+          "ngs-2025-59878",
+          "ngs-2025-59896",
+          "ngs-2025-59909",
+          "ngs-2025-59950",
+          "ngs-2025-59956",
+          "ngs-2025-59968",
+          "ngs-2025-59982",
+          "ngs-2025-60000",
+          "ngs-2025-60007",
+          "ngs-2025-60027",
+          "ngs-2025-60049",
+          "ngs-2025-60054",
+          "ngs-2025-60080",
+          "ngs-2025-60089",
+          "ngs-2025-60104"
+        ]
+      },
+      "IND": {
+        "games": 17,
+        "scoring_margin_sum": 54,
+        "shrunk_prior_margin": 2.5714285714285716,
+        "game_ids": [
+          "ngs-2025-59847",
+          "ngs-2025-59870",
+          "ngs-2025-59883",
+          "ngs-2025-59900",
+          "ngs-2025-59911",
+          "ngs-2025-59925",
+          "ngs-2025-59945",
+          "ngs-2025-59961",
+          "ngs-2025-59971",
+          "ngs-2025-59979",
+          "ngs-2025-60013",
+          "ngs-2025-60027",
+          "ngs-2025-60042",
+          "ngs-2025-60063",
+          "ngs-2025-60082",
+          "ngs-2025-60092",
+          "ngs-2025-60104"
+        ]
+      },
+      "JAX": {
+        "games": 17,
+        "scoring_margin_sum": 138,
+        "shrunk_prior_margin": 6.571428571428571,
+        "game_ids": [
+          "ngs-2025-59848",
+          "ngs-2025-59861",
+          "ngs-2025-59878",
+          "ngs-2025-59901",
+          "ngs-2025-59920",
+          "ngs-2025-59926",
+          "ngs-2025-59937",
+          "ngs-2025-59974",
+          "ngs-2025-59982",
+          "ngs-2025-59996",
+          "ngs-2025-60015",
+          "ngs-2025-60031",
+          "ngs-2025-60042",
+          "ngs-2025-60055",
+          "ngs-2025-60078",
+          "ngs-2025-60092",
+          "ngs-2025-60105"
+        ]
+      },
+      "KC": {
+        "games": 17,
+        "scoring_margin_sum": 34,
+        "shrunk_prior_margin": 1.619047619047619,
+        "game_ids": [
+          "ngs-2025-59844",
+          "ngs-2025-59871",
+          "ngs-2025-59889",
+          "ngs-2025-59902",
+          "ngs-2025-59920",
+          "ngs-2025-59933",
+          "ngs-2025-59940",
+          "ngs-2025-59963",
+          "ngs-2025-59975",
+          "ngs-2025-60004",
+          "ngs-2025-60013",
+          "ngs-2025-60022",
+          "ngs-2025-60049",
+          "ngs-2025-60056",
+          "ngs-2025-60076",
+          "ngs-2025-60085",
+          "ngs-2025-60107"
+        ]
+      },
+      "LA": {
+        "games": 17,
+        "scoring_margin_sum": 172,
+        "shrunk_prior_margin": 8.19047619047619,
+        "game_ids": [
+          "ngs-2025-59856",
+          "ngs-2025-59868",
+          "ngs-2025-59881",
+          "ngs-2025-59900",
+          "ngs-2025-59907",
+          "ngs-2025-59923",
+          "ngs-2025-59937",
+          "ngs-2025-59973",
+          "ngs-2025-59988",
+          "ngs-2025-60002",
+          "ngs-2025-60019",
+          "ngs-2025-60025",
+          "ngs-2025-60047",
+          "ngs-2025-60061",
+          "ngs-2025-60067",
+          "ngs-2025-60098",
+          "ngs-2025-60106"
+        ]
+      },
+      "LAC": {
+        "games": 17,
+        "scoring_margin_sum": 28,
+        "shrunk_prior_margin": 1.3333333333333333,
+        "game_ids": [
+          "ngs-2025-59844",
+          "ngs-2025-59874",
+          "ngs-2025-59885",
+          "ngs-2025-59898",
+          "ngs-2025-59918",
+          "ngs-2025-59927",
+          "ngs-2025-59945",
+          "ngs-2025-59951",
+          "ngs-2025-59972",
+          "ngs-2025-59990",
+          "ngs-2025-59996",
+          "ngs-2025-60033",
+          "ngs-2025-60050",
+          "ngs-2025-60056",
+          "ngs-2025-60073",
+          "ngs-2025-60089",
+          "ngs-2025-60103"
+        ]
+      },
+      "LV": {
+        "games": 17,
+        "scoring_margin_sum": -191,
+        "shrunk_prior_margin": -9.095238095238095,
+        "game_ids": [
+          "ngs-2025-59849",
+          "ngs-2025-59874",
+          "ngs-2025-59884",
+          "ngs-2025-59903",
+          "ngs-2025-59911",
+          "ngs-2025-59930",
+          "ngs-2025-59940",
+          "ngs-2025-59974",
+          "ngs-2025-59978",
+          "ngs-2025-60006",
+          "ngs-2025-60016",
+          "ngs-2025-60033",
+          "ngs-2025-60046",
+          "ngs-2025-60059",
+          "ngs-2025-60080",
+          "ngs-2025-60090",
+          "ngs-2025-60107"
+        ]
+      },
+      "MIA": {
+        "games": 17,
+        "scoring_margin_sum": -77,
+        "shrunk_prior_margin": -3.6666666666666665,
+        "game_ids": [
+          "ngs-2025-59847",
+          "ngs-2025-59864",
+          "ngs-2025-59875",
+          "ngs-2025-59905",
+          "ngs-2025-59910",
+          "ngs-2025-59927",
+          "ngs-2025-59939",
+          "ngs-2025-59952",
+          "ngs-2025-59964",
+          "ngs-2025-59983",
+          "ngs-2025-59993",
+          "ngs-2025-60028",
+          "ngs-2025-60044",
+          "ngs-2025-60066",
+          "ngs-2025-60081",
+          "ngs-2025-60093",
+          "ngs-2025-60109"
+        ]
+      },
+      "MIN": {
+        "games": 17,
+        "scoring_margin_sum": 11,
+        "shrunk_prior_margin": 0.5238095238095238,
+        "game_ids": [
+          "ngs-2025-59858",
+          "ngs-2025-59872",
+          "ngs-2025-59879",
+          "ngs-2025-59892",
+          "ngs-2025-59908",
+          "ngs-2025-59941",
+          "ngs-2025-59951",
+          "ngs-2025-59966",
+          "ngs-2025-59984",
+          "ngs-2025-59997",
+          "ngs-2025-60012",
+          "ngs-2025-60032",
+          "ngs-2025-60043",
+          "ngs-2025-60065",
+          "ngs-2025-60075",
+          "ngs-2025-60084",
+          "ngs-2025-60108"
+        ]
+      },
+      "NE": {
+        "games": 17,
+        "scoring_margin_sum": 170,
+        "shrunk_prior_margin": 8.095238095238095,
+        "game_ids": [
+          "ngs-2025-59849",
+          "ngs-2025-59864",
+          "ngs-2025-59880",
+          "ngs-2025-59897",
+          "ngs-2025-59919",
+          "ngs-2025-59932",
+          "ngs-2025-59943",
+          "ngs-2025-59957",
+          "ngs-2025-59969",
+          "ngs-2025-59986",
+          "ngs-2025-59992",
+          "ngs-2025-60010",
+          "ngs-2025-60036",
+          "ngs-2025-60057",
+          "ngs-2025-60070",
+          "ngs-2025-60094",
+          "ngs-2025-60109"
+        ]
+      },
+      "NO": {
+        "games": 17,
+        "scoring_margin_sum": -77,
+        "shrunk_prior_margin": -3.6666666666666665,
+        "game_ids": [
+          "ngs-2025-59850",
+          "ngs-2025-59865",
+          "ngs-2025-59886",
+          "ngs-2025-59894",
+          "ngs-2025-59912",
+          "ngs-2025-59932",
+          "ngs-2025-59938",
+          "ngs-2025-59959",
+          "ngs-2025-59973",
+          "ngs-2025-59980",
+          "ngs-2025-60018",
+          "ngs-2025-60028",
+          "ngs-2025-60045",
+          "ngs-2025-60062",
+          "ngs-2025-60074",
+          "ngs-2025-60095",
+          "ngs-2025-60099"
+        ]
+      },
+      "NYG": {
+        "games": 17,
+        "scoring_margin_sum": -58,
+        "shrunk_prior_margin": -2.761904761904762,
+        "game_ids": [
+          "ngs-2025-59852",
+          "ngs-2025-59862",
+          "ngs-2025-59889",
+          "ngs-2025-59898",
+          "ngs-2025-59912",
+          "ngs-2025-59921",
+          "ngs-2025-59944",
+          "ngs-2025-59958",
+          "ngs-2025-59970",
+          "ngs-2025-59981",
+          "ngs-2025-59998",
+          "ngs-2025-60011",
+          "ngs-2025-60036",
+          "ngs-2025-60058",
+          "ngs-2025-60075",
+          "ngs-2025-60090",
+          "ngs-2025-60110"
+        ]
+      },
+      "NYJ": {
+        "games": 17,
+        "scoring_margin_sum": -203,
+        "shrunk_prior_margin": -9.666666666666666,
+        "game_ids": [
+          "ngs-2025-59851",
+          "ngs-2025-59866",
+          "ngs-2025-59882",
+          "ngs-2025-59905",
+          "ngs-2025-59913",
+          "ngs-2025-59922",
+          "ngs-2025-59942",
+          "ngs-2025-59955",
+          "ngs-2025-59985",
+          "ngs-2025-59992",
+          "ngs-2025-60008",
+          "ngs-2025-60029",
+          "ngs-2025-60044",
+          "ngs-2025-60055",
+          "ngs-2025-60074",
+          "ngs-2025-60094",
+          "ngs-2025-60100"
+        ]
+      },
+      "PHI": {
+        "games": 17,
+        "scoring_margin_sum": 54,
+        "shrunk_prior_margin": 2.5714285714285716,
+        "game_ids": [
+          "ngs-2025-59843",
+          "ngs-2025-59871",
+          "ngs-2025-59881",
+          "ngs-2025-59899",
+          "ngs-2025-59914",
+          "ngs-2025-59921",
+          "ngs-2025-59941",
+          "ngs-2025-59958",
+          "ngs-2025-59991",
+          "ngs-2025-60005",
+          "ngs-2025-60017",
+          "ngs-2025-60024",
+          "ngs-2025-60050",
+          "ngs-2025-60059",
+          "ngs-2025-60069",
+          "ngs-2025-60096",
+          "ngs-2025-60111"
+        ]
+      },
+      "PIT": {
+        "games": 17,
+        "scoring_margin_sum": 10,
+        "shrunk_prior_margin": 0.47619047619047616,
+        "game_ids": [
+          "ngs-2025-59851",
+          "ngs-2025-59867",
+          "ngs-2025-59880",
+          "ngs-2025-59892",
+          "ngs-2025-59928",
+          "ngs-2025-59936",
+          "ngs-2025-59962",
+          "ngs-2025-59971",
+          "ngs-2025-59990",
+          "ngs-2025-59999",
+          "ngs-2025-60009",
+          "ngs-2025-60034",
+          "ngs-2025-60039",
+          "ngs-2025-60066",
+          "ngs-2025-60079",
+          "ngs-2025-60091",
+          "ngs-2025-60112"
+        ]
+      },
+      "SEA": {
+        "games": 17,
+        "scoring_margin_sum": 191,
+        "shrunk_prior_margin": 9.095238095238095,
+        "game_ids": [
+          "ngs-2025-59854",
+          "ngs-2025-59867",
+          "ngs-2025-59886",
+          "ngs-2025-59891",
+          "ngs-2025-59916",
+          "ngs-2025-59926",
+          "ngs-2025-59950",
+          "ngs-2025-59976",
+          "ngs-2025-59987",
+          "ngs-2025-60002",
+          "ngs-2025-60014",
+          "ngs-2025-60032",
+          "ngs-2025-60038",
+          "ngs-2025-60063",
+          "ngs-2025-60067",
+          "ngs-2025-60086",
+          "ngs-2025-60113"
+        ]
+      },
+      "SF": {
+        "games": 17,
+        "scoring_margin_sum": 66,
+        "shrunk_prior_margin": 3.142857142857143,
+        "game_ids": [
+          "ngs-2025-59854",
+          "ngs-2025-59865",
+          "ngs-2025-59888",
+          "ngs-2025-59901",
+          "ngs-2025-59907",
+          "ngs-2025-59929",
+          "ngs-2025-59948",
+          "ngs-2025-59956",
+          "ngs-2025-59970",
+          "ngs-2025-59988",
+          "ngs-2025-60001",
+          "ngs-2025-60020",
+          "ngs-2025-60026",
+          "ngs-2025-60064",
+          "ngs-2025-60082",
+          "ngs-2025-60097",
+          "ngs-2025-60113"
+        ]
+      },
+      "TB": {
+        "games": 17,
+        "scoring_margin_sum": -31,
+        "shrunk_prior_margin": -1.4761904761904763,
+        "game_ids": [
+          "ngs-2025-59845",
+          "ngs-2025-59873",
+          "ngs-2025-59882",
+          "ngs-2025-59899",
+          "ngs-2025-59916",
+          "ngs-2025-59929",
+          "ngs-2025-59949",
+          "ngs-2025-59959",
+          "ngs-2025-59986",
+          "ngs-2025-59995",
+          "ngs-2025-60019",
+          "ngs-2025-60030",
+          "ngs-2025-60045",
+          "ngs-2025-60051",
+          "ngs-2025-60071",
+          "ngs-2025-60093",
+          "ngs-2025-60114"
+        ]
+      },
+      "TEN": {
+        "games": 17,
+        "scoring_margin_sum": -194,
+        "shrunk_prior_margin": -9.238095238095237,
+        "game_ids": [
+          "ngs-2025-59853",
+          "ngs-2025-59868",
+          "ngs-2025-59883",
+          "ngs-2025-59896",
+          "ngs-2025-59915",
+          "ngs-2025-59930",
+          "ngs-2025-59943",
+          "ngs-2025-59961",
+          "ngs-2025-59972",
+          "ngs-2025-60000",
+          "ngs-2025-60014",
+          "ngs-2025-60031",
+          "ngs-2025-60040",
+          "ngs-2025-60064",
+          "ngs-2025-60076",
+          "ngs-2025-60095",
+          "ngs-2025-60105"
+        ]
+      },
+      "WAS": {
+        "games": 17,
+        "scoring_margin_sum": -95,
+        "shrunk_prior_margin": -4.523809523809524,
+        "game_ids": [
+          "ngs-2025-59852",
+          "ngs-2025-59859",
+          "ngs-2025-59884",
+          "ngs-2025-59893",
+          "ngs-2025-59918",
+          "ngs-2025-59935",
+          "ngs-2025-59947",
+          "ngs-2025-59963",
+          "ngs-2025-59976",
+          "ngs-2025-59989",
+          "ngs-2025-59993",
+          "ngs-2025-60035",
+          "ngs-2025-60043",
+          "ngs-2025-60058",
+          "ngs-2025-60069",
+          "ngs-2025-60083",
+          "ngs-2025-60111"
+        ]
+      }
+    }
+  },
+  "current_coverage": {
+    "raw_rows_by_type": {
+      "PRE": 49,
+      "REG": 272
+    },
+    "regular_games": 272,
+    "verified_completed_games": 94,
+    "pbp_rows": 16551,
+    "joined_games": 94,
+    "joined_team_game_totals": 188,
+    "missing_completed_game_joins": 0
+  },
+  "sources": [
+    {
+      "asset_id": 564279453,
+      "kind": "prior",
+      "license_url": "https://github.com/sportsdataverse/sportsdataverse-data/blob/main/LICENSE",
+      "raw_sha256": "bbccec126c53f8992353a58d3ac9c15f7bac9971c38da1726f65507171860c25",
+      "retrieval_started_at": "2026-10-25T13:35:02.892217+00:00",
+      "retrieved_at": "2026-10-25T13:35:03.407991+00:00",
+      "season": 2025,
+      "size": 89491,
+      "source_updated_at": "2026-09-14T21:37:39Z",
+      "synthetic": false,
+      "upstream_digest": "sha256:bbccec126c53f8992353a58d3ac9c15f7bac9971c38da1726f65507171860c25",
+      "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nfl_ngs_schedules/ngs_schedule_2025.csv"
+    },
+    {
+      "asset_id": 668960439,
+      "kind": "schedule",
+      "license_url": "https://github.com/sportsdataverse/sportsdataverse-data/blob/main/LICENSE",
+      "raw_sha256": "1922b31983e74a7c53c661084c7d68e70bd9ea2ffd63ff410aaa754dc5023d9c",
+      "retrieval_started_at": "2026-10-25T13:35:03.409428+00:00",
+      "retrieved_at": "2026-10-25T13:35:03.733413+00:00",
+      "season": 2026,
+      "size": 82308,
+      "source_updated_at": "2026-10-23T11:47:43Z",
+      "synthetic": false,
+      "upstream_digest": "sha256:1922b31983e74a7c53c661084c7d68e70bd9ea2ffd63ff410aaa754dc5023d9c",
+      "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nfl_ngs_schedules/ngs_schedule_2026.csv"
+    },
+    {
+      "asset_id": 674570910,
+      "kind": "pbp",
+      "license_url": "https://github.com/nflverse/nflverse-data/blob/main/LICENSE.md",
+      "raw_sha256": "e568b906582ac25419fa0d08e99c0ce5b219a00c70e2570a5961f4a31b4c1d71",
+      "retrieval_started_at": "2026-10-25T13:35:04.139257+00:00",
+      "retrieved_at": "2026-10-25T13:35:04.585712+00:00",
+      "season": 2026,
+      "size": 7069896,
+      "source_updated_at": "2026-10-25T09:03:15Z",
+      "synthetic": false,
+      "upstream_digest": "sha256:e568b906582ac25419fa0d08e99c0ce5b219a00c70e2570a5961f4a31b4c1d71",
+      "url": "https://github.com/nflverse/nflverse-data/releases/download/pbp/play_by_play_2026.parquet"
+    }
+  ],
+  "predictions": [
+    {
+      "away": "SF",
+      "away_probability": 0.6695334849370165,
+      "cutoff": "2026-10-25T13:38:07.065309+00:00",
+      "features": {
+        "adjusted_defense_ypp_diff": 0.03773907549073918,
+        "adjusted_offense_ypp_diff": -0.6038433212219767,
+        "margin_diff": -7.800000000000001,
+        "prior_margin_diff": -5.428571428571429,
+        "recent_margin_diff": -7.285714285714286,
+        "rest_diff": 1,
+        "smooth_win_diff": -0.4
+      },
+      "game_id": "ngs-2026-60273",
+      "generated_at": "2026-10-25T13:38:07.382862+00:00",
+      "home": "ATL",
+      "home_probability": 0.3304665150629836,
+      "kickoff": "2026-10-25T17:00:00+00:00",
+      "prospective": false,
+      "prospective_t60_cutoff": "2026-10-25T16:00:00+00:00",
+      "scorecard_eligible": false,
+      "status": "available",
+      "unavailable_reason": null,
+      "week": 7
+    },
+    {
+      "away": "CIN",
+      "away_probability": 0.38165503694999925,
+      "cutoff": "2026-10-25T13:38:07.065309+00:00",
+      "features": {
+        "adjusted_defense_ypp_diff": -0.5229938863867252,
+        "adjusted_offense_ypp_diff": 0.5140404447118834,
+        "margin_diff": 0.28888888888888875,
+        "prior_margin_diff": 4.9523809523809526,
+        "recent_margin_diff": -1.8571428571428572,
+        "rest_diff": -7,
+        "smooth_win_diff": 0.0444444444444444
+      },
+      "game_id": "ngs-2026-60274",
+      "generated_at": "2026-10-25T13:38:07.685994+00:00",
+      "home": "BAL",
+      "home_probability": 0.6183449630500008,
+      "kickoff": "2026-10-25T17:00:00+00:00",
+      "prospective": false,
+      "prospective_t60_cutoff": "2026-10-25T16:00:00+00:00",
+      "scorecard_eligible": false,
+      "status": "available",
+      "unavailable_reason": null,
+      "week": 7
+    },
+    {
+      "away": "TB",
+      "away_probability": 0.31866388483162467,
+      "cutoff": "2026-10-25T13:38:07.065309+00:00",
+      "features": {
+        "adjusted_defense_ypp_diff": 0.11374338545053453,
+        "adjusted_offense_ypp_diff": 0.8268945954482718,
+        "margin_diff": 4.455555555555556,
+        "prior_margin_diff": -1.8095238095238093,
+        "recent_margin_diff": 5.142857142857142,
+        "rest_diff": 0,
+        "smooth_win_diff": 0.2555555555555556
+      },
+      "game_id": "ngs-2026-60275",
+      "generated_at": "2026-10-25T13:38:07.989777+00:00",
+      "home": "CAR",
+      "home_probability": 0.6813361151683753,
+      "kickoff": "2026-10-25T17:00:00+00:00",
+      "prospective": false,
+      "prospective_t60_cutoff": "2026-10-25T16:00:00+00:00",
+      "scorecard_eligible": false,
+      "status": "available",
+      "unavailable_reason": null,
+      "week": 7
+    },
+    {
+      "away": "NYG",
+      "away_probability": 0.33043745611403874,
+      "cutoff": "2026-10-25T13:38:07.065309+00:00",
+      "features": {
+        "adjusted_defense_ypp_diff": -0.2902446700919785,
+        "adjusted_offense_ypp_diff": 0.43904325827228186,
+        "margin_diff": 0.5,
+        "prior_margin_diff": 7.9523809523809526,
+        "recent_margin_diff": 2.571428571428571,
+        "rest_diff": 0,
+        "smooth_win_diff": -0.15000000000000002
+      },
+      "game_id": "ngs-2026-60276",
+      "generated_at": "2026-10-25T13:38:08.298879+00:00",
+      "home": "HOU",
+      "home_probability": 0.6695625438859613,
+      "kickoff": "2026-10-25T17:00:00+00:00",
+      "prospective": false,
+      "prospective_t60_cutoff": "2026-10-25T16:00:00+00:00",
+      "scorecard_eligible": false,
+      "status": "available",
+      "unavailable_reason": null,
+      "week": 7
+    },
+    {
+      "away": "IND",
+      "away_probability": 0.31679541722540183,
+      "cutoff": "2026-10-25T13:38:07.065309+00:00",
+      "features": {
+        "adjusted_defense_ypp_diff": -0.8791966112355434,
+        "adjusted_offense_ypp_diff": -0.00914790210353511,
+        "margin_diff": 7.0,
+        "prior_margin_diff": -2.047619047619048,
+        "recent_margin_diff": 6.714285714285714,
+        "rest_diff": 7,
+        "smooth_win_diff": 0.37777777777777777
+      },
+      "game_id": "ngs-2026-60277",
+      "generated_at": "2026-10-25T13:38:08.602037+00:00",
+      "home": "MIN",
+      "home_probability": 0.6832045827745982,
+      "kickoff": "2026-10-25T17:00:00+00:00",
+      "prospective": false,
+      "prospective_t60_cutoff": "2026-10-25T16:00:00+00:00",
+      "scorecard_eligible": false,
+      "status": "available",
+      "unavailable_reason": null,
+      "week": 7
+    },
+    {
+      "away": "MIA",
+      "away_probability": 0.4202860243310974,
+      "cutoff": "2026-10-25T13:38:07.065309+00:00",
+      "features": {
+        "adjusted_defense_ypp_diff": -0.7158523955086908,
+        "adjusted_offense_ypp_diff": -0.12179858593008575,
+        "margin_diff": 5.888888888888889,
+        "prior_margin_diff": -6.0,
+        "recent_margin_diff": 5.571428571428572,
+        "rest_diff": -7,
+        "smooth_win_diff": 0.1777777777777778
+      },
+      "game_id": "ngs-2026-60278",
+      "generated_at": "2026-10-25T13:38:08.914823+00:00",
+      "home": "NYJ",
+      "home_probability": 0.5797139756689026,
+      "kickoff": "2026-10-25T17:00:00+00:00",
+      "prospective": false,
+      "prospective_t60_cutoff": "2026-10-25T16:00:00+00:00",
+      "scorecard_eligible": false,
+      "status": "available",
+      "unavailable_reason": null,
+      "week": 7
+    },
+    {
+      "away": "CLE",
+      "away_probability": 0.57363530491805,
+      "cutoff": "2026-10-25T13:38:07.065309+00:00",
+      "features": {
+        "adjusted_defense_ypp_diff": 0.1925237273099115,
+        "adjusted_offense_ypp_diff": -0.18759609177739872,
+        "margin_diff": -2.9,
+        "prior_margin_diff": -4.476190476190475,
+        "recent_margin_diff": -5.7142857142857135,
+        "rest_diff": 0,
+        "smooth_win_diff": -0.3
+      },
+      "game_id": "ngs-2026-60279",
+      "generated_at": "2026-10-25T13:38:09.211808+00:00",
+      "home": "TEN",
+      "home_probability": 0.42636469508194996,
+      "kickoff": "2026-10-25T17:00:00+00:00",
+      "prospective": false,
+      "prospective_t60_cutoff": "2026-10-25T16:00:00+00:00",
+      "scorecard_eligible": false,
+      "status": "available",
+      "unavailable_reason": null,
+      "week": 7
+    },
+    {
+      "away": "DEN",
+      "away_probability": 0.6572337866751435,
+      "cutoff": "2026-10-25T13:38:07.065309+00:00",
+      "features": {
+        "adjusted_defense_ypp_diff": 0.6085787753065838,
+        "adjusted_offense_ypp_diff": -0.043147124977508666,
+        "margin_diff": -4.1,
+        "prior_margin_diff": -10.619047619047619,
+        "recent_margin_diff": -10.571428571428571,
+        "rest_diff": -3,
+        "smooth_win_diff": -0.19999999999999996
+      },
+      "game_id": "ngs-2026-60280",
+      "generated_at": "2026-10-25T13:38:09.514906+00:00",
+      "home": "ARI",
+      "home_probability": 0.34276621332485646,
+      "kickoff": "2026-10-25T20:05:00+00:00",
+      "prospective": false,
+      "prospective_t60_cutoff": "2026-10-25T19:05:00+00:00",
+      "scorecard_eligible": false,
+      "status": "available",
+      "unavailable_reason": null,
+      "week": 7
+    },
+    {
+      "away": "GB",
+      "away_probability": 0.3684951463010576,
+      "cutoff": "2026-10-25T13:38:07.065309+00:00",
+      "features": {
+        "adjusted_defense_ypp_diff": 0.5706146580669192,
+        "adjusted_offense_ypp_diff": 0.2606510842964324,
+        "margin_diff": 1.5777777777777777,
+        "prior_margin_diff": 1.7619047619047619,
+        "recent_margin_diff": -0.4285714285714288,
+        "rest_diff": 7,
+        "smooth_win_diff": -0.0444444444444444
+      },
+      "game_id": "ngs-2026-60281",
+      "generated_at": "2026-10-25T13:38:09.815035+00:00",
+      "home": "DET",
+      "home_probability": 0.6315048536989424,
+      "kickoff": "2026-10-25T20:25:00+00:00",
+      "prospective": false,
+      "prospective_t60_cutoff": "2026-10-25T19:25:00+00:00",
+      "scorecard_eligible": false,
+      "status": "available",
+      "unavailable_reason": null,
+      "week": 7
+    },
+    {
+      "away": "LA",
+      "away_probability": 0.6283686997330291,
+      "cutoff": "2026-10-25T13:38:07.065309+00:00",
+      "features": {
+        "adjusted_defense_ypp_diff": 0.6918799574274539,
+        "adjusted_offense_ypp_diff": -0.2640723472817752,
+        "margin_diff": 0.3,
+        "prior_margin_diff": -17.285714285714285,
+        "recent_margin_diff": -4.428571428571429,
+        "rest_diff": 0,
+        "smooth_win_diff": 0.09999999999999998
+      },
+      "game_id": "ngs-2026-60282",
+      "generated_at": "2026-10-25T13:38:10.115369+00:00",
+      "home": "LV",
+      "home_probability": 0.37163130026697094,
+      "kickoff": "2026-10-25T20:25:00+00:00",
+      "prospective": false,
+      "prospective_t60_cutoff": "2026-10-25T19:25:00+00:00",
+      "scorecard_eligible": false,
+      "status": "available",
+      "unavailable_reason": null,
+      "week": 7
+    },
+    {
+      "away": "KC",
+      "away_probability": 0.4847334209227303,
+      "cutoff": "2026-10-25T13:38:07.065309+00:00",
+      "features": {
+        "adjusted_defense_ypp_diff": -0.6205884423438288,
+        "adjusted_offense_ypp_diff": -0.7582283366667759,
+        "margin_diff": -3.733333333333333,
+        "prior_margin_diff": 7.476190476190476,
+        "recent_margin_diff": -4.857142857142857,
+        "rest_diff": 3,
+        "smooth_win_diff": -0.2777777777777778
+      },
+      "game_id": "ngs-2026-60283",
+      "generated_at": "2026-10-25T13:38:10.421506+00:00",
+      "home": "SEA",
+      "home_probability": 0.5152665790772697,
+      "kickoff": "2026-10-26T00:20:00+00:00",
+      "prospective": false,
+      "prospective_t60_cutoff": "2026-10-25T23:20:00+00:00",
+      "scorecard_eligible": false,
+      "status": "available",
+      "unavailable_reason": null,
+      "week": 7
+    },
+    {
+      "away": "DAL",
+      "away_probability": 0.4815819999816995,
+      "cutoff": "2026-10-25T13:38:07.065309+00:00",
+      "features": {
+        "adjusted_defense_ypp_diff": -0.6146615051340394,
+        "adjusted_offense_ypp_diff": -0.7254951183490296,
+        "margin_diff": -2.3,
+        "prior_margin_diff": 4.476190476190476,
+        "recent_margin_diff": -4.714285714285714,
+        "rest_diff": 0,
+        "smooth_win_diff": 0.0
+      },
+      "game_id": "ngs-2026-60284",
+      "generated_at": "2026-10-25T13:38:10.735371+00:00",
+      "home": "PHI",
+      "home_probability": 0.5184180000183005,
+      "kickoff": "2026-10-27T00:15:00+00:00",
+      "prospective": false,
+      "prospective_t60_cutoff": "2026-10-26T23:15:00+00:00",
+      "scorecard_eligible": false,
+      "status": "available",
+      "unavailable_reason": null,
+      "week": 7
+    }
+  ],
+  "immutable_record_receipts": [
+    {
+      "file": "data/research-v2/prospective/limited-rehearsal-2026-10-25/rehearsals/8397293ba764ac1c85524c1571ff6925e1365ff47a98694f856a9076a4ca371d.json",
+      "sha256": "29184432dd27751be90df0b3ee8e6a7b2d0d03f8b5862dfd1c6dfc79f18786bf",
+      "decision_id": "8397293ba764ac1c85524c1571ff6925e1365ff47a98694f856a9076a4ca371d",
+      "prospective": false
+    },
+    {
+      "file": "data/research-v2/prospective/limited-rehearsal-2026-10-25/rehearsals/4a149938ea36d1f375391d8755ebfcad1d173a33ff53f32849d5022f5651872e.json",
+      "sha256": "6b42e6c5e4cdda44a76e90e8133a5ea6b8aeed76d2964a8d92661b0ccbb8eba9",
+      "decision_id": "4a149938ea36d1f375391d8755ebfcad1d173a33ff53f32849d5022f5651872e",
+      "prospective": false
+    },
+    {
+      "file": "data/research-v2/prospective/limited-rehearsal-2026-10-25/rehearsals/db6f21fdc58406e64d1e41f554fe8e162e9f91f1958bfc7e9fb0b311a11eb397.json",
+      "sha256": "60fe9a72dfdec935da36547ad6ef3187740518fa61039fd97de065baa3421cfd",
+      "decision_id": "db6f21fdc58406e64d1e41f554fe8e162e9f91f1958bfc7e9fb0b311a11eb397",
+      "prospective": false
+    },
+    {
+      "file": "data/research-v2/prospective/limited-rehearsal-2026-10-25/rehearsals/ded079c3f5b0a898f230197df925eb5e613309341defbdd1e90c74ba4de9481c.json",
+      "sha256": "920b9afc88625d42537ba24b8e86c19bd98cc1279af83c80f0a8f991ac796dc4",
+      "decision_id": "ded079c3f5b0a898f230197df925eb5e613309341defbdd1e90c74ba4de9481c",
+      "prospective": false
+    },
+    {
+      "file": "data/research-v2/prospective/limited-rehearsal-2026-10-25/rehearsals/74983297ea1b47e306329c1f1f1960ec2e03d8bd0ca5ce8e401927b3c439ba03.json",
+      "sha256": "986f156c6d6480656faa15aaecd7dc31c20b1b5fb8f4721ca341f785971af95b",
+      "decision_id": "74983297ea1b47e306329c1f1f1960ec2e03d8bd0ca5ce8e401927b3c439ba03",
+      "prospective": false
+    },
+    {
+      "file": "data/research-v2/prospective/limited-rehearsal-2026-10-25/rehearsals/1a1022183db89c008ead8184673ae40dbb2ac79ebfbc1e242acc57c8922dcde6.json",
+      "sha256": "ab9116582bd200a0ee5af74e4fcfa3298ae40a78a0635233bcead66b9003f401",
+      "decision_id": "1a1022183db89c008ead8184673ae40dbb2ac79ebfbc1e242acc57c8922dcde6",
+      "prospective": false
+    },
+    {
+      "file": "data/research-v2/prospective/limited-rehearsal-2026-10-25/rehearsals/5ad1a2316ead6746cad6ed7a8b9015acd2d15b12da1093c91aa955011c2040d5.json",
+      "sha256": "74a5fb5639506faddebe415a306c0afbdc06e8d3beda744e995f0f11a3d99a72",
+      "decision_id": "5ad1a2316ead6746cad6ed7a8b9015acd2d15b12da1093c91aa955011c2040d5",
+      "prospective": false
+    },
+    {
+      "file": "data/research-v2/prospective/limited-rehearsal-2026-10-25/rehearsals/bfdc27fbd9a935e94d19823983ec34f28ebd8789aabfaa7d5e7a97c2e0a0b9f7.json",
+      "sha256": "9bb1515f42db568b8938d42dc0b14cd770c2c464cb51dcfd69d7bf645dc70b55",
+      "decision_id": "bfdc27fbd9a935e94d19823983ec34f28ebd8789aabfaa7d5e7a97c2e0a0b9f7",
+      "prospective": false
+    },
+    {
+      "file": "data/research-v2/prospective/limited-rehearsal-2026-10-25/rehearsals/a1896eb679d6d5bd35c35cc87d091f68b387515088117c5d6ce109ead83ade06.json",
+      "sha256": "73c94def3e0a962d54907f01c0ef5e8af3f44b5cae294becf79c51d7114626d8",
+      "decision_id": "a1896eb679d6d5bd35c35cc87d091f68b387515088117c5d6ce109ead83ade06",
+      "prospective": false
+    },
+    {
+      "file": "data/research-v2/prospective/limited-rehearsal-2026-10-25/rehearsals/bd972b0c30e2727a54c4d73aceadddb9258f1b28e1011a816652de7f944acda2.json",
+      "sha256": "b72b887d8e95db3569445c2aa9a54789932f0ad48312a96a9ef1bf6956f655e1",
+      "decision_id": "bd972b0c30e2727a54c4d73aceadddb9258f1b28e1011a816652de7f944acda2",
+      "prospective": false
+    },
+    {
+      "file": "data/research-v2/prospective/limited-rehearsal-2026-10-25/rehearsals/17cc2d845724ee7d1f9009fb6c535e28ebda12da774b662caff8a9964a6d9b3f.json",
+      "sha256": "dffde066a31193212b7c019db7af9254c88b87dda8487ec1b7dfe57e4b5751c7",
+      "decision_id": "17cc2d845724ee7d1f9009fb6c535e28ebda12da774b662caff8a9964a6d9b3f",
+      "prospective": false
+    },
+    {
+      "file": "data/research-v2/prospective/limited-rehearsal-2026-10-25/rehearsals/2a90f9f5d3ecdfcf5ea3ea0f55d3b00cff8c418bbdd80ca6beaaca85b0e3cc47.json",
+      "sha256": "6b4ed1ce3721e474a8a1baed13c6dd16102a399668fa649a42aeac0334fa5b99",
+      "decision_id": "2a90f9f5d3ecdfcf5ea3ea0f55d3b00cff8c418bbdd80ca6beaaca85b0e3cc47",
+      "prospective": false
+    }
+  ],
+  "exclusion_counts": {
+    "kickoff at/before actual rehearsal cutoff": 95,
+    "outside earliest upcoming week selected before scoring": 141,
+    "unconfirmed kickoff": 24
+  },
+  "exclusions": [
+    {
+      "game_id": "ngs-2026-60178",
+      "week": 1,
+      "kickoff": "2026-09-10T00:20:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60179",
+      "week": 1,
+      "kickoff": "2026-09-11T00:35:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60180",
+      "week": 1,
+      "kickoff": "2026-09-13T17:00:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60181",
+      "week": 1,
+      "kickoff": "2026-09-13T17:00:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60182",
+      "week": 1,
+      "kickoff": "2026-09-13T17:00:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60183",
+      "week": 1,
+      "kickoff": "2026-09-13T17:00:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60184",
+      "week": 1,
+      "kickoff": "2026-09-13T17:00:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60185",
+      "week": 1,
+      "kickoff": "2026-09-13T17:00:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60186",
+      "week": 1,
+      "kickoff": "2026-09-13T17:00:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60187",
+      "week": 1,
+      "kickoff": "2026-09-13T17:00:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60188",
+      "week": 1,
+      "kickoff": "2026-09-13T20:25:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60189",
+      "week": 1,
+      "kickoff": "2026-09-13T20:25:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60190",
+      "week": 1,
+      "kickoff": "2026-09-13T20:25:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60191",
+      "week": 1,
+      "kickoff": "2026-09-13T20:25:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60192",
+      "week": 1,
+      "kickoff": "2026-09-14T00:20:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60193",
+      "week": 1,
+      "kickoff": "2026-09-15T00:15:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60194",
+      "week": 2,
+      "kickoff": "2026-09-18T00:15:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60195",
+      "week": 2,
+      "kickoff": "2026-09-20T17:00:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60196",
+      "week": 2,
+      "kickoff": "2026-09-20T17:00:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60197",
+      "week": 2,
+      "kickoff": "2026-09-20T17:00:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60198",
+      "week": 2,
+      "kickoff": "2026-09-20T17:00:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60199",
+      "week": 2,
+      "kickoff": "2026-09-20T17:00:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60200",
+      "week": 2,
+      "kickoff": "2026-09-20T17:00:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60201",
+      "week": 2,
+      "kickoff": "2026-09-20T17:00:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60202",
+      "week": 2,
+      "kickoff": "2026-09-20T17:00:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60203",
+      "week": 2,
+      "kickoff": "2026-09-20T20:05:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60204",
+      "week": 2,
+      "kickoff": "2026-09-20T20:05:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60205",
+      "week": 2,
+      "kickoff": "2026-09-20T20:25:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60206",
+      "week": 2,
+      "kickoff": "2026-09-20T20:25:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60207",
+      "week": 2,
+      "kickoff": "2026-09-20T20:25:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60208",
+      "week": 2,
+      "kickoff": "2026-09-21T00:20:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60209",
+      "week": 2,
+      "kickoff": "2026-09-22T00:15:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60210",
+      "week": 3,
+      "kickoff": "2026-09-25T00:15:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60211",
+      "week": 3,
+      "kickoff": "2026-09-27T17:00:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60212",
+      "week": 3,
+      "kickoff": "2026-09-27T17:00:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60213",
+      "week": 3,
+      "kickoff": "2026-09-27T17:00:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60214",
+      "week": 3,
+      "kickoff": "2026-09-27T17:00:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60215",
+      "week": 3,
+      "kickoff": "2026-09-27T17:00:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60216",
+      "week": 3,
+      "kickoff": "2026-09-27T17:00:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60217",
+      "week": 3,
+      "kickoff": "2026-09-27T17:00:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60218",
+      "week": 3,
+      "kickoff": "2026-09-27T17:00:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60219",
+      "week": 3,
+      "kickoff": "2026-09-27T17:00:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60220",
+      "week": 3,
+      "kickoff": "2026-09-27T20:05:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60221",
+      "week": 3,
+      "kickoff": "2026-09-27T20:05:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60222",
+      "week": 3,
+      "kickoff": "2026-09-27T20:25:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60223",
+      "week": 3,
+      "kickoff": "2026-09-27T20:25:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60224",
+      "week": 3,
+      "kickoff": "2026-09-28T00:20:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60225",
+      "week": 3,
+      "kickoff": "2026-09-29T00:15:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60226",
+      "week": 4,
+      "kickoff": "2026-10-02T00:15:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60227",
+      "week": 4,
+      "kickoff": "2026-10-04T13:30:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60228",
+      "week": 4,
+      "kickoff": "2026-10-04T17:00:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60229",
+      "week": 4,
+      "kickoff": "2026-10-04T17:00:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60230",
+      "week": 4,
+      "kickoff": "2026-10-04T17:00:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60231",
+      "week": 4,
+      "kickoff": "2026-10-04T17:00:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60232",
+      "week": 4,
+      "kickoff": "2026-10-04T17:00:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60233",
+      "week": 4,
+      "kickoff": "2026-10-04T17:00:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60234",
+      "week": 4,
+      "kickoff": "2026-10-04T17:00:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60235",
+      "week": 4,
+      "kickoff": "2026-10-04T17:00:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60236",
+      "week": 4,
+      "kickoff": "2026-10-04T20:05:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60237",
+      "week": 4,
+      "kickoff": "2026-10-04T20:25:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60238",
+      "week": 4,
+      "kickoff": "2026-10-04T20:25:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60239",
+      "week": 4,
+      "kickoff": "2026-10-04T20:25:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60240",
+      "week": 4,
+      "kickoff": "2026-10-05T00:20:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60241",
+      "week": 4,
+      "kickoff": "2026-10-06T00:15:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60242",
+      "week": 5,
+      "kickoff": "2026-10-09T00:15:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60243",
+      "week": 5,
+      "kickoff": "2026-10-11T13:30:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60244",
+      "week": 5,
+      "kickoff": "2026-10-11T17:00:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60245",
+      "week": 5,
+      "kickoff": "2026-10-11T17:00:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60246",
+      "week": 5,
+      "kickoff": "2026-10-11T17:00:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60247",
+      "week": 5,
+      "kickoff": "2026-10-11T17:00:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60248",
+      "week": 5,
+      "kickoff": "2026-10-11T17:00:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60249",
+      "week": 5,
+      "kickoff": "2026-10-11T17:00:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60250",
+      "week": 5,
+      "kickoff": "2026-10-11T17:00:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60251",
+      "week": 5,
+      "kickoff": "2026-10-11T20:05:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60252",
+      "week": 5,
+      "kickoff": "2026-10-11T20:25:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60253",
+      "week": 5,
+      "kickoff": "2026-10-11T17:00:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60254",
+      "week": 5,
+      "kickoff": "2026-10-11T20:25:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60255",
+      "week": 5,
+      "kickoff": "2026-10-12T00:20:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60256",
+      "week": 5,
+      "kickoff": "2026-10-13T00:15:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60257",
+      "week": 6,
+      "kickoff": "2026-10-16T00:15:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60258",
+      "week": 6,
+      "kickoff": "2026-10-18T13:30:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60259",
+      "week": 6,
+      "kickoff": "2026-10-18T17:00:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60260",
+      "week": 6,
+      "kickoff": "2026-10-18T17:00:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60261",
+      "week": 6,
+      "kickoff": "2026-10-18T17:00:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60262",
+      "week": 6,
+      "kickoff": "2026-10-18T17:00:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60263",
+      "week": 6,
+      "kickoff": "2026-10-18T17:00:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60264",
+      "week": 6,
+      "kickoff": "2026-10-18T17:00:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60265",
+      "week": 6,
+      "kickoff": "2026-10-18T17:00:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60266",
+      "week": 6,
+      "kickoff": "2026-10-18T20:05:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60267",
+      "week": 6,
+      "kickoff": "2026-10-18T20:25:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60268",
+      "week": 6,
+      "kickoff": "2026-10-18T20:25:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60269",
+      "week": 6,
+      "kickoff": "2026-10-19T00:20:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60270",
+      "week": 6,
+      "kickoff": "2026-10-20T00:15:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60271",
+      "week": 7,
+      "kickoff": "2026-10-23T00:15:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60272",
+      "week": 7,
+      "kickoff": "2026-10-25T13:30:00+00:00",
+      "reason": "kickoff at/before actual rehearsal cutoff"
+    },
+    {
+      "game_id": "ngs-2026-60285",
+      "week": 8,
+      "kickoff": "2026-10-30T00:15:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60286",
+      "week": 8,
+      "kickoff": "2026-11-01T18:00:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60287",
+      "week": 8,
+      "kickoff": "2026-11-01T18:00:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60288",
+      "week": 8,
+      "kickoff": "2026-11-01T18:00:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60289",
+      "week": 8,
+      "kickoff": "2026-11-01T18:00:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60290",
+      "week": 8,
+      "kickoff": "2026-11-01T18:00:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60291",
+      "week": 8,
+      "kickoff": "2026-11-01T18:00:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60292",
+      "week": 8,
+      "kickoff": "2026-11-01T18:00:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60293",
+      "week": 8,
+      "kickoff": "2026-11-01T18:00:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60294",
+      "week": 8,
+      "kickoff": "2026-11-01T21:05:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60295",
+      "week": 8,
+      "kickoff": "2026-11-01T21:25:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60296",
+      "week": 8,
+      "kickoff": "2026-11-01T21:25:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60297",
+      "week": 8,
+      "kickoff": "2026-11-02T01:20:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60298",
+      "week": 8,
+      "kickoff": "2026-11-03T01:15:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60299",
+      "week": 9,
+      "kickoff": "2026-11-06T01:15:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60300",
+      "week": 9,
+      "kickoff": "2026-11-08T14:30:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60301",
+      "week": 9,
+      "kickoff": "2026-11-08T18:00:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60302",
+      "week": 9,
+      "kickoff": "2026-11-08T18:00:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60303",
+      "week": 9,
+      "kickoff": "2026-11-08T18:00:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60304",
+      "week": 9,
+      "kickoff": "2026-11-08T18:00:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60305",
+      "week": 9,
+      "kickoff": "2026-11-08T18:00:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60306",
+      "week": 9,
+      "kickoff": "2026-11-08T18:00:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60307",
+      "week": 9,
+      "kickoff": "2026-11-08T18:00:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60308",
+      "week": 9,
+      "kickoff": "2026-11-08T21:05:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60309",
+      "week": 9,
+      "kickoff": "2026-11-08T21:05:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60310",
+      "week": 9,
+      "kickoff": "2026-11-08T21:25:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60311",
+      "week": 9,
+      "kickoff": "2026-11-08T21:25:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60312",
+      "week": 9,
+      "kickoff": "2026-11-09T01:20:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60313",
+      "week": 9,
+      "kickoff": "2026-11-10T01:15:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60314",
+      "week": 10,
+      "kickoff": "2026-11-13T01:15:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60315",
+      "week": 10,
+      "kickoff": "2026-11-15T14:30:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60316",
+      "week": 10,
+      "kickoff": "2026-11-15T18:00:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60317",
+      "week": 10,
+      "kickoff": "2026-11-15T18:00:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60318",
+      "week": 10,
+      "kickoff": "2026-11-15T18:00:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60319",
+      "week": 10,
+      "kickoff": "2026-11-15T18:00:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60320",
+      "week": 10,
+      "kickoff": "2026-11-15T18:00:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60321",
+      "week": 10,
+      "kickoff": "2026-11-15T18:00:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60322",
+      "week": 10,
+      "kickoff": "2026-11-15T18:00:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60323",
+      "week": 10,
+      "kickoff": "2026-11-15T21:05:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60324",
+      "week": 10,
+      "kickoff": "2026-11-15T21:05:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60325",
+      "week": 10,
+      "kickoff": "2026-11-15T21:25:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60326",
+      "week": 10,
+      "kickoff": "2026-11-16T01:20:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60327",
+      "week": 10,
+      "kickoff": "2026-11-17T01:15:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60328",
+      "week": 11,
+      "kickoff": "2026-11-20T01:15:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60329",
+      "week": 11,
+      "kickoff": "2026-11-22T18:00:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60330",
+      "week": 11,
+      "kickoff": "2026-11-22T18:00:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60331",
+      "week": 11,
+      "kickoff": "2026-11-22T18:00:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60332",
+      "week": 11,
+      "kickoff": "2026-11-22T18:00:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60333",
+      "week": 11,
+      "kickoff": "2026-11-22T18:00:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60334",
+      "week": 11,
+      "kickoff": "2026-11-22T18:00:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60335",
+      "week": 11,
+      "kickoff": "2026-11-22T18:00:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60336",
+      "week": 11,
+      "kickoff": "2026-11-22T21:05:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60337",
+      "week": 11,
+      "kickoff": "2026-11-22T21:25:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60338",
+      "week": 11,
+      "kickoff": "2026-11-22T21:25:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60339",
+      "week": 11,
+      "kickoff": "2026-11-23T01:20:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60340",
+      "week": 11,
+      "kickoff": "2026-11-24T01:15:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60341",
+      "week": 12,
+      "kickoff": "2026-11-26T01:00:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60342",
+      "week": 12,
+      "kickoff": "2026-11-26T18:00:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60343",
+      "week": 12,
+      "kickoff": "2026-11-26T21:30:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60344",
+      "week": 12,
+      "kickoff": "2026-11-27T01:20:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60345",
+      "week": 12,
+      "kickoff": "2026-11-27T20:00:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60346",
+      "week": 12,
+      "kickoff": "2026-11-29T18:00:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60347",
+      "week": 12,
+      "kickoff": "2026-11-29T18:00:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60348",
+      "week": 12,
+      "kickoff": "2026-11-29T18:00:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60349",
+      "week": 12,
+      "kickoff": "2026-11-29T18:00:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60350",
+      "week": 12,
+      "kickoff": "2026-11-29T18:00:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60351",
+      "week": 12,
+      "kickoff": "2026-11-29T18:00:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60352",
+      "week": 12,
+      "kickoff": "2026-11-29T21:05:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60353",
+      "week": 12,
+      "kickoff": "2026-11-29T21:25:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60354",
+      "week": 12,
+      "kickoff": "2026-11-29T21:25:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60355",
+      "week": 12,
+      "kickoff": "2026-11-30T01:20:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60356",
+      "week": 12,
+      "kickoff": "2026-12-01T01:15:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60357",
+      "week": 13,
+      "kickoff": "2026-12-04T01:15:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60358",
+      "week": 13,
+      "kickoff": "2026-12-06T18:00:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60359",
+      "week": 13,
+      "kickoff": "2026-12-06T18:00:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60360",
+      "week": 13,
+      "kickoff": "2026-12-06T18:00:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60361",
+      "week": 13,
+      "kickoff": "2026-12-06T18:00:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60362",
+      "week": 13,
+      "kickoff": "2026-12-06T18:00:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60363",
+      "week": 13,
+      "kickoff": "2026-12-06T18:00:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60364",
+      "week": 13,
+      "kickoff": "2026-12-06T18:00:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60365",
+      "week": 13,
+      "kickoff": "2026-12-06T21:05:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60366",
+      "week": 13,
+      "kickoff": "2026-12-06T21:05:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60367",
+      "week": 13,
+      "kickoff": "2026-12-06T21:25:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60368",
+      "week": 13,
+      "kickoff": "2026-12-06T21:25:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60369",
+      "week": 13,
+      "kickoff": "2026-12-07T01:20:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60370",
+      "week": 13,
+      "kickoff": "2026-12-08T01:15:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60371",
+      "week": 14,
+      "kickoff": "2026-12-11T01:15:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60372",
+      "week": 14,
+      "kickoff": "2026-12-13T18:00:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60373",
+      "week": 14,
+      "kickoff": "2026-12-13T18:00:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60374",
+      "week": 14,
+      "kickoff": "2026-12-13T18:00:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60375",
+      "week": 14,
+      "kickoff": "2026-12-13T18:00:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60376",
+      "week": 14,
+      "kickoff": "2026-12-13T18:00:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60377",
+      "week": 14,
+      "kickoff": "2026-12-13T18:00:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60378",
+      "week": 14,
+      "kickoff": "2026-12-13T18:00:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60379",
+      "week": 14,
+      "kickoff": "2026-12-13T18:00:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60380",
+      "week": 14,
+      "kickoff": "2026-12-13T21:05:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60381",
+      "week": 14,
+      "kickoff": "2026-12-13T21:25:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60382",
+      "week": 14,
+      "kickoff": "2026-12-13T21:25:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60383",
+      "week": 14,
+      "kickoff": "2026-12-13T21:25:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60384",
+      "week": 14,
+      "kickoff": "2026-12-14T01:20:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60385",
+      "week": 14,
+      "kickoff": "2026-12-15T01:15:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60386",
+      "week": 15,
+      "kickoff": "2026-12-18T01:15:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60387",
+      "week": 15,
+      "kickoff": "2026-12-19T22:00:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60388",
+      "week": 15,
+      "kickoff": "2026-12-20T01:20:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60389",
+      "week": 15,
+      "kickoff": "2026-12-20T18:00:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60390",
+      "week": 15,
+      "kickoff": "2026-12-20T18:00:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60391",
+      "week": 15,
+      "kickoff": "2026-12-20T18:00:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60392",
+      "week": 15,
+      "kickoff": "2026-12-20T18:00:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60393",
+      "week": 15,
+      "kickoff": "2026-12-20T18:00:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60394",
+      "week": 15,
+      "kickoff": "2026-12-20T18:00:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60395",
+      "week": 15,
+      "kickoff": "2026-12-20T18:00:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60396",
+      "week": 15,
+      "kickoff": "2026-12-20T18:00:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60397",
+      "week": 15,
+      "kickoff": "2026-12-20T21:05:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60398",
+      "week": 15,
+      "kickoff": "2026-12-20T21:25:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60399",
+      "week": 15,
+      "kickoff": "2026-12-20T21:25:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60400",
+      "week": 15,
+      "kickoff": "2026-12-21T01:20:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60401",
+      "week": 15,
+      "kickoff": "2026-12-22T01:15:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60402",
+      "week": 16,
+      "kickoff": "2026-12-25T01:15:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60403",
+      "week": 16,
+      "kickoff": "2026-12-25T18:00:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60404",
+      "week": 16,
+      "kickoff": "2026-12-25T21:30:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60405",
+      "week": 16,
+      "kickoff": "2026-12-26T01:15:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60406",
+      "week": 16,
+      "kickoff": null,
+      "reason": "unconfirmed kickoff"
+    },
+    {
+      "game_id": "ngs-2026-60407",
+      "week": 16,
+      "kickoff": null,
+      "reason": "unconfirmed kickoff"
+    },
+    {
+      "game_id": "ngs-2026-60408",
+      "week": 16,
+      "kickoff": null,
+      "reason": "unconfirmed kickoff"
+    },
+    {
+      "game_id": "ngs-2026-60409",
+      "week": 16,
+      "kickoff": null,
+      "reason": "unconfirmed kickoff"
+    },
+    {
+      "game_id": "ngs-2026-60410",
+      "week": 16,
+      "kickoff": "2026-12-27T18:00:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60411",
+      "week": 16,
+      "kickoff": "2026-12-27T18:00:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60412",
+      "week": 16,
+      "kickoff": "2026-12-27T18:00:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60413",
+      "week": 16,
+      "kickoff": "2026-12-27T18:00:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60414",
+      "week": 16,
+      "kickoff": "2026-12-27T21:05:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60415",
+      "week": 16,
+      "kickoff": "2026-12-27T21:25:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60416",
+      "week": 16,
+      "kickoff": "2026-12-28T01:20:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60417",
+      "week": 16,
+      "kickoff": "2026-12-29T01:15:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60418",
+      "week": 17,
+      "kickoff": "2027-01-01T01:15:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60419",
+      "week": 17,
+      "kickoff": null,
+      "reason": "unconfirmed kickoff"
+    },
+    {
+      "game_id": "ngs-2026-60420",
+      "week": 17,
+      "kickoff": null,
+      "reason": "unconfirmed kickoff"
+    },
+    {
+      "game_id": "ngs-2026-60421",
+      "week": 17,
+      "kickoff": null,
+      "reason": "unconfirmed kickoff"
+    },
+    {
+      "game_id": "ngs-2026-60422",
+      "week": 17,
+      "kickoff": null,
+      "reason": "unconfirmed kickoff"
+    },
+    {
+      "game_id": "ngs-2026-60423",
+      "week": 17,
+      "kickoff": "2027-01-03T18:00:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60424",
+      "week": 17,
+      "kickoff": "2027-01-03T18:00:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60425",
+      "week": 17,
+      "kickoff": "2027-01-03T18:00:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60426",
+      "week": 17,
+      "kickoff": "2027-01-03T18:00:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60427",
+      "week": 17,
+      "kickoff": "2027-01-03T18:00:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60428",
+      "week": 17,
+      "kickoff": "2027-01-03T18:00:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60429",
+      "week": 17,
+      "kickoff": "2027-01-03T18:00:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60430",
+      "week": 17,
+      "kickoff": "2027-01-03T21:05:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60431",
+      "week": 17,
+      "kickoff": "2027-01-03T21:25:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60432",
+      "week": 17,
+      "kickoff": "2027-01-04T01:20:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60433",
+      "week": 17,
+      "kickoff": "2027-01-05T01:15:00+00:00",
+      "reason": "outside earliest upcoming week selected before scoring"
+    },
+    {
+      "game_id": "ngs-2026-60434",
+      "week": 18,
+      "kickoff": null,
+      "reason": "unconfirmed kickoff"
+    },
+    {
+      "game_id": "ngs-2026-60435",
+      "week": 18,
+      "kickoff": null,
+      "reason": "unconfirmed kickoff"
+    },
+    {
+      "game_id": "ngs-2026-60436",
+      "week": 18,
+      "kickoff": null,
+      "reason": "unconfirmed kickoff"
+    },
+    {
+      "game_id": "ngs-2026-60437",
+      "week": 18,
+      "kickoff": null,
+      "reason": "unconfirmed kickoff"
+    },
+    {
+      "game_id": "ngs-2026-60438",
+      "week": 18,
+      "kickoff": null,
+      "reason": "unconfirmed kickoff"
+    },
+    {
+      "game_id": "ngs-2026-60439",
+      "week": 18,
+      "kickoff": null,
+      "reason": "unconfirmed kickoff"
+    },
+    {
+      "game_id": "ngs-2026-60440",
+      "week": 18,
+      "kickoff": null,
+      "reason": "unconfirmed kickoff"
+    },
+    {
+      "game_id": "ngs-2026-60441",
+      "week": 18,
+      "kickoff": null,
+      "reason": "unconfirmed kickoff"
+    },
+    {
+      "game_id": "ngs-2026-60442",
+      "week": 18,
+      "kickoff": null,
+      "reason": "unconfirmed kickoff"
+    },
+    {
+      "game_id": "ngs-2026-60443",
+      "week": 18,
+      "kickoff": null,
+      "reason": "unconfirmed kickoff"
+    },
+    {
+      "game_id": "ngs-2026-60444",
+      "week": 18,
+      "kickoff": null,
+      "reason": "unconfirmed kickoff"
+    },
+    {
+      "game_id": "ngs-2026-60445",
+      "week": 18,
+      "kickoff": null,
+      "reason": "unconfirmed kickoff"
+    },
+    {
+      "game_id": "ngs-2026-60446",
+      "week": 18,
+      "kickoff": null,
+      "reason": "unconfirmed kickoff"
+    },
+    {
+      "game_id": "ngs-2026-60447",
+      "week": 18,
+      "kickoff": null,
+      "reason": "unconfirmed kickoff"
+    },
+    {
+      "game_id": "ngs-2026-60448",
+      "week": 18,
+      "kickoff": null,
+      "reason": "unconfirmed kickoff"
+    },
+    {
+      "game_id": "ngs-2026-60449",
+      "week": 18,
+      "kickoff": null,
+      "reason": "unconfirmed kickoff"
+    }
+  ],
+  "independent_verification": {
+    "records": 12,
+    "joined_completed_games": 94,
+    "features_checked": 84,
+    "max_feature_error": 0.0,
+    "max_probability_error": 0.0,
+    "max_equivalent_preprocessing_error": 1.1102230246251565e-16,
+    "all_captures_before_cutoff": true,
+    "all_generation_before_kickoff": true,
+    "same_day_future_and_opponent_leakage_checks": "pass",
+    "model_fits": 0,
+    "calibration_fits": 0,
+    "protected_evaluation": false
+  },
+  "reproducibility": {
+    "records_reproduced": 12,
+    "byte_identical": true,
+    "new_forecasts_created": false,
+    "unchanged_files_on_second_and_third_run": 14,
+    "duplicate_decisions": 0,
+    "original_generation_timestamps_preserved": true,
+    "immutable_file_sha256": {
+      "session.json": "b4a6a0a1ae715d91e422a26dc975537974f551157ba5dd1752a00cbffb703d24",
+      "batch.json": "59b2c4deabd6d51f4161cf0f7dd676123a60e161b8821d90544ebcf3a401068d",
+      "rehearsals/4a149938ea36d1f375391d8755ebfcad1d173a33ff53f32849d5022f5651872e.json": "6b42e6c5e4cdda44a76e90e8133a5ea6b8aeed76d2964a8d92661b0ccbb8eba9",
+      "rehearsals/17cc2d845724ee7d1f9009fb6c535e28ebda12da774b662caff8a9964a6d9b3f.json": "dffde066a31193212b7c019db7af9254c88b87dda8487ec1b7dfe57e4b5751c7",
+      "rehearsals/db6f21fdc58406e64d1e41f554fe8e162e9f91f1958bfc7e9fb0b311a11eb397.json": "60fe9a72dfdec935da36547ad6ef3187740518fa61039fd97de065baa3421cfd",
+      "rehearsals/5ad1a2316ead6746cad6ed7a8b9015acd2d15b12da1093c91aa955011c2040d5.json": "74a5fb5639506faddebe415a306c0afbdc06e8d3beda744e995f0f11a3d99a72",
+      "rehearsals/bfdc27fbd9a935e94d19823983ec34f28ebd8789aabfaa7d5e7a97c2e0a0b9f7.json": "9bb1515f42db568b8938d42dc0b14cd770c2c464cb51dcfd69d7bf645dc70b55",
+      "rehearsals/1a1022183db89c008ead8184673ae40dbb2ac79ebfbc1e242acc57c8922dcde6.json": "ab9116582bd200a0ee5af74e4fcfa3298ae40a78a0635233bcead66b9003f401",
+      "rehearsals/a1896eb679d6d5bd35c35cc87d091f68b387515088117c5d6ce109ead83ade06.json": "73c94def3e0a962d54907f01c0ef5e8af3f44b5cae294becf79c51d7114626d8",
+      "rehearsals/bd972b0c30e2727a54c4d73aceadddb9258f1b28e1011a816652de7f944acda2.json": "b72b887d8e95db3569445c2aa9a54789932f0ad48312a96a9ef1bf6956f655e1",
+      "rehearsals/8397293ba764ac1c85524c1571ff6925e1365ff47a98694f856a9076a4ca371d.json": "29184432dd27751be90df0b3ee8e6a7b2d0d03f8b5862dfd1c6dfc79f18786bf",
+      "rehearsals/74983297ea1b47e306329c1f1f1960ec2e03d8bd0ca5ce8e401927b3c439ba03.json": "986f156c6d6480656faa15aaecd7dc31c20b1b5fb8f4721ca341f785971af95b",
+      "rehearsals/2a90f9f5d3ecdfcf5ea3ea0f55d3b00cff8c418bbdd80ca6beaaca85b0e3cc47.json": "6b4ed1ce3721e474a8a1baed13c6dd16102a399668fa649a42aeac0334fa5b99",
+      "rehearsals/ded079c3f5b0a898f230197df925eb5e613309341defbdd1e90c74ba4de9481c.json": "920b9afc88625d42537ba24b8e86c19bd98cc1279af83c80f0a8f991ac796dc4"
+    }
+  },
+  "tests": {
+    "python_passed": 456,
+    "python_skipped": 1,
+    "skip_reason": "Owner prohibits V1 retraining"
+  },
+  "activation_approved": false,
+  "recurring_enabled": false,
+  "scorecard_eligible": false,
+  "models_fitted": 0,
+  "calibrations_fitted": 0,
+  "protected_evaluation_executed": false,
+  "remaining_requirements": [
+    "Explicit prospective activation approval and future start timestamp",
+    "Reviewed pre-T-60 capture runner and pairing with actual archived V1 predictions",
+    "Separately approved scheduling and operational verification; no V1 or public changes in this rehearsal"
+  ],
+  "limitations": [
+    "Ad hoc real-input rehearsal only; cannot enter T-60 prospective cohort or scorecards",
+    "Source schedule remains published 2026-10-23; retrieval is not proof of newer source content or all real-world changes",
+    "2025 outcome-level exposure is permanent and must accompany any future retrospective assessment",
+    "No QB, injury, weather or news features; no prospective accuracy claim"
+  ]
+}

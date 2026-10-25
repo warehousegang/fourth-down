@@ -38,18 +38,18 @@ def plan():
 
 def readiness():
     p = plan()
-    return {"enabled": False, "status": "preparation-only", "model_id": p["model_id"],
+    return {"enabled": False, "status": "local-rehearsal-only" if p["prior_2025_use_approved"] else "preparation-only", "model_id": p["model_id"],
             "data_use_approved": p["prior_2025_use_approved"],
             "activation_approved": p["activation_approved"],
-            "blockers": ["2025 score-only prior use requires an explicit holdout amendment",
-                         "Prospective activation and a future start timestamp require separate approval",
-                         "Approved 2025 prior capture and actual paired V1/V2 shadow rehearsal remain pending"]}
+            "blockers": ([] if p["prior_2025_use_approved"] else ["2025 score-only prior use requires an explicit holdout amendment"]) +
+                        ["Prospective activation and a future start timestamp require separate approval",
+                         "Recurring capture and actual archived-V1 pairing remain disabled"]}
 
 
 def require_activation():
     # This preparation has NO enable flag or unreviewed configuration bypass.
     # An approved activation revision must implement the signed-off boundary.
-    raise PermissionError("V2 shadow execution disabled; 2025 data use and activation both await owner approval")
+    raise PermissionError("V2 prospective execution disabled; recurring activation still awaits owner approval")
 
 
 def frozen_v2():
