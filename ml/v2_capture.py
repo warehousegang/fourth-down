@@ -12,10 +12,10 @@ from functools import lru_cache
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
-from ml.current_source import SCHEDULED, canonical, iso, normalize, sha, timestamp
+from ml.current_source import FINAL, SCHEDULED, canonical, iso, normalize, sha, timestamp
 from ml.data import ROOT
 from ml.evidence_bundle import decode_bundle
-from ml.lifecycle import eligibility, input_verification
+from ml.lifecycle import IN_PROGRESS, eligibility, input_verification
 from ml.v2_prospective import (MODEL_SHA, RESULT_SHA, _pbp_totals, _prior_scores,
                                feature_state, frozen_v2, probability, verify_capture)
 from ml.v2_rehearsal import authorized, check_capture
@@ -60,11 +60,13 @@ def phase(game, now):
     p = config()
     if not game['kickoff']:
         return 'unconfirmed_kickoff'
-    if game.get('phase') not in SCHEDULED:
-        return 'not_scheduled'
     due = cutoff(game)
     if due <= timestamp(p['activation_at']):
         return 'before_activation'
+    if game.get('phase') not in SCHEDULED:
+        if game.get('phase') in FINAL | IN_PROGRESS and now > due + timedelta(minutes=p['maximum_finalization_delay_minutes']):
+            return 'missed_cutoff'
+        return 'not_scheduled'
     if now < due - timedelta(minutes=p['stage_minutes_before_cutoff']):
         return 'pending'
     if now < due:
@@ -309,6 +311,20 @@ def finalize(ledger, target, now, *, synthetic=False, schedule_observed_at=None,
                     record.update(mode='v2-prospective-shadow',prospective=True,
                               scorecard_eligible=record['pair_category']=='both',
                               activation_at=config()['activation_at'],approval_reference=config()['approval_reference'])
+    if record.get('exclusion') in ('missed_cutoff', 'missed_cutoff_during_inference', 'schedule_not_rechecked_at_finalization'):
+        # Missing V2 capture must not erase an already sealed V1-only observation.
+        witnesses = persisted_stages or {}
+        saved = [json.loads(p.read_bytes()) for p in (ledger.root/'stages').glob('*.json')]
+        saved = [s for s in saved if s['target'] == identity(target)
+                 and s['config_sha256'] == sha(CONFIG.read_bytes())
+                 and timestamp(s['observed_at']) < due
+                 and (synthetic or (sha(canonical(s)) in witnesses and
+                     timestamp(s['observed_at']) <= timestamp(witnesses[sha(canonical(s))]['committed_at']) < due))]
+        if saved:
+            s = max(saved,key=lambda s:(timestamp(s['observed_at']),sha(canonical(s))))
+            v1,reasons = select_v1(ledger.read(s['v1_archive']['object']),s['v1_archive']['receipt'],target,due)
+            record.update(v1=v1,v1_exclusions=reasons,pair_category='v1_only' if v1 else 'neither',
+                          stage_sha256=sha(canonical(s)))
     ledger.receipt('decisions',record,slot)
     return record
 

@@ -191,3 +191,21 @@ def test_github_temp_is_accepted_only_for_hosted_isolated_root(tmp_path,monkeypa
     monkeypatch.setenv('GITHUB_ACTIONS','true')
     monkeypatch.setenv('RUNNER_TEMP',str(capture.ROOT/'web/public'))
     with pytest.raises(ValueError,match='isolated'): Ledger(capture.ROOT/'web/public/forbidden-shadow')
+
+
+def test_missed_v2_capture_preserves_verified_v1_only_coverage(tmp_path,archived,monkeypatch):
+    import ml.v2_capture as capture
+    c,g=inputs();l=Ledger(tmp_path)
+    stage(l,c,*archived,g,timestamp('2026-11-01T15:36:00Z'),synthetic=True)
+    # Pair selection itself is separately tested against complete synthetic archive bytes.
+    original={'game_id':g['id'],'home_probability':0.61,'generated_at':'2026-10-31T12:00:00Z'}
+    monkeypatch.setattr(capture,'select_v1',lambda *a:(original,[]))
+    r=finalize(l,g,cutoff(g)+timedelta(minutes=16),synthetic=True)
+    assert r['exclusion']=='missed_cutoff' and r['v1']==original and r['v2'] is None
+    assert r['pair_category']=='v1_only' and not r['scorecard_eligible']
+
+
+@pytest.mark.parametrize('state',['FINAL','IN_PROGRESS'])
+def test_daily_recovery_reports_missed_games_after_kickoff(state):
+    _,g=inputs();g['phase']=state
+    assert phase(g,timestamp(g['kickoff'])+timedelta(hours=4))=='missed_cutoff'

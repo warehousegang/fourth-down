@@ -12,7 +12,8 @@ already authorized 2025 score-source SHA; reject a changed prior vintage before
 download. No 2024 source, new fitting, calibration, selection or retrospective
 evaluation is authorized.
 
-At T−60 through T−45 inclusive, use the latest sealed pre-cutoff stage. Preserve
+At T−60 through T−45 inclusive, use the latest sealed stage whose separate Git
+commit also predates T−60. A late-persisted stage is ineligible. Preserve
 actual generation time and report finalization delay; the 15-minute grace is
 queue tolerance, **not permission to use later information**. Recheck schedule
 identity at finalization; later schedule bytes may validate identity only, never
@@ -82,3 +83,9 @@ missed captures. Monitor coverage and source publication/retrieval ages, not
 just green runs. Inspect final-score provenance and voids before any later
 paired reconciliation. Public Actions and the Workers Free plan target $0;
 no paid resources or scheduler were provisioned by this preparation.
+
+Cost references checked October 25, 2026: [standard runners for public repositories](https://docs.github.com/en/actions/concepts/billing-and-usage)
+and [Workers Free limits](https://developers.cloudflare.com/workers/platform/limits/).
+The proposed 288 lightweight calendar checks/day are below the shared 100,000
+request/day allowance; verify the account's remaining trigger quota and CPU
+usage when deployment is approved. No paid plan is required by the design.
