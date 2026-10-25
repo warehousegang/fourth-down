@@ -12,7 +12,7 @@ npm ci --ignore-scripts
 npm run dev -- --port 4175 --strictPort
 ```
 
-Open http://127.0.0.1:4175/fourth-down/. The six product views are Upcoming Games, Matchup Intelligence, Forecast History, Model Intelligence, Postgame Analysis and Architecture. Existing 2023 retrospective matchups/explanations/performance remain separately accessible. Recorded current forecasts expire and suppress probabilities after kickoff; this is not an always-live service. Included static artifacts and notices make a clean checkout browsable without Python, raw data or training.
+Open http://127.0.0.1:4175/fourth-down/. The six product views are Upcoming Games, Matchup Intelligence, Forecast History, Model Intelligence, Postgame Analysis and Architecture. Existing 2023 retrospective matchups/explanations/performance remain separately accessible. At kickoff, verified forecasts remain visible as archived pregame predictions. Verified final results and scores appear after reconciliation; this is not an always-live service. Included static artifacts and notices make a clean checkout browsable without Python, raw data or training.
 
 ## Explicit local operations
 

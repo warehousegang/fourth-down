@@ -71,7 +71,7 @@ async function serveArtifact(page: Page, directory: string, prefix: string, data
   await page.route(`**/data/${directory}/${file}`,route=>route.fulfill({contentType:"application/json",body}));
 }
 
-test("48-hour boundary retains explicitly older estimates, then hides them at kickoff", async ({page}, info)=>{
+test("48-hour boundary retains explicitly older estimates, then archives them at kickoff", async ({page}, info)=>{
   await serveArtifact(page,"current",`forecast-${original.season}`,original);
   await serveArtifact(page,"operations","operations",originalOperations);
   await page.clock.install({time:new Date(Date.parse(original.valid_until)-1000)});
@@ -127,8 +127,9 @@ test("48-hour boundary retains explicitly older estimates, then hides them at ki
   await expect(page.locator(".intelligence-team-comparison strong")).toHaveText([`${(first.away_probability*100).toFixed(1)}%`,`${(first.home_probability*100).toFixed(1)}%`]);
   await page.goto("./");
   await page.clock.fastForward(Date.parse(first.kickoff)-Date.parse(original.valid_until));
-  await expect(page.locator(".current-card").first()).toContainText("Kickoff is unconfirmed or has passed");
-  await expect(page.locator(".current-card").first().locator(".current-probabilities")).toHaveCount(0);
+  await expect(page.locator(".current-card").first()).toContainText("Archived pregame prediction");
+  await expect(page.locator(".current-card").first().locator(".current-probabilities strong")).toHaveText([`${(first.away_probability*100).toFixed(1)}%`,`${(first.home_probability*100).toFixed(1)}%`]);
+  await expect(page.locator(".current-card").first()).toContainText("awaiting verified game status and final result");
 });
 
 test("stale-source refresh displays original archived probabilities without minting new ones", async ({page})=>{

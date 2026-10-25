@@ -20,3 +20,12 @@ for (const testCase of vectors.cases) {
     expect(JSON.stringify(values)).toBe(before);
   });
 }
+
+it("uses the designated evaluation snapshot even when another eligible receipt sorts later",()=>{
+  const values=structuredClone(vectors.base);
+  values.operations.catalog.push({...structuredClone(values.operations.catalog[0]),id:"f".repeat(64),generated_at:"2026-10-25T01:00:00Z"});
+  values.operations.games=[{id:values.game.id,final_forecast_id:values.operations.catalog[0].id}];
+  const before=JSON.stringify(values);
+  expect(selectDisplayForecast(values.current,values.game,values.operations,Date.parse(values.game.kickoff)).forecast_id).toBe(values.operations.catalog[0].id);
+  expect(JSON.stringify(values)).toBe(before);
+});
