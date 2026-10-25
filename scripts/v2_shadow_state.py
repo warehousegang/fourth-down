@@ -56,5 +56,5 @@ def append_state(checkout,ledger):
 if __name__=='__main__':
     parser=argparse.ArgumentParser();parser.add_argument('--checkout',required=True);parser.add_argument('--ledger',required=True)
     args=parser.parse_args();require_activation()
-    if git(args.checkout,'remote','get-url','origin')!=REMOTE: raise ValueError('Unexpected state remote')
+    if git(args.checkout,'remote','get-url','origin').removesuffix('.git')!=REMOTE.removesuffix('.git'): raise ValueError('Unexpected state remote')
     print(json.dumps(publish(args.checkout,args.ledger),sort_keys=True))
