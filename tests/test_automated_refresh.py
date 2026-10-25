@@ -135,7 +135,8 @@ def test_unchanged_run_recovers_a_failed_pages_build_without_new_commit(tmp_path
 
 
 @pytest.mark.parametrize('source_changed,schedule_outage,outcomes_changed',[(False,False,True),(False,True,True),(True,True,True),(False,False,False)])
-def test_score_only_prepare_never_runs_inference_and_selects_build_correctly(tmp_path,monkeypatch,source_changed,schedule_outage,outcomes_changed):
+@pytest.mark.parametrize('new_observations',[False,True])
+def test_score_only_prepare_never_runs_inference_and_selects_build_correctly(tmp_path,monkeypatch,source_changed,schedule_outage,outcomes_changed,new_observations):
     import json
     from contextlib import nullcontext
     from urllib.error import URLError
@@ -159,7 +160,9 @@ def test_score_only_prepare_never_runs_inference_and_selects_build_correctly(tmp
     monkeypatch.setattr(runner,'refresh_reasons',lambda *_:[])
     def forbidden(*_):raise AssertionError('Inference must not run on a score-only check')
     monkeypatch.setattr(runner,'refresh',forbidden)
-    monkeypatch.setattr(result_source,'collect',lambda *_:{'changed':True})
+    # Reinterpreting retained evidence must publish even when duplicate
+    # suppression correctly reports no newly downloaded observation.
+    monkeypatch.setattr(result_source,'collect',lambda *_:{'changed':new_observations})
     monkeypatch.setattr(result_source,'load_observations',lambda *_:[])
     monkeypatch.setattr(results,'reconcile',lambda *_:{**operations,'verified_outcome':'synthetic'} if outcomes_changed else operations)
     published=[];monkeypatch.setattr(lifecycle,'publish_operations',lambda value:published.append(value))

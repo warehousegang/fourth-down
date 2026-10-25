@@ -78,11 +78,12 @@ def test_final_scores_existing_designation_without_modifying_forecast(tmp_path):
     assert reconcile(result,captures,'2026-09-14T04:00:00Z')==result
 
 
-def test_correction_is_new_evidence_and_changes_score_once(tmp_path):
-    ops=base(); captures,raw,_=observation(tmp_path,ops)
+@pytest.mark.parametrize('phase',['FINAL','FINAL_OVERTIME'])
+def test_correction_is_new_evidence_and_changes_score_once(tmp_path,phase):
+    ops=base(); captures,raw,_=observation(tmp_path,ops,phase=phase)
     first=reconcile(ops,captures,AFTER)
     game=ops['schedule'][0]
-    corrected=raw_fixture(tmp_path,game,home=17,away=24)
+    corrected=raw_fixture(tmp_path,game,phase=phase,home=17,away=24)
     fetch,_=provider(corrected,game,'2026-09-14T04:00:00Z')
     result_source.collect([game],2026,root=tmp_path,fetch=fetch,now=timestamp('2026-09-14T04:01:00Z'))
     all_captures=result_source.load_observations(2026,tmp_path,'2026-09-14T04:01:00Z')
@@ -95,11 +96,11 @@ def test_correction_is_new_evidence_and_changes_score_once(tmp_path):
     assert latest['catalog']==first['catalog']
 
 
-@pytest.mark.parametrize('phase,status',[('IN_PROGRESS','in_progress'),('POSTPONED','postponed'),('CANCELED','canceled')])
+@pytest.mark.parametrize('phase,status',[('IN_PROGRESS','in_progress'),('OVERTIME','in_progress'),('FINAL_UNKNOWN','unknown'),('POSTPONED','postponed'),('CANCELED','canceled')])
 def test_nonfinal_observations_are_never_scored(tmp_path,phase,status):
     ops=base();captures,_,_=observation(tmp_path,ops,phase=phase)
     result=reconcile(ops,captures,AFTER)
-    assert result['games'][0]['status']==status
+    assert result['games'][0]['status']==(ops['games'][0]['status'] if status=='unknown' else status)
     assert result['games'][0]['result'] is None
     assert not result['games'][0]['evaluations']
     assert result['metrics']['primary']['count']==0
@@ -180,7 +181,8 @@ def test_newer_verified_primary_correction_takes_precedence(tmp_path):
     assert reconcile(ops,captures,'2026-09-14T04:01:00Z')==ops
 
 
-def test_outcome_bundle_roundtrip_and_tampering_rejected(tmp_path):
+@pytest.mark.parametrize('legacy_overtime',[False,True])
+def test_outcome_bundle_roundtrip_and_tampering_rejected(tmp_path,legacy_overtime):
     from unittest.mock import patch
     from ml import current_source
     from ml.rc1_operations import synthetic_source
@@ -196,8 +198,17 @@ def test_outcome_bundle_roundtrip_and_tampering_rejected(tmp_path):
     directory=working/'web/public/data/operations'
     ops=json.loads((directory/json.loads((directory/'latest.json').read_bytes())['file']).read_bytes())
     game=ops['schedule'][0]
-    raw=raw_fixture(tmp_path,game);fetch,_=provider(raw,game)
+    raw=raw_fixture(tmp_path,game,phase='FINAL_OVERTIME' if legacy_overtime else 'FINAL');fetch,_=provider(raw,game)
     result_source.collect([game],2026,root=working,fetch=fetch,now=timestamp(AFTER))
+    if legacy_overtime:
+        # Construct the exact receipt written by the old parser, then restore it
+        # unchanged before deriving the new operations version.
+        path=next((working/'data/results/2026').glob('observation-*.json'))
+        legacy=json.loads(path.read_bytes());legacy['game'].update(validated=False,status='unknown')
+        path.unlink();body=canonical(legacy)
+        (path.parent/f'observation-{sha(body)}.json').write_bytes(body)
+        forecast_state_receipt=save(2026,working,timestamp(AFTER))
+        assert forecast_state_receipt['result_evidence']['files']>0
     result=reconcile(ops,result_source.load_observations(2026,working,AFTER),AFTER)
     publish_operations(result,directory)
     checked_pair(working,2026)
@@ -208,6 +219,10 @@ def test_outcome_bundle_roundtrip_and_tampering_rejected(tmp_path):
     assert not list((fresh/'data/results').glob('**/*'))
     assert restore(2026,fresh,kind='result')['restored']>0
     assert len(result_source.load_observations(2026,fresh,AFTER))==1
+    if legacy_overtime:
+        restored=result_source.load_observations(2026,fresh,AFTER)[0]
+        assert restored==legacy
+        assert reconcile(result,[restored],AFTER)==result
     payload=collect_payload(2026,working)
     bad=copy.deepcopy(result);bad['games'][0]['result']['home_score']=99
     body=canonical(bad);payload[f'web/public/data/operations/operations-{sha(body)}.json']=body

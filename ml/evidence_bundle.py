@@ -67,6 +67,7 @@ def destination(root, name):
 
 def validate_payload(payload, season, created_at):
     """All bytes and dependencies validated before any destination write."""
+    from ml.result_source import effective_game
     check_season(season)
     now = timestamp(created_at)
     if not payload or len(payload) > MAX_FILES:
@@ -147,11 +148,11 @@ def validate_payload(payload, season, created_at):
                 raise ValueError("Mixed season in outcome evaluations")
             if game.get('result_evidence'):
                 observation = results.get(game['result_evidence'])
-                if not observation or any(observation['game'][k] != game[k] for k in ('id','home','away','week','kickoff','status')):
+                if not observation or any(effective_game(observation)[k] != game[k] for k in ('id','home','away','week','kickoff','status')):
                     raise ValueError('Supplemental outcome observation missing or mismatched')
             if game["result"] and game["result"]["snapshot_sha256"] in results:
                 observed = results[game['result']['snapshot_sha256']]
-                if (observed['game']['status'] != 'completed' or
+                if (effective_game(observed)['status'] != 'completed' or
                         any(game['result'][k] != observed['game'][k] for k in ('home_score','away_score')) or
                         game.get('result_evidence') != game['result']['snapshot_sha256'] or
                         game['result'].get('provider') != 'nflverse' or

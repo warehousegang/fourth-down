@@ -5,7 +5,7 @@ from datetime import datetime, timezone
 from ml.current_source import canonical, iso, sha, timestamp
 from ml.data import ROOT
 from ml.lifecycle import HOME_RATE, binary_score, investigate, metric_set
-from ml.result_source import LICENSE, REPOSITORY
+from ml.result_source import LICENSE, REPOSITORY, effective_game
 
 
 def reconcile(operations, observations, now=None):
@@ -37,7 +37,7 @@ def reconcile(operations, observations, now=None):
         observation = latest.get(row['id'])
         if not observation:
             continue
-        game = observation['game']; scheduled = schedule.get(row['id'])
+        game = effective_game(observation); scheduled = schedule.get(row['id'])
         if not scheduled or any(game[k] != scheduled[k] for k in ('season','week','home','away','kickoff','day')):
             continue  # A confirmed reschedule cannot inherit another kickoff's result.
         if (timestamp(observation['source_updated_at']) < timestamp(result['source']['source_updated_at'])
