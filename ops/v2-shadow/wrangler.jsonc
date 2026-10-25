@@ -4,6 +4,21 @@
   "compatibility_date": "2026-10-24",
   "workers_dev": false,
   "preview_urls": false,
-  "vars": { "ENABLED": "false", "ACTIVATION_AT": "2026-10-29T00:00:00+00:00" },
-  "triggers": { "crons": [] }
+  "vars": {
+    "ENABLED": "true",
+    "ACTIVATION_AT": "2026-10-29T00:00:00+00:00"
+  },
+  "triggers": {
+    "crons": [
+      "*/5 * * * *"
+    ]
+  },
+  "observability": {
+    "enabled": true
+  },
+  "secrets": {
+    "required": [
+      "GITHUB_TOKEN"
+    ]
+  }
 }
