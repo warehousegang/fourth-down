@@ -111,6 +111,9 @@ test("stale-source refresh displays original archived probabilities without mint
     await expect(card.locator(".current-probabilities strong")).toHaveText([`${(g.away_probability*100).toFixed(1)}%`,`${(g.home_probability*100).toFixed(1)}%`]);
     await expect(card.getByRole("link",{name:"Original forecast JSON",exact:true})).toHaveAttribute("href",new RegExp(saved.artifact_file+"$"));
   }
+  await page.locator(".current-card").first().getByRole("link",{name:"Explore matchup intelligence"}).click();
+  await expect(page.getByText("Older forecast — not fresh.",{exact:true})).toBeVisible();
+  await expect(page.getByRole("region",{name:"Current matchup model factors"}).locator("tbody tr")).toHaveCount(4);
 });
 
 test("missing provenance never exposes probabilities", async ({page})=>{
