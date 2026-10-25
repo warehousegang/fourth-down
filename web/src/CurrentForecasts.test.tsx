@@ -3,7 +3,7 @@ import { afterEach, beforeEach, expect, it, vi } from "vitest";
 import { App } from "./App";
 import { readFileSync } from "node:fs";
 import { loadOperations } from "./operations-contracts";
-import { operationsFixture, operationsCapture } from "./intelligence-fixtures";
+import { operationsFixture, operationsCapture, completedFixture } from "./intelligence-fixtures";
 import { currentSchema, loadCurrent } from "./current-contracts";
 const record = operationsFixture().catalog.filter(f => f.eligible).at(-1)!;
 const currentPointer = {file:record.artifact_file,sha256:record.artifact_sha256};
@@ -79,4 +79,49 @@ it("fails closed when archive provenance cannot be loaded",async()=>{
   render(<App/>);
   expect(await screen.findByText(/Forecast provenance unavailable/)).toBeInTheDocument();
   expect(document.querySelectorAll(".current-probabilities")).toHaveLength(0);
+});
+
+
+it.each([[24,17,"Saints"],[17,24,"Steelers"],[24,24,null]] as const)("retains the archived card after refresh and shows verified final %i–%i",async(home,away,winner)=>{
+  const ops=completedFixture(home,away);
+  const game=ops.games[0];
+  const selected=ops.catalog.find(f=>f.id===game.final_forecast_id)!;
+  const current=currentFixture(); current.games=[]; current.week=8;
+  current.generated_at=ops.generated_at;
+  vi.spyOn(Date,"now").mockReturnValue(Date.parse(ops.generated_at)+1);
+  vi.mocked(loadCurrent).mockResolvedValue({data:current,...currentPointer});
+  vi.mocked(loadOperations).mockResolvedValue({data:ops,...operationsCapture.pointer});
+  render(<App/>);
+  const card=await screen.findByRole("article",{name:"Steelers at Saints current forecast"});
+  expect(within(card).getByText("Archived pregame prediction")).toBeInTheDocument();
+  expect(card).toHaveTextContent(`Verified final: PIT ${away} · NO ${home}`);
+  expect(card).toHaveTextContent(winner?`Actual winner: ${winner}`:"Tie excluded from binary scoring.");
+  expect(card.querySelector(".current-cutoff time")).toHaveAttribute("datetime",selected.generated_at);
+  expect([...card.querySelectorAll(".current-probabilities strong")].map(n=>n.textContent)).toEqual([`${(selected.away_probability!*100).toFixed(1)}%`,`${(selected.home_probability!*100).toFixed(1)}%`]);
+  if(winner)expect(card).toHaveTextContent(`Brier: ${game.evaluations.find(e=>e.primary)!.brier.toFixed(4)}`);
+  else expect(card).not.toHaveTextContent("Brier:");
+});
+
+it("keeps pregame percentages at kickoff without inferring a live status or result",async()=>{
+  const data=currentFixture(); const first=data.games[0];
+  vi.spyOn(Date,"now").mockReturnValue(Date.parse(first.kickoff!));
+  render(<App/>);
+  const card=await screen.findByRole("article",{name:"Steelers at Saints current forecast"});
+  expect(await within(card).findByText("Archived pregame prediction")).toBeInTheDocument();
+  expect(card).toHaveTextContent("awaiting verified game status and final result");
+  expect(card).not.toHaveTextContent("Verified final:");
+  expect(card).not.toHaveTextContent("Brier:");
+});
+
+it("retains archived intelligence deep links when refresh has removed the upcoming game",async()=>{
+  const ops=completedFixture(); const current=currentFixture(); current.games=[];
+  current.generated_at=ops.generated_at;
+  vi.spyOn(Date,"now").mockReturnValue(Date.parse(ops.generated_at)+1);
+  vi.mocked(loadCurrent).mockResolvedValue({data:current,...currentPointer});
+  vi.mocked(loadOperations).mockResolvedValue({data:ops,...operationsCapture.pointer});
+  window.location.hash=`intelligence?game=${ops.games[0].id}`;
+  render(<App/>);
+  expect(await screen.findByText("Archived pregame prediction")).toBeInTheDocument();
+  expect(screen.getByText(/Actual winner: Saints/)).toBeInTheDocument();
+  expect(screen.getByRole("region",{name:"Current matchup model factors"}).querySelectorAll("tbody tr")).toHaveLength(4);
 });

@@ -341,7 +341,8 @@
           "valid_until": "2026-10-25T11:47:43+00:00",
           "week": 7
         }
-      ]
+      ],
+      "games": []
     }
   },
   "cases": [
@@ -481,7 +482,7 @@
     },
     {
       "name": "kickoff-boundary",
-      "expected": "unavailable",
+      "expected": "archived",
       "now": "2026-10-25T13:30:00+00:00",
       "changes": []
     },
@@ -504,6 +505,130 @@
         [
           "operations.generated_at",
           "2026-10-25T12:01:00Z"
+        ]
+      ]
+    },
+    {
+      "name": "after-kickoff-with-delayed-status",
+      "expected": "archived",
+      "now": "2026-10-25T17:30:00Z",
+      "changes": []
+    },
+    {
+      "name": "in-progress-with-new-source",
+      "expected": "archived",
+      "now": "2026-10-25T17:30:00Z",
+      "changes": [
+        [
+          "operations.schedule.0.status",
+          "in_progress"
+        ],
+        [
+          "operations.source.raw_sha256",
+          "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        ]
+      ]
+    },
+    {
+      "name": "completed-with-new-source",
+      "expected": "archived",
+      "now": "2026-10-25T17:30:00Z",
+      "changes": [
+        [
+          "operations.schedule.0.status",
+          "completed"
+        ],
+        [
+          "operations.source.raw_sha256",
+          "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        ]
+      ]
+    },
+    {
+      "name": "no-eligible-pregame-record",
+      "expected": "unavailable",
+      "now": "2026-10-25T17:30:00Z",
+      "changes": [
+        [
+          "operations.catalog",
+          []
+        ]
+      ]
+    },
+    {
+      "name": "postponed-after-old-kickoff",
+      "expected": "unavailable",
+      "now": "2026-10-25T17:30:00Z",
+      "changes": [
+        [
+          "operations.schedule.0.status",
+          "postponed"
+        ]
+      ]
+    },
+    {
+      "name": "canceled-after-kickoff",
+      "expected": "unavailable",
+      "now": "2026-10-25T17:30:00Z",
+      "changes": [
+        [
+          "operations.schedule.0.status",
+          "canceled"
+        ]
+      ]
+    },
+    {
+      "name": "rescheduled-after-old-kickoff",
+      "expected": "unavailable",
+      "now": "2026-10-25T17:30:00Z",
+      "changes": [
+        [
+          "operations.schedule.0.kickoff",
+          "2026-10-26T13:30:00Z"
+        ]
+      ]
+    },
+    {
+      "name": "invalid-after-kickoff-receipt",
+      "expected": "unavailable",
+      "now": "2026-10-25T17:30:00Z",
+      "changes": [
+        [
+          "operations.catalog.0.generated_at",
+          "2026-10-25T13:30:00+00:00"
+        ]
+      ]
+    },
+    {
+      "name": "designated-forecast-missing",
+      "expected": "unavailable",
+      "now": "2026-10-25T17:30:00Z",
+      "changes": [
+        [
+          "operations.games",
+          [
+            {
+              "id": "ngs-2026-60272",
+              "final_forecast_id": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+            }
+          ]
+        ]
+      ]
+    },
+    {
+      "name": "missing-evidence-after-kickoff",
+      "expected": "unavailable",
+      "now": "2026-10-25T17:30:00Z",
+      "changes": [
+        [
+          "operations.catalog.0.eligible",
+          false
+        ],
+        [
+          "operations.catalog.0.exclusions",
+          [
+            "Original input snapshot unavailable"
+          ]
         ]
       ]
     }

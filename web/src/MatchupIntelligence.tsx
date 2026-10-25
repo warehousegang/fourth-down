@@ -1,10 +1,11 @@
 import { ArrowRight } from "lucide-react";
 import { loadCurrent } from "./current-contracts";
 import { loadOperations } from "./operations-contracts";
-import { selectDisplayForecast, displayRecord } from "./forecast-display";
+import { selectDisplayForecast, displayRecord, displayGames } from "./forecast-display";
 import { loadResearch, type Domain } from "./research-contracts";
 import { useArtifact } from "./use-artifact";
 import { Heading, LoadState, pct, Provenance, Table, time } from "./IntelligenceShared";
+import { ForecastOutcome } from "./ForecastOutcome";
 import { team } from "./teams";
 import { useForecastClock } from "./use-forecast-clock";
 import { CurrentContext } from "./CurrentContext";
@@ -16,20 +17,23 @@ export function MatchupIntelligence({ selectedId }: {selectedId:string|null}) {
   const now=useForecastClock(current.data ? [current.data.data.valid_until,...current.data.data.games.map(g=>g.kickoff)] : []);
   if(!current.data)return <LoadState title="Matchup Intelligence" error={current.error} retry={current.retry}/>;
   const {data,file,sha256}=current.data;
-  const game=data.games.find(g=>g.id===selectedId)??data.games[0];
+  const games=displayGames(data,operations.data?.data??null,now,selectedId);
+  const game=games.find(g=>g.id===selectedId)??games[0];
   const choice=game?selectDisplayForecast(data,game,operations.data?.data??null,now):null;
   const record=choice?displayRecord(operations.data?.data??null,choice):null;
-  const view=record??game;
+  const view=record??(game && "cutoff" in game ? game : null);
   const reason=choice?.reason;
   return <>
     <Heading label="KNOWN INPUTS · VISIBLE GAPS" title="Matchup Intelligence">The model explains its actual inputs. Broader football intelligence stays separate from the probability until a validated model includes it.</Heading>
     {!game?<section className="panel"><h2>No upcoming matchup</h2><p>A confirmed current-season matchup is required to show team inputs.</p></section>:<>
-      <label className="intelligence-select">Compare teams <select value={game.id} onChange={e=>{window.location.hash=`intelligence?game=${encodeURIComponent(e.target.value)}`;}}>{data.games.map(g=><option key={g.id} value={g.id}>Week {g.week} · {g.away} at {g.home}</option>)}</select></label>
-      <section className="panel"><div className="eyebrow">WEEK {game.week} · {time(game.kickoff)}</div><h2>{team(game.away).name} at {team(game.home).name}</h2><p className="muted">{game.stadium} · Feature cutoff {time(view.cutoff)} · Forecast generated {time(view.generated_at)}</p>{reason?<p className="current-warning">Current probability unavailable: {reason}</p>:<div className="intelligence-team-comparison"><div><span>{game.away} · AWAY</span><strong>{pct(view.away_probability)}</strong><p>{view.history.away.length} earlier completed current-season games</p></div><div><span>{game.home} · HOME</span><strong>{pct(view.home_probability)}</strong><p>{view.history.home.length} earlier completed current-season games</p></div></div>}
-      {choice?.state === "older" && <p className="current-warning" role="status"><strong>Older forecast — not fresh.</strong> Generated {time(view.generated_at)} from the original verified inputs. The latest recorded source content is unchanged; later schedule changes are not ruled out. No injury, weather or news adjustment is included.</p>}
-      <h3>The four frozen predictive factors</h3><p>Values below belong to this archived input snapshot{reason?"; refresh before using it as a current forecast":""}. Rest is capped at 14 days. Smoothed rates and margins include the model’s fixed shrinkage.</p>{view.factors.length?<Table label="Current matchup model factors"><thead><tr><th>Factor</th><th>{game.away}</th><th>{game.home}</th><th>Home − away</th><th>Log-odds contribution</th></tr></thead><tbody>{view.factors.map(f=><tr key={f.key}><th>{f.label}</th><td>{f.away.toFixed(4)}</td><td>{f.home.toFixed(4)}</td><td>{f.difference.toFixed(4)}</td><td>{f.contribution.toFixed(4)}</td></tr>)}</tbody></Table>:<p className="current-warning">A required observation is unavailable. No input or contribution is imputed for this matchup.</p>}<p>Home-win probability = logistic({data.model.intercept.toFixed(6)} + the four contributions). Positive contributions favor the home team. These are model associations, not causal claims.</p><a href="#history">View forecast versions <ArrowRight size={14}/></a></section>
+      <label className="intelligence-select">Compare teams <select value={game.id} onChange={e=>{window.location.hash=`intelligence?game=${encodeURIComponent(e.target.value)}`;}}>{games.map(g=><option key={g.id} value={g.id}>Week {g.week} · {g.away} at {g.home}</option>)}</select></label>
+      <section className="panel"><div className="eyebrow">WEEK {game.week} · {time(game.kickoff)}</div><h2>{team(game.away).name} at {team(game.home).name}</h2><p className="muted">{game.stadium} · Feature cutoff {time(view?.cutoff??null)} · Forecast generated {time(view?.generated_at??null)}</p>{reason || !view?<p className="current-warning">Current probability unavailable: {reason}</p>:<div className="intelligence-team-comparison"><div><span>{game.away} · AWAY</span><strong>{pct(view.away_probability)}</strong><p>{view.history.away.length} earlier completed current-season games</p></div><div><span>{game.home} · HOME</span><strong>{pct(view.home_probability)}</strong><p>{view.history.home.length} earlier completed current-season games</p></div></div>}
+      {choice?.state === "older" && <p className="current-warning" role="status"><strong>Older forecast — not fresh.</strong> Generated {time(view?.generated_at??null)} from the original verified inputs. The latest recorded source content is unchanged; later schedule changes are not ruled out. No injury, weather or news adjustment is included.</p>}
+      {choice?.state === "archived" && <p className="current-warning"><strong>Archived pregame prediction</strong> · Saved before kickoff; not a live win probability.</p>}
+      <ForecastOutcome game={game} operations={operations.data?.data??null} record={record} now={now}/>
+      <h3>The four frozen predictive factors</h3><p>Values below belong to this archived input snapshot{reason?"; refresh before using it as a current forecast":""}. Rest is capped at 14 days. Smoothed rates and margins include the model’s fixed shrinkage.</p>{view?.factors.length?<Table label="Current matchup model factors"><thead><tr><th>Factor</th><th>{game.away}</th><th>{game.home}</th><th>Home − away</th><th>Log-odds contribution</th></tr></thead><tbody>{view.factors.map(f=><tr key={f.key}><th>{f.label}</th><td>{f.away.toFixed(4)}</td><td>{f.home.toFixed(4)}</td><td>{f.difference.toFixed(4)}</td><td>{f.contribution.toFixed(4)}</td></tr>)}</tbody></Table>:<p className="current-warning">A required observation is unavailable. No input or contribution is imputed for this matchup.</p>}<p>Home-win probability = logistic({data.model.intercept.toFixed(6)} + the four contributions). Positive contributions favor the home team. These are model associations, not causal claims.</p><a href="#history">View forecast versions <ArrowRight size={14}/></a></section>
     </>}
-    {game&&<CurrentContext game={game}/>}
+    {game&&"cutoff" in game&&<CurrentContext game={game}/>}
     <section className="panel"><div className="eyebrow">12 REQUIRED INTELLIGENCE DOMAINS</div><h2>Model inputs and research gaps.</h2><p>“Used by the incumbent” means an input affects upcoming probabilities. Research inputs belong to a separate, unpromoted historical challenger. This inventory describes the archived research training dataset. Current player and team annotations above can be available even when a training input is unavailable. None of the expanded research inputs changes this matchup.</p>{research.error?<div role="alert"><p>{research.error}</p><button className="current-reload" onClick={research.retry}>Retry domain inventory</button></div>:!research.data?<p role="status">Loading verified domain inventory…</p>:<div className="domain-grid">{research.data.data.domains.map(d=><DomainCard key={d.id} domain={d}/>)}</div>}</section>
     <section className="panel intelligence-empty"><h2>Weather, news and remaining gaps</h2><p>Game-time weather, verified team developments, individual quarterback performance and confirmed starters remain unavailable. Observed injury and depth-chart annotations above do not adjust model probabilities. No player or team mental state is inferred.</p></section>
     {record && <p><a href={`${import.meta.env.BASE_URL}data/current/${record.artifact_file}`} download>Original matchup forecast JSON</a> · Generated {time(record.generated_at)}</p>}
