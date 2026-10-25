@@ -3,7 +3,7 @@ import AxeBuilder from "@axe-core/playwright";
 import { readFileSync } from "node:fs";
 import { demonstrationForecasts } from "../src/interview-demo";
 import type { Operations } from "../src/operations-contracts";
-import { displayRecord, selectDisplayForecast } from "../src/forecast-display";
+import { displayGames, displayRecord, selectDisplayForecast } from "../src/forecast-display";
 const pointer=JSON.parse(readFileSync("public/data/current/latest.json","utf8"));
 const contextPointer=JSON.parse(readFileSync("public/data/context/latest.json","utf8"));
 const context=JSON.parse(readFileSync(`public/data/context/${contextPointer.file}`,"utf8"));
@@ -14,6 +14,8 @@ const operations=JSON.parse(readFileSync(`public/data/operations/${operationsPoi
 test("operational intelligence routes, honest evidence, responsive layout and accessibility",async({page},info)=>{
   const errors:string[]=[];page.on("pageerror",e=>errors.push(e.message));
   const now=Math.max(Date.parse(current.generated_at),Date.parse(context.generated_at),Date.parse(operations.generated_at));
+  const games=displayGames(current,operations,now);
+  const game=games[0];
   await page.clock.install({time:new Date(now)});
   await page.goto("./#intelligence");
   for(const [label,route] of [["Matchup Intelligence","intelligence"],["Forecast History","history"],["Postgame Analysis","postgame"],["Model Intelligence","models"]]){
@@ -21,15 +23,14 @@ test("operational intelligence routes, honest evidence, responsive layout and ac
     await expect(page.getByRole("heading",{name:label,exact:true})).toBeVisible();
     if(route==="intelligence"){
       await expect(page.locator(".domain-card")).toHaveCount(12);
-      const game=current.games[0];
       const saved=game?displayRecord(operations,selectDisplayForecast(current,game,operations,now)):null;
-      if((saved??game)?.factors.length)await expect(page.getByRole("region",{name:"Current matchup model factors"})).toBeVisible();
+      if((saved??(game&&"factors" in game?game:null))?.factors.length)await expect(page.getByRole("region",{name:"Current matchup model factors"})).toBeVisible();
       else if(game)await expect(page.getByText(/A required observation is unavailable/)).toBeVisible();
       else await expect(page.getByRole("heading",{name:"No upcoming matchup"})).toBeVisible();
       await expect(page.getByRole("heading",{name:"Weather, news and remaining gaps"})).toBeVisible();
       await page.locator(".domain-card details summary").first().click();
       const matching=context.games.find((g:{id:string;home:string;away:string;kickoff:string|null})=>game&&g.id===game.id&&g.home===game.home&&g.away===game.away&&g.kickoff===game.kickoff);
-      if(game&&matching&&now<Date.parse(context.valid_until)&&(!game.kickoff||now<Date.parse(game.kickoff))){
+      if(game&&"cutoff" in game&&matching&&now<Date.parse(context.valid_until)&&(!game.kickoff||now<Date.parse(game.kickoff))){
         await expect(page.locator(".context-team")).toHaveCount(2);
         await expect(page.getByText("Starter not confirmed.",{exact:true})).toHaveCount(2);
         for(const side of ["home","away"]){
@@ -41,7 +42,7 @@ test("operational intelligence routes, honest evidence, responsive layout and ac
         }
       }else{
         await expect(page.locator(".context-team")).toHaveCount(0);
-        if(game)await expect(page.locator(".current-context-panel [role=status]")).toBeVisible();
+        if(game&&"cutoff" in game)await expect(page.locator(".current-context-panel [role=status]")).toBeVisible();
       }
     }else if(route==="history"){
       const game=operations.games[0];
@@ -74,7 +75,7 @@ test("operational intelligence routes, honest evidence, responsive layout and ac
     await page.evaluate(()=>window.scrollTo(0,0));
     await page.screenshot({path:`${process.env.TEST_ARTIFACT_DIR || "../artifacts/execution"}/${process.env.TEST_BASE_URL?.includes("/nfl-predictor/")?"subpath":"root"}-platform-${route}-${info.project.name}.png`,fullPage:true,animations:"disabled"});
     await page.screenshot({path:`${process.env.TEST_ARTIFACT_DIR || "../artifacts/execution"}/${process.env.TEST_BASE_URL?.includes("/nfl-predictor/")?"subpath":"root"}-viewport-${route}-${info.project.name}.png`,fullPage:false,animations:"disabled"});
-    if(route==="intelligence"&&current.games.length) {await page.locator(".current-context-panel").scrollIntoViewIfNeeded();await page.screenshot({path:`${process.env.TEST_ARTIFACT_DIR || "../artifacts/execution"}/${process.env.TEST_BASE_URL?.includes("/nfl-predictor/")?"subpath":"root"}-context-${info.project.name}.png`,fullPage:false,animations:"disabled"});}
+    if(route==="intelligence"&&game&&"cutoff" in game) {await page.locator(".current-context-panel").scrollIntoViewIfNeeded();await page.screenshot({path:`${process.env.TEST_ARTIFACT_DIR || "../artifacts/execution"}/${process.env.TEST_BASE_URL?.includes("/nfl-predictor/")?"subpath":"root"}-context-${info.project.name}.png`,fullPage:false,animations:"disabled"});}
     await page.reload();
     await expect(page.getByRole("heading",{name:label,exact:true})).toBeVisible();
   }
@@ -97,11 +98,14 @@ test("freshness expiry keeps eligible older forecasts and immutable history insp
   await page.clock.install({time:new Date(now)});
   await page.goto("./#current");
   await expect(page.getByText("Older forecasts — not fresh",{exact:true})).toBeVisible();
-  const visible=await page.locator(".current-probabilities").count();
-  await expect(page.locator(".current-card summary strong").filter({hasText:/^Older forecast$/})).toHaveCount(visible);
+  const games=displayGames(current,operations,now);
+  const choices=games.map(game=>selectDisplayForecast(current,game,operations,now));
+  await expect(page.locator(".current-card summary strong").filter({hasText:/^Older forecast$/})).toHaveCount(choices.filter(c=>c.state==="older").length);
+  await expect(page.locator(".current-card").getByText("Archived pregame prediction",{exact:true})).toHaveCount(choices.filter(c=>c.state==="archived").length);
   await page.getByRole("link",{name:"Matchup Intelligence",exact:true}).click();
-  if(!current.games.length)await expect(page.getByRole("heading",{name:"No upcoming matchup"})).toBeVisible();
-  else if(await page.locator(".intelligence-team-comparison").count())await expect(page.getByText("Older forecast — not fresh.",{exact:true})).toBeVisible();
+  if(!games.length)await expect(page.getByRole("heading",{name:"No upcoming matchup"})).toBeVisible();
+  else if(choices[0].state==="archived")await expect(page.getByText("Archived pregame prediction",{exact:true})).toBeVisible();
+  else if(choices[0].state==="older")await expect(page.getByText("Older forecast — not fresh.",{exact:true})).toBeVisible();
   await page.getByRole("link",{name:"Forecast History",exact:true}).click();
   if(operations.games.length){
     await expect(page.getByText("Original record",{exact:true})).toBeVisible();
