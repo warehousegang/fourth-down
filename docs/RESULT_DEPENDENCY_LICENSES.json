@@ -1,0 +1,22 @@
+[
+  {
+    "name": "rdata",
+    "version": "1.1.0",
+    "files": [
+      {
+        "source": "rdata-1.1.0.dist-info/licenses/LICENSE",
+        "sha256": "3e7e73e8b4d9fda45c78be9442d329d35b59236acdaeb31131c7adb640b9eea9"
+      }
+    ]
+  },
+  {
+    "name": "xarray",
+    "version": "2026.9.0",
+    "files": [
+      {
+        "source": "xarray-2026.9.0.dist-info/licenses/LICENSE",
+        "sha256": "533d735a2bbc40eccebe20014c38a2bf6fb1afd488398d2c508006496099af17"
+      }
+    ]
+  }
+]

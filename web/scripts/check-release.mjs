@@ -25,7 +25,14 @@ assert.equal(demo.evaluation.holdout_status, "locked");
 assert.equal(protocol.execution_authorized, false);
 assert.equal(json("docs/HOLDOUT_EXPOSURE.json").status, "partially-exposed");
 assert.deepEqual(readdirSync(resolve(root, "web/public")).sort(), ["CURRENT_DATA_NOTICE.txt", "THIRD_PARTY_NOTICES.txt", "data"]);
-assert.deepEqual(readdirSync(resolve(root, "web/public/data")).sort(), ["context", "current", "demo.json", "operations", "research"]);
+assert.deepEqual(readdirSync(resolve(root, "web/public/data")).filter(n=>n!=="game-day.json").sort(), ["context", "current", "demo.json", "operations", "research"]);
+if(existsSync(resolve(root,"web/public/data/game-day.json"))){
+  const plan=json("web/public/data/game-day.json"), op=json("web/public/data/operations/latest.json");
+  const operations=json(`web/public/data/operations/${op.file}`);
+  assert.equal(plan.operations_sha256,op.sha256);
+  assert.equal(plan.season,operations.season);
+  assert.deepEqual(plan.games,operations.schedule.map(({id,kickoff,status})=>({id,kickoff,status})));
+}
 const currentPath = "web/public/data/current/";
 const pointer = json(currentPath + "latest.json");
 assert.match(pointer.sha256, /^[a-f0-9]{64}$/);

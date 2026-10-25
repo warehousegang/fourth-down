@@ -16,8 +16,6 @@ def select_display_forecast(current, game, operations, now):
         return blocked("Verified forecast history is unavailable.")
     if timestamp(current["generated_at"]) > now or timestamp(operations["generated_at"]) > now:
         return blocked("Forecast evidence is dated in the future.")
-    if not game["kickoff"]:
-        return blocked("Kickoff is unconfirmed; no eligible pregame prediction is displayed.")
     if (operations["season"] != current["season"]
             or timestamp(operations["source"]["retrieved_at"]) < timestamp(current["source"]["retrieved_at"])):
         return blocked("Forecast and latest source evidence do not match.")
@@ -25,9 +23,11 @@ def select_display_forecast(current, game, operations, now):
     identity = ("home", "away", "kickoff", "day", "week", "season")
     if not scheduled or any(scheduled[k] != game[k] for k in identity):
         return blocked("The observed schedule changed; inspect the retained forecast history.")
-    if scheduled["status"] in {"postponed", "canceled"}:
-        return blocked("The game is postponed or canceled; earlier forecasts remain in Forecast History.")
-    archived = now >= timestamp(game["kickoff"])
+    halted = scheduled["status"] in {"postponed", "canceled"}
+    if not game['kickoff'] and not halted:
+        return blocked("Kickoff is unconfirmed; no eligible pregame prediction is displayed.")
+    archived = halted or now >= timestamp(game['kickoff'])
+    historic_exclusions = {"Game is canceled or awaiting confirmed rescheduled kickoff", "Schedule identity changed; a new pregame forecast is required"}
     if not archived:
         if scheduled["status"] != "scheduled" or game["source_phase"] not in SCHEDULED:
             return blocked("The matchup is not confirmed scheduled.")
@@ -38,13 +38,13 @@ def select_display_forecast(current, game, operations, now):
         if operations["source"]["raw_sha256"] != current["source"]["raw_sha256"]:
             return blocked("Forecast and latest source evidence do not match.")
     candidates = [f for f in operations["catalog"] if (
-        f["game_id"] == game["id"] and f["eligible"] and not f["exclusions"]
+        f["game_id"] == game["id"] and ((f["eligible"] and not f["exclusions"]) or (halted and f["exclusions"] and all(e in historic_exclusions for e in f["exclusions"])))
         and f["forecast_status"] == "available"
-        and all(f[k] == game[k] for k in identity)
+        and all(f[k] == game[k] for k in identity if not halted or k not in {"kickoff", "day"})
         and (archived or (f["schedule_fingerprint"] == game["schedule_fingerprint"]
                          and f["source"]["raw_sha256"] == current["source"]["raw_sha256"]))
         and timestamp(f["generated_at"]) <= now
-        and timestamp(f["generated_at"]) < timestamp(game["kickoff"]))]
+        and f["kickoff"] and timestamp(f["generated_at"]) < timestamp(f["kickoff"]))]
     if not candidates:
         return blocked("No eligible forecast with verified unchanged inputs is available.")
     record = max(candidates, key=lambda f: (timestamp(f["generated_at"]), f["id"]))

@@ -34,11 +34,13 @@ export const operationsSchema = z.object({
   schema_version: z.literal(1), mode: z.literal("forecast-operations"), season: z.number().int().min(2026), generated_at: timestamp,
   model_id: z.literal(frozen.model.id), protocol: z.object({ version: z.string(), sha256: digest }),
   source: z.object({ snapshot_sha256: digest, retrieved_at: timestamp, source_updated_at: timestamp, source_url: sourceURL, raw_sha256: digest }),
+  result_feed: z.object({provider:z.literal("nflverse"),source_url:z.literal("https://github.com/nflverse/nflverse-pbp"),license_url:z.literal("https://github.com/nflverse/nflverse-pbp/blob/master/LICENSE.md"),base_operations_sha256:digest,last_observed_at:timestamp,source_updated_at:timestamp}).optional(),
   schedule: z.array(z.object({ id: z.string(), season: z.number().int().min(2026), week: count.min(1).max(18), home: z.string(), away: z.string(), kickoff: timestamp.nullable(), day: z.string().nullable(), stadium: z.string(), status, source_phase: z.string() })).max(300),
   catalog: z.array(catalog).max(10000),
   games: z.array(z.object({ id: z.string(), home: z.string(), away: z.string(), week: count.min(1).max(18), kickoff: timestamp.nullable(), status,
     forecast_ids: z.array(digest), original_forecast_id: digest.nullable(), latest_forecast_id: digest.nullable(), final_forecast_id: digest.nullable(),
-    result: z.object({ version: z.string(), home_score: count, away_score: count, tie: z.boolean(), observed_at: timestamp, source_url: sourceURL, snapshot_sha256: digest }).nullable(),
+    result_evidence:digest.optional(),
+    result: z.object({ version: z.string(), home_score: count.max(200), away_score: count.max(200), tie: z.boolean(), observed_at: timestamp, source_url: sourceURL, snapshot_sha256: digest,raw_sha256:digest.optional(),source_updated_at:timestamp.optional(),provider:z.literal("nflverse").optional() }).nullable(),
     evaluations: z.array(evaluation), analysis: z.object({ facts: z.array(z.object({ text: z.string(), source_url: sourceURL, observed_at: timestamp })), hypotheses: z.array(z.object({ text: z.string(), evidence_needed: z.string() })), deficiencies: z.array(z.string()) }).nullable(),
   })).max(300),
   metrics: z.object({ primary: metricSet, all_snapshots: metricSet }), warnings: z.array(z.string()), limitations: z.array(z.string()),
@@ -47,6 +49,7 @@ export const operationsSchema = z.object({
   const close = (a: number | null, b: number | null) => a === null || b === null ? a === b : Math.abs(a-b) < 1e-9;
   if (compareTimestamp(data.source.source_updated_at, data.source.retrieved_at) > 0 || compareTimestamp(data.source.retrieved_at, data.generated_at) > 0) fail("Invalid operations time ordering");
   if (!data.source.source_url.endsWith(`/ngs_schedule_${data.season}.csv`)) fail("Operations source season mismatch");
+  if(data.result_feed&&(compareTimestamp(data.result_feed.source_updated_at,data.result_feed.last_observed_at)>0||compareTimestamp(data.result_feed.last_observed_at,data.generated_at)>0))fail("Invalid supplemental result time ordering");
   const snapshots = new Map(data.catalog.map(f => [f.id, f]));
   const schedule = new Map(data.schedule.map(g => [g.id, g]));
   if (snapshots.size !== data.catalog.length || schedule.size !== data.schedule.length || new Set(data.games.map(g => g.id)).size !== data.games.length) fail("Duplicate operations records");
@@ -83,6 +86,7 @@ export const operationsSchema = z.object({
     if (g.latest_forecast_id && (!g.forecast_ids.includes(g.latest_forecast_id) || !snapshots.get(g.latest_forecast_id)?.latest)) fail("Latest forecast mismatch");
     if (g.final_forecast_id && (!g.forecast_ids.includes(g.final_forecast_id) || !snapshots.get(g.final_forecast_id)?.selected_final || !snapshots.get(g.final_forecast_id)?.eligible || !g.kickoff || compareTimestamp(g.kickoff,data.generated_at)>0)) fail("Invalid final pregame forecast");
     if (g.result) {
+      if(g.result.provider==="nflverse"&&(!data.result_feed||g.result_evidence!==g.result.snapshot_sha256||!g.result.raw_sha256||!g.result.source_updated_at||!g.kickoff||compareTimestamp(g.result.source_updated_at,g.kickoff)<=0||compareTimestamp(g.result.source_updated_at,g.result.observed_at)>0||g.result.source_url!==`https://github.com/nflverse/nflverse-pbp/releases/download/raw_pbp_${data.season}/${data.season}_${String(g.week).padStart(2,"0")}_${g.away}_${g.home}.rds`))fail("Invalid supplemental final-result provenance");
       if (g.status !== "completed" || g.result.tie !== (g.result.home_score === g.result.away_score) || compareTimestamp(g.result.observed_at,data.generated_at)>0 || !g.kickoff || compareTimestamp(g.result.observed_at,g.kickoff)<=0) fail("Unverified result");
       if (g.result.tie) { if(g.final_forecast_id)ties++; tiesAll+=records.filter(f=>f?.eligible).length; }
     }

@@ -45,7 +45,7 @@ const routes = [
 ] as const;
 type Route = (typeof routes)[number];
 const nav = [
-  ["current", "Current Week Forecasts", Clock3, "Upcoming Games"],
+  ["current", "Current Week Forecasts", Clock3, "Games & Results"],
   ["intelligence", "Matchup Intelligence", Target, "Matchup Intelligence"],
   ["history", "Forecast History", History, "Forecast History"],
   ["models", "Model Intelligence", BarChart3, "Model Intelligence"],
@@ -185,7 +185,7 @@ export function App() {
             <strong>{[...nav, ...historicalNav].find((n) => n[0] === location.route)?.[1]}</strong>
           </span>
           <span className="replay-badge">
-            <span /> {location.route === "current" || location.route === "intelligence" ? "UPCOMING · STATIC FORECAST" : needsHistorical(location.route) && location.route !== "architecture" ? "2023 HISTORICAL REPLAY" : "LOCAL EVIDENCE · REVIEW BUILD"}
+            <span /> {location.route === "current" || location.route === "intelligence" ? "SAVED PICKS · VERIFIED RESULTS" : needsHistorical(location.route) && location.route !== "architecture" ? "2023 HISTORICAL REPLAY" : "LOCAL EVIDENCE · REVIEW BUILD"}
           </span>
         </header>
         <main id="main-content" tabIndex={-1}>

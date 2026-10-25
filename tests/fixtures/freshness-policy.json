@@ -454,7 +454,7 @@
     },
     {
       "name": "postponed",
-      "expected": "unavailable",
+      "expected": "archived",
       "now": "2026-10-25T12:00:00Z",
       "changes": [
         [
@@ -557,7 +557,7 @@
     },
     {
       "name": "postponed-after-old-kickoff",
-      "expected": "unavailable",
+      "expected": "archived",
       "now": "2026-10-25T17:30:00Z",
       "changes": [
         [
@@ -568,7 +568,7 @@
     },
     {
       "name": "canceled-after-kickoff",
-      "expected": "unavailable",
+      "expected": "archived",
       "now": "2026-10-25T17:30:00Z",
       "changes": [
         [
@@ -620,6 +620,27 @@
       "expected": "unavailable",
       "now": "2026-10-25T17:30:00Z",
       "changes": [
+        [
+          "operations.catalog.0.eligible",
+          false
+        ],
+        [
+          "operations.catalog.0.exclusions",
+          [
+            "Original input snapshot unavailable"
+          ]
+        ]
+      ]
+    },
+    {
+      "name": "canceled-missing-input-proof",
+      "expected": "unavailable",
+      "now": "2026-10-25T17:30:00Z",
+      "changes": [
+        [
+          "operations.schedule.0.status",
+          "canceled"
+        ],
         [
           "operations.catalog.0.eligible",
           false

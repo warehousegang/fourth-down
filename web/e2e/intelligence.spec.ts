@@ -97,15 +97,14 @@ test("freshness expiry keeps eligible older forecasts and immutable history insp
   const now=Math.max(Date.parse(current.valid_until),Date.parse(current.generated_at),Date.parse(operations.generated_at))+1000;
   await page.clock.install({time:new Date(now)});
   await page.goto("./#current");
-  await expect(page.getByText("Older forecasts — not fresh",{exact:true})).toBeVisible();
+  await expect(page.getByText("Older forecasts — not fresh",{exact:true})).toHaveCount(0);
   const games=displayGames(current,operations,now);
   const choices=games.map(game=>selectDisplayForecast(current,game,operations,now));
-  await expect(page.locator(".current-card summary strong").filter({hasText:/^Older forecast$/})).toHaveCount(choices.filter(c=>c.state==="older").length);
-  await expect(page.locator(".current-card").getByText("Archived pregame prediction",{exact:true})).toHaveCount(choices.filter(c=>c.state==="archived").length);
+  await expect(page.locator(".current-card").getByText("Pregame prediction",{exact:true})).toHaveCount(choices.filter(c=>c.state!=="unavailable").length);
   await page.getByRole("link",{name:"Matchup Intelligence",exact:true}).click();
   if(!games.length)await expect(page.getByRole("heading",{name:"No upcoming matchup"})).toBeVisible();
-  else if(choices[0].state==="archived")await expect(page.getByText("Archived pregame prediction",{exact:true})).toBeVisible();
-  else if(choices[0].state==="older")await expect(page.getByText("Older forecast — not fresh.",{exact:true})).toBeVisible();
+  else if(choices[0].state==="archived")await expect(page.getByText("Pregame prediction",{exact:true})).toBeVisible();
+  else if(choices[0].state==="older")await expect(page.getByText("Pregame prediction",{exact:true})).toBeVisible();
   await page.getByRole("link",{name:"Forecast History",exact:true}).click();
   if(operations.games.length){
     await expect(page.getByText("Original record",{exact:true})).toBeVisible();

@@ -40,3 +40,14 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+SUPPLEMENTAL COMPLETED-GAME RESULTS
+nflverse / nflverse-pbp, licensed under Creative Commons Attribution 4.0 International.
+Source: https://github.com/nflverse/nflverse-pbp/releases
+License: https://github.com/nflverse/nflverse-pbp/blob/master/LICENSE.md
+License summary: https://creativecommons.org/licenses/by/4.0/
+Fourth Down reads only explicitly selected current-season, per-game published files.
+Derived output: normalized game status, verified final score, and prospective V1
+prediction scores. Original raw bytes and observation timestamps are retained.
+This result adapter does not change forecast inputs, model coefficients, or
+archived probabilities. nflverse and the NFL do not endorse Fourth Down.

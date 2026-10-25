@@ -76,3 +76,27 @@ it("keeps tied outcomes out of binary metrics and verifies both exclusion popula
   for(const key of ["primary","all_snapshots"] as const){const m=d.metrics[key];Object.assign(m,empty,{game_count:0,ties_excluded:key==="primary"?1:d.catalog.filter(f=>f.eligible).length});m.baselines={coin_flip:{...empty},home_rate:{...empty}};m.by_season=[];m.calibration=m.calibration.map(b=>({...b,count:0,mean_probability:null,home_win_rate:null,brier:null}));}
   expect(operationsSchema.safeParse(d).success).toBe(true);d.metrics.all_snapshots.ties_excluded=99;expect(operationsSchema.safeParse(d).success).toBe(false);
 });
+
+function supplementalResult() {
+  const data=completedFixture(),game=data.games[0];
+  data.result_feed={provider:"nflverse",source_url:"https://github.com/nflverse/nflverse-pbp",
+    license_url:"https://github.com/nflverse/nflverse-pbp/blob/master/LICENSE.md",base_operations_sha256:"a".repeat(64),
+    last_observed_at:data.generated_at,source_updated_at:data.generated_at};
+  game.result_evidence="b".repeat(64);
+  Object.assign(game.result!,{provider:"nflverse",snapshot_sha256:game.result_evidence,raw_sha256:"c".repeat(64),
+    source_updated_at:data.generated_at,source_url:`https://github.com/nflverse/nflverse-pbp/releases/download/raw_pbp_${data.season}/${data.season}_${String(game.week).padStart(2,"0")}_${game.away}_${game.home}.rds`});
+  return data;
+}
+it("accepts a verified supplemental final without changing original forecast receipts",()=>{
+  const data=supplementalResult();
+  expect(operationsSchema.safeParse(data).success).toBe(true);
+  expect(data.catalog).toEqual(completedFixture().catalog);
+});
+it.each(["url","digest","time","feed"] as const)("rejects supplemental result provenance tampering: %s",field=>{
+  const data=supplementalResult(),result=data.games[0].result!;
+  if(field==="url")result.source_url=result.source_url.replace("raw_pbp_2026","raw_pbp_2025");
+  if(field==="digest")delete result.raw_sha256;
+  if(field==="time")result.source_updated_at="2027-01-01T00:00:00Z";
+  if(field==="feed")delete data.result_feed;
+  expect(operationsSchema.safeParse(data).success).toBe(false);
+});

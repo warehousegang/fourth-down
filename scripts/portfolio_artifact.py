@@ -58,11 +58,11 @@ def source_revision(generated_only=False):
         if not entry:
             continue
         status, name = entry[:2], entry[3:]
-        evidence = re.fullmatch(r'ops/forecast-evidence-20[2-9][0-9]\.(json|zip)', name)
+        evidence = re.fullmatch(r'ops/(forecast|result)-evidence-20[2-9][0-9]\.(json|zip)', name)
         if evidence and int(name.split('-')[-1].split('.')[0]) < 2026:
             evidence = None
         if (not generated_only or any(c in status for c in 'DRCU')
-                or not (name.startswith(prefixes) or evidence)):
+                or not (name.startswith(prefixes) or name == 'web/public/data/game-day.json' or evidence)):
             raise ValueError('Commit the reviewed source before packaging; only generated state may differ')
     return subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT).decode().strip()
 

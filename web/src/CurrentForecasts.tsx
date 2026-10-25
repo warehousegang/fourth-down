@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
-import { ArrowRight, ChevronDown, Clock3, Database, RefreshCw, ShieldCheck } from "lucide-react";
-import { loadCurrent, type LoadedCurrent } from "./current-contracts";
+import { ArrowRight, RefreshCw } from "lucide-react";
+import { loadCurrent } from "./current-contracts";
 import { loadOperations } from "./operations-contracts";
 import { useArtifact } from "./use-artifact";
 import { selectDisplayForecast, displayRecord, displayGames } from "./forecast-display";
-import { ForecastOutcome } from "./ForecastOutcome";
+import { ForecastOutcome, gameStatus } from "./ForecastOutcome";
+import { PredictionScoreboard } from "./PredictionScoreboard";
+import { PredictionDetails } from "./PredictionDetails";
 import { team } from "./teams";
 import { TeamMark } from "./TeamMark";
 import { ObservedSchedule } from "./ObservedSchedule";
@@ -14,76 +15,54 @@ const time = (s: string | null) => s ? new Intl.DateTimeFormat("en-US", { month:
 const pct = (p: number) => `${(p*100).toFixed(1)}%`;
 
 export function CurrentForecasts() {
-  const operations = useArtifact(loadOperations);
-  const [loaded, setLoaded] = useState<LoadedCurrent | null>(null);
-  const [error, setError] = useState("");
-  const [attempt, setAttempt] = useState(0);
-  const now = useForecastClock(loaded ? [loaded.data.valid_until, ...loaded.data.games.map(g=>g.kickoff)] : []);
-  useEffect(() => {
-    let active = true;
-    setError(""); setLoaded(null);
-    loadCurrent().then(value => { if (active) setLoaded(value); }).catch(e => { if (active) setError(e.message); });
-    return () => { active = false; };
-  }, [attempt]);
-  if (error) return <section className="empty-state" role="alert"><h1>Current forecasts unavailable</h1><p>{error}</p><p>Historical analysis remains available in the navigation.</p><button onClick={() => setAttempt(n => n+1)}>Retry artifact load</button></section>;
+  const operations = useArtifact(loadOperations,60_000);
+  const current = useArtifact(loadCurrent,60_000);
+  const loaded=current.data;
+  const now=useForecastClock(loaded?[loaded.data.valid_until,...loaded.data.games.map(g=>g.kickoff)]:[]);
+  if (!loaded && current.error) return <section className="empty-state" role="alert"><h1>Current forecasts unavailable</h1><p>{current.error}</p><p>Historical analysis remains available in the navigation.</p><button onClick={current.retry}>Retry artifact load</button></section>;
   if (!loaded) return <section className="empty-state" role="status"><h1>Loading Current Week Forecasts</h1><p>Verifying the snapshot and frozen model…</p></section>;
   const { data } = loaded;
-  const evidence = operations.data?.data ?? null;
+  const candidate = operations.data?.data;
+  const evidence = candidate && Date.parse(candidate.generated_at)<=now ? candidate : null;
   const games = displayGames(data,evidence,now);
-  const choices = games.map(g => selectDisplayForecast(data,g,evidence,now));
-  const fresh = choices.filter(c => c.state === "fresh").length;
-  const older = choices.filter(c => c.state === "older").length;
-  const archived = choices.filter(c => c.state === "archived").length;
-  const expired = now >= Date.parse(data.valid_until);
+  const recentWeek=Math.max(0,...games.filter(g=>g.kickoff&&Date.parse(g.kickoff)<=now).map(g=>g.week));
+  const week=recentWeek||data.week;
   return <>
     <section className="page-heading hero-heading current-heading">
-      <div><div className="eyebrow">// {data.season} NFL · {data.week ? `WEEK ${String(data.week).padStart(2,"0")}` : "NO UPCOMING WEEK"}</div>
-        <h1><span className="hero-intro">Next up.</span><span>Before the kickoff.</span></h1>
-        <h2>Current Week Forecasts</h2><p>Upcoming games and archived pregame predictions. The original frozen model.<br/>A dated snapshot of what the model knows.</p></div>
+      <div><div className="eyebrow">// {data.season} NFL · PREGAME PICKS & VERIFIED RESULTS</div>
+        <h1><span className="hero-intro">NFL predictions.</span><span>From kickoff to final.</span></h1>
+        <h2>Current Week Forecasts</h2><p>See the pick, follow the result, and track the record.<br/>Every prediction stays fixed once the game begins.</p></div>
     </section>
-    <section className="current-provenance panel" aria-label="Current forecast provenance">
-      <div><span className="eyebrow"><Clock3 size={14}/> LATEST DECISION TIME</span><strong><time dateTime={data.as_of} title={data.as_of}>{time(data.as_of)}</time></strong></div>
-      <div><span className="eyebrow"><Database size={14}/> SOURCE FILE UPDATED</span><strong><time dateTime={data.source.source_updated_at} title={data.source.source_updated_at}>{time(data.source.source_updated_at)}</time></strong></div>
-      <div><span className="eyebrow"><ShieldCheck size={14}/> FORECAST AVAILABILITY</span><dl className="current-status-counts" aria-label="Forecast availability">
-        <div><dt>Displayable</dt><dd>{fresh + older + archived}<span> of {games.length}</span></dd></div>
-        <div><dt>Fresh</dt><dd>{fresh}</dd></div>
-        <div><dt>Older</dt><dd>{older}</dd></div>
-        {archived > 0 && <div><dt>Archived</dt><dd>{archived}</dd></div>}
-      </dl></div>
-      <p>Latest decision artifact: <time dateTime={data.generated_at} title={data.generated_at}>{time(data.generated_at)}</time> · Source retrieved: <time dateTime={data.source.retrieved_at} title={data.source.retrieved_at}>{time(data.source.retrieved_at)}</time>.<br/>Source freshness deadline: {time(data.valid_until)}. Checking the source again does not change its file-update time or the original prediction timestamps.</p>
-    </section>
-    {(expired || older > 0) && <details className="current-freshness-notice current-global-freshness"><summary><strong>Older forecasts — not fresh</strong><span className="current-notice-toggle">Details <ChevronDown size={14} aria-hidden="true"/></span></summary><p>A source check is not a new prediction. Eligible saved estimates keep their original timestamps and verified inputs. Upcoming estimates require unchanged source inputs. Archived pregame predictions retain their original source; later observations may include results or corrections. No late-breaking injuries, weather or news are included.</p></details>}
-    {operations.error && <p className="current-warning" role="alert">Forecast provenance unavailable: {operations.error} Probabilities remain hidden until history is verified.</p>}
-    {data.warnings.map(w => <p className="current-warning" key={w}>{w}</p>)}
-    <p className="current-context">Current-season inputs only: season win rate, scoring margin, recent margin and rest. No injury, player-news, weather or prior-season strength adjustment. Probabilities are conditional on no tie.</p>
-    {!games.length && <section className="panel"><h2>No upcoming regular-season games</h2><p>No matchups are invented. Refresh when a confirmed schedule is available.</p></section>}
+    <PredictionScoreboard operations={evidence} week={week} error={operations.error??undefined}/>
+    <p className="game-day-note">Pregame predictions use the inputs available when saved. Injuries, weather, and breaking news are not included. Results appear only after verification.</p>
+    {operations.error && <p className="current-warning" role="alert">Forecast provenance unavailable: {operations.error} {evidence?"Showing the last verified saved evidence.":"Predictions will return when their saved evidence can be verified."}</p>}
+    {!games.length && <section className="panel"><h2>No current matchups</h2><p>Saved predictions remain available in Forecast History. No matchups or results are invented.</p></section>}
     <div className="current-grid">
       {games.map(g => {
         const choice = selectDisplayForecast(data,g,evidence,now);
         const record = displayRecord(evidence,choice);
         const view = record ?? ("cutoff" in g ? g : null);
         const reason = choice.reason;
-        return <article key={g.id} className="panel current-card" aria-label={`${team(g.away).name} at ${team(g.home).name} current forecast`}>
-          <div className="current-card-top"><span>WEEK {g.week}</span><span>{time(g.kickoff)}</span></div>
+        const status=gameStatus(g,evidence,now);
+        const predicted=record&&record.home_probability!==null?team(record.home_probability>=.5?g.home:g.away).name:null;
+        return <article key={g.id} className={`panel current-card game-day-card${status==="Final"?" game-final":""}`} aria-label={`${team(g.away).name} at ${team(g.home).name} current forecast`}>
+          <div className="current-card-top"><span>WEEK {g.week}</span><span className={`game-status status-${status.toLowerCase().replaceAll(" ","-")}`}>{status}</span></div>
+          <p className="game-kickoff">Kickoff <time dateTime={g.kickoff??undefined}>{time(g.kickoff)}</time></p>
           <div className="current-teams"><div><TeamMark code={g.away} size="current"/><h3>{team(g.away).name}</h3><small>{g.away} · AWAY</small></div><span className="current-at">at</span><div><TeamMark code={g.home} size="current"/><h3>{team(g.home).name}</h3><small>{g.home} · HOME</small></div></div>
-          <p className="muted current-venue">{g.stadium}</p>
-          {reason || !view ? <div className="current-unavailable"><strong>Prediction unavailable</strong><p>{reason}</p></div> : <div className="current-probabilities"><div><span>{g.away}</span><strong>{pct(view.away_probability!)}</strong><strong>{pct(view.home_probability!)}</strong><span>{g.home}</span></div><div className="current-probability-bar" aria-hidden="true"><span style={{width:pct(view.away_probability!)}}/></div>{choice.state === "fresh" && <small>MODEL ESTIMATE · NOT A GUARANTEE</small>}</div>}
-          {choice.state === "older" && record && <details className="current-freshness-notice"><summary><strong>Older forecast</strong><span className="current-notice-toggle">Details <ChevronDown size={14} aria-hidden="true"/></span></summary><p>Saved pregame estimate, not a live update or guarantee. Original timestamp below; source limitations above apply.</p></details>}
-          {choice.state === "archived" && <p className="current-warning"><strong>Archived pregame prediction</strong><br/>Saved before kickoff; not a live win probability.</p>}
+          {reason || !record ? <div className="current-unavailable"><strong>Prediction unavailable</strong><p>No eligible, verified pregame prediction is available for this matchup. See Prediction details for the reason.</p></div> : <>
+            <div className="prediction-label">Pregame prediction</div>
+            <div className="current-probabilities"><div><span>{g.away}</span><strong>{pct(record.away_probability!)}</strong><strong>{pct(record.home_probability!)}</strong><span>{g.home}</span></div><div className="current-probability-bar" aria-hidden="true"><span style={{width:pct(record.away_probability!)}}/></div></div>
+            <p className="predicted-winner">Predicted winner <strong>{predicted}</strong></p>
+          </>}
+          {record && <p className="current-cutoff">Prediction saved <time dateTime={record.generated_at} title={record.generated_at}>{time(record.generated_at)}</time></p>}
           <ForecastOutcome game={g} operations={evidence} record={record} now={now}/>
-          {("warnings" in g ? g.warnings : []).map(w => <p className="current-warning small" key={w}>{w}</p>)}
-          {view && <p className="current-cutoff">Forecast generated: <time dateTime={view.generated_at} title={view.generated_at}>{time(view.generated_at)}</time><br/>Feature cutoff: <time dateTime={view.cutoff} title={view.cutoff}>{time(view.cutoff)}</time><br/>Matchup: {g.id}</p>}
-          <div className="current-card-actions">
-            <a className="current-intelligence-link" href={`#intelligence?game=${encodeURIComponent(g.id)}`}>Explore matchup intelligence <ArrowRight size={14} aria-hidden="true"/></a>
-            {reason && <a href="#history">Inspect retained forecast history</a>}
-            {record && <a className="current-data-link" href={`${import.meta.env.BASE_URL}data/current/${record.artifact_file}`} download>View prediction data (JSON)</a>}
-          </div>
-          {!reason && view && <details className="current-inputs"><summary>Inspect the four model inputs <ArrowRight size={14}/></summary><p>Earlier completed games: {g.away} {view.history.away.length} · {g.home} {view.history.home.length}. Results must be observed as final before this cutoff; same-day games are excluded.</p><div className="current-feature-table" role="region" aria-label={`${g.away} at ${g.home} feature values`} tabIndex={0}><table><thead><tr><th>Input</th><th>{g.away}</th><th>{g.home}</th><th>Contribution</th></tr></thead><tbody>{view.factors.map(f=><tr key={f.key}><th>{f.label}</th><td>{f.away.toFixed(3)}</td><td>{f.home.toFixed(3)}</td><td>{f.contribution.toFixed(4)}</td></tr>)}</tbody></table></div><p>Contribution = coefficient × (home − away), in log-odds. Frozen intercept {data.model.intercept.toFixed(6)}. These associations are not causal explanations.</p></details>}
+          <div className="current-card-actions"><a className="current-intelligence-link" href={`#intelligence?game=${encodeURIComponent(g.id)}`}>Explore matchup intelligence <ArrowRight size={14} aria-hidden="true"/></a>{reason&&<a href="#history">Inspect retained forecast history</a>}{record&&<a className="current-data-link" href={`${import.meta.env.BASE_URL}data/current/${record.artifact_file}`} download>View prediction data (JSON)</a>}</div>
+          <PredictionDetails record={view} current={data} reason={reason}/>
         </article>;
       })}
     </div>
     <ObservedSchedule initialWeek={data.week}/>
-    <section className="panel current-limitations"><div className="eyebrow">READ BEFORE USING</div><h2>What this forecast can tell you</h2><ul>{data.limitations.map(l=><li key={l}>{l}</li>)}</ul><p>The 2024–2025 assessment remains locked and partially exposed. This screen does not evaluate those seasons or imply new accuracy evidence.</p><a href="#performance">View the separate 2023 validation <ArrowRight size={15}/></a></section>
-    <footer className="current-footer"><span>FOURTH DOWN / Current forecast snapshot</span><span>Source: <a href={data.source.source_url} target="_blank" rel="noreferrer">SportsDataverse / NFL Next Gen Stats</a> · <a href={`${import.meta.env.BASE_URL}CURRENT_DATA_NOTICE.txt`}>Data attribution and license</a></span><p>Model {data.model.id} · No affiliation with the NFL. Educational research, not betting advice.</p><details><summary>Version and source provenance</summary><p>Forecast SHA256: {loaded.sha256}<br/>Source SHA256: {data.source.raw_sha256}<br/>Snapshot SHA256: {data.snapshot_sha256}</p><a href={`${import.meta.env.BASE_URL}data/current/${loaded.file}`} download>Download this forecast JSON</a></details><a href={`${import.meta.env.BASE_URL}THIRD_PARTY_NOTICES.txt`}>Third-party dependency notices</a><button className="current-reload" onClick={()=>{setAttempt(n=>n+1); operations.retry();}}><RefreshCw size={14}/> Reload published artifacts</button></footer>
+    <details className="panel current-limitations"><summary>Model limitations and research context</summary><ul>{data.limitations.map(l=><li key={l}>{l}</li>)}</ul><p>The 2024–2025 assessment remains locked and partially exposed. This screen does not evaluate those seasons or imply new accuracy evidence.</p><a href="#performance">View the separate 2023 validation <ArrowRight size={15}/></a></details>
+    <footer className="current-footer"><span>FOURTH DOWN / Saved predictions · Verified results</span><span>Schedule: <a href={data.source.source_url} target="_blank" rel="noreferrer">SportsDataverse / NFL Next Gen Stats</a> · Results: <a href="https://github.com/nflverse/nflverse-pbp">nflverse</a> · <a href={`${import.meta.env.BASE_URL}CURRENT_DATA_NOTICE.txt`}>Data attribution and license</a></span><p>Model {data.model.id} · No affiliation with the NFL. Educational research, not betting advice.</p><details><summary>Published data and source provenance</summary><p>Latest decision: {time(data.generated_at)}<br/>Source published: {time(data.source.source_updated_at)}<br/>Source observed: {time(data.source.retrieved_at)}<br/>Forecast SHA256: {loaded.sha256}<br/>Source SHA256: {data.source.raw_sha256}<br/>Snapshot SHA256: {data.snapshot_sha256}</p><a href={`${import.meta.env.BASE_URL}data/current/${loaded.file}`} download>Download this forecast JSON</a></details><a href={`${import.meta.env.BASE_URL}THIRD_PARTY_NOTICES.txt`}>Third-party dependency notices</a><button className="current-reload" onClick={()=>{current.retry(); operations.retry();}}><RefreshCw size={14}/> Check published updates</button></footer>
   </>;
 }
