@@ -7,6 +7,7 @@ from pathlib import Path
 from ml.data import ROOT
 from ml.features import FEATURES, VERSION, Record
 from ml.forecast import score
+from ml.freshness import SOURCE_STALE_REASON
 from ml.current_source import (EASTERN, FINAL, SCHEDULED, acquire, canonical, check_season,
                                current_season, iso, load_snapshot, sha, timestamp)
 
@@ -138,7 +139,7 @@ def generate(snapshot, prior_snapshots, as_of, generated_at=None):
             item["warnings"].append("Schedule changed since the previous snapshot; this version uses the revised date and kickoff.")
         try:
             if as_of - updated > MAX_AGE:
-                raise ValueError("Source is over 48 hours old; refresh before using forecasts")
+                raise ValueError(SOURCE_STALE_REASON)
             if not g["day"] or not g["kickoff"]:
                 raise ValueError("Kickoff date/time unconfirmed; no probability generated")
             if g["phase"] not in SCHEDULED:

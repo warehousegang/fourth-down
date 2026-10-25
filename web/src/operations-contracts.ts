@@ -18,6 +18,8 @@ const catalog = z.object({
   artifact_file: z.string().regex(/^forecast-20\d{2}-[a-f0-9]{64}\.json$/), artifact_sha256: digest,
   generated_at: timestamp, cutoff: timestamp, kickoff: timestamp.nullable(), valid_until: timestamp,
   home: z.string(), away: z.string(), model_id: z.literal(frozen.model.id), features: z.record(z.string(), finite),
+  day: z.string().nullable(), week: count.min(1).max(18), schedule_fingerprint: digest,
+  source: z.object({ raw_sha256: digest, source_updated_at: timestamp, retrieved_at: timestamp }),
   home_probability: probability.nullable(), away_probability: probability.nullable(),
   forecast_status: z.enum(["available", "unavailable"]), eligible: z.boolean(), exclusions: z.array(z.string()),
   selected_final: z.boolean(), latest: z.boolean(),
@@ -50,6 +52,7 @@ export const operationsSchema = z.object({
   if (snapshots.size !== data.catalog.length || schedule.size !== data.schedule.length || new Set(data.games.map(g => g.id)).size !== data.games.length) fail("Duplicate operations records");
   for (const game of data.schedule) if (game.season !== data.season || !game.id.startsWith(`ngs-${data.season}-`) || game.home === game.away) fail("Invalid schedule lineage");
   for (const f of data.catalog) {
+    if (compareTimestamp(f.source.source_updated_at,f.source.retrieved_at)>0 || compareTimestamp(f.source.retrieved_at,f.generated_at)>0) fail("Invalid archived source ordering");
     if (f.season !== data.season || !f.game_id.startsWith(`ngs-${data.season}-`) || f.artifact_file !== `forecast-${data.season}-${f.artifact_sha256}.json` || f.eligible && !schedule.has(f.game_id)) fail("Invalid forecast lineage");
     if (compareTimestamp(f.cutoff, f.generated_at) > 0 || compareTimestamp(f.generated_at, data.generated_at) > 0) fail("Invalid forecast ordering");
     if (f.eligible && (f.forecast_status !== "available" || f.exclusions.length || !f.kickoff || compareTimestamp(f.generated_at, f.kickoff) >= 0)) fail("Ineligible forecast marked eligible");

@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, afterEach } from "vitest";
 import { webcrypto } from "node:crypto";
-import { currentSchema, loadCurrent, unavailableReason } from "./current-contracts";
+import { currentSchema, loadCurrent } from "./current-contracts";
 import { currentFixture, currentPointer, currentText } from "./current-fixture";
 
 afterEach(() => vi.unstubAllGlobals());
@@ -25,12 +25,6 @@ describe("current artifact integrity", () => {
     const d = currentFixture();
     d.games[0].status = "unavailable";
     expect(currentSchema.safeParse(d).success).toBe(false);
-  });
-  it("suppresses expired and past-kickoff predictions", () => {
-    const d = currentFixture(), g = d.games[0];
-    expect(unavailableReason(d,g,Date.parse(d.valid_until)+1)).toMatch(/expired/);
-    d.valid_until = new Date(Date.parse(g.kickoff!)+1000).toISOString();
-    expect(unavailableReason(d,g,Date.parse(g.kickoff!))).toMatch(/Kickoff has passed/);
   });
   it("loads the pointer and verifies exact bytes", async () => {
     vi.stubGlobal("crypto", webcrypto);

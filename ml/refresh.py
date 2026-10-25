@@ -13,6 +13,7 @@ from ml.current import generate, publish_local
 from ml.current_source import (EASTERN, FINAL, SCHEDULED, acquire, canonical, check_season,
                                current_season, iso, load_snapshot, sha, timestamp)
 from ml.lifecycle import build_operations, load_forecasts, publish_operations
+from ml.freshness import select_display_forecast
 
 MAX_UI_ARTIFACT_BYTES = 5_000_000
 
@@ -176,6 +177,8 @@ def refresh(snapshot_path=None, *, now=None, current_directory=None, operations_
     if not any(f["sha256"] == digest for f in forecasts):
         forecasts.append(candidate)
     operations = build_operations(forecasts, observations or [snapshot], iso(generated))
+    display = [dict(game_id=game["id"], **select_display_forecast(current, game, operations, generated))
+               for game in current["games"]]
     verify_publication_budget(current, operations)
     # Source/validation failures above leave both pointers unchanged. File-system
     # failures between these two replacements require rerun; no cross-file atomicity claim.
@@ -186,6 +189,7 @@ def refresh(snapshot_path=None, *, now=None, current_directory=None, operations_
             "current_artifact":str(current_path),"operations_artifact":str(operations_path),
             "source_changed_since_previous": bool(prior and prior[-1]["raw_sha256"] != snapshot["raw_sha256"]),
             "available_forecasts":sum(g["status"]=="available" for g in current["games"]),
+            "display_forecasts": display,
             "forecast_games":len(current["games"]),"publicly_published":False,"scheduler_enabled":False}
 
 

@@ -55,3 +55,27 @@ TEST_BASE_URL=http://127.0.0.1:4174/nfl-predictor/ npm run test:e2e
 The Product Execution Directive supersedes the earlier blanket no-training/no-evaluation restriction only for separately versioned challengers on authorized data and current-season lifecycle scoring. Incumbent retraining, holdout access and automatic promotion remain prohibited. Forecast inputs remain exactly the frozen four; independent current-context annotations do not enter them. Current source freshness is unchanged: copying or rereading unchanged source bytes does not advance its update time.
 
 Target infrastructure cost is $0 subject to account and storage limits; no settings were changed or hosted workflow run. RELEASE_GATES.md records local readiness and the remaining G1/G3/G4 blockers.
+
+## Source freshness and older forecasts
+
+Successful dispatch does not prove that the upstream schedule changed. Keep these
+times separate: provider update, source retrieval, original feature cutoff, and
+original forecast generation. A repeated download must not reset provider age.
+
+New inference still rejects schedule data older than 48 hours. The display policy
+in `ml/freshness.py` and `web/src/forecast-display.ts` can instead show an eligible
+archived pregame estimate as **older, not fresh** after its freshness deadline.
+The latest recorded source SHA and matchup identity must match; the operations
+archive must verify its original inputs, model arithmetic and pregame eligibility.
+An unchanged recorded source does not rule out subsequent real-world schedule
+changes. Missing provenance, invalid inputs, changed source bytes, postponement,
+rescheduling, or a reached/unconfirmed kickoff keep upcoming probabilities hidden.
+Injury, weather and news annotations never affect this model's probabilities.
+
+The original JSON, generation time, cutoff, probability and history stay immutable.
+An unavailable new inference is not overwritten with an older prediction. Refresh
+receipts report `display_forecasts` separately. Postgame selection and scoring still
+use the original eligible pregame forecast and verified final result; freshness
+expiry alone does not erase that forecast's eligibility. Shared Python/React policy
+vectors and browser boundary tests check these rules. A source outage retains
+previous dated artifacts; it never manufactures a successful freshness check.
