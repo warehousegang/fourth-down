@@ -96,7 +96,7 @@ test("freshness expiry keeps eligible older forecasts and immutable history insp
   const now=Math.max(Date.parse(current.valid_until),Date.parse(current.generated_at),Date.parse(operations.generated_at))+1000;
   await page.clock.install({time:new Date(now)});
   await page.goto("./#current");
-  await expect(page.getByText(/Older forecast warning — these are not fresh predictions/)).toBeVisible();
+  await expect(page.getByText("Older forecasts — not fresh",{exact:true})).toBeVisible();
   const visible=await page.locator(".current-probabilities").count();
   await expect(page.getByText("OLDER FORECAST · NOT FRESH",{exact:true})).toHaveCount(visible);
   await page.getByRole("link",{name:"Matchup Intelligence",exact:true}).click();
