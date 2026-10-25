@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "protocol_id": "v2-t60-prospective-2026-1",
+  "enabled": true,
+  "activation_approved": true,
+  "approval_reference": "research/v2/shadow/AUTHORIZATION-2026-10-25.json",
+  "activation_at": "2026-10-29T00:00:00+00:00",
+  "season": 2026,
+  "decision_minutes_before_kickoff": 60,
+  "stage_minutes_before_cutoff": 30,
+  "maximum_finalization_delay_minutes": 15,
+  "poll_minutes": 5,
+  "maximum_capture_age_hours": 6,
+  "model_sha256": "d4832bedb306ef315d179e5ec102e3048c2dbc7f584dd7c9803870af3b5438a6",
+  "prior_sha256": "bbccec126c53f8992353a58d3ac9c15f7bac9971c38da1726f65507171860c25",
+  "state_branch": "v2-shadow-state",
+  "public_publication": false,
+  "automatic_promotion": false,
+  "protected_evaluation_seasons": [
+    2024,
+    2025
+  ]
+}

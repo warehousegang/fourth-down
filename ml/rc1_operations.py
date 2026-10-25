@@ -75,13 +75,20 @@ def workflow_contract():
         text = path.read_text()
         active = path.suffix == '.yml'
         assert_manual_trigger(text, allow_daily='portfolio-artifact' in path.name)
-        assert 'timeout-minutes: 10' in text and 'contents: read' in text
+        shadow = path.name == 'v2-shadow.yml'
+        assert ('timeout-minutes: 12' if shadow else 'timeout-minutes: 10') in text and 'contents: read' in text
         uses = re.findall(r'uses:\s+([^\s#]+)', text)
         assert uses
         for use in uses:
             name, digest = use.split('@')
             assert digest == lock[name]['sha'] and re.fullmatch('[0-9a-f]{40}', digest)
-        if 'portfolio-artifact' not in path.name:
+        if shadow:
+            assert 'group: v2-shadow-capture' in text and 'cancel-in-progress: false' in text
+            assert 'ref: v2-shadow-state' in text and 'fetch-depth: 0' in text
+            assert 'scripts/v2_shadow_tick.py' in text and 'scripts/v2_shadow_state.py' in text
+            assert '  capture:\n    permissions:\n      contents: write' in text
+            assert not any(v in text for v in ('deploy-pages@','pages: write','id-token: write','ml.refresh','portfolio_artifact.py'))
+        elif 'portfolio-artifact' not in path.name:
             assert not re.search(r'^\s+\S+: write', text, re.M)
         else:
             assert 'deploy-pages@' not in text and 'pages: write' not in text and 'id-token: write' not in text
@@ -90,7 +97,8 @@ def workflow_contract():
             assert 'portfolio_artifact.py pack' in text and 'VITE_BASE_PATH: /fourth-down/' in text
         records.append({'file':str(path.relative_to(ROOT)), 'sha256':sha(path.read_bytes()),
                         'active_manual_only':active, 'immutable_actions':len(uses)})
-    assert len(records) == 2
+    assert len(records) == 3
+    assert {Path(r['file']).name for r in records} <= {'ci.yml','portfolio-artifact.yml.disabled','portfolio-artifact.yml','v2-shadow.yml'}
     return records
 
 
