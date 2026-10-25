@@ -1,13 +1,19 @@
 name: Manual local-build checks
 on:
   workflow_dispatch:
+    inputs:
+      shadow_dry_run:
+        description: 'Run the unscored V2 hosted dry run; never writes production'
+        type: boolean
+        default: false
 permissions:
   contents: read
 concurrency:
-  group: manual-checks
-  cancel-in-progress: true
+  group: ${{ inputs.shadow_dry_run && 'v2-shadow-dry-run' || 'manual-checks' }}
+  cancel-in-progress: ${{ !inputs.shadow_dry_run }}
 jobs:
   checks:
+    if: ${{ !inputs.shadow_dry_run }}
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
@@ -32,3 +38,31 @@ jobs:
           VITE_BASE_PATH: /fourth-down/
       - run: npm audit --audit-level=moderate
         working-directory: web
+
+  shadow-dry-run:
+    if: ${{ inputs.shadow_dry_run }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0
+        with:
+          python-version: '3.14.2'
+      - run: python -m pip install -r requirements.txt -c requirements-lock.txt
+      - name: Guarded temporal, pairing and immutable-storage tests
+        run: python scripts/test_release.py -k 'v2_capture or evidence_bundle or (v2_prospective and not parity)'
+      - run: node --test ops/v2-shadow/scheduler.test.mjs
+      - name: Real data and original V1 archive dry run
+        run: python scripts/v2_shadow_dry_run.py --output "$RUNNER_TEMP/v2-shadow-dry-run"
+      - name: Exact replay and idempotent retry without acquiring new data
+        run: |
+          python scripts/v2_shadow_dry_run.py --output "$RUNNER_TEMP/v2-shadow-dry-run" --verify
+          python scripts/v2_shadow_dry_run.py --output "$RUNNER_TEMP/v2-shadow-dry-run"
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: v2-shadow-dry-run-${{ github.run_id }}
+          path: ${{ runner.temp }}/v2-shadow-dry-run/
+          if-no-files-found: error
+          retention-days: 7
