@@ -1,4 +1,12 @@
 # Data inventory and provenance
+
+## V2 research-only PBP addition — 2026-10-25
+
+The approved V2 experiment separately captures `play_by_play_2010.parquet` through `play_by_play_2023.parquet` from the [nflverse PBP release](https://github.com/nflverse/nflverse-data/releases/tag/pbp), without combined-season acquisition or protected 2024–2025 files. [The sealed manifest](../research/v2/data-manifest.json) records each exact URL, asset ID, update/retrieval timestamps, local SHA256 and upstream digest when provided. Older assets lack a GitHub digest; their HTTPS release identity/size and locally sealed checksum are recorded without claiming independent cryptographic publisher attestation. Original parquet bytes remain local/ignored. The reproducible, attributed `research/v2/team-games.csv` contains 7,262 team-game rows for 3,631 regular-season games, with no invalid efficiency totals. The frozen schedule source is unchanged.
+
+Use only observable fields for counted pass/run yards and allowed yards; no EPA/CPOE, FTN, odds, QB, injury, weather or news variables enter V2. [EXPERIMENT.md](../research/v2/EXPERIMENT.md) defines exclusions, fixed shrinkage, earlier-date opponent adjustment and missingness. This is a corrected historical extract, not original publication-vintage evidence. Nightly PBP/stat corrections can lag actual game completion; any future prospective adapter must capture real pre-cutoff availability. The repository's CC BY 4.0 data terms and nflverse/nflfastR/NFL source attribution apply to these derived research totals; software MIT does not relicense upstream data. Current V1 inputs below remain unchanged.
+
+## Preserved V1 source record
 Checked 2026-10-24. Primary input: [nflverse schedules](https://github.com/nflverse/nflverse-data/releases/tag/schedules), originating with [Lee Sharpe / nfldata](https://github.com/nflverse/nfldata). Access via nflreadpy 0.1.5. [Schedule dictionary](https://nflreadr.nflverse.com/articles/dictionary_schedules.html).
 
 Use 2010–2023 regular-season schedule rows. Required fields: game_id, season, week, game_type, gameday, gametime, home_team, away_team, home_score, away_score; stadium/location optional. No market odds, postgame statistics, injuries or news enter predictors. Scheduled kickoff and stadium are display metadata. Score-derived fields use only earlier game dates. Season and team identifiers index records. Ties update history at half a win, but are excluded as binary evaluation targets. Missing outcomes never update history.

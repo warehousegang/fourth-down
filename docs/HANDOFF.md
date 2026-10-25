@@ -1,3 +1,37 @@
+# V2 efficiency research handoff — 2026-10-25
+
+**GO for a bounded prospective-data/shadow preparation phase; NO-GO for promotion or 2026 shadow execution.** Candidate `v2-efficiency-ff72f16c5ea3` is research-only. The seven-feature declaration was committed as `525376d` before fitting. Production V1, public assets/forecast history, the existing registry, schedules and locked 2024–2025 boundaries remain unchanged. Earlier handoffs below are preserved historical records.
+
+Implementation: four exact incumbent features plus prior-season shrunk margin and opponent-adjusted offensive/defensive yards/play. The latter use only earlier-date opponent ratings with fixed four-game shrinkage and a 5.5 YPP reference. One logistic configuration, train-only scaling, previous-season Platt calibration, six chronological 2018–2023 diagnostics; the four-feature comparator receives identical rows, windows and calibration. QB/injury/weather/news remain outside probabilities. See the [pre-fit specification](../research/v2/EXPERIMENT.md), [sealed source manifest](../research/v2/data-manifest.json) and [complete result](../research/v2/result-47ba6e069a6e3ddcc4a3181017a856fd7a866f9462598d20e6a7238299265c8a.json).
+
+Coverage: fourteen 2010–2023 PBP assets, 3,631 REG games / 7,262 team-game efficiency rows, zero invalid totals. 2010's 256 games are warmup. All 3,375 games from 2011–2023 have required features; twelve ties are excluded from binary labels, leaving 3,363 rows. Diagnostic comparison uses 1,576 games after seven ties. Canceled 2022 BUF–CIN is absent from completed observations. No protected-season data was fetched or read.
+
+| Pooled 2018–2023, n=1,576 | Accuracy | Brier ↓ | Log loss ↓ | ECE ↓ |
+|---|---:|---:|---:|---:|
+| Calibrated four-feature comparator | .607234 | .232118 | .657427 | .015692 |
+| Calibrated V2 (primary) | .631345 | .225555 | .643003 | .017535 |
+| Raw four-feature comparator | .604061 | .231682 | .655147 | .033013 |
+| Raw V2 | .629442 | .226110 | .643635 | .033253 |
+
+V2-minus-comparator Brier difference **−.006563**, paired season-stratified season-week 95% interval **[−.009474, −.003629]** (2,000 draws, seed42). Log-loss difference −.014424 [−.020547, −.007986]; accuracy difference +.024112 [.008243, .039366]. These are descriptive intervals under the declared resampling assumptions, not prospective guarantees. Calibration is within the fixed limits but pooled ECE is slightly worse than the comparator.
+
+| Season | Games | Four-feature Brier | V2 Brier | V2 ECE |
+|---|---:|---:|---:|---:|
+| 2018 | 254 | .218326 | .212830 | .062382 |
+| 2019 | 255 | .233539 | .229908 | .092723 |
+| 2020 | 255 | .220744 | .218712 | .044067 |
+| 2021 | 271 | .245379 | .228566 | .055618 |
+| 2022 | 269 | .236185 | .230297 | .043681 |
+| 2023 | 272 | .237092 | .232082 | .054516 |
+
+All five predeclared retrospective criteria pass. Only 2021's individual-season paired Brier interval excludes zero; no individual improvement claim for the other seasons. Separately, frozen V1's selected 2023 Brier remains .237045 versus V2 .232082; difference −.004962, interval [−.010706, +.000948] includes zero. Frozen V1 has a different fitting window, so this is not the controlled feature comparison. No post-result feature removal or tuning occurred.
+
+Verification: **388 no-fit release Python tests passed, one V1-retraining test intentionally skipped; 28 V2 tests passed after final ledger changes; 147 frontend tests and 11 packaging tests passed; production-subpath build passed.** Leakage, same-day batching, future-opponent perturbation, missingness, aliases, rest/reset, train-only scaler, calibration and block-bootstrap tests passed. All fourteen sealed raw files re-aggregate exactly to the committed totals. Full fitting/evaluation repeated exactly; model coefficients, probabilities and metrics also stayed identical after the ledger-only path/CLI fix. One initial attempt stopped on a pandas read-only-array check before diagnostic scoring; the fix copied the verification array, without changing estimator settings. Both completed result receipts remain immutable; the latest result's code hashes match the final pipeline.
+
+Rerun locally using the existing Python environment and approved `data/schedules-2010-2023.csv` / `data/manifest.json`: `python -m ml.v2_experiment --verify-repeat`. Committed aggregate totals avoid any network requirement. Preserve ignored original parquet captures for exact raw-to-derived auditing; do not invoke the old all-season schedule acquisition path. `python -m ml.v2_shadow --season 2026` reports disabled. `python -m ml.v2_shadow --replay-game 2023_01_DET_KC` demonstrates immutable V1/V2 receipts and verified historical outcome scoring under `data/research-v2/shadow/`, explicitly retrospective with actual generation time. This cannot enter the prospective scorecard. A live point-in-time input adapter is not implemented/approved, and protected prior-2025 data blocks 2026 V2 regardless.
+
+Remaining limits: corrected source vintages lack original publication timestamps; reused diagnostic seasons and cross-week team dependence constrain inference; YPP ignores situation, turnovers and roster conditions; this experiment measures the seven-feature bundle, not causal value per added domain. Prospective full-season evidence and owner approval are still required. Additional recurring cost **$0**; no dependencies/services, production deployment, automation or frontend changes. Review [verification.json](../research/v2/verification.json) for hashes and final check evidence.
+
 # Current portfolio release — 2026-10-24
 
 The owner’s **Simplify and Ship** instruction supersedes the earlier commercial release process below. The subsequent Personal Website Integration instruction sets the destination to `https://thomashoward.dev/fourth-down/`. Fourth Down exports a checksummed static artifact from its separate repository; the existing portfolio main/root Pages publisher remains unchanged. Local integration changes are prepared for review, with no push or deployment. Frozen models and original observations are preserved. The local implementation includes an interactive simulation, deterministic cited research walkthrough and commercial scaling explanation. See [DEPLOYMENT.md](DEPLOYMENT.md) for exact publication steps and the $0 plan. Deployment, recurring activation and live personal-site publication still await explicit approval; training, promotion and the 2024–2025 holdout remain separately prohibited. Earlier reports and metrics below are preserved as historical evidence, not additional release gates.

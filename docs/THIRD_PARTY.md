@@ -1,5 +1,9 @@
 # Third-party attribution and notices
 
+## V2 research data — 2026-10-25
+
+`research/v2/team-games.csv` and its derived feature/evaluation records use [nflverse/nflfastR play-by-play](https://github.com/nflverse/nflverse-data/releases/tag/pbp), originally NFL game data, plus nflverse/Lee Sharpe schedules. Credit the nflverse/nflfastR contributors and Lee Sharpe; preserve the [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) [repository license](https://github.com/nflverse/nflverse-data/blob/main/LICENSE.md). Team-game aggregates, shrunk opponent-adjusted features and predictions are modifications. Raw per-season files are local/ignored; source URLs, hashes and capture times accompany the derivative. This does not grant NFL trademark rights or assert publication-vintage accuracy. No FTN data, new dependencies, paid feeds, logos or production notices were changed; the software MIT license does not supersede the data's terms.
+
 ## Current team-logo candidate — 2026-10-24
 
 All 32 recognizable team logos are locally bundled as low-resolution PNG thumbnails from documented English Wikipedia/Wikimedia Commons file pages. [TEAM_LOGO_REVIEW.json](TEAM_LOGO_REVIEW.json) records each exact page revision, image URL, source copyright status, credit, SHA256, dimensions, independent informational-use rationale and remaining concerns. [The bundled notice](../web/src/assets/team-logos/NOTICE.txt) ships with the application and is linked beside the non-affiliation statement. Artwork is expressly excluded from MIT. No ESPN image bytes, generic badges or remotely loaded logo images are used.

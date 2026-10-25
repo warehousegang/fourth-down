@@ -1,5 +1,7 @@
 # Architecture — Fourth Down prediction and learning lifecycle
 
+**V2 research addition (2026-10-25):** `ml/v2_data.py` acquires only fourteen approved season-specific PBP files (2010–2023); `v2_features.py` joins hash-verified schedule/efficiency snapshots and stores adjustments from opponents' earlier-date ratings. `v2_experiment.py` runs six fixed train/calibrate/diagnostic folds with the same calibrated four-feature comparator. JSON models, game predictions, feature snapshots, coverage, paired uncertainty and provenance live solely in `research/v2/`. No production registry, static pointer, refresh or frontend imports these modules. `v2_shadow.py` supplies an isolated immutable paired-replay ledger and dual-model outcome scoring; prospective collection remains disabled, including 2026's protected prior-year dependency. Corrected historical inputs cannot be relabeled as prospective evidence. Existing operational architecture below is unchanged.
+
 ```mermaid
 flowchart LR
  A[Season-isolated current schedule] --> B[Validated immutable observation snapshots]

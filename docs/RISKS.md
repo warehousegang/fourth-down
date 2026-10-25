@@ -1,5 +1,15 @@
 # Risks and owners
 
+## V2 research — 2026-10-25
+
+| Risk | Mitigation / residual limitation | Owner |
+|---|---|---|
+| Better retrospective metrics mistaken for deployable skill | One predeclared configuration; calibrated four-feature comparison on identical rows; all seasons and paired block intervals reported. Reused diagnostics and corrected vintages remain limitations; no promotion | ML maintainer |
+| Opponent ratings or efficiency pull future information | Store each game's adjustment from its opponent's earlier-date raw state; no final-season rating. Same-date, future-result/PBP and order perturbation tests; missing state propagates | ML maintainer |
+| Prior-2025 input opens protected data | Explicit acquisition/feature/shadow guards; 2026 V2 disabled. No current-only substitute or previous-year imputation | Engineering |
+| Historical replay enters prospective scorecard | Separate research ledger, real generation timestamps, retrospective mode, no production imports/pointers; prospective input adapter remains unapproved/unimplemented | Engineering |
+| Bundled feature gain mistaken for causal domain contribution | Seven-feature bundle compared as predeclared; no post-result ablations or causal claims. Defensive coefficient sign may reflect correlated predictors | ML maintainer |
+
 ## RC1 additions — 2026-10-24
 
 | Risk | Evidence / mitigation required | Owner |
