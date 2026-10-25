@@ -126,8 +126,9 @@ def test_output_is_fixed_to_ignored_area_and_requires_synthetic_label(tmp_path, 
 @pytest.fixture
 def forecast():
     directory = simulation.FORECAST_DIRECTORY
-    pointer = json.loads((directory / "latest.json").read_text())
-    path = directory / pointer["file"]
+    # Exercise a retained positive example even when the latest refresh correctly
+    # has no available predictions (stale source, postgame or offseason).
+    path = directory / "forecast-2026-3449f56cda00dca8e4f4c253458d471b8924cc3ec9a25fd4a5821d356d7737cb.json"
     artifact = json.loads(path.read_text())
     game = next(game for game in artifact["games"] if game["status"] == "available")
     return path, artifact, game

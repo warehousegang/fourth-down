@@ -3,6 +3,7 @@ import AxeBuilder from "@axe-core/playwright";
 import { readFileSync } from "node:fs";
 import { demonstrationForecasts } from "../src/interview-demo";
 import type { Operations } from "../src/operations-contracts";
+import { displayRecord, selectDisplayForecast } from "../src/forecast-display";
 const pointer=JSON.parse(readFileSync("public/data/current/latest.json","utf8"));
 const contextPointer=JSON.parse(readFileSync("public/data/context/latest.json","utf8"));
 const context=JSON.parse(readFileSync(`public/data/context/${contextPointer.file}`,"utf8"));
@@ -21,7 +22,8 @@ test("operational intelligence routes, honest evidence, responsive layout and ac
     if(route==="intelligence"){
       await expect(page.locator(".domain-card")).toHaveCount(12);
       const game=current.games[0];
-      if(game?.factors.length)await expect(page.getByRole("region",{name:"Current matchup model factors"})).toBeVisible();
+      const saved=game?displayRecord(operations,selectDisplayForecast(current,game,operations,now)):null;
+      if((saved??game)?.factors.length)await expect(page.getByRole("region",{name:"Current matchup model factors"})).toBeVisible();
       else if(game)await expect(page.getByText(/A required observation is unavailable/)).toBeVisible();
       else await expect(page.getByRole("heading",{name:"No upcoming matchup"})).toBeVisible();
       await expect(page.getByRole("heading",{name:"Weather, news and remaining gaps"})).toBeVisible();
