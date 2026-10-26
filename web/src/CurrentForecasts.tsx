@@ -5,6 +5,7 @@ import { useArtifact } from "./use-artifact";
 import { selectDisplayForecast, displayRecord, displayGames } from "./forecast-display";
 import { ForecastOutcome, gameStatus } from "./ForecastOutcome";
 import { PredictionScoreboard } from "./PredictionScoreboard";
+import { WeeklyIntelligence } from "./WeeklyIntelligence";
 import { PredictionDetails } from "./PredictionDetails";
 import { team } from "./teams";
 import { TeamMark } from "./TeamMark";
@@ -33,6 +34,7 @@ export function CurrentForecasts() {
         <h1><span className="hero-intro">NFL predictions.</span><span>From kickoff to final.</span></h1>
         <h2>Current Week Forecasts</h2><p>See the pick, follow the result, and track the record.<br/>Every prediction stays fixed once the game begins.</p></div>
     </section>
+    <WeeklyIntelligence operations={evidence} week={week}/>
     <PredictionScoreboard operations={evidence} week={week} checkedAt={operations.checkedAt} error={operations.error??undefined}/>
     <p className="game-day-note">Pregame predictions use the inputs available when saved. Injuries, weather, and breaking news are not included. Results appear only after verification.</p>
     {operations.error && <p className="current-warning" role="alert">Forecast provenance unavailable: {operations.error} {evidence?"Showing the last verified saved evidence.":"Predictions will return when their saved evidence can be verified."}</p>}

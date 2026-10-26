@@ -28,15 +28,18 @@ test("open dashboard receives a final and corrected result without changing its 
   const card=page.getByRole("article",{name:"Steelers at Saints current forecast"});
   const expected=[`${(record.away_probability!*100).toFixed(1)}%`,`${(record.home_probability!*100).toFixed(1)}%`];
   await expect(card).toContainText("In progress");
+  await expect(page.locator(".weekly-intelligence")).toContainText("Awaiting verified outcomes");
   await expect(card.locator(".current-probabilities strong")).toHaveText(expected);
   await serve(page,"operations","operations",final);
   await page.clock.fastForward(60_000);
   await expect(card.getByLabel("Verified final: PIT 17 · NO 24")).toBeVisible();
   await expect(page.locator(".scoreboard-primary dd").nth(1)).toHaveText("1");
+  await expect(page.locator(".weekly-numbers dd").first()).toHaveText("0 / 1");
   await page.route("**/data/operations/latest.json",r=>r.fulfill({status:503,body:"Synthetic outage"}));
   await page.clock.fastForward(60_000);
   await expect(page.getByRole("alert").filter({hasText:"last verified saved evidence"})).toBeVisible();
   await expect(card.getByLabel("Verified final: PIT 17 · NO 24")).toBeVisible();
+  await expect(page.locator(".weekly-numbers dd").first()).toHaveText("0 / 1");
   const corrected=completedOperations(captured,17,24);
   corrected.generated_at=new Date(Date.parse(final.generated_at)+120_000).toISOString();
   corrected.games[0].result!.observed_at=corrected.generated_at;
@@ -44,6 +47,7 @@ test("open dashboard receives a final and corrected result without changing its 
   await page.clock.fastForward(60_000);
   await expect(card.getByLabel("Verified final: PIT 24 · NO 17")).toBeVisible();
   await expect(card).toContainText("Correct prediction");
+  await expect(page.locator(".weekly-numbers dd").first()).toHaveText("1 / 1");
   await expect(card.locator(".current-probabilities strong")).toHaveText(expected);
   await expect(card.locator(".current-cutoff time")).toHaveAttribute("datetime",record.generated_at);
   await expect(page.locator(".scoreboard-primary dd").nth(1)).toHaveText("1");

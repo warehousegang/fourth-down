@@ -1878,6 +1878,54 @@ footer p {
 .current-heading { margin-bottom: 24px; }
 .current-heading h1 { font-size: clamp(32px, 4.2vw, 48px); margin-bottom: 16px; }
 .current-heading h2 { margin: 18px 0 8px; font-size: 22px; }
+/* Weekly intelligence is a read-only view of the existing verified scorecard sample. */
+.weekly-intelligence { padding:24px 28px 0; border:1px solid #66583e; border-left:3px solid #e6bc75; background:linear-gradient(115deg,#26291e,#18231e 72%); }
+.weekly-overview { display:grid; grid-template-columns:1.15fr 1fr; gap:28px; align-items:center; }
+.weekly-copy .eyebrow { color:#e6c997; font-size:10px; line-height:1.7; }
+.weekly-copy h2 { font-size:clamp(21px,2.3vw,28px); margin:8px 0; line-height:1.25; }
+.weekly-copy p,.weekly-analysis p,.weekly-upsets p,.weekly-method p { font-size:13px; color:#c2cec5; line-height:1.7; margin:8px 0; }
+.weekly-coverage { display:inline-block; margin-top:8px; color:#d8c49f; font:500 10px/1.7 var(--mono); }
+.weekly-numbers { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:20px; margin:0; }
+.weekly-numbers dt { color:#c2cec5; font:500 10px/1.7 var(--mono); }
+.weekly-numbers dd { margin:9px 0 0; color:#f4f3e8; font:600 clamp(23px,2.8vw,32px)/1.2 var(--mono); white-space:nowrap; }
+.weekly-numbers small { color:#b5c4b9; font-size:13px; }
+.weekly-tail dd { color:#f3ce8e; }
+.weekly-caveat { color:#b8c5ba; font-size:12px; line-height:1.7; margin:18px 0; }
+.weekly-details { border-top:1px solid #49503b; }
+.weekly-details summary { cursor:pointer; color:#edcf9f; font-size:12px; line-height:1.5; padding:15px 0; min-height:44px; }
+.weekly-details summary:focus-visible { outline:2px solid #9dd5e9; outline-offset:2px; border-radius:3px; }
+.weekly-analysis { display:grid; grid-template-columns:1fr 1fr; gap:32px; padding:8px 0 18px; }
+.weekly-details h3 { color:#eeeede; font-size:15px; line-height:1.5; margin:8px 0; }
+.weekly-distribution { display:flex; align-items:end; height:125px; gap:5px; margin-top:12px; }
+.weekly-distribution>div { flex:1; min-width:0; text-align:center; color:#c6d5cc; font:500 10px var(--mono); }
+.weekly-distribution span { display:block; min-height:1px; background:#729f8c; border-radius:3px 3px 0 0; margin-bottom:9px; }
+.weekly-distribution .weekly-observed { color:#f3ce8e; font-weight:700; }
+.weekly-distribution .weekly-observed span { background:#f3ce8e; }
+.weekly-analysis .weekly-chart-note { font-size:11px; color:#dac7a4; }
+.weekly-distribution-table table { width:100%; border-collapse:collapse; color:#d8e1da; font:500 12px/1.6 var(--mono); }
+.weekly-distribution-table th,.weekly-distribution-table td { padding:6px; border-bottom:1px solid #424b3f; text-align:left; }
+.weekly-distribution-table caption { text-align:left; color:#c2cec5; font-size:12px; line-height:1.7; padding-bottom:10px; }
+.weekly-analysis .weekly-surprise { color:#dfc18f; margin:16px 0; }
+.weekly-surprise strong { font:600 28px var(--mono); color:#f3ce8e; }
+.weekly-details a { color:#a9e7c4; text-underline-offset:3px; }
+.weekly-upsets { border-top:1px solid #424b3f; padding:16px 0; }
+.weekly-upsets ol { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; padding:0; margin:16px 0 4px; list-style:none; }
+.weekly-upsets li { padding:14px; background:#17241d; border:1px solid #3f5142; border-radius:8px; min-width:0; }
+.weekly-upsets a { display:flex; justify-content:space-between; gap:8px; align-items:baseline; font-size:13px; line-height:1.7; }
+.weekly-upsets strong { font:600 16px var(--mono); color:#f3ce8e; }
+.weekly-upsets span,.weekly-upsets small { display:block; color:#c2cec5; line-height:1.7; margin-top:8px; font-size:11px; }
+.weekly-upsets small { color:#aebfb3; font-size:10px; }
+.weekly-method { border-top:1px solid #424b3f; padding:16px 0 20px; }
+.weekly-method p { font-size:12px; }
+@media(max-width:1100px) { .weekly-overview { grid-template-columns:1fr; gap:20px; } }
+@media(max-width:750px) {
+  .weekly-intelligence { padding:20px 20px 0; }
+  .weekly-analysis { grid-template-columns:1fr; gap:20px; }
+  .weekly-upsets ol { grid-template-columns:1fr; }
+  .weekly-numbers { gap:10px; }
+  .weekly-numbers dt { min-height:3.4em; }
+}
+@media(max-width:360px) { .weekly-numbers { grid-template-columns:1fr 1fr; gap:16px; } .weekly-tail { grid-column:span 2; } }
 .prediction-scoreboard { border-top: 3px solid #00d991; padding: 28px; }
 .scoreboard-heading { display:flex; justify-content:space-between; align-items:flex-start; gap:20px; }
 .scoreboard-heading h2 { margin:10px 0 8px; font-size:28px; }
