@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
-import { readFileSync, readdirSync } from "node:fs";
+import { readFileSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { displayGames, displayRecord, selectDisplayForecast } from "../src/forecast-display";
 import type { Page } from "@playwright/test";
@@ -63,10 +63,12 @@ test("current artifact, inputs, source lineage, history separation and accessibi
   expect(errors).toEqual([]);
 });
 
-// Exercise real archived inputs through checksum/schema validation and the built UI.
-const saved = operations.catalog.filter((f: {eligible:boolean})=>f.eligible).at(-1);
+// These lifecycle scenarios need the original all-pregame capture. A later
+// one-game forecast may coexist with many scored archives; it is not a zero-score
+// fixture. The first test above still exercises the actual latest production data.
+const originalOperations = JSON.parse(readFileSync("public/data/operations/operations-acb075e2b1bbe89e74a4bf93810f2d19e17a3540bfc8f0d0ca4368c799623217.json", "utf8"));
+const saved = originalOperations.catalog.filter((f: {eligible:boolean})=>f.eligible).at(-1);
 const original = JSON.parse(readFileSync(`public/data/current/${saved.artifact_file}`,"utf8"));
-const originalOperations = readdirSync("public/data/operations").filter(f=>f.startsWith("operations-")).map(f=>JSON.parse(readFileSync(`public/data/operations/${f}`,"utf8"))).find(o=>o.generated_at===original.generated_at);
 const originalCount = original.games.length;
 async function serveArtifact(page: Page, directory: string, prefix: string, data: typeof artifact) {
   const body=JSON.stringify(data);
