@@ -181,7 +181,7 @@ def test_newer_verified_primary_correction_takes_precedence(tmp_path):
     assert reconcile(ops,captures,'2026-09-14T04:01:00Z')==ops
 
 
-@pytest.mark.parametrize('legacy_overtime',[False,True])
+@pytest.mark.parametrize('legacy_overtime',[False,True,'terminal'])
 def test_outcome_bundle_roundtrip_and_tampering_rejected(tmp_path,legacy_overtime):
     from unittest.mock import patch
     from ml import current_source
@@ -198,7 +198,18 @@ def test_outcome_bundle_roundtrip_and_tampering_rejected(tmp_path,legacy_overtim
     directory=working/'web/public/data/operations'
     ops=json.loads((directory/json.loads((directory/'latest.json').read_bytes())['file']).read_bytes())
     game=ops['schedule'][0]
-    raw=raw_fixture(tmp_path,game,phase='FINAL_OVERTIME' if legacy_overtime else 'FINAL');fetch,_=provider(raw,game)
+    if legacy_overtime == 'terminal':
+        from test_terminal_result import terminal_detail
+        import pandas as pd
+        value=terminal_detail(game)
+        for frame in (value['plays'],value['drives']):
+            for column in frame.columns:
+                if pd.api.types.is_string_dtype(frame[column]):
+                    frame[column]=frame[column].astype(pd.StringDtype(storage='python'))
+        path=tmp_path/'terminal.rds';rdata.write_rds(path,{'data':{'viewer':{'gameDetail':value}}});raw=path.read_bytes()
+    else:
+        raw=raw_fixture(tmp_path,game,phase='FINAL_OVERTIME' if legacy_overtime else 'FINAL')
+    fetch,_=provider(raw,game)
     result_source.collect([game],2026,root=working,fetch=fetch,now=timestamp(AFTER))
     if legacy_overtime:
         # Construct the exact receipt written by the old parser, then restore it
