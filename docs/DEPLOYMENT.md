@@ -55,3 +55,16 @@ If a run fails before push, the website and its retained state are unchanged. If
 Expected additional recurring cost: **$0/month** on public repositories using standard `ubuntu-24.04` runners and existing GitHub Pages. There are no paid feeds, LLM calls, new infrastructure or retained Actions artifacts. Domain renewal is unchanged. [Actions billing](https://docs.github.com/en/billing/concepts/product-billing/github-actions).
 
 Failures are visible in Actions and normal GitHub notifications; no external alerting service is installed. Source freshness and final-score availability depend on the public provider. Original code caps (5 MB operations JSON, 10,000 catalog receipts, evidence/archive size limits) fail before publication; history may need partitioning as it grows. No pruning or silent history loss is implemented. Updating model code requires a separately reviewed source pin; automation never advances that pin or learns from the protected holdout.
+
+The aggregate static release has a bounded **100,000,000-byte** ceiling. The
+previous 30,000,000-byte ceiling blocked Week 8 result publication on October 30,
+2026: retained immutable versions already occupied about 29.6 MB before the next
+operations snapshot. The collector had retrieved the Panthers–Packers result,
+but packaging failed before a Git push or Pages build. Raising this aggregate
+ceiling preserves every existing file and leaves individual JSON/parser limits,
+checksums, archive path checks, the 2,000-member cap, and atomic installation
+unchanged. It does not increase a browser's per-request payload or change hosting.
+This provides recovery headroom, not unlimited season storage. Check retained
+release growth before that ceiling is reached; a future partitioning change must
+preserve archived URLs/evidence and be reviewed separately. Do not prune history
+or bypass the guard to make a failed publication pass.
