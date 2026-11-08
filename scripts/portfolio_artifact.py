@@ -14,9 +14,16 @@ from pathlib import Path, PurePosixPath
 ROOT = Path(__file__).resolve().parents[1]
 BASE = '/fourth-down/'
 # This is the aggregate retained release, not a single browser response. Immutable
-# operations versions exhausted 30 MB in Week 8; keep a finite recovery ceiling
-# without pruning forecasts/evidence or changing individual JSON/parser limits.
-MAX_BYTES = 100_000_000
+# operations versions exhausted 30 MB in Week 8 and 100 MB in Week 9. Reserve
+# bounded history headroom below Pages' 1 GB site limit; individual JSON/parser
+# limits are unchanged. Report capacity before the next hard stop is reached.
+MAX_BYTES = 500_000_000
+
+
+def capacity(total):
+    return dict(bytes=total, limit_bytes=MAX_BYTES,
+                remaining_bytes=MAX_BYTES-total,
+                maintenance_required=total >= MAX_BYTES * 0.8)
 
 
 def digest(body):
@@ -87,6 +94,10 @@ def pack(output, generated_only=False):
                    source_commit=revision,
                    files={name:digest(body) for name,body in sorted(files.items())})
     validate(files, receipt)
+    usage = capacity(sum(map(len, files.values())))
+    if usage['maintenance_required'] and os.environ.get('GITHUB_ACTIONS') == 'true':
+        print(f"::warning title=Fourth Down retained storage::Retained static release uses "
+              f"{usage['bytes']} of {MAX_BYTES} bytes; partition history before the hard limit.", flush=True)
     files['release.json'] = (json.dumps(receipt, indent=2, sort_keys=True)+'\n').encode()
     output = Path(output); output.parent.mkdir(parents=True, exist_ok=True)
     with output.open('wb') as raw, gzip.GzipFile(fileobj=raw, mode='wb', filename='', mtime=0) as zipped:
@@ -96,7 +107,8 @@ def pack(output, generated_only=False):
                 archive.addfile(member, io.BytesIO(body))
     checksum = digest(output.read_bytes())
     Path(str(output)+'.sha256').write_text(f'{checksum}  {output.name}\n')
-    return dict(archive=str(output), sha256=checksum, source_commit=receipt['source_commit'], files=len(files))
+    return dict(archive=str(output), sha256=checksum, source_commit=receipt['source_commit'],
+                files=len(files), capacity=usage)
 
 
 def read_archive(path, expected):

@@ -149,7 +149,9 @@ def test_score_only_prepare_never_runs_inference_and_selects_build_correctly(tmp
     (directory/'latest.json').write_text(json.dumps({'file':'fixture.json'}))
     (directory/'fixture.json').write_text(json.dumps(operations))
     monkeypatch.setattr(runner,'ROOT',tmp_path)
-    monkeypatch.setattr(runner,'hydrate',lambda *_:(previous,state,{}))
+    published_dir=tmp_path/'published/fourth-down';published_dir.mkdir(parents=True)
+    (published_dir/'fixture.json').write_bytes(b'kept')
+    monkeypatch.setattr(runner,'hydrate',lambda *_:(previous,state,{'files':{'fixture.json':'retained'}}))
     monkeypatch.setattr(runner.subprocess,'check_output',lambda *a,**kw:revision)
     monkeypatch.setattr(runner,'refresh_lock',nullcontext)
     def acquire(*_):
@@ -167,11 +169,12 @@ def test_score_only_prepare_never_runs_inference_and_selects_build_correctly(tmp
     monkeypatch.setattr(results,'reconcile',lambda *_:{**operations,'verified_outcome':'synthetic'} if outcomes_changed else operations)
     published=[];monkeypatch.setattr(lifecycle,'publish_operations',lambda value:published.append(value))
     monkeypatch.setattr(runner.forecast_state,'save',lambda *_:{'sha256':'d'*64})
-    decision=runner.prepare('disposable')
+    decision=runner.prepare(published_dir.parent)
     assert decision['changed']==(outcomes_changed or source_changed)
     assert decision['data_only']==(outcomes_changed and not source_changed)
     assert decision['reasons']==(['verified_outcome_changed'] if outcomes_changed else [])
     assert len(published)==int(outcomes_changed)
+    assert decision['published_capacity']['bytes']==4
 
 
 def test_score_only_stage_keeps_compiled_assets_and_forecast_bytes(tmp_path,monkeypatch):

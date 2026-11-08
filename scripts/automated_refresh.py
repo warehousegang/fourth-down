@@ -122,7 +122,9 @@ def refresh_reasons(snapshot, previous, state, revision, now):
 
 def prepare(portfolio):
     season = current_season(datetime.now(timezone.utc))
-    previous, state, _ = hydrate(portfolio, season)
+    previous, state, published = hydrate(portfolio, season)
+    published_bytes = sum((Path(portfolio)/'fourth-down'/name).stat().st_size
+                          for name in published['files'])
     revision = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()
     with refresh_lock():
         # A schedule-provider outage must not prevent the independent result feed
@@ -139,6 +141,10 @@ def prepare(portfolio):
         result = dict(schema_version=1, changed=bool(reasons), reasons=list(reasons), season=season,
                       source_commit=revision, source_updated_at=snapshot['source_updated_at'],
                       source_raw_sha256=snapshot['raw_sha256'], checked_at=iso(datetime.now(timezone.utc)))
+        result['published_capacity'] = portfolio_artifact.capacity(published_bytes)
+        if result['published_capacity']['maintenance_required']:
+            print(f'::warning title=Fourth Down retained storage::Published history uses '
+                  f'{published_bytes} bytes; review retention capacity before the hard limit.', flush=True)
         if schedule_error:
             result['schedule_error'] = schedule_error
         if reasons:
