@@ -73,6 +73,9 @@ def import_bytes(content, root, tmp_path, expected=None):
 def test_roundtrip_exact_bytes_no_pointers_and_reproducible_export(payload, tmp_path):
     content, receipt = archive(payload)
     assert archive(payload)[0] == content
+    with zipfile.ZipFile(io.BytesIO(content)) as zipped:
+        assert receipt['uncompressed_bytes'] == sum(i.file_size for i in zipped.infolist())
+    assert not receipt['maintenance_required']
     recovered, summary = decode_bundle(content, 2026, receipt["sha256"], receipt["manifest_sha256"])
     assert recovered == payload and summary["source_snapshots"] == summary["forecast_versions"] == summary["operations_versions"] == 1
     target = tmp_path / "restored"

@@ -84,6 +84,31 @@ def test_result_publication_can_cross_30mb_without_pruning_history(tmp_path):
     assert (root/'index.html').read_text() == 'Existing portfolio'
 
 
+def test_result_publication_can_cross_100mb_without_pruning_history(tmp_path):
+    # Week 9: a new result plus immutable snapshots exhausted the previous cap.
+    # Exercise both the existing-release import and the expanded archive reader.
+    retained = {f'data/operations/operations-{i}.json': b' ' * 4_000_000 for i in range(24)}
+    root = portfolio(tmp_path)
+    old = tmp_path/'before.tgz'
+    install(old, bundle(old, retained=retained), root)
+    retained['data/operations/operations-final.json'] = b' ' * 4_600_000
+    new = tmp_path/'final.tgz'
+    checksum = bundle(new, retained=retained)
+    files, _ = read_archive(new, checksum)
+    assert sum(map(len, files.values())) > 100_000_000
+    install(new, checksum, root)
+    assert all((root/'fourth-down'/name).read_bytes() == body for name, body in retained.items())
+    assert (root/'index.html').read_text() == 'Existing portfolio'
+
+
+def test_capacity_warns_before_the_hard_stop(monkeypatch):
+    from scripts import portfolio_artifact as module
+    monkeypatch.setattr(module, 'MAX_BYTES', 1000)
+    assert not module.capacity(799)['maintenance_required']
+    assert module.capacity(800) == {'bytes': 800, 'limit_bytes': 1000,
+                                   'remaining_bytes': 200, 'maintenance_required': True}
+
+
 def test_compressed_archive_still_obeys_expanded_budget_before_install(tmp_path, monkeypatch):
     from scripts import portfolio_artifact
     root = portfolio(tmp_path)

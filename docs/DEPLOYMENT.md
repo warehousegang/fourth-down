@@ -56,15 +56,31 @@ Expected additional recurring cost: **$0/month** on public repositories using st
 
 Failures are visible in Actions and normal GitHub notifications; no external alerting service is installed. Source freshness and final-score availability depend on the public provider. Original code caps (5 MB operations JSON, 10,000 catalog receipts, evidence/archive size limits) fail before publication; history may need partitioning as it grows. No pruning or silent history loss is implemented. Updating model code requires a separately reviewed source pin; automation never advances that pin or learns from the protected holdout.
 
-The aggregate static release has a bounded **100,000,000-byte** ceiling. The
-previous 30,000,000-byte ceiling blocked Week 8 result publication on October 30,
-2026: retained immutable versions already occupied about 29.6 MB before the next
-operations snapshot. The collector had retrieved the Panthers–Packers result,
-but packaging failed before a Git push or Pages build. Raising this aggregate
-ceiling preserves every existing file and leaves individual JSON/parser limits,
-checksums, archive path checks, the 2,000-member cap, and atomic installation
-unchanged. It does not increase a browser's per-request payload or change hosting.
-This provides recovery headroom, not unlimited season storage. Check retained
-release growth before that ceiling is reached; a future partitioning change must
-preserve archived URLs/evidence and be reviewed separately. Do not prune history
-or bypass the guard to make a failed publication pass.
+The aggregate static release has a bounded **500,000,000-byte** ceiling. This is
+the retained history plus application, not a browser response. The 30 MB ceiling
+blocked Week 8 publication on October 30; the subsequent 100 MB ceiling blocked
+Week 9 publication on November 8 at 100,520,797 bytes. The 15-minute Cloudflare
+cron continued dispatching, and the provider collector retrieved a verified
+final, but packaging stopped before the Git push and Pages build.
+
+The reviewed recovery allowance preserves every existing file, checksum,
+archive path check, the 2,000-member cap, and atomic installation. The evidence
+bundle's aggregate expanded allowance is 512 MiB so restoration does not become
+the next immediate blocker. Its 5 MB per-entry limit, 64 MiB compressed limit,
+4,096-entry limit, compression-ratio checks, and full evidence validation remain.
+No browser payload limit, forecast calculation, model, schedule, or host changes.
+
+Refresh decision receipts report published bytes, limit, remaining capacity and
+an 80% maintenance flag even on no-change runs. Packaging receipts report the
+candidate's capacity. GitHub Actions warnings appear at the 80% threshold;
+evidence receipts also report expanded bytes and their threshold. Review storage
+and job duration at that point, before any hard stop. This is bounded recovery
+headroom, **not archive partitioning or a guarantee of season-long capacity**.
+A follow-up partition design must preserve archived URLs/evidence and reduce
+repeated restore work. Do not prune history or bypass a guard to publish.
+
+The application cap leaves room for the existing portfolio under GitHub Pages'
+[1 GB published-site limit](https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits).
+Do not add a second GitHub cron: the active external Worker already dispatches
+`fourth-down-refresh.yml` at minutes 2, 17, 32 and 47 during game windows, with
+hourly dispatch outside those windows. See `V1_GAME_DAY_ACTIVATION.md`.

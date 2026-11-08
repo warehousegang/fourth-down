@@ -1,8 +1,10 @@
-# V1 game-day scheduler proposal
+# V1 game-day scheduler
 
-This directory is a review candidate. `wrangler.json` is deliberately disabled
-and has no triggers. The production Worker continues on its existing hourly
-version. Do not deploy this directory or enable its cron without owner approval.
+The existing V1 Worker was activated with owner approval on October 25, 2026.
+Its single cron is `2,17,32,47 * * * *`: dispatch every 15 minutes inside the
+bounded game windows and hourly outside them. See
+[the activation record](../../docs/V1_GAME_DAY_ACTIVATION.md).
+Do not create a second scheduler or change the active configuration without review.
 
 The implementation reuses the existing V1 Worker and secret, adding a bounded
 game-window hint and 15-minute slots. It does not perform model inference,

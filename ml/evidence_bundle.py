@@ -17,7 +17,10 @@ from ml.lifecycle import input_verification, validate_snapshot, verify_forecast
 
 MAX_FILES = 4096
 MAX_ENTRY_BYTES = 5_000_000
-MAX_TOTAL_BYTES = 128 * 1024 * 1024
+# Aggregate immutable history, not a single source download or browser payload.
+# Keep this aligned with the bounded 500 MB static release so restoration does
+# not become the next blocker immediately after packaging recovers.
+MAX_TOTAL_BYTES = 512 * 1024 * 1024
 MAX_ARCHIVE_BYTES = 64 * 1024 * 1024
 MAX_RATIO = 200
 HEX = r"[0-9a-f]{64}"
@@ -214,8 +217,12 @@ def encode_bundle(payload, season, created_at):
     content = stream.getvalue()
     if len(content) > MAX_ARCHIVE_BYTES:
         raise ValueError("Compressed bundle exceeds archive budget")
+    expanded = len(manifest_bytes) + sum(map(len, payload.values()))
     return content, {"season": season, "sha256": sha(content), "manifest_sha256": sha(manifest_bytes),
-                     "files": len(payload), "bytes": len(content), **summary}
+                     "files": len(payload), "bytes": len(content),
+                     "uncompressed_bytes": expanded, "uncompressed_limit_bytes": MAX_TOTAL_BYTES,
+                     "maintenance_required": expanded >= MAX_TOTAL_BYTES * 0.8,
+                     **summary}
 
 
 def export_bundle(season, output_directory=None, *, root=ROOT, created_at=None):
