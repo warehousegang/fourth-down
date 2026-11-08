@@ -6,16 +6,18 @@ const checkout = process.env.PORTFOLIO_CHECKOUT;
 test.skip(!origin || !checkout, "Run against a separately prepared portfolio checkout");
 test.use({ reducedMotion: "reduce" });
 
-test("featured project enters the isolated application and hash routes reload", async ({page}, info) => {
+test("portfolio entry opens the isolated application and hash routes reload", async ({page}, info) => {
   const failures:string[]=[];
   page.on("pageerror", error => failures.push(error.message));
   page.on("response", response => { if (response.status() >= 400) failures.push(response.url()); });
   await page.goto(origin!);
   await expect(page.getByRole("heading", {name:"Thomas Howard",exact:true})).toBeVisible();
-  await expect(page.getByRole("link", {name:"Open Fourth Down"})).toHaveAttribute("href","/fourth-down/");
-  await page.locator("#nfl-predictor").scrollIntoViewIfNeeded();
+  const entry = page.getByRole("link", {name:"Open Fourth Down",exact:true});
+  await expect(entry).toHaveAttribute("href","/fourth-down/");
+  await entry.scrollIntoViewIfNeeded();
+  await expect(entry).toBeInViewport();
   await page.screenshot({path:`${process.env.TEST_ARTIFACT_DIR}/portfolio-card-${info.project.name}.png`});
-  await page.getByRole("link", {name:"Open Fourth Down"}).click();
+  await entry.click();
   await expect(page).toHaveURL(/\/fourth-down\/$/);
   await expect(page.getByRole("heading", {name:"Current Week Forecasts",exact:true})).toBeVisible();
   const assets = await page.locator('script[src], link[rel="stylesheet"]').evaluateAll(elements =>
