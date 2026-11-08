@@ -104,3 +104,7 @@ jobs:
           with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as output:
               print('### Publication verification\n```json\n'+(Path(os.environ['RUNNER_TEMP'])/'publication.json').read_text()+'\n```', file=output)
           PY
+      - name: Report result collection health
+        if: always() && steps.refresh.outcome == 'success'
+        working-directory: source
+        run: python scripts/check_refresh_health.py --receipt "$RUNNER_TEMP/refresh.json"

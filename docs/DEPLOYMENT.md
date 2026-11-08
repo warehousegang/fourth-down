@@ -2,7 +2,7 @@
 
 Live application: https://thomashoward.dev/fourth-down/. Source and ML remain in `warehousegang/fourth-down`. The portfolio is `warehousegang/thomashowarddev`, using its existing Pages branch publisher (`main`, `/`), existing `CNAME`, and unchanged domain settings. The initial approved release was portfolio commit `6740d1150306ebd1474d4508f97b73ec1cca82d9`, from source `39b42a1bab4b72a87ea30d253b32e0528d944b04`.
 
-## Manual verification, then separate recurring activation
+## Existing publication workflow and external schedule
 
 The portfolio workflow `.github/workflows/fourth-down-refresh.yml` has **only `workflow_dispatch` enabled**. Its source checkout and all Actions are pinned to immutable commits. No PAT, new secret, paid service, or Pages configuration change is required. The old source-repository `portfolio-artifact.yml.disabled` remains inactive; do not enable both workflows.
 
@@ -26,14 +26,24 @@ gh run watch RUN_ID --repo warehousegang/thomashowarddev --exit-status
 
 Compare both summaries: the second should show `changed: false`, the same website commit/forecast hash and no new build request when the inputs/window are unchanged. A real source change or kickoff boundary appropriately creates another version. Check generated/source/expiry timestamps at the live application; a successful job does not guarantee the upstream feed is fresh.
 
-**After explicit recurring-run approval only**, edit the portfolio workflow's `on` block to uncomment exactly:
+The owner activated the existing Cloudflare dispatcher on October 25. Keep the
+portfolio workflow manual-dispatch only: the Worker dispatches at minutes 2, 17,
+32 and 47 during bounded game windows, and minute 17 otherwise. Kickoff timestamps
+cover international, Sunday, weekday, holiday and rescheduled games without DST
+assumptions. Do not enable a parallel GitHub cron. See
+[the active configuration](V1_GAME_DAY_ACTIVATION.md).
 
-```yaml
-  schedule:
-    - cron: '17 * * * *'
-```
+This is a collection cadence, not a guarantee of publication within 15 minutes
+of the final whistle. Provider availability, evidence verification and Pages
+publication add latency. Missed pregame cutoffs are never backfilled.
 
-Commit and merge that small change to `main`. No repository setting, secret or DNS change is needed. Hourly UTC checks cover Sunday morning/international, afternoon/evening, Thursday, Monday, Saturday/holiday and rescheduled kickoffs without weekday or DST assumptions. They also poll for final results after games. Off-hour minute 17 avoids the busiest start-of-hour queue. GitHub can delay/drop scheduled jobs; this is a portfolio refresh service, not a guaranteed pregame SLA. Missed cutoffs are never backfilled. Public-repository schedules may be disabled after 60 days without activity; use a manual run/check before a demonstration or new season. [GitHub scheduling limits](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#schedule).
+The proposed workflow ends with `check_refresh_health.py` after publication.
+A result-provider network failure can retain or publish safe evidence, but must
+still mark the run failed. A successful query with an unpublished game file is
+healthy and remains pending. This gate also runs on no-change checks and adds no
+requests, builds, credentials or external notifications. Deploy the reviewed
+source pin, compiled frontend and workflow gate together; see
+[the reliability checks](V1_REFRESH_RELIABILITY.md).
 
 ## Local reproduction and rollback
 

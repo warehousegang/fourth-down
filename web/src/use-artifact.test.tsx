@@ -37,3 +37,17 @@ it('advances the successful published-results check even when the artifact is un
   expect(result.current.data).toBe(data);expect(result.current.checkedAt).toBe('2026-10-25T17:01:00.000Z');
   unmount();
 });
+
+it('fetches immediately when a hidden tab returns without waiting for the next interval',async()=>{
+  vi.useFakeTimers();let visible=false;
+  vi.spyOn(document,'visibilityState','get').mockImplementation(()=>visible?'visible':'hidden');
+  const load=vi.fn().mockResolvedValueOnce({score:24}).mockResolvedValue({score:27});
+  const {result,unmount}=renderHook(()=>useArtifact(load,60_000));
+  await act(async()=>{});
+  await act(async()=>{await vi.advanceTimersByTimeAsync(30_000)});
+  expect(result.current.data).toEqual({score:24});
+  visible=true;
+  await act(async()=>{document.dispatchEvent(new Event('visibilitychange'))});
+  expect(result.current.data).toEqual({score:27});
+  expect(load).toHaveBeenCalledTimes(2);unmount();
+});

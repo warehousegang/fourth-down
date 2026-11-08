@@ -11,6 +11,9 @@ export function Heading({ label, title, children }: { label: string; title: stri
 export function LoadState({ title, error, retry }: { title: string; error: string; retry: () => void }) {
   return <section className="empty-state" role={error ? "alert" : "status"}><h1>{error ? `${title} unavailable` : `Loading ${title}`}</h1><p>{error || "Checking artifact integrity and evidence…"}</p>{error && <button onClick={retry}>Retry artifact load</button>}</section>;
 }
+export function ResultRefreshStatus({ checkedAt, error, retry }: { checkedAt: string | null; error: string; retry: () => void }) {
+  return <div className="muted"><p>Published results checked {time(checkedAt)}. This view checks for updates every minute while visible.</p>{error && <p role="status">Update check failed. Showing the last verified data. <button className="current-reload" onClick={retry}>Retry published results</button></p>}</div>;
+}
 export function Provenance({ label, directory, file, hash, generated, retry }: { label: string; directory: string; file: string; hash: string; generated: string; retry: () => void }) {
   return <footer className="intelligence-provenance"><span>{label} · Generated {time(generated)}</span><a href={`${import.meta.env.BASE_URL}data/${directory}/${file}`} download>Download verified artifact <ArrowUpRight size={13}/></a><details><summary>Artifact checksum</summary><p>{hash}</p></details><button className="current-reload" onClick={retry}><RefreshCw size={14}/> Reload local evidence</button></footer>;
 }
