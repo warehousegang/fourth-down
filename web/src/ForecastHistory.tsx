@@ -2,11 +2,11 @@ import { useState } from "react";
 import { ArrowRight, History } from "lucide-react";
 import { loadOperations, type ForecastRecord } from "./operations-contracts";
 import { useArtifact } from "./use-artifact";
-import { Heading, LoadState, pct, Provenance, signed, Table, time } from "./IntelligenceShared";
+import { Heading, LoadState, pct, Provenance, ResultRefreshStatus, signed, Table, time } from "./IntelligenceShared";
 import { team } from "./teams";
 
 export function ForecastHistory() {
-  const evidence = useArtifact(loadOperations);
+  const evidence = useArtifact(loadOperations,60_000);
   const [selection, setSelection] = useState("");
   if (!evidence.data) return <LoadState title="Forecast History" error={evidence.error} retry={evidence.retry}/>;
   const { data, file, sha256 } = evidence.data;
@@ -19,6 +19,7 @@ export function ForecastHistory() {
   const delta = original?.home === latest?.home && original?.away === latest?.away && original?.home_probability !== null && original?.home_probability !== undefined && latest?.home_probability !== null && latest?.home_probability !== undefined ? (latest.home_probability-original.home_probability)*100 : null;
   return <>
     <Heading label="IMMUTABLE FORECAST LEDGER" title="Forecast History">Every version keeps its inputs, cutoff and checksum. Updated probabilities never replace the record of an earlier forecast.</Heading>
+    <ResultRefreshStatus checkedAt={evidence.checkedAt} error={evidence.error} retry={evidence.retry}/>
     <div className="intelligence-summary panel"><History size={24}/><div><strong>{data.catalog.length} forecast records · {data.games.length} matchups</strong><p>Archived probabilities describe what was known at that timestamp. They remain visible after current-forecast freshness expires.</p></div></div>
     {data.warnings.map(w=><p key={w} className="current-warning">{w}</p>)}
     {!game ? <section className="panel"><h2>No recorded forecasts</h2><p>A successful local refresh creates the first immutable record.</p></section> : <>

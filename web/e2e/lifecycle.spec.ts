@@ -53,6 +53,30 @@ test("open dashboard receives a final and corrected result without changing its 
   await expect(page.locator(".scoreboard-primary dd").nth(1)).toHaveText("1");
 });
 
+for(const view of ["current","postgame","history","models"]) test(`open ${view} secondary results refresh after publication`,async({page})=>{
+  const final=completedOperations(captured,24,17), record=final.catalog.find(f=>f.selected_final)!;
+  const current=JSON.parse(readFileSync(`public/data/current/${record.artifact_file}`,"utf8"));
+  await serve(page,"current",`forecast-${current.season}`,current);
+  await serve(page,"operations","operations",captured);
+  await page.clock.install({time:new Date(Date.parse(final.generated_at)-60_000)});
+  await page.goto(`./#${view}`);
+  if(view==="current") await expect(page.getByRole("region",{name:"Observed Week 7 schedule"}).getByRole("row",{name:/PIT at NO/})).toContainText("scheduled");
+  if(view==="postgame") await expect(page.getByRole("heading",{name:"No completed forecasted games yet"})).toBeVisible();
+  if(view==="history") await expect(page.getByText("Not designated before kickoff")).toBeVisible();
+  if(view==="models") await expect(page.getByText(/No scored prospective games yet/)).toBeVisible();
+  await serve(page,"operations","operations",final);
+  await page.clock.fastForward(60_000);
+  if(view==="current") await expect(page.getByRole("region",{name:"Observed Week 7 schedule"}).getByRole("row",{name:/PIT at NO/})).toContainText("completed");
+  if(view==="postgame") await expect(page.getByRole("heading",{name:"PIT 17 at NO 24"})).toBeVisible();
+  if(view==="history") {
+    await expect(page.getByText("FINAL PREGAME",{exact:true})).toBeVisible();
+    await expect(page.getByText("Not designated before kickoff")).toHaveCount(0);
+  }
+  if(view==="models") await expect(page.getByRole("region",{name:"Current incumbent metrics"}).locator("strong").first()).toHaveText("1");
+  await expect(page.getByText(/Published results checked/)).toBeVisible();
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+});
+
 // Synthetic results only. No test outcome is written to public artifacts.
 for (const [home,away] of [[24,17],[17,24],[24,24]]) test(`archived card survives refresh and verified final ${home}-${away}`,async({page},info)=>{
   const operations=completedOperations(captured,home,away);
