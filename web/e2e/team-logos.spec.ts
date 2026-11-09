@@ -44,8 +44,8 @@ test("a failed logo retains a readable team identifier and the matchup layout", 
   await page.goto("./#matchups");
   await expect(page.getByRole("heading", {name:/Game on/})).toBeVisible();
   const fallback = page.getByRole("img", {name:"Detroit Lions",exact:true});
-  await fallback.scrollIntoViewIfNeeded();
   await expect(fallback).toHaveText("DET");
+  await fallback.scrollIntoViewIfNeeded();
   await expect(page.locator("img[alt='Detroit Lions']")).toHaveCount(0);
   const before = await page.locator(".team-mark").first().boundingBox();
   await page.getByLabel("Select week").selectOption("1");
