@@ -87,7 +87,11 @@ def terminal_game(detail, scores):
         if any(frame.empty for frame in (plays,drives,summaries)):
             return False
         play, drive, summary = (frame.iloc[-1] for frame in (plays,drives,summaries))
-        sequence = [scalar(v) for v in plays['orderSequence']]
+        # Deleted provider records can retain duplicate placeholder sequences
+        # (including zero). They are not active plays. Keep the terminal-row,
+        # drive, score and review checks below, including rejecting a deleted end.
+        sequence = [scalar(v) for v, deleted in zip(plays['orderSequence'], plays['playDeleted'])
+                    if scalar(deleted) is not True]
         quarter = scalar(play['quarter'])
         if (any(type(v) is not int for v in sequence) or sequence != sorted(set(sequence))
                 or type(quarter) is not int or quarter not in (4,5)

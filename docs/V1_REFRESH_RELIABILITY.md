@@ -79,3 +79,30 @@ partition improvements, not overlapping jobs or deleted archives. Review all
 entry, archive and expanded-size caps as well as the aggregate warning. Alerts
 and guardrails improve detection; they cannot eliminate provider outages or
 guarantee a final score is available immediately after a game ends.
+
+## Late-game parser follow-up (November 8)
+
+The 23:32 EST run [42562394586](https://github.com/warehousegang/thomashowarddev/actions/runs/42562394586)
+completed successfully at 23:37 EST. All 25 checks since the safeguards release
+had succeeded at 15-minute intervals. Hosted artifacts matched portfolio
+`a02cbf46eacdbeab5c274a23a04f12b537ecf1eb`, but GB–NE still lacked a result.
+
+The provider published GB 45–NE 27 at 19:46:23 EST; production retained that
+exact file at 19:52:40 EST. Its header remained `INGAME`, and the terminal
+validator rejected two deleted `UNSPECIFIED` rows with duplicate sequence zero.
+The active last play and last drive explicitly agree on `END_GAME` and 00:00,
+with matching scores and no pending review. This was a parser defect, not a
+missed dispatch, missing file, publication failure or stale browser.
+
+The repair excludes only explicitly deleted records from active sequence
+validation. All existing terminal play, drive, clock, score and review checks
+remain. Duplicate active rows are still rejected. The original retained JSON,
+source digest and observation timestamp are not rewritten; existing archive
+revalidation recovers its interpretation and reconciliation remains idempotent.
+The real raw file and original receipt are retained as regression fixtures.
+
+At 23:43 EST, the approved provider's release had no TB–CHI asset. That is a
+separate provider-availability condition; no final is inferred from elapsed
+time. A successful collection health gate establishes query completion, not
+that every completed game has been recognized. Changes to final recognition
+require code review and a matching production source pin.
