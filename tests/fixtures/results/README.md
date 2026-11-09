@@ -35,3 +35,22 @@ production result bundle at 23:48:29.756110 UTC. Revalidation may interpret its
 raw file but must never rewrite its JSON, hash, scores or observation time.
 The new interpretation is derived only after raw provenance validation and is
 not serialized into the original receipt. Fixtures are never published.
+
+## GB–NE deleted-play regression
+
+`2026_09_GB_NE.rds` is the unchanged nflverse file published November 9, 2026
+at 00:46:23 UTC. Its summary says `INGAME`, but its last play and drive explicitly
+agree on `END_GAME`, play/sequence 4673, quarter 4, 00:00. Scoring totals agree:
+GB 45, NE 27. Two leading deleted `UNSPECIFIED` records both retain sequence zero.
+They must not invalidate the active play sequence or serve as final evidence.
+
+Source: https://github.com/nflverse/nflverse-pbp/releases/download/raw_pbp_2026/2026_09_GB_NE.rds
+
+License: https://github.com/nflverse/nflverse-pbp/blob/master/LICENSE.md
+
+SHA-256: `2cd407019b15fb5a1467740527a396fa2901ee137e24dd7097d2cadf2170bd2c`
+
+`2026_09_GB_NE.legacy.json` is the original production observation at
+00:52:40.029302 UTC. Its `unknown` status, hash and timestamps remain unchanged;
+restoration revalidates the raw file to recover the final interpretation.
+These are regression fixtures, never forecast inputs or publication artifacts.
